@@ -13,11 +13,16 @@ dotnet list package
 
 
 3. Use the Scaffold Command:
+#create a Data folder inside the project
 
 dotnet ef dbcontext scaffold "Server=localhost;Database=attendanceDB;User=root;Port=3306;Password=Database@123;" Pomelo.EntityFrameworkCore.MySql --output-dir Models --context-dir Data --context ApplicationDbContext --force
 
 
 #program.cs
+
+#using projectname.Data
+using MySqlConnectionSample1.Data;
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
     ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))));
