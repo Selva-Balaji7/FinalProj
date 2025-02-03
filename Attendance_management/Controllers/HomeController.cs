@@ -1,6 +1,6 @@
+using System.Diagnostics;
 using Attendance_management.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace Attendance_management.Controllers
 {

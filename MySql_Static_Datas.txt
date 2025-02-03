@@ -1,0 +1,20 @@
+USE attendance_management;
+
+INSERT INTO Users (id,name,email,password,role,profile_picture) values 
+(100, "Smith", "Smith@gmail.com", "Smith@123","Student", "SmithPic"),
+(101, "Johnson", "Johnson@gmail.com", "Johnson@123","Student", "JohnsonPic"),
+(102, "Williams", "Williams@gmail.com", "Williams@123","Student", "WilliamsPic"),
+(103, "Jones", "Jones@gmail.com", "Jones@123","Student", "JonesPic"),
+(104, "Davis", "Davis@gmail.com", "Davis@123","Student", "DavisPic"),
+(105, "Rodriguez", "Rodriguez@gmail.com", "Rodriguez@123","Student", "RodriguezPic"),
+(106, "Taylor", "Taylor@gmail.com", "Taylor@123","Student", "TaylorPic"),
+(107, "Moore", "Moore@gmail.com", "Moore@123","Student", "MoorePic"),
+(108, "Jackson", "Jackson@gmail.com", "Jackson@123","Student", "JacksonPic"),
+(109, "Lee", "Lee@gmail.com", "Lee@123","Student", "LeePic"),
+(500, "Hill", "Hill@gmail.com", "Hill@123","Teacher", "HillPic"),
+(600, "Roberts", "Roberts@gmail.com", "Roberts@123","Teacher", "RobertsPic"),
+(999, "Allen", "Allen@gmail.com", "Allen@123","Admin", "AllenPic");
+
+
+
+select * from Users;

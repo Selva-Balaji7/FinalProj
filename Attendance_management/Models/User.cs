@@ -21,5 +21,9 @@ public partial class User
 
     public DateTime? UpdatedAt { get; set; }
 
+    public virtual ICollection<Attendancerequest> Attendancerequests { get; set; } = new List<Attendancerequest>();
+
     public virtual ICollection<Attendance> Attendances { get; set; } = new List<Attendance>();
+
+    public virtual ICollection<Leaverequest> Leaverequests { get; set; } = new List<Leaverequest>();
 }
