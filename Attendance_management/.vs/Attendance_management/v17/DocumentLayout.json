@@ -32,7 +32,7 @@
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
               "ToolTip": "C:\\Users\\selva.balaji\\Desktop\\FinalProj\\Attendance_management\\Controllers\\UserController.cs",
               "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAA4AAAAAAAAAA==",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAxwBcAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-31T12:44:47.21Z",
               "EditorCaption": ""
@@ -47,8 +47,7 @@
               "RelativeToolTip": "appsettings.json",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAAMAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-01-31T12:36:24.931Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-31T12:36:24.931Z"
             },
             {
               "$type": "Document",
@@ -60,8 +59,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-31T12:19:13.512Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-31T12:19:13.512Z"
             }
           ]
         }

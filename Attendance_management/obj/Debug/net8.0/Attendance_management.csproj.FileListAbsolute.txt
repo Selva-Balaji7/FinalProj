@@ -102,3 +102,4 @@ C:\Users\selva.balaji\Desktop\FinalProj\Attendance_management\obj\Debug\net8.0\r
 C:\Users\selva.balaji\Desktop\FinalProj\Attendance_management\obj\Debug\net8.0\Attendance_management.pdb
 C:\Users\selva.balaji\Desktop\FinalProj\Attendance_management\obj\Debug\net8.0\Attendance_management.genruntimeconfig.cache
 C:\Users\selva.balaji\Desktop\FinalProj\Attendance_management\obj\Debug\net8.0\ref\Attendance_management.dll
+C:\Users\selva.balaji\Desktop\FinalProj\Attendance_management\obj\Debug\net8.0\Attendance_management.sourcelink.json
