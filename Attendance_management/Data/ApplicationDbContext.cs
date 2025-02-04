@@ -19,6 +19,12 @@ public partial class ApplicationDbContext : DbContext
 
     public virtual DbSet<Attendance> Attendances { get; set; }
 
+    public virtual DbSet<Attendancerequest> Attendancerequests { get; set; }
+
+    public virtual DbSet<Efmigrationshistory> Efmigrationshistories { get; set; }
+
+    public virtual DbSet<Leaverequest> Leaverequests { get; set; }
+
     public virtual DbSet<Leavetype> Leavetypes { get; set; }
 
     public virtual DbSet<Permission> Permissions { get; set; }
@@ -26,6 +32,8 @@ public partial class ApplicationDbContext : DbContext
     public virtual DbSet<Role> Roles { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
+
+    public virtual DbSet<Usersregistration> Usersregistrations { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -67,6 +75,92 @@ public partial class ApplicationDbContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.Attendances)
                 .HasForeignKey(d => d.UserId)
                 .HasConstraintName("attendance_ibfk_1");
+        });
+
+        modelBuilder.Entity<Attendancerequest>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("attendancerequests");
+
+            entity.HasIndex(e => e.UserId, "user_id");
+
+            entity.Property(e => e.Id)
+                .ValueGeneratedNever()
+                .HasColumnName("id");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                .HasColumnType("timestamp")
+                .HasColumnName("created_at");
+            entity.Property(e => e.Date).HasColumnName("date");
+            entity.Property(e => e.Remarks)
+                .HasColumnType("text")
+                .HasColumnName("remarks");
+            entity.Property(e => e.Status)
+                .HasMaxLength(255)
+                .HasColumnName("status");
+            entity.Property(e => e.UpdatedAt)
+                .ValueGeneratedOnAddOrUpdate()
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                .HasColumnType("timestamp")
+                .HasColumnName("updated_at");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Attendancerequests)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("attendancerequests_ibfk_1");
+        });
+
+        modelBuilder.Entity<Efmigrationshistory>(entity =>
+        {
+            entity.HasKey(e => e.MigrationId).HasName("PRIMARY");
+
+            entity.ToTable("__efmigrationshistory");
+
+            entity.Property(e => e.MigrationId).HasMaxLength(150);
+            entity.Property(e => e.ProductVersion).HasMaxLength(32);
+        });
+
+        modelBuilder.Entity<Leaverequest>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("leaverequests");
+
+            entity.HasIndex(e => e.LeaveTypeId, "leave_type_id");
+
+            entity.HasIndex(e => e.UserId, "user_id");
+
+            entity.Property(e => e.Id)
+                .ValueGeneratedNever()
+                .HasColumnName("id");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                .HasColumnType("timestamp")
+                .HasColumnName("created_at");
+            entity.Property(e => e.EndDate).HasColumnName("end_date");
+            entity.Property(e => e.LeaveTypeId).HasColumnName("leave_type_id");
+            entity.Property(e => e.Reason)
+                .HasColumnType("text")
+                .HasColumnName("reason");
+            entity.Property(e => e.StartDate).HasColumnName("start_date");
+            entity.Property(e => e.Status)
+                .HasMaxLength(255)
+                .HasColumnName("status");
+            entity.Property(e => e.UpdatedAt)
+                .ValueGeneratedOnAddOrUpdate()
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                .HasColumnType("timestamp")
+                .HasColumnName("updated_at");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
+
+            entity.HasOne(d => d.LeaveType).WithMany(p => p.Leaverequests)
+                .HasForeignKey(d => d.LeaveTypeId)
+                .HasConstraintName("leaverequests_ibfk_2");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Leaverequests)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("leaverequests_ibfk_1");
         });
 
         modelBuilder.Entity<Leavetype>(entity =>
@@ -149,6 +243,41 @@ public partial class ApplicationDbContext : DbContext
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
             entity.ToTable("users");
+
+            entity.HasIndex(e => e.Email, "email").IsUnique();
+
+            entity.Property(e => e.Id)
+                .ValueGeneratedNever()
+                .HasColumnName("id");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                .HasColumnType("timestamp")
+                .HasColumnName("created_at");
+            entity.Property(e => e.Email).HasColumnName("email");
+            entity.Property(e => e.Name)
+                .HasMaxLength(255)
+                .HasColumnName("name");
+            entity.Property(e => e.Password)
+                .HasMaxLength(255)
+                .HasColumnName("password");
+            entity.Property(e => e.ProfilePicture)
+                .HasMaxLength(255)
+                .HasColumnName("profile_picture");
+            entity.Property(e => e.Role)
+                .HasMaxLength(255)
+                .HasColumnName("role");
+            entity.Property(e => e.UpdatedAt)
+                .ValueGeneratedOnAddOrUpdate()
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                .HasColumnType("timestamp")
+                .HasColumnName("updated_at");
+        });
+
+        modelBuilder.Entity<Usersregistration>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("usersregistration");
 
             entity.HasIndex(e => e.Email, "email").IsUnique();
 
