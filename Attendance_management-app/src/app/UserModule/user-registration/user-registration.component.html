@@ -1,0 +1,39 @@
+<div>
+    <!-- (ngSubmit)="AuthenticateUser(LoginForm)" -->
+    <form #LoginForm="ngForm" >
+        <div class="">
+            <label for="userid">UserId</label>
+            <input type="text" id="userid" name="id" ngModel>
+        </div>
+        <div class="">
+            <label for="username">UserId</label>
+            <input type="text" id="username" name="name" ngModel>
+        </div>
+        <div class="">
+            <label for="useremail">UserId</label>
+            <input type="text" id="useremail" name="email" ngModel>
+        </div>
+        <div class="">
+            <label for="userpassword">Password</label>
+            <input type="text" id="userpassword" name="password" ngModel>
+        </div>
+        <div class="">
+            <label for="userrole">Password</label>
+            <input type="radio" id="userrole1" name="role" value="student" ngModel>Student
+            <input type="radio" id="userrole2" name="role" value="teacher" ngModel>Teacher
+            <input type="radio" id="userrole3" name="role" value="staff" ngModel>Staff
+            <input type="radio" id="userrole4" name="role" value="admin" ngModel>Admin
+        </div>
+        <button type="submit" >loggin</button>
+    </form>
+
+    <div>
+        <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+        <button (click)="onUpload()">Upload</button>
+      </div>
+      
+      <div *ngIf="imageUrl">
+        <h3>Uploaded Image:</h3>
+        <img [src]="imageUrl" alt="Uploaded Image" style="max-width: 300px;" />
+      </div>
+</div>

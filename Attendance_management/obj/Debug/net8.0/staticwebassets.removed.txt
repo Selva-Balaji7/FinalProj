@@ -1,2 +1,2 @@
-D:\Attendance_Management_MainProject\Attendance_management\wwwroot\images\Screenshot (17).png
-D:\Attendance_Management_MainProject\Attendance_management\wwwroot\images\Screenshot (6).png
+D:\Atendance_Management_Final\Attendance_management\wwwroot\images\Screenshot (17).png
+D:\Atendance_Management_Final\Attendance_management\wwwroot\images\Screenshot (6).png

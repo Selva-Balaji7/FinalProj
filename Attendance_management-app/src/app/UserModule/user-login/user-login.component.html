@@ -1,0 +1,14 @@
+<div>
+    <form #LoginForm="ngForm" (ngSubmit)="AuthenticateUser(LoginForm)">
+        <div class="">
+            <label for="userid">UserId</label>
+            <input type="text" id="userid" name="userid" ngModel>
+        </div>
+        <div class="">
+            <label for="userpassword">Password</label>
+            <input type="text" id="userpassword" name="userpassword" ngModel>
+        </div>
+        <button type="submit" >loggin</button>
+        <a [routerLink]="['/userregistration']">New User</a>
+    </form>
+</div>
