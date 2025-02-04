@@ -16,7 +16,6 @@ namespace Attendance_management.Controllers
             _context = context;
         }
 
-        // ✅ GET: api/role (Get all roles)
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Role>>> GetRoles()
         {
@@ -24,7 +23,6 @@ namespace Attendance_management.Controllers
             return Ok(roles);
         }
 
-        // ✅ GET: api/role/{id} (Get a specific role by ID)
         [HttpGet("{id}")]
         public async Task<ActionResult<Role>> GetRole(int id)
         {
@@ -35,7 +33,6 @@ namespace Attendance_management.Controllers
             return Ok(role);
         }
 
-        // ✅ POST: api/role (Add a new role)
         [HttpPost]
         public async Task<ActionResult<Role>> AddRole(Role role)
         {
@@ -52,7 +49,6 @@ namespace Attendance_management.Controllers
             return CreatedAtAction(nameof(GetRole), new { id = newRole.Id }, newRole);
         }
 
-        // ✅ DELETE: api/role/{id} (Delete a role by ID)
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRole(int id)
         {
@@ -63,7 +59,7 @@ namespace Attendance_management.Controllers
             _context.Roles.Remove(role);
             await _context.SaveChangesAsync();
 
-            return NoContent(); // 204 status code
+            return NoContent(); 
         }
     }
 }
