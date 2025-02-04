@@ -15,51 +15,6 @@
           }
         }
       },
-      "libsodium/1.0.19": {
-        "type": "package",
-        "runtimeTargets": {
-          "runtimes/linux-arm/native/libsodium.so": {
-            "assetType": "native",
-            "rid": "linux-arm"
-          },
-          "runtimes/linux-arm64/native/libsodium.so": {
-            "assetType": "native",
-            "rid": "linux-arm64"
-          },
-          "runtimes/linux-musl-arm/native/libsodium.so": {
-            "assetType": "native",
-            "rid": "linux-musl-arm"
-          },
-          "runtimes/linux-musl-arm64/native/libsodium.so": {
-            "assetType": "native",
-            "rid": "linux-musl-arm64"
-          },
-          "runtimes/linux-musl-x64/native/libsodium.so": {
-            "assetType": "native",
-            "rid": "linux-musl-x64"
-          },
-          "runtimes/linux-x64/native/libsodium.so": {
-            "assetType": "native",
-            "rid": "linux-x64"
-          },
-          "runtimes/osx-arm64/native/libsodium.dylib": {
-            "assetType": "native",
-            "rid": "osx-arm64"
-          },
-          "runtimes/osx-x64/native/libsodium.dylib": {
-            "assetType": "native",
-            "rid": "osx-x64"
-          },
-          "runtimes/win-x64/native/libsodium.dll": {
-            "assetType": "native",
-            "rid": "win-x64"
-          },
-          "runtimes/win-x86/native/libsodium.dll": {
-            "assetType": "native",
-            "rid": "win-x86"
-          }
-        }
-      },
       "Microsoft.AspNet.Cors/5.3.0": {
         "type": "package",
         "compile": {
@@ -661,22 +616,6 @@
           }
         }
       },
-      "Sodium.Core/1.3.5": {
-        "type": "package",
-        "dependencies": {
-          "libsodium": "1.0.19"
-        },
-        "compile": {
-          "lib/netstandard2.1/Sodium.Core.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.1/Sodium.Core.dll": {
-            "related": ".xml"
-          }
-        }
-      },
       "System.CodeDom/4.4.0": {
         "type": "package",
         "compile": {
@@ -963,30 +902,6 @@
         "lib/netstandard2.0/Humanizer.dll",
         "lib/netstandard2.0/Humanizer.xml",
         "logo.png"
-      ]
-    },
-    "libsodium/1.0.19": {
-      "sha512": "tupm/HViwBN6Knd/gckR+cLaJGR39GLmiU4iDMM5hp/1BoczMr8fwJhSU+3/C2V4hi9nBK/4FICRKtTLU30TCA==",
-      "type": "package",
-      "path": "libsodium/1.0.19",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "AUTHORS",
-        "ChangeLog",
-        "LICENSE",
-        "libsodium.1.0.19.nupkg.sha512",
-        "libsodium.nuspec",
-        "runtimes/linux-arm/native/libsodium.so",
-        "runtimes/linux-arm64/native/libsodium.so",
-        "runtimes/linux-musl-arm/native/libsodium.so",
-        "runtimes/linux-musl-arm64/native/libsodium.so",
-        "runtimes/linux-musl-x64/native/libsodium.so",
-        "runtimes/linux-x64/native/libsodium.so",
-        "runtimes/osx-arm64/native/libsodium.dylib",
-        "runtimes/osx-x64/native/libsodium.dylib",
-        "runtimes/win-x64/native/libsodium.dll",
-        "runtimes/win-x86/native/libsodium.dll"
       ]
     },
     "Microsoft.AspNet.Cors/5.3.0": {
@@ -1975,23 +1890,6 @@
         "pomelo.entityframeworkcore.mysql.nuspec"
       ]
     },
-    "Sodium.Core/1.3.5": {
-      "sha512": "6SMCCZ895tTNKq7CCo0Cr+U0+d/dEQuKxoJKkfsZpEk1Swhb7ykoO7euOti7GIo7JSce+qwxKa2aDYecEw3UwQ==",
-      "type": "package",
-      "path": "sodium.core/1.3.5",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE",
-        "icon.png",
-        "lib/netstandard2.0/Sodium.Core.dll",
-        "lib/netstandard2.0/Sodium.Core.xml",
-        "lib/netstandard2.1/Sodium.Core.dll",
-        "lib/netstandard2.1/Sodium.Core.xml",
-        "sodium.core.1.3.5.nupkg.sha512",
-        "sodium.core.nuspec"
-      ]
-    },
     "System.CodeDom/4.4.0": {
       "sha512": "2sCCb7doXEwtYAbqzbF/8UAeDRMNmPaQbU2q50Psg1J9KzumyVVCgKQY8s53WIPTufNT0DpSe9QRvVjOzfDWBA==",
       "type": "package",
@@ -2423,28 +2321,27 @@
       "Microsoft.EntityFrameworkCore.Design >= 8.0.2",
       "Microsoft.EntityFrameworkCore.Relational >= 8.0.2",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.2",
-      "Pomelo.EntityFrameworkCore.MySql >= 8.0.2",
-      "Sodium.Core >= 1.3.5"
+      "Pomelo.EntityFrameworkCore.MySql >= 8.0.2"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Bejesh\\.nuget\\packages\\": {},
+    "C:\\Users\\bejesh.sriram\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Atendance_Management_Final\\Attendance_management\\Attendance_management.csproj",
+      "projectUniqueName": "D:\\Attendance_Management_MainProject\\Attendance_management\\Attendance_management.csproj",
       "projectName": "Attendance_management",
-      "projectPath": "D:\\Atendance_Management_Final\\Attendance_management\\Attendance_management.csproj",
-      "packagesPath": "C:\\Users\\Bejesh\\.nuget\\packages\\",
-      "outputPath": "D:\\Atendance_Management_Final\\Attendance_management\\obj\\",
+      "projectPath": "D:\\Attendance_Management_MainProject\\Attendance_management\\Attendance_management.csproj",
+      "packagesPath": "C:\\Users\\bejesh.sriram\\.nuget\\packages\\",
+      "outputPath": "D:\\Attendance_Management_MainProject\\Attendance_management\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Bejesh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\bejesh.sriram\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -2504,10 +2401,6 @@
           "Pomelo.EntityFrameworkCore.MySql": {
             "target": "Package",
             "version": "[8.0.2, )"
-          },
-          "Sodium.Core": {
-            "target": "Package",
-            "version": "[1.3.5, )"
           }
         },
         "imports": [

@@ -107,17 +107,6 @@ D:\Attendance_Management_MainProject\Attendance_management\obj\Debug\net8.0\refi
 D:\Attendance_Management_MainProject\Attendance_management\obj\Debug\net8.0\Attendance_management.pdb
 D:\Attendance_Management_MainProject\Attendance_management\obj\Debug\net8.0\Attendance_management.genruntimeconfig.cache
 D:\Attendance_Management_MainProject\Attendance_management\obj\Debug\net8.0\ref\Attendance_management.dll
-D:\Attendance_Management_MainProject\Attendance_management\bin\Debug\net8.0\Sodium.Core.dll
-D:\Attendance_Management_MainProject\Attendance_management\bin\Debug\net8.0\runtimes\linux-arm\native\libsodium.so
-D:\Attendance_Management_MainProject\Attendance_management\bin\Debug\net8.0\runtimes\linux-arm64\native\libsodium.so
-D:\Attendance_Management_MainProject\Attendance_management\bin\Debug\net8.0\runtimes\linux-musl-arm\native\libsodium.so
-D:\Attendance_Management_MainProject\Attendance_management\bin\Debug\net8.0\runtimes\linux-musl-arm64\native\libsodium.so
-D:\Attendance_Management_MainProject\Attendance_management\bin\Debug\net8.0\runtimes\linux-musl-x64\native\libsodium.so
-D:\Attendance_Management_MainProject\Attendance_management\bin\Debug\net8.0\runtimes\linux-x64\native\libsodium.so
-D:\Attendance_Management_MainProject\Attendance_management\bin\Debug\net8.0\runtimes\osx-arm64\native\libsodium.dylib
-D:\Attendance_Management_MainProject\Attendance_management\bin\Debug\net8.0\runtimes\osx-x64\native\libsodium.dylib
-D:\Attendance_Management_MainProject\Attendance_management\bin\Debug\net8.0\runtimes\win-x64\native\libsodium.dll
-D:\Attendance_Management_MainProject\Attendance_management\bin\Debug\net8.0\runtimes\win-x86\native\libsodium.dll
 D:\Attendance_Management_MainProject\Attendance_management\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 D:\Atendance_Management_Final\Attendance_management\bin\Debug\net8.0\appsettings.Development.json
 D:\Atendance_Management_Final\Attendance_management\bin\Debug\net8.0\appsettings.json

@@ -13,5 +13,8 @@ export class DbservicesService {
   postRecord(tableName:any, val:any){
     return this.http.post(`${this.baseURL}/${tableName}`, val);
   }
+  getRecord(tableName:any){
+    return this.http.get(`${this.baseURL}/${tableName}`);
+  }
 
 }

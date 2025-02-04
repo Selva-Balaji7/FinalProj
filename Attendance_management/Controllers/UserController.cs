@@ -1,6 +1,5 @@
 ﻿using Attendance_management.Data;
 using Attendance_management.Models;
-using Attendance_management.UserServices;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +12,6 @@ namespace Attendance_management.Controllers
     public class UserController : ControllerBase
     {
         private ApplicationDbContext _context;
-        HashServiceClass hashserv = new HashServiceClass();
 
         public UserController(ApplicationDbContext context)
         {
@@ -78,7 +76,7 @@ namespace Attendance_management.Controllers
                 Id = user.Id,
                 Name = user.Name,
                 Email = user.Email,
-                Password = this.hashserv.HashPassword(user.Password),
+                Password = user.Password,
                 Role = user.Role,
                 ProfilePicture = user.ProfilePicture,
                 CreatedAt = user.CreatedAt,
@@ -93,7 +91,7 @@ namespace Attendance_management.Controllers
 
 
 
-        [HttpPost("{id}/profileimage")]
+        [HttpPost("profileimage")]
         public async Task<IActionResult> UploadProfileImage(int id, IFormFile image)
         {
             Console.Clear();
