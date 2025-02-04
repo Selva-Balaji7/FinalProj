@@ -11,8 +11,17 @@
       "RelativeMoniker": "D:0:0:{B6F31281-878E-4636-8C96-DCB8C331D27B}|Attendance_management.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
+<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{B6F31281-878E-4636-8C96-DCB8C331D27B}|Attendance_management.csproj|c:\\users\\tharu\\onedrive\\desktop\\finalproj\\attendance_management\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B6F31281-878E-4636-8C96-DCB8C331D27B}|Attendance_management.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+=======
+      "AbsoluteMoniker": "D:0:0:{B6F31281-878E-4636-8C96-DCB8C331D27B}|Attendance_management.csproj|c:\\users\\tharu\\onedrive\\desktop\\finalproj\\attendance_management\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6F31281-878E-4636-8C96-DCB8C331D27B}|Attendance_management.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6F31281-878E-4636-8C96-DCB8C331D27B}|Attendance_management.csproj|c:\\users\\tharu\\onedrive\\desktop\\finalproj\\attendance_management\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{B6F31281-878E-4636-8C96-DCB8C331D27B}|Attendance_management.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+>>>>>>> 7c01bd4 (userregistration)
     }
   ],
   "DocumentGroupContainers": [
@@ -27,6 +36,7 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+<<<<<<< HEAD
               "Title": "UserController.cs",
               "DocumentMoniker": "C:\\Users\\tharu\\OneDrive\\Desktop\\FinalProj\\Attendance_management\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
@@ -35,6 +45,41 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-04T03:33:46.9Z",
+=======
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\tharu\\OneDrive\\Desktop\\FinalProj\\Attendance_management\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\tharu\\OneDrive\\Desktop\\FinalProj\\Attendance_management\\Program.cs*",
+              "RelativeToolTip": "Program.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-04T00:22:52.39Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\tharu\\OneDrive\\Desktop\\FinalProj\\Attendance_management\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\tharu\\OneDrive\\Desktop\\FinalProj\\Attendance_management\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-02-02T01:45:20.63Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\tharu\\OneDrive\\Desktop\\FinalProj\\Attendance_management\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\tharu\\OneDrive\\Desktop\\FinalProj\\Attendance_management\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-01T11:38:35.55Z",
+>>>>>>> 7c01bd4 (userregistration)
               "EditorCaption": ""
             },
             {
@@ -43,6 +88,7 @@
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\tharu\\OneDrive\\Desktop\\FinalProj\\Attendance_management\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
+<<<<<<< HEAD
               "ToolTip": "C:\\Users\\tharu\\OneDrive\\Desktop\\FinalProj\\Attendance_management\\appsettings.json",
               "RelativeToolTip": "appsettings.json",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAAMAAAAEAAAAAAAAAA==",
@@ -60,6 +106,14 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-04T03:33:47.248Z"
+=======
+              "ToolTip": "C:\\Users\\tharu\\OneDrive\\Desktop\\FinalProj\\Attendance_management\\appsettings.json*",
+              "RelativeToolTip": "appsettings.json*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-01-31T12:36:24.931Z",
+              "EditorCaption": ""
+>>>>>>> 7c01bd4 (userregistration)
             }
           ]
         }

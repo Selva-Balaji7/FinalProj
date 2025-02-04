@@ -1,0 +1,10 @@
+# Ignore Visual Studio and .NET build files
+.vs/
+bin/
+obj/
+*.suo
+*.user
+*.cache
+*.pdb
+*.dll
+*.exe
