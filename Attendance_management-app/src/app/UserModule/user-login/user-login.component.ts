@@ -21,6 +21,8 @@ export class UserLoginComponent {
     this.reqUrl = `user/${LoginForm.value.userid}/verify?password=${LoginForm.value.userpassword}`;
 
     console.log(this.reqUrl);
+
+    _
   }
   
 }
