@@ -67,8 +67,7 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-03T17:40:49.592Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -84,8 +83,7 @@
               "RelativeToolTip": "Attendance_management\\Models\\Permission.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-04T13:22:01.148Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-04T13:22:01.148Z"
             },
             {
               "$type": "Document",
@@ -97,8 +95,7 @@
               "RelativeToolTip": "Attendance_management\\Data\\ApplicationDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-04T09:35:10.907Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-04T09:35:10.907Z"
             },
             {
               "$type": "Document",
@@ -110,8 +107,7 @@
               "RelativeToolTip": "Attendance_management\\Models\\Attendance.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-04T08:02:28.792Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-04T08:02:28.792Z"
             },
             {
               "$type": "Document",
@@ -123,8 +119,7 @@
               "RelativeToolTip": "Attendance_management\\Controllers\\RolesController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAC8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-04T07:12:27.176Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-04T07:12:27.176Z"
             },
             {
               "$type": "Document",
@@ -136,8 +131,7 @@
               "RelativeToolTip": "Attendance_management\\Controllers\\PermissionController.cs",
               "ViewState": "AgIAAEYAAAAAAAAAAAAcwE8AAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-04T13:28:17.339Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-04T13:28:17.339Z"
             },
             {
               "$type": "Document",
@@ -149,8 +143,7 @@
               "RelativeToolTip": "Attendance_management\\Models\\User.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-03T17:42:27.095Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-03T17:42:27.095Z"
             },
             {
               "$type": "Document",
@@ -162,8 +155,7 @@
               "RelativeToolTip": "Attendance_management\\Controllers\\HomeController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-03T17:35:57.649Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-03T17:35:57.649Z"
             },
             {
               "$type": "Document",
@@ -175,8 +167,7 @@
               "RelativeToolTip": "Attendance_management\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-02-03T17:29:19.506Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-03T17:29:19.506Z"
             },
             {
               "$type": "Document",
@@ -188,8 +179,7 @@
               "RelativeToolTip": "Attendance_management\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-03T17:28:47.753Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-03T17:28:47.753Z"
             },
             {
               "$type": "Document",

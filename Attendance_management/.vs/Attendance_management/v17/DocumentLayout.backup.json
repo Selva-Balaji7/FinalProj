@@ -71,6 +71,10 @@
               "EditorCaption": ""
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Permission.cs",
@@ -82,10 +86,6 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-04T13:22:01.148Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Document",
@@ -132,9 +132,9 @@
               "Title": "PermissionController.cs",
               "DocumentMoniker": "C:\\FInal_Team_Proj\\Attendance_management\\Attendance_management\\Controllers\\PermissionController.cs",
               "RelativeDocumentMoniker": "Attendance_management\\Controllers\\PermissionController.cs",
-              "ToolTip": "C:\\FInal_Team_Proj\\Attendance_management\\Attendance_management\\Controllers\\PermissionController.cs*",
-              "RelativeToolTip": "Attendance_management\\Controllers\\PermissionController.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAArAAAAAAAAAA==",
+              "ToolTip": "C:\\FInal_Team_Proj\\Attendance_management\\Attendance_management\\Controllers\\PermissionController.cs",
+              "RelativeToolTip": "Attendance_management\\Controllers\\PermissionController.cs",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAcwE8AAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-04T13:28:17.339Z",
               "EditorCaption": ""
@@ -184,8 +184,8 @@
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\FInal_Team_Proj\\Attendance_management\\Attendance_management\\Program.cs",
               "RelativeDocumentMoniker": "Attendance_management\\Program.cs",
-              "ToolTip": "C:\\FInal_Team_Proj\\Attendance_management\\Attendance_management\\Program.cs*",
-              "RelativeToolTip": "Attendance_management\\Program.cs*",
+              "ToolTip": "C:\\FInal_Team_Proj\\Attendance_management\\Attendance_management\\Program.cs",
+              "RelativeToolTip": "Attendance_management\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-03T17:28:47.753Z",
