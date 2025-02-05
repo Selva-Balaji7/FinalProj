@@ -1,0 +1,4 @@
+Angular short notes:
+
+ngOnInit:
+ngOnInit() is used to fetch data from an API:

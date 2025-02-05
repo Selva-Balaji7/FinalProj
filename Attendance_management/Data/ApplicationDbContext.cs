@@ -21,11 +21,6 @@ public partial class ApplicationDbContext : DbContext
 
     public virtual DbSet<Attendancerequest> Attendancerequests { get; set; }
 
-<<<<<<< HEAD
-=======
-    public virtual DbSet<Efmigrationshistory> Efmigrationshistories { get; set; }
-
->>>>>>> 216c7889527391813817263029145e2906540561
     public virtual DbSet<Leaverequest> Leaverequests { get; set; }
 
     public virtual DbSet<Leavetype> Leavetypes { get; set; }
@@ -116,19 +111,6 @@ public partial class ApplicationDbContext : DbContext
                 .HasConstraintName("attendancerequests_ibfk_1");
         });
 
-<<<<<<< HEAD
-=======
-        modelBuilder.Entity<Efmigrationshistory>(entity =>
-        {
-            entity.HasKey(e => e.MigrationId).HasName("PRIMARY");
-
-            entity.ToTable("__efmigrationshistory");
-
-            entity.Property(e => e.MigrationId).HasMaxLength(150);
-            entity.Property(e => e.ProductVersion).HasMaxLength(32);
-        });
-
->>>>>>> 216c7889527391813817263029145e2906540561
         modelBuilder.Entity<Leaverequest>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");

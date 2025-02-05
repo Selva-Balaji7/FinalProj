@@ -1,0 +1,16 @@
+<div class="container">
+    <h2>Leave Types</h2>
+    <mat-table [dataSource]="leaveTypes" class="mat-elevation-z8">
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+        <mat-cell *matCellDef="let type"> {{ type.id }} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let type"> {{ type.name }} </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="['id', 'name']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['id', 'name'];"></mat-row>
+    </mat-table>
+  </div>
+  
