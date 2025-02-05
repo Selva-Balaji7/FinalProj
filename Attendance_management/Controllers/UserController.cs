@@ -49,7 +49,7 @@ namespace Attendance_management.Controllers
 
             if(user == null)
             {
-                return NotFound();
+                return NotFound("User Id Not Found");
             }
             return user.Password == password;
         }

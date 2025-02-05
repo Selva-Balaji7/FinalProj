@@ -14,12 +14,25 @@ export class UserLoginComponent {
   LData:any;
   reqUrl:any;
 
-  constructor(private http : DbservicesService, private _route:Router){}
+  constructor(private _http : DbservicesService, private _route:Router){}
 
   AuthenticateUser(LoginForm:any){
     this.LData = LoginForm.value;
     this.reqUrl = `user/${LoginForm.value.userid}/verify?password=${LoginForm.value.userpassword}`;
 
+    this._http.getRecord(this.reqUrl).subscribe(
+      (res)=>{
+        if(res){
+          window.alert("Logged in");
+        }
+        else{
+          window.alert("Wrong Password");
+        }
+      },
+      (error)=>{
+        window.alert(error.error);
+      }
+    )
     console.log(this.reqUrl);
 
     _

@@ -1,0 +1,56 @@
+*What is NgRx?
+    NgRx is a state management library for Angular inspired by Redux (a popular state management library in React). 
+    It helps you manage the state of your application in a predictable way using a unidirectional data flow.
+
+*Core Concepts of NgRx
+
+State:      The single source of truth for your application's data.
+Actions:    Events that describe something that happened in the application (e.g., "Load Users").
+Reducers:   Pure functions that take the current state and an action, and return a new state.
+Selectors:  Functions that allow you to query and derive data from the state.
+Effects:    Side effects (e.g., API calls) that occur in response to actions.
+Store:      The central hub that holds the application state and provides methods to interact with it.
+
+
+1. Install NgRx Packages
+
+    ng add @ngrx/store
+
+
+2. Create a Feature State
+
+    2.a src/app/ngrx/counter.actions.ts
+
+    import { createAction } from '@ngrx/store';
+    export const increment = createAction('[Counter] Increment');
+    export const decrement = createAction('[Counter] Decrement');
+    export const reset = createAction('[Counter] Reset');
+    export const incrementCountBy = createAction(
+    '[Counter] Increment By',
+    props<{ value: number }>() // Define payload type
+    );
+
+
+    2.b src/app/ngrx/counter.reducer.ts
+
+    import { createReducer, on } from '@ngrx/store';
+    import { increment, decrement, reset } from './counter.actions';
+
+    export const initialState = 0;
+
+    const _counterReducer = createReducer(
+    initialState,
+    on(increment, (state) => state + 1),
+    on(decrement, (state) => state - 1),
+    on(reset, () => 0),
+    on(incrementCountBy, (state, { value }) => state + value)
+    );
+
+    export function counterReducer(state: any, action: any) {
+    return _counterReducer(state, action);
+    }
+
+3. Register the Store in AppModule
+
+    Open app.module.ts
+
