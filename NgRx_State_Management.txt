@@ -14,43 +14,76 @@ Store:      The central hub that holds the application state and provides method
 
 1. Install NgRx Packages
 
-    ng add @ngrx/store
+    npm install @ngrx/store @ngrx/effects @ngrx/entity @ngrx/store-devtools
 
 
-2. Create a Feature State
+2. Define the User State
 
-    2.a src/app/ngrx/counter.actions.ts
-
-    import { createAction } from '@ngrx/store';
-    export const increment = createAction('[Counter] Increment');
-    export const decrement = createAction('[Counter] Decrement');
-    export const reset = createAction('[Counter] Reset');
-    export const incrementCountBy = createAction(
-    '[Counter] Increment By',
-    props<{ value: number }>() // Define payload type
-    );
-
-
-    2.b src/app/ngrx/counter.reducer.ts
-
-    import { createReducer, on } from '@ngrx/store';
-    import { increment, decrement, reset } from './counter.actions';
-
-    export const initialState = 0;
-
-    const _counterReducer = createReducer(
-    initialState,
-    on(increment, (state) => state + 1),
-    on(decrement, (state) => state - 1),
-    on(reset, () => 0),
-    on(incrementCountBy, (state, { value }) => state + value)
-    );
-
-    export function counterReducer(state: any, action: any) {
-    return _counterReducer(state, action);
+    export interface User{
+        id:number;
+        name:string;
+        email:string;
     }
 
-3. Register the Store in AppModule
+    export interface UserState{
+        users:User[];
+        selectedUser: User | null;
+    }
 
-    Open app.module.ts
+    export const initialState:UserState = {
+        users:[],
+        selectedUser:null,
+    };
 
+
+
+3. Create User Actions
+
+    import { createAction, props } from "@ngrx/store";
+    import { User } from "./user.state";
+
+    export const loadUsers = createAction('[User] Load Users');
+    export const loadUsersSuccess = createAction('[User] Load Users Success', props<{ users: User[] }>());
+    export const selectUser = createAction('[User] Select User', props<{ userId:number }>());
+
+
+3. Create User Reducer
+
+    import { createReducer, on } from "@ngrx/store";
+    import { initialState } from "./user.state";
+    import { loadUsersSuccess, selectUser } from "./user.actions";
+
+    export const userReducer = createReducer(
+        initialState,
+        on(loadUsersSuccess, (state, {users})=>({...state, users})),
+        on(selectUser, (state, {userId})=>({...state, selectedUser: state.users.find(user => user.id===userId) || null, }))
+    )
+
+
+4. app.config.ts
+
+    providers: [
+        provideStore({user:userReducer}),
+    ]
+
+
+
+5. Dispatch Actions
+
+    private store = inject(Store<{user:UserState}>);
+
+    users$= this.store.select(state => state.user.users);
+    selectedUser$ = this.store.select(state => state.user.selectedUser);
+
+    ngOnInit(){
+        const users:User[] = [
+        {id:1, name:'John Doe', email:'john@gmail.com'},
+        {id:2, name:'Jane Smith', email:'jane@gmail.com'},
+        ];
+
+        this.store.dispatch(loadUsersSuccess({users}));
+    }
+
+    onSelectUser(userId:number){
+        this.store.dispatch(selectUser({userId}));
+    }

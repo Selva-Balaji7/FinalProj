@@ -35,7 +35,6 @@ export class UserLoginComponent {
     )
     console.log(this.reqUrl);
 
-    _
   }
   
 }
