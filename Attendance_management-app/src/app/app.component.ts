@@ -6,7 +6,7 @@ import { LeaveTypeComponent } from './leave-type/leave-type.component';
 
 @Component({
   selector: 'app-root',
-  imports: [UserLoginComponent,LeaveTypeComponent],
+  imports: [LeaveTypeComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

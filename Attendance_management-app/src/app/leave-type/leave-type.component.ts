@@ -3,7 +3,7 @@ import { Component,OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-leave-type',
-  imports: [HttpClient],
+  imports: [],
   templateUrl: './leave-type.component.html',
   styleUrl: './leave-type.component.css'
 })
