@@ -1,7 +1,7 @@
 [
   {
     "ContainingType": "Attendance_management.Controllers.PermissionController",
-    "Method": "Get",
+    "Method": "GetPermissions",
     "RelativePath": "api/Permission",
     "HttpMethod": "GET",
     "IsController": true,
@@ -47,7 +47,7 @@
   },
   {
     "ContainingType": "Attendance_management.Controllers.PermissionController",
-    "Method": "Get",
+    "Method": "GetPermission",
     "RelativePath": "api/Permission/{id}",
     "HttpMethod": "GET",
     "IsController": true,

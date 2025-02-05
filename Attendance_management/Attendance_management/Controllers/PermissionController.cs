@@ -1,13 +1,15 @@
-﻿
-using Attendance_management.Data;
+﻿using Attendance_management.Data;
 using Attendance_management.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Attendance_management.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
     public class PermissionController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -17,24 +19,53 @@ namespace Attendance_management.Controllers
             _context = context;
         }
 
+        // GET: api/Permission
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Permission>>> Get()
+        public async Task<ActionResult<IEnumerable<Permission>>> GetPermissions()
         {
-            var permissions = await _context.Permissions.Include(p => p.Role).ToListAsync();
-            return Ok(permissions);
+            try
+            {
+                var permissions = await _context.Permissions
+                    .Include(p => p.Role)
+                    .ToListAsync();
+
+                if (permissions == null || permissions.Count == 0)
+                {
+                    return NotFound("No permissions found.");
+                }
+
+                return Ok(permissions);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
 
+        // GET: api/Permission/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<Permission>> Get(int id)
+        public async Task<ActionResult<Permission>> GetPermission(int id)
         {
-            var permission = await _context.Permissions.Include(p => p.Role)
-                .FirstOrDefaultAsync(p => p.Id == id);
-            if (permission == null)
-                return NotFound();
+            try
+            {
+                var permission = await _context.Permissions
+                    .Include(p => p.Role)
+                    .FirstOrDefaultAsync(p => p.Id == id);
 
-            return Ok(permission);
+                if (permission == null)
+                {
+                    return NotFound($"Permission with ID {id} not found.");
+                }
+
+                return Ok(permission);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
 
+        // POST: api/Permission
         [HttpPost]
         public async Task<ActionResult<Permission>> Post([FromBody] Permission permission)
         {
@@ -47,15 +78,16 @@ namespace Attendance_management.Controllers
             _context.Permissions.Add(permission);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(Get), new { id = permission.Id }, permission);
+            return CreatedAtAction(nameof(GetPermission), new { id = permission.Id }, permission);
         }
 
+        // PUT: api/Permission/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] Permission permission)
         {
             if (id != permission.Id)
             {
-                return BadRequest();
+                return BadRequest("Mismatched ID in request.");
             }
 
             permission.UpdatedAt = DateTime.UtcNow;
@@ -80,6 +112,7 @@ namespace Attendance_management.Controllers
             return NoContent();
         }
 
+        // DELETE: api/Permission/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
