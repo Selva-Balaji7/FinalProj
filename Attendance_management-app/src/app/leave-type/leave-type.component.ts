@@ -5,7 +5,11 @@ import { MatTableModule } from '@angular/material/table';
 
 @Component({
   selector: 'app-leave-type',
+<<<<<<< HEAD
   imports: [MatFormFieldModule,MatTableModule], // Add MatTableModule here if you're using Angular standalone components
+=======
+  imports: [],
+>>>>>>> 93854f6c6392202529a8f748723b3534ee429213
   templateUrl: './leave-type.component.html',
   styleUrls: ['./leave-type.component.css'], // Corrected the typo here: 'styleUrls' instead of 'styleUrl'
 })

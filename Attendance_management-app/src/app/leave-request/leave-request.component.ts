@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Component,OnInit } from '@angular/core';
+<<<<<<< HEAD
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+=======
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+>>>>>>> 93854f6c6392202529a8f748723b3534ee429213
 
 
 @Component({
