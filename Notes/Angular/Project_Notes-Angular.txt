@@ -1,0 +1,43 @@
+ANGULAR:
+
+Pre-req s/w:-
+-> node js   (node --version)
+-> typescript (tsc -v) or (npx tsc -v)
+If tsc not there install globally: npm install -g typescript
+
+1) Angular Installation:
+npm install -g @angular/cli  (ng --version) or (npx ng --version)
+// npm install -g @angular/cli@18
+ 
+2) Create new Ang proj:
+ng new projName
+* ng new Attendance_management-app
+
+If node modules does not install => npm install 
+
+
+3) run / check project:
+cd projectname 
+ng serve (or) ng s
+
+check local host : 4200
+
+
+Angular Component :
+
+*how to create component in angular
+    -npx ng generate component componentName (or) npx ng g c componentName
+
+
+*how to get output of individual component
+    1. go to component ts file copy its selector name and write as a tag in app.HTML file.
+    2. import the component in app.ts and append its name in imports Decorator.
+
+-----comment----
+For TypeScript/JavaScript Files:
+ /* 
+
+For HTML Files:
+<!--
+
+
