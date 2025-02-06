@@ -2,6 +2,7 @@ for use  i created the controller for this type of code in .net in visual studio
 
 user.cs
 
+
 using System;
 using System.Collections.Generic;
 
@@ -31,6 +32,10 @@ public partial class User
 
     public virtual ICollection<Leaverequest> Leaverequests { get; set; } = new List<Leaverequest>();
 }
+
+
+
+
 
 UserController.cs
 
@@ -210,16 +215,16 @@ namespace Attendance_management.Controllers
     }
 } 
 
-using  the same approch give the code for AttendanceController
+using  the same approch give the code for AttendanceRequestController
 
-Attendance.cs
+AttendanceRequest.cs
 
 using System;
 using System.Collections.Generic;
 
 namespace Attendance_management.Models;
 
-public partial class Attendance
+public partial class Attendancerequest
 {
     public int Id { get; set; }
 
@@ -237,6 +242,7 @@ public partial class Attendance
 
     public virtual User? User { get; set; }
 }
+
 
 give me the AttendanceController.cs code
 
