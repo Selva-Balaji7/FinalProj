@@ -1,16 +1,47 @@
 <div class="container">
-    <h2>Leave Types</h2>
-    <mat-table [dataSource]="leaveTypes" class="mat-elevation-z8">
-      <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
-        <mat-cell *matCellDef="let type"> {{ type.id }} </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-        <mat-cell *matCellDef="let type"> {{ type.name }} </mat-cell>
-      </ng-container>
-      <mat-header-row *matHeaderRowDef="['id', 'name']"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: ['id', 'name'];"></mat-row>
-    </mat-table>
-  </div>
+  <h2>Leave Types</h2>
   
+  <!-- Add Leave Type Form -->
+  <div class="add-form">
+    <h3>Add Leave Type</h3>
+    <form [formGroup]="leaveForm" (ngSubmit)="submitLeaveType()">
+      <mat-form-field>
+        <label>Leave Type Name</label>
+        <input matInput formControlName="name">
+      </mat-form-field>
+      
+      <mat-form-field>
+        <label>Description</label>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
+      
+      <button mat-raised-button color="primary" type="submit">Add Leave Type</button>
+    </form>
+  </div>
+
+  <!-- Leave Types Table -->
+  <mat-table [dataSource]="leaveTypes" class="mat-elevation-z8">
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+      <mat-cell *matCellDef="let type"> {{ type.id }} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let type"> {{ type.name }} </mat-cell>
+    </ng-container>
+
+    <!-- Description Column -->
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+      <mat-cell *matCellDef="let type"> {{ type.description || 'N/A' }} </mat-cell>
+    </ng-container>
+
+    <!-- Header Row -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <!-- Data Row -->
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

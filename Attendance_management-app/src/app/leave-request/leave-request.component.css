@@ -1,0 +1,90 @@
+/* Container Styling */
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  color: #2d93a0;
+  padding: 20px;
+  background-color: #E3F2FD;
+  border-radius: 75px;
+  box-shadow: 8px -6px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Heading Styling */
+  .container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Form Styling */
+  form {
+    display: flex;
+    flex-direction: column;
+    
+  }
+  
+  /* Mat-Form Field Styling */
+  mat-form-field {
+    margin-bottom: 20px;
+  }
+  
+  mat-form-field mat-label {
+    color: #1976d2; /* Label color */
+    margin-left: 10px;
+  }
+  
+  mat-form-field input, mat-form-field textarea {
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+  }
+  
+  /* Textarea Styling */
+  textarea.mat-input-element {
+    resize: vertical;
+  }
+  
+  /* Submit Button Styling */
+  button {
+    align-self: center;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #1976d2;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Hover effect for the submit button */
+  button:hover {
+    background-color: #1565c0;
+  }
+  
+  /* Focus styling for inputs */
+  mat-form-field input:focus, mat-form-field textarea:focus {
+    border-color: #1976d2;
+    box-shadow: 0 0 5px rgba(25, 118, 210, 0.6);
+  }
+  
+  /* Responsive Styling */
+  @media (max-width: 768px) {
+    .container {
+      width: 70%;
+      padding: 15px;
+    }
+  
+    .container h2 {
+      font-size: 20px;
+    }
+  
+    button {
+      width: 50%;
+    }
+  }
+  

@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component,OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @Component({
   selector: 'app-leave-request',
-  imports: [HttpClient,FormBuilder,FormGroup],
+  imports: [MatFormFieldModule,ReactiveFormsModule],
   templateUrl: './leave-request.component.html',
   styleUrl: './leave-request.component.css'
 })

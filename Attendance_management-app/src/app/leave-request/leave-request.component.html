@@ -1,24 +1,24 @@
 <div class="container">
     <h2>Apply for Leave</h2>
     <form [formGroup]="leaveForm" (ngSubmit)="submitLeaveRequest()">
-      <mat-form-field>
-        <mat-label>User ID</mat-label>
+      <mat-form-field appearance="fill">
+        <label>User ID</label>
         <input matInput formControlName="userId">
       </mat-form-field>
-      <mat-form-field>
-        <mat-label>Leave Type ID</mat-label>
+      <mat-form-field appearance="fill">
+        <label>Leave Type ID</label>
         <input matInput formControlName="leaveTypeId">
       </mat-form-field>
-      <mat-form-field>
-        <mat-label>Start Date</mat-label>
+      <mat-form-field appearance="fill">
+        <label>Start Date</label>
         <input matInput type="date" formControlName="startDate">
       </mat-form-field>
-      <mat-form-field>
-        <mat-label>End Date</mat-label>
+      <mat-form-field appearance="fill">
+        <label>End Date</label>
         <input matInput type="date" formControlName="endDate">
       </mat-form-field>
-      <mat-form-field>
-        <mat-label>Reason</mat-label>
+      <mat-form-field appearance="fill">
+        <label>Reason</label>
         <textarea matInput formControlName="reason"></textarea>
       </mat-form-field>
       <button mat-raised-button color="primary" type="submit">Submit</button>
