@@ -19,71 +19,96 @@ Store:      The central hub that holds the application state and provides method
 
 2. Define the User State
 
-    export interface User{
-        id:number;
-        name:string;
-        email:string;
+    export interface UserState2{
+        id:number|null;
+        name:string|null;
+        email:string|null;
+        role:string|null;
+        permissions:string[]|null;
+        profilepicture:string|null;
     }
 
-    export interface UserState{
-        users:User[];
-        selectedUser: User | null;
+    export const initialStateUserData:UserState2 = {
+        id:null,
+        name:null,
+        email:null,
+        role:null,
+        permissions:[],
+        profilepicture:null
     }
-
-    export const initialState:UserState = {
-        users:[],
-        selectedUser:null,
-    };
 
 
 
 3. Create User Actions
 
     import { createAction, props } from "@ngrx/store";
-    import { User } from "./user.state";
 
-    export const loadUsers = createAction('[User] Load Users');
-    export const loadUsersSuccess = createAction('[User] Load Users Success', props<{ users: User[] }>());
-    export const selectUser = createAction('[User] Select User', props<{ userId:number }>());
+    export interface SaveUserDataPayload {
+        id: number;
+        name: string;
+        email: string;
+        role: string;
+        permissions: string[];
+        profilepicture: string;
+    }
+    
+    export const saveUserData = createAction(
+        '[UserData] Save User Data',
+        props<SaveUserDataPayload>() // Use the interface here
+    );
+
 
 
 3. Create User Reducer
 
     import { createReducer, on } from "@ngrx/store";
-    import { initialState } from "./user.state";
-    import { loadUsersSuccess, selectUser } from "./user.actions";
+    import { initialStateUserData } from "./userdata.state";
+    import { saveUserData } from "./userdata.actions";
 
-    export const userReducer = createReducer(
-        initialState,
-        on(loadUsersSuccess, (state, {users})=>({...state, users})),
-        on(selectUser, (state, {userId})=>({...state, selectedUser: state.users.find(user => user.id===userId) || null, }))
+    export const userdataReducer = createReducer(
+        initialStateUserData,
+        on(saveUserData, (state, {id,name,email,role,permissions,profilepicture}) => ({
+            id,
+            name,
+            email,
+            role,
+            permissions,
+            profilepicture
+        }))
     )
 
 
 4. app.config.ts
 
     providers: [
-        provideStore({user:userReducer}),
+        provideStore({userdata:userdataReducer}),
     ]
 
 
 
 5. Dispatch Actions
 
-    private store = inject(Store<{user:UserState}>);
-
-    users$= this.store.select(state => state.user.users);
-    selectedUser$ = this.store.select(state => state.user.selectedUser);
+    private userstore = inject(Store<{userdata:UserState2}>);
+    userdata$ = this.userstore.select(state => state.userdata);
 
     ngOnInit(){
-        const users:User[] = [
-        {id:1, name:'John Doe', email:'john@gmail.com'},
-        {id:2, name:'Jane Smith', email:'jane@gmail.com'},
-        ];
+        const userdatas:SaveUserDataPayload = {
+        id: 100,
+        name: "Bejesh",
+        email: "bejesh@gmail.com",
+        role: "Student",
+        permissions: ["Attendance","ManageAttendance"],
+        profilepicture: "BejeshPic"
+        };
+        this.userstore.dispatch(saveUserData(userdatas));
 
-        this.store.dispatch(loadUsersSuccess({users}));
+        this.userdata$.subscribe(data => console.log(data));
     }
 
     onSelectUser(userId:number){
         this.store.dispatch(selectUser({userId}));
     }
+
+    <ul>
+        <li>{{userdata$ | async | json}}</li>
+    </ul>
