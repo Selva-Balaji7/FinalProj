@@ -9,7 +9,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[Attendance_management.Models.Permission, Attendance_management, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Attendance_management.Models.PermissionDto, Attendance_management, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -29,13 +29,13 @@
     "Parameters": [
       {
         "Name": "permission",
-        "Type": "Attendance_management.Models.Permission",
+        "Type": "Attendance_management.Models.PermissionDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "Attendance_management.Models.Permission",
+        "Type": "Attendance_management.Models.PermissionDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -61,7 +61,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Attendance_management.Models.Permission",
+        "Type": "Attendance_management.Models.PermissionDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -86,7 +86,7 @@
       },
       {
         "Name": "permission",
-        "Type": "Attendance_management.Models.Permission",
+        "Type": "Attendance_management.Models.PermissionDto",
         "IsRequired": true
       }
     ],
@@ -118,7 +118,7 @@
     "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[Attendance_management.Models.Role, Attendance_management, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Attendance_management.Models.RoleDto, Attendance_management, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -138,13 +138,13 @@
     "Parameters": [
       {
         "Name": "role",
-        "Type": "Attendance_management.Models.Role",
+        "Type": "Attendance_management.Models.RoleDto",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "Attendance_management.Models.Role",
+        "Type": "Attendance_management.Models.RoleDto",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -170,7 +170,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Attendance_management.Models.Role",
+        "Type": "Attendance_management.Models.RoleDto",
         "MediaTypes": [
           "text/plain",
           "application/json",

@@ -21,7 +21,7 @@ namespace Attendance_management.Controllers
 
         // GET: api/Permission
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Permission>>> GetPermissions()
+        public async Task<ActionResult<IEnumerable<PermissionDto>>> GetPermissions()
         {
             try
             {
@@ -44,7 +44,7 @@ namespace Attendance_management.Controllers
 
         // GET: api/Permission/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<Permission>> GetPermission(int id)
+        public async Task<ActionResult<PermissionDto>> GetPermission(int id)
         {
             try
             {
@@ -67,7 +67,7 @@ namespace Attendance_management.Controllers
 
         // POST: api/Permission
         [HttpPost]
-        public async Task<ActionResult<Permission>> Post([FromBody] Permission permission)
+        public async Task<ActionResult<PermissionDto>> Post([FromBody] PermissionDto permission)
         {
             if (permission == null)
             {
@@ -83,7 +83,7 @@ namespace Attendance_management.Controllers
 
         // PUT: api/Permission/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] Permission permission)
+        public async Task<IActionResult> Put(int id, [FromBody] PermissionDto permission)
         {
             if (id != permission.Id)
             {

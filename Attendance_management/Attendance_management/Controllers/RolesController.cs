@@ -17,14 +17,14 @@ namespace Attendance_management.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Role>>> GetRoles()
+        public async Task<ActionResult<IEnumerable<RoleDto>>> GetRoles()
         {
             var roles = await _context.Roles.ToListAsync();
             return Ok(roles);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Role>> GetRole(int id)
+        public async Task<ActionResult<RoleDto>> GetRole(int id)
         {
             var role = await _context.Roles.FindAsync(id);
             if (role == null)
@@ -34,9 +34,9 @@ namespace Attendance_management.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Role>> AddRole(Role role)
+        public async Task<ActionResult<RoleDto>> AddRole(RoleDto role)
         {
-            var newRole = new Role
+            var newRole = new RoleDto
             {
                 RoleName = role.RoleName,
                 CreatedAt = DateTime.UtcNow,

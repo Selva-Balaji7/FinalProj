@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\FInal_Team_Proj\\Attendance_management\\Attendance_management\\Attendance_management.csproj": {}
+    "C:\\Users\\sanka\\Desktop\\FINAL_TEAM_PROJECT\\Attendance_management\\Attendance_management\\Attendance_management.csproj": {}
   },
   "projects": {
-    "C:\\FInal_Team_Proj\\Attendance_management\\Attendance_management\\Attendance_management.csproj": {
+    "C:\\Users\\sanka\\Desktop\\FINAL_TEAM_PROJECT\\Attendance_management\\Attendance_management\\Attendance_management.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\FInal_Team_Proj\\Attendance_management\\Attendance_management\\Attendance_management.csproj",
+        "projectUniqueName": "C:\\Users\\sanka\\Desktop\\FINAL_TEAM_PROJECT\\Attendance_management\\Attendance_management\\Attendance_management.csproj",
         "projectName": "Attendance_management",
-        "projectPath": "C:\\FInal_Team_Proj\\Attendance_management\\Attendance_management\\Attendance_management.csproj",
-        "packagesPath": "C:\\Users\\sankaresan.s\\.nuget\\packages\\",
-        "outputPath": "C:\\FInal_Team_Proj\\Attendance_management\\Attendance_management\\obj\\",
+        "projectPath": "C:\\Users\\sanka\\Desktop\\FINAL_TEAM_PROJECT\\Attendance_management\\Attendance_management\\Attendance_management.csproj",
+        "packagesPath": "C:\\Users\\sanka\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\sanka\\Desktop\\FINAL_TEAM_PROJECT\\Attendance_management\\Attendance_management\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\sankaresan.s\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\sanka\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
