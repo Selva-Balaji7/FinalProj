@@ -2325,23 +2325,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Bejesh\\.nuget\\packages\\": {},
+    "C:\\Users\\bejesh.sriram\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Atendance_Management_Final\\Attendance_management\\Attendance_management.csproj",
+      "projectUniqueName": "D:\\Attendance_Management_MainProject\\Attendance_management\\Attendance_management.csproj",
       "projectName": "Attendance_management",
-      "projectPath": "D:\\Atendance_Management_Final\\Attendance_management\\Attendance_management.csproj",
-      "packagesPath": "C:\\Users\\Bejesh\\.nuget\\packages\\",
-      "outputPath": "D:\\Atendance_Management_Final\\Attendance_management\\obj\\",
+      "projectPath": "D:\\Attendance_Management_MainProject\\Attendance_management\\Attendance_management.csproj",
+      "packagesPath": "C:\\Users\\bejesh.sriram\\.nuget\\packages\\",
+      "outputPath": "D:\\Attendance_Management_MainProject\\Attendance_management\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Bejesh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\bejesh.sriram\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

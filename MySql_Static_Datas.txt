@@ -15,6 +15,16 @@ INSERT INTO Users (id,name,email,password,role,profile_picture) values
 (600, "Roberts", "Roberts@gmail.com", "Roberts@123","Teacher", "RobertsPic"),
 (999, "Allen", "Allen@gmail.com", "Allen@123","Admin", "AllenPic");
 
+INSERT INTO roles (id, role_name) values
+(1,"Student"), (2,"Teacher"), (3,"Admin");
+
+
+INSERT INTO permissions (id, role_id, permission_name) values 
+(1, 1, "GiveAttendance"), (2, 1, "ViewAttendance"), 
+(3, 2,"GiveAttendance"), (4, 2, "ViewAttendance"), (5, 2, "ManageAttendance"),
+(6, 3, "ViewAttendance"), (7, 3, "ManageAttendance");
 
 
 select * from Users;
+select * from roles;
+select * from permissions;
