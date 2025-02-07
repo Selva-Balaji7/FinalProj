@@ -12,7 +12,9 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 })
 export class ViewAttendanceComponent {
 
-  user:any = {id:500, name:"William", email:"william@gmail.com",role:"student", permisssions:["","",""]}
+  user:any = {id:500, name:"William", email:"william@gmail.com",role:"admin", permisssions:["","",""]};
+  showStudents:boolean = false;
+  showTeachers:boolean = false;
   page:number = 1;
   filterForm:any;
   startDate:string = "";
@@ -22,12 +24,13 @@ export class ViewAttendanceComponent {
   constructor(private _route:Router, private _http:DbservicesService){}
 
   ngOnInit(){
-    if(this.user.role === "admin" || this.user.role === null){
+    if(this.user.role === null){
       this._route.navigate(['/']);
     }
     this.filterForm = new FormGroup({
       startDate:new FormControl("", [Validators.required]),
-      endDate:new FormControl("", [Validators.required])
+      endDate:new FormControl("", [Validators.required]),
+      status: new FormControl("", [Validators.required])
     })
     
     this.getAttendanceDetails();
@@ -37,19 +40,29 @@ export class ViewAttendanceComponent {
 
   getAttendanceDetails(){
     console.log("Trying to get details");
-    var reqUrl:string = "";
+    var reqUrl:string = "Attendance/";
+
+    if(this.user.role == "student" || (this.user.role == "teacher" && !this.showStudents))
+      reqUrl += `${this.user.id}/limit/${this.page}`
+
+    if(this.user.role == "admin" && !this.showTeachers && !this.showStudents)
+      reqUrl += `limit/${this.page}`
+    
+    if(this.showStudents)
+      reqUrl += `role/student/${this.page}`
+    if(this.showTeachers)
+      reqUrl += `role/teacher/${this.page}`
 
     if(this.startDate && this.endDate)
-      reqUrl= `Attendance/${this.user.id}/limit/${this.page}?startDate=${this.startDate}&endDate=${this.endDate}`;
+      reqUrl += `?startDate=${this.startDate}&endDate=${this.endDate}`;
     else
-      reqUrl = `Attendance/${this.user.id}/limit/${this.page}?startDate=null&endDate=null`;
+      reqUrl += `?startDate=null&endDate=null`;
 
     console.log(reqUrl);
     this._http.getRecord(reqUrl).subscribe(
       (res) => {this.attendances=res;console.log(this.attendances);},
       (error) => {console.log(error)}
     )
-
   }
 
   reset(){
@@ -82,6 +95,26 @@ export class ViewAttendanceComponent {
     else
       window.alert("require Both dates");
 
+  }
+
+
+  changeToStudents(){
+    this.showStudents = true;
+    this.showTeachers = false;
+
+    this.getAttendanceDetails();
+  }
+  changeToTeachers(){
+    this.showStudents = false;
+    this.showTeachers = true;
+
+    this.getAttendanceDetails();
+  }
+  changeToYours(){
+    this.showStudents = false;
+    this.showTeachers = false;
+
+    this.getAttendanceDetails();
   }
 
 

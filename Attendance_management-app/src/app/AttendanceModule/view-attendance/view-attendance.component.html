@@ -1,8 +1,24 @@
+<div *ngIf="user.role=='teacher'">
+    <button type="button" (click)="changeToStudents()">Show Students</button>
+    <button type="button" *ngIf="showStudents" (click)="changeToYours()">Your attendance</button>
+</div>
+<div *ngIf="user.role=='admin'">
+    <button type="button" (click)="changeToStudents()">Show Students</button>
+    <button type="button" (click)="changeToTeachers()">Show Teachers</button>
+</div>
 <div>
     Filter : 
     <form [formGroup]="filterForm" (ngSubmit)="setFiler()">
         START DATE : <input type="date" formControlName="startDate">
-        END DATE : <input type="date" formControlName="endDate" >
+        END DATE : <input type="date" formControlName="endDate" > 
+        <div>
+            Status : <select formControlName="status" id="">
+                        <option value="Present">Present</option>
+                        <option value="Present">Holiday</option>
+                        <option value="Present">Leave</option>
+                        <option value="Present">Sunday</option>
+                    </select> 
+        </div>
         <button type="submit">Filter</button>
     </form>
 </div>
@@ -10,12 +26,18 @@
 <div>
     <table>
         <tr>
+            <th *ngIf="user.role == 'admin' ||showStudents || showTeachers">User Id</th>
+            <th *ngIf="user.role == 'admin' || showStudents || showTeachers">Name</th>
+            <th *ngIf="user.role == 'admin' ||showStudents || showTeachers">Role</th>
             <th>Date</th>
             <th>Time</th>
             <th>Status</th>
             <th>Remarks</th>
         </tr>
         <tr *ngFor="let attendance of attendances">
+            <td *ngIf="user.role == 'admin' ||showStudents || showTeachers">{{attendance.userId}}</td>
+            <td *ngIf="user.role == 'admin' ||showStudents || showTeachers">{{attendance.user.name}}</td>
+            <td *ngIf="user.role == 'admin' ||showStudents || showTeachers">{{attendance.user.role}}</td>
             <td>{{attendance.date}}</td>
             <td>{{attendance.updatedAt | date:'HH:mm'}}</td>
             <td>{{attendance.status}}</td>
@@ -25,7 +47,7 @@
 </div>
 <div>
     <p>page = {{page}}</p>
-    <button type="button" *ngIf="page!=1" (click)="reset()">latest</button>
     <button type="button" (click)="prevPage(1)">prev</button>
     <button type="button" (click)="nextPage(1)">next</button>
+    <button type="button" *ngIf="page!=1" (click)="reset()">latest</button>
 </div>

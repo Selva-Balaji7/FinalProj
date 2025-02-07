@@ -45,6 +45,18 @@ namespace Attendance_management.Controllers
                     .OrderByDescending(a => a.Date)
                     .Skip((count - 1) * 10)
                     .Take(10)
+                    .Select(a => new Attendance
+                    {
+                        UserId = a.UserId,
+                        Date = a.Date,
+                        Status = a.Status,
+                        UpdatedAt = a.UpdatedAt,
+                        User = new User
+                        {
+                            Name = a.User.Name,
+                            Role = a.User.Role
+                        }
+                    })
                     .ToListAsync();
                 if(attendances != null)
                 {
@@ -61,6 +73,18 @@ namespace Attendance_management.Controllers
                     .OrderByDescending(a => a.Date)
                     .Skip((count - 1) * 10)
                     .Take(10)
+                    .Select(a => new Attendance
+                    {
+                        UserId = a.UserId,
+                        Date = a.Date,
+                        Status = a.Status,
+                        UpdatedAt = a.UpdatedAt,
+                        User = new User
+                        {
+                            Name = a.User.Name,
+                            Role = a.User.Role
+                        }
+                    })
                     .ToListAsync();
                 if (attendances != null)
                 {
@@ -115,6 +139,71 @@ namespace Attendance_management.Controllers
                     .OrderByDescending(a => a.Date)
                     .Skip((count - 1) * 10)
                     .Take(10)
+                    .ToListAsync();
+                if (attendances != null)
+                {
+                    return Ok(attendances);
+                }
+            }
+            return BadRequest();
+        }
+
+
+        //To Get attendance details Based on Role
+        [HttpGet("role/{role}/{count}")]
+        public async Task<ActionResult<Attendance>> GetAttendanceRole(string role, int count,[FromQuery] string startDate, [FromQuery] string endDate)
+        {
+            Console.Clear();
+            if (startDate == "null" || endDate == "null")
+            {
+                Console.WriteLine("The Date are null");
+                var attendances = await _context.Attendances
+                    .Include(a => a.User)
+                    .Where(a => a.User.Role == role)
+                    .OrderByDescending(a => a.Date)
+                    .Skip((count - 1) * 10)
+                    .Take(10)
+                    .Select(a => new Attendance
+                    {
+                        UserId = a.UserId,
+                        Date = a.Date,
+                        Status = a.Status,
+                        UpdatedAt = a.UpdatedAt,
+                        User = new User
+                        {
+                            Name = a.User.Name,
+                            Role = a.User.Role
+                        }
+                    })
+                    .ToListAsync();
+                if (attendances != null)
+                {
+                    return Ok(attendances);
+                }
+            }
+            else
+            {
+                var sDate = DateOnly.Parse(startDate);
+                var eDate = DateOnly.Parse(endDate);
+
+                var attendances = await _context.Attendances
+                    .Include(a => a.User)
+                    .Where(a => a.User.Role == role && a.Date >= sDate && a.Date <= eDate)
+                    .OrderByDescending(a => a.Date)
+                    .Skip((count - 1) * 10)
+                    .Take(10)
+                    .Select(a => new Attendance
+                    {
+                        UserId = a.UserId,
+                        Date = a.Date,
+                        Status = a.Status,
+                        UpdatedAt = a.UpdatedAt,
+                        User = new User
+                        {
+                            Name = a.User.Name,
+                            Role = a.User.Role
+                        }
+                    })
                     .ToListAsync();
                 if (attendances != null)
                 {
