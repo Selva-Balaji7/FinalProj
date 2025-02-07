@@ -46,9 +46,12 @@ export class ViewAttendanceComponent {
   changePage(count:number){
     var tempPage:number = this.page;
     tempPage += count;
-    if(tempPage > 0 && this.attendances.length != 0){
+    if(tempPage > 0 ){
       this.page = tempPage;
       this.getAttendanceDetails();
+      if(this.attendances.length == 0){
+        this.page-=count;
+      }
     }
   }
 
