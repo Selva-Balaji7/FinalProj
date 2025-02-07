@@ -1,50 +1,111 @@
+import { Injectable, Component, OnInit } from '@angular/core';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+
+interface Permission {
+  id: number;
+  name: string;
+}
+
+interface CreatePermissionRequest {
+  permissionName: string;
+  roleId: number;
+}
+
+interface UpdatePermissionRequest {
+  id: number;
+  name: string;
+}
 
 @Component({
   selector: 'app-permission',
-  imports: [FormsModule,CommonModule],
+  imports:[FormsModule, CommonModule],
   templateUrl: './permission.component.html',
   styleUrls: ['./permission.component.css']
 })
 export class PermissionComponent implements OnInit {
+  permissions: Permission[] = [];
+  permissionForm: CreatePermissionRequest = {
+    permissionName: '',
+    roleId: 2
+  };
 
-  permissions: any[] = [];  // Using `any` to avoid type issues
-  permissionForm: { value: { permissionName: string, roleId: number } } = { value: { permissionName: '', roleId: 2 } }; // Define the permissionForm property
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    })
+  };
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.getPermissions();  // Get permissions on initialization
+    this.getPermissions();
   }
 
-  // Simulate getting permissions
   getPermissions(): void {
-    this.permissions = [
-      { id: 1, name: 'Read' },
-      { id: 2, name: 'Write' },
-      { id: 3, name: 'Execute' }
-    ];
+    this.http.get<Permission[]>('https://localhost:7171/api/Permission')
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.permissions = data;
+        },
+        (error) => {
+          console.error('Error fetching permissions: ', error);
+        }
+      );
   }
 
-  // Simulate create permission
   createPermission(): void {
-    const newPermission = { id: this.permissions.length + 1, name: this.permissionForm.value.permissionName };
-    this.permissions.push(newPermission);
-    this.permissionForm.value.permissionName = ''; // Clear the input field
+    const newPermission: CreatePermissionRequest = {
+      permissionName: this.permissionForm.permissionName,
+      roleId: this.permissionForm.roleId
+    };
+
+    this.http.post('https://localhost:7171/api/Permission', newPermission, this.httpOptions)
+      .subscribe(
+        (data) => {
+          console.log('New permission created: ', data);
+          this.getPermissions();
+          this.permissionForm.permissionName = '';
+        },
+        (error) => {
+          console.error('Error creating permission: ', error);
+        }
+      );
   }
 
-  // Simulate update permission
-  updatePermission(permission: any): void {
-    const index = this.permissions.findIndex(p => p.id === permission.id);
-    if (index !== -1) {
-      this.permissions[index].name = permission.name;
+  updatePermission(permission: Permission): void {
+    if (permission) {
+      const updatePermissionRequest: UpdatePermissionRequest = {
+        name: permission.name,
+        id: permission.id
+      };
+
+      this.http.put(`https://localhost:7171/api/Permission${permission.id}`, updatePermissionRequest, this.httpOptions)
+        .subscribe(
+          (data) => {
+            console.log('Permission updated: ', data);
+            this.getPermissions();
+          },
+          (error) => {
+            console.error('Error updating permission: ', error);
+          }
+        );
     }
   }
 
-  // Simulate delete permission
   deletePermission(id: number): void {
-    this.permissions = this.permissions.filter(permission => permission.id !== id);
+    this.http.delete(`https://localhost:7171/api/Permission/${id}`, this.httpOptions)
+      .subscribe(
+        () => {
+          console.log('Permission deleted');
+          this.getPermissions();
+        },
+        (error) => {
+          console.error('Error deleting permission: ', error);
+        }
+      );
   }
 }

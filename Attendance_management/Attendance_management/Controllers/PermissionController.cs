@@ -26,7 +26,7 @@ namespace Attendance_management.Controllers
             try
             {
                 var permissions = await _context.Permissions
-                    .Include(p => p.Role)
+                    
                     .ToListAsync();
 
                 if (permissions == null || permissions.Count == 0)
@@ -49,7 +49,7 @@ namespace Attendance_management.Controllers
             try
             {
                 var permission = await _context.Permissions
-                    .Include(p => p.Role)
+                    
                     .FirstOrDefaultAsync(p => p.Id == id);
 
                 if (permission == null)
