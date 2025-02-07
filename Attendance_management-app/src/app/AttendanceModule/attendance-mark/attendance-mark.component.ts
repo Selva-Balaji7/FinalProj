@@ -8,64 +8,55 @@ import {DbservicesService} from '../../Services/dbservices.service';
   templateUrl: './attendance-mark.component.html',
   styleUrl: './attendance-mark.component.css'
 })
-export class AttendanceMarkComponent implements OnInit {
-  role_id: number = 1; // Assume value from logged-in user
-  selectedDate: string = '';
-  inTime: string | null = null;
-  outTime: string | null = null;
-  isFullDay: boolean = false;
-  attendanceRequests: any[] = [];
-
-  constructor(private DbService:DbservicesService) {}
-
-  ngOnInit() {
-    if (this.role_id === 2 || this.role_id === 3) {
-      this.loadAttendanceRequests();
-    }
-  }
-
-  markInTime() {
-    this.inTime = new Date().toISOString().split('T')[1].substring(0, 5);
-  }
-
-  markOutTime() {
-    this.outTime = new Date().toISOString().split('T')[1].substring(0, 5);
-  }
-
-  submitRequest() {
-    if (this.inTime && this.outTime) {
-      let inTimeDate = new Date(`1970-01-01T${this.inTime}:00`);
-      let outTimeDate = new Date(`1970-01-01T${this.outTime}:00`);
-      let difference = (outTimeDate.getTime() - inTimeDate.getTime()) / (1000 * 60 * 60);
-      this.isFullDay = difference >= 8;
-
-      let requestData = {
-        userId: 1, // Assume logged-in user
-        date: this.selectedDate,
-        status: this.isFullDay ? 'Full Day' : 'Short Fall',
-        createdAt: new Date(),
-      };
-
-      this.DbService.submitAttendanceRequest(requestData).subscribe(response => {
-        alert('Attendance request submitted');
-      });
-    } else {
-      alert('Please mark both In Time and Out Time');
-    }
-  }
-
-  loadAttendanceRequests() {
-    this.DbService.getAttendanceRequests().subscribe(data => {
-      this.attendanceRequests = data;
-    });
-  }
-
-  approveAttendance(request: any, status: string) {
-    request.status = status;
-    this.DbService.approveAttendanceRequest(request).subscribe(response => {
-      alert('Attendance updated successfully');
-    });
-  }
-
+export class AttendanceMarkComponent  {
+  
  
+  // user:any = {id:100, name:"William", email:"william@gmail.com",role:"student", permisssions:["","",""],
+    
+  // }
+
+
+role: string = "Admin";  // Role of the user (Student, Teacher, Admin)
+
+
+
+  attendance = { date: '' };  // Stores selected date
+  studentRequests = [  // Sample student attendance requests
+    { studentName: 'John Doe', date: '2025-02-07' },
+    { studentName: 'Jane Smith', date: '2025-02-06' }
+  ];
+  teacherRequests = [  // Sample teacher attendance requests
+    { teacherName: 'Mr. Brown', date: '2025-02-07' },
+    { teacherName: 'Ms. Green', date: '2025-02-06' }
+  ];
+
+
+  // ngOnInit() {
+  //   // Assume we get user role from authentication service
+  //   this.role = localStorage.getItem('userRole') || 'Student'; // Change this for testing
+  // }
+
+
+
+  // Student submits attendance request
+  submitAttendanceRequest() {
+    if (!this.attendance.date) {
+      alert('Please select a date.');
+      return;
+    }
+    alert(`Attendance request submitted for ${this.attendance.date}`);
+    // Call API to save attendance request for teacher approval
+  }
+  // Teacher/Admin marks attendance
+  markAttendance(request: any, status: string) {
+    alert(`${request.studentName || request.teacherName} marked as ${status} on ${request.date}`);
+    // Call API to update attendance status
+  }
+
+
+
+
+
+
+
 }

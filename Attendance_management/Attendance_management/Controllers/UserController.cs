@@ -1,60 +1,24 @@
-for use  i created the controller for this type of code in .net in visual studio.
+﻿using Microsoft.AspNetCore.Mvc;
 
-user.cs
-
-
-using System;
-using System.Collections.Generic;
-
-namespace Attendance_management.Models;
-
-public partial class User
-{
-    public int Id { get; set; }
-
-    public string Name { get; set; } = null!;
-
-    public string Email { get; set; } = null!;
-
-    public string Password { get; set; } = null!;
-
-    public string Role { get; set; } = null!;
-
-    public string? ProfilePicture { get; set; }
-
-    public DateTime? CreatedAt { get; set; }
-
-    public DateTime? UpdatedAt { get; set; }
-
-    public virtual ICollection<Attendancerequest> Attendancerequests { get; set; } = new List<Attendancerequest>();
-
-    public virtual ICollection<Attendance> Attendances { get; set; } = new List<Attendance>();
-
-    public virtual ICollection<Leaverequest> Leaverequests { get; set; } = new List<Leaverequest>();
-}
-
-
-
-
-
-UserController.cs
-
-﻿using Attendance_management.Data;
+using Attendance_management.Data;
 using Attendance_management.Models;
-using Attendance_management.UserServices;
 
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Attendance_management.Controllers
 {
+
     [ApiController]
     [Route("api/[controller]")]
 
-    public class UserController : ControllerBase
+    public class UserController : Controller
     {
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
+
         private ApplicationDbContext _context;
-        HashServiceClass hashserv = new HashServiceClass();
 
         public UserController(ApplicationDbContext context)
         {
@@ -85,14 +49,16 @@ namespace Attendance_management.Controllers
             return Ok(response);
         }
 
+
+
         [HttpGet("{id}/verify")]
-        public async Task<ActionResult<bool>> VerifyUser(int id, [FromQuery]string password)
+        public async Task<ActionResult<bool>> VerifyUser(int id, [FromQuery] string password)
         {
             var user = await _context.Users.FindAsync(id);
 
-            if(user == null)
+            if (user == null)
             {
-                return NotFound();
+                return NotFound("User Id Not Found");
             }
             return user.Password == password;
         }
@@ -119,7 +85,7 @@ namespace Attendance_management.Controllers
                 Id = user.Id,
                 Name = user.Name,
                 Email = user.Email,
-                Password = this.hashserv.HashPassword(user.Password),
+                Password = user.Password,
                 Role = user.Role,
                 ProfilePicture = user.ProfilePicture,
                 CreatedAt = user.CreatedAt,
@@ -134,7 +100,7 @@ namespace Attendance_management.Controllers
 
 
 
-        [HttpPost("{id}/profileimage")]
+        [HttpPost("profileimage")]
         public async Task<IActionResult> UploadProfileImage(int id, IFormFile image)
         {
             Console.Clear();
@@ -159,9 +125,9 @@ namespace Attendance_management.Controllers
         }
 
 
-        
 
-        
+
+
 
 
         [HttpPut("{id}")]
@@ -192,14 +158,14 @@ namespace Attendance_management.Controllers
 
             return NoContent();
 
-        } 
+        }
 
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteUser(int id)
         {
             var user = await _context.Users.FindAsync(id);
-            if(user == null)
+            if (user == null)
             {
                 return NotFound();
             }
@@ -211,132 +177,5 @@ namespace Attendance_management.Controllers
         }
 
 
-
     }
-} 
-
-using  the same approch give the code for AttendanceRequestController
-
-AttendanceRequest.cs
-
-using System;
-using System.Collections.Generic;
-
-namespace Attendance_management.Models;
-
-public partial class AttendanceRequest
-{
-    public int Id { get; set; }
-
-    public int? UserId { get; set; }
-
-    public DateOnly Date { get; set; }
-
-    public string Status { get; set; } = null!;
-
-    public string? Remarks { get; set; }
-
-    public DateTime? CreatedAt { get; set; }
-
-    public DateTime? UpdatedAt { get; set; }
-
-    public virtual User? User { get; set; }
 }
-
-
-give me the AttendanceRequestController.cs code
-
-
-
-
-
-
-
-I am having model class as AttendanceRequest.cs give me the AttendanceController.cs code for this?
-
-AttendanceRequest.cs
-
-using System;
-using System.Collections.Generic;
-
-namespace Attendance_management.Models;
-
-public partial class AttendanceRequest
-{
-    public int Id { get; set; }
-
-    public int? UserId { get; set; }
-
-    public DateOnly Date { get; set; }
-
-    public string Status { get; set; } = null!;
-
-    public string? Remarks { get; set; }
-
-    public DateTime? CreatedAt { get; set; }
-
-    public DateTime? UpdatedAt { get; set; }
-
-    public virtual User? User { get; set; }
-}
-
-
-for reference i am  having database tables if it necessary use this or skip the above
-
-=>Attendance Table Relation Many-to-One with Users Table: Each attendance record (user_id) is associated with one user (id in the Users table).
-
-
-=> User Table
-User.cs
-
-using System;
-using System.Collections.Generic;
-
-namespace Attendance_management.Models;
-
-public partial class User
-{
-    public int Id { get; set; }
-
-    public string Name { get; set; } = null!;
-
-    public string Email { get; set; } = null!;
-
-    public string Password { get; set; } = null!;
-
-    public string Role { get; set; } = null!;
-
-    public string? ProfilePicture { get; set; }
-
-    public DateTime? CreatedAt { get; set; }
-
-    public DateTime? UpdatedAt { get; set; }
-
-    public virtual ICollection<Attendancerequest> Attendancerequests { get; set; } = new List<Attendancerequest>();
-
-    public virtual ICollection<Attendance> Attendances { get; set; } = new List<Attendance>();
-
-    public virtual ICollection<Leaverequest> Leaverequests { get; set; } = new List<Leaverequest>();
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-https://chatgpt.com/c/67a174d7-e578-800d-a488-1767b2bbc420

@@ -1,0 +1,48 @@
+<p>attendance-mark works!</p>
+
+
+
+
+
+
+
+
+<div *ngIf="role_id === 1">
+    <h2>Student Attendance</h2>
+    <label>Select Date:</label>
+    <input type="date" [(ngModel)]="selectedDate" />
+    <button (click)="markInTime()">In Time</button>
+    <button (click)="markOutTime()">Out Time</button>
+    <button (click)="submitRequest()">Submit Attendance Request</button>
+  </div>
+  
+  <div *ngIf="role_id === 2">
+    <h2>Teacher Attendance</h2>
+    <label>Select Date:</label>
+    <input type="date" [(ngModel)]="selectedDate" />
+    <button (click)="markInTime()">In Time</button>
+    <button (click)="markOutTime()">Out Time</button>
+    <button (click)="submitRequest()">Submit Attendance Request</button>
+  
+    <h3>Review Attendance Requests</h3>
+    <ul>
+      <li *ngFor="let request of attendanceRequests">
+        {{ request.date }} - {{ request.status }}
+        <button (click)="approveAttendance(request, 'Present')">Approve</button>
+        <button (click)="approveAttendance(request, 'Absent')">Reject</button>
+      </li>
+    </ul>
+  </div>
+  
+  <div *ngIf="role_id === 3">
+    <h2>Admin Attendance Panel</h2>
+    <h3>Review Teacher/Student Attendance</h3>
+    <ul>
+      <li *ngFor="let request of attendanceRequests">
+        {{ request.userId }} - {{ request.date }} - {{ request.status }}
+        <button (click)="approveAttendance(request, 'Present')">Approve</button>
+        <button (click)="approveAttendance(request, 'Absent')">Reject</button>
+      </li>
+    </ul>
+  </div>
+  
