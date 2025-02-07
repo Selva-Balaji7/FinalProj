@@ -1,0 +1,31 @@
+<div>
+    Filter : 
+    <form [formGroup]="filterForm" (ngSubmit)="setFiler()">
+        START DATE : <input type="date" formControlName="startDate">
+        END DATE : <input type="date" formControlName="endDate" >
+        <button type="submit">Filter</button>
+    </form>
+</div>
+
+<div>
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status</th>
+            <th>Remarks</th>
+        </tr>
+        <tr *ngFor="let attendance of attendances">
+            <td>{{attendance.date}}</td>
+            <td>{{attendance.updatedAt | date:'HH:mm'}}</td>
+            <td>{{attendance.status}}</td>
+            <td>{{attendance.remarks || "-"}}</td>
+        </tr>
+    </table>
+</div>
+<div>
+    <p>page = {{page}}</p>
+    <button type="button" *ngIf="page!=1" (click)="reset()">latest</button>
+    <button type="button" (click)="prevPage(1)">prev</button>
+    <button type="button" (click)="nextPage(1)">next</button>
+</div>

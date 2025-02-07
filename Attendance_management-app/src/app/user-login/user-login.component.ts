@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { DbservicesService } from '../../services/db/dbservices.service';
+import { DbservicesService } from '../services/db.service';
+
 
 @Component({
   selector: 'app-user-login',
@@ -18,7 +19,7 @@ export class UserLoginComponent {
 
   AuthenticateUser(LoginForm:any){
     this.LData = LoginForm.value;
-    this.reqUrl = `user/${LoginForm.value.userid}/verify?password=${LoginForm.value.userpassword}`;
+    this.reqUrl = `UserLogin/${LoginForm.value.userid}/verify?password=${LoginForm.value.userpassword}`;
 
     this._http.getRecord(this.reqUrl).subscribe(
       (res)=>{

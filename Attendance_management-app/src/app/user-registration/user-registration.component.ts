@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule , ReactiveFormsModule, FormGroup, FormControl, Validators} from '@angular/forms';
-import { DbservicesService } from '../../services/db/dbservices.service';
+import { DbservicesService } from '../services/db.service.js';
 import { Router } from '@angular/router';
 
 @Component({

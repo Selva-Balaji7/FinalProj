@@ -1,5 +1,227 @@
 [
   {
+    "ContainingType": "Attendance_management.Controllers.AttendanceController",
+    "Method": "GetAllAttendancesCount",
+    "RelativePath": "api/Attendance",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Attendance_management.Models.Attendance, Attendance_management, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Attendance_management.Controllers.AttendanceController",
+    "Method": "AddAttendance",
+    "RelativePath": "api/Attendance",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "attendance",
+        "Type": "Attendance_management.Models.Attendance",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Attendance_management.Controllers.AttendanceController",
+    "Method": "GetAttendance",
+    "RelativePath": "api/Attendance/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Attendance_management.Models.Attendance",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Attendance_management.Controllers.AttendanceController",
+    "Method": "UpdateAttendance",
+    "RelativePath": "api/Attendance/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedAttendance",
+        "Type": "Attendance_management.Models.Attendance",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Attendance_management.Controllers.AttendanceController",
+    "Method": "DeleteAttendance",
+    "RelativePath": "api/Attendance/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Attendance_management.Controllers.AttendanceController",
+    "Method": "GetAttendanceCount",
+    "RelativePath": "api/Attendance/{id}/count",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Int32",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Attendance_management.Controllers.AttendanceController",
+    "Method": "GetAttendanceLimit",
+    "RelativePath": "api/Attendance/{id}/limit/{count}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "count",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "startDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "endDate",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Attendance_management.Models.Attendance",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Attendance_management.Controllers.AttendanceController",
+    "Method": "GetAllAttendances",
+    "RelativePath": "api/Attendance/count",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Int32",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Attendance_management.Controllers.AttendanceController",
+    "Method": "GetLimitAttendance",
+    "RelativePath": "api/Attendance/limit/{count}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "count",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "startDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "endDate",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Attendance_management.Models.Attendance, Attendance_management, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Attendance_management.Controllers.LeaveRequestsController",
     "Method": "GetLeaveRequests",
     "RelativePath": "api/LeaveRequests",
@@ -218,9 +440,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Attendance_management.Controllers.UserController",
+    "ContainingType": "Attendance_management.Controllers.UserLoginController",
     "Method": "GetAllUser",
-    "RelativePath": "api/User",
+    "RelativePath": "api/UserLogin",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -238,9 +460,9 @@
     ]
   },
   {
-    "ContainingType": "Attendance_management.Controllers.UserController",
+    "ContainingType": "Attendance_management.Controllers.UserLoginController",
     "Method": "AddUser",
-    "RelativePath": "api/User",
+    "RelativePath": "api/UserLogin",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -254,9 +476,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Attendance_management.Controllers.UserController",
+    "ContainingType": "Attendance_management.Controllers.UserLoginController",
     "Method": "GetUser",
-    "RelativePath": "api/User/{id}",
+    "RelativePath": "api/UserLogin/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -270,9 +492,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Attendance_management.Controllers.UserController",
+    "ContainingType": "Attendance_management.Controllers.UserLoginController",
     "Method": "UpdateUser",
-    "RelativePath": "api/User/{id}",
+    "RelativePath": "api/UserLogin/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -291,9 +513,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Attendance_management.Controllers.UserController",
+    "ContainingType": "Attendance_management.Controllers.UserLoginController",
     "Method": "DeleteUser",
-    "RelativePath": "api/User/{id}",
+    "RelativePath": "api/UserLogin/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -307,9 +529,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Attendance_management.Controllers.UserController",
+    "ContainingType": "Attendance_management.Controllers.UserLoginController",
     "Method": "UploadProfileImage",
-    "RelativePath": "api/User/{id}/profileimage",
+    "RelativePath": "api/UserLogin/{id}/profileimage",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -328,9 +550,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Attendance_management.Controllers.UserController",
+    "ContainingType": "Attendance_management.Controllers.UserLoginController",
     "Method": "VerifyUser",
-    "RelativePath": "api/User/{id}/verify",
+    "RelativePath": "api/UserLogin/{id}/verify",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -359,9 +581,9 @@
     ]
   },
   {
-    "ContainingType": "Attendance_management.Controllers.UserController",
+    "ContainingType": "Attendance_management.Controllers.UserLoginController",
     "Method": "GetImage",
-    "RelativePath": "api/User/images/{fileName}",
+    "RelativePath": "api/UserLogin/images/{fileName}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

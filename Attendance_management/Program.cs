@@ -9,6 +9,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))));
 
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.AllowAnyOrigin()  // Allows any origin
+                   .AllowAnyMethod()  // Allows any HTTP method (GET, POST, etc.)
+                   .AllowAnyHeader(); // Allows any header
+        });
+});
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -22,6 +33,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseCors("AllowAllOrigins");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
