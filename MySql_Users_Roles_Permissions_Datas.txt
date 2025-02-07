@@ -1,5 +1,14 @@
 USE attendance_management;
 
+select * from Users;
+select * from roles;
+select * from permissions;
+
+desc roles;
+desc Users;
+desc permissions;
+
+
 INSERT INTO Users (id,name,email,password,role,profile_picture) values 
 (100, "Smith", "Smith@gmail.com", "Smith@123","Student", "SmithPic"),
 (101, "Johnson", "Johnson@gmail.com", "Johnson@123","Student", "JohnsonPic"),
@@ -25,6 +34,8 @@ INSERT INTO permissions (id, role_id, permission_name) values
 (6, 3, "ViewAttendance"), (7, 3, "ManageAttendance");
 
 
-select * from Users;
-select * from roles;
-select * from permissions;
+
+
+
+
+

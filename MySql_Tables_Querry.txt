@@ -1,8 +1,9 @@
 create database attendance_management;
+DROP DATABASE attendance_management;
 use attendance_management;
 
 CREATE TABLE Users (
-    id INT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
@@ -13,7 +14,7 @@ CREATE TABLE Users (
 );
 
 CREATE TABLE UsersRegistration (
-    id INT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
@@ -24,14 +25,14 @@ CREATE TABLE UsersRegistration (
 );
 
 CREATE TABLE Roles (
-    id INT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     role_name VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE Permissions (
-    id INT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     role_id INT,
     permission_name VARCHAR(255),
     FOREIGN KEY (role_id) REFERENCES Roles(id),
@@ -40,7 +41,7 @@ CREATE TABLE Permissions (
 );
 
 CREATE TABLE Attendance (
-    id INT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     date DATE NOT NULL,
     status VARCHAR(255) NOT NULL,
@@ -51,7 +52,7 @@ CREATE TABLE Attendance (
 );
 
 CREATE TABLE AttendanceRequests (
-    id INT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     date DATE NOT NULL,
     status VARCHAR(255) NOT NULL,
@@ -62,7 +63,7 @@ CREATE TABLE AttendanceRequests (
 );
 
 CREATE TABLE LeaveTypes (
-    id INT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -70,7 +71,7 @@ CREATE TABLE LeaveTypes (
 );
 
 CREATE TABLE LeaveRequests (
-    id INT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     leave_type_id INT,
     start_date DATE NOT NULL,

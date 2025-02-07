@@ -1,0 +1,5 @@
+1. Drop database 		(MySql_Tables_Querry.txt)
+2. Create Database 		(MySql_Tables_Querry.txt)
+3. Create Tables 		(MySql_Tables_Querry.txt)
+4. Create Trigger and Event 	(MySql_Triggers.txt)
+5. Insert Data			(MySql_Users_Roles_Permissions_Datas.txt, MySql_Attendance_Data.txt)
