@@ -1,0 +1,15 @@
+<div class="role-container">
+    <h2>Roles Management</h2>
+  
+    <div>
+        <input [(ngModel)]="newRoleName" placeholder="Enter Role Name" />
+        <button (click)="addRole()">Add Role</button>
+      </div>
+      
+      <ul>
+        <li *ngFor="let role of roles">
+          {{ role.roleName }}
+          <button (click)="deleteRole(role.id)">Delete</button>
+        </li>
+      </ul>
+  </div>

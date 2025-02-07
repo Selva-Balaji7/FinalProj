@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 //import { UserLoginComponent } from './user-login/user-login.component';
  //import { LeaveTypeComponent } from './leave-type/leave-type.component';
 import { LeaveRequestComponent } from './leave-request/leave-request.component';
-import { LeaveTypeComponent } from './leave-type/leave-type.component';
+ import { LeaveTypeComponent } from './leave-type/leave-type.component';
 
 
 @Component({

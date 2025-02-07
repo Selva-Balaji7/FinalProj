@@ -1,13 +1,14 @@
-<h1>user-login</h1>
-<div class="loginpage"  >
-  <form [ngStyle]="myStyle1">
-    <label for="uemail">Enter user mail-id:</label>
-    <input type="text" name="email" id="uemail" placeholder="enter email" required/>
-     <br/>
-    <label for="upass">Enter user pass:</label>
-    <input type="password" name="password" id="upass" placehold="enter password" required/>
-    <br/>
-    <button type="submit" class="btn btn-primary">login</button>
+<div>
+  <form #LoginForm="ngForm" (ngSubmit)="AuthenticateUser(LoginForm)">
+      <div class="">
+          <label for="userid">UserId</label>
+          <input type="text" id="userid" name="userid" ngModel>
+      </div>
+      <div class="">
+          <label for="userpassword">Password</label>
+          <input type="text" id="userpassword" name="userpassword" ngModel>
+      </div>
+      <button type="submit" >loggin</button>
+      <a [routerLink]="['/userregistration']">New User</a>
   </form>
-   
 </div>
