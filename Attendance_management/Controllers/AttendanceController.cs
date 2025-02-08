@@ -33,15 +33,19 @@ namespace Attendance_management.Controllers
 
 
         // https://localhost:7200/api/attendance/limit/1?startDate=2025-01-01&endDate=2025-01-30
-        // https://localhost:7200/api/attendance/limit/1?startDate=null&endDate=null
+        // https://localhost:7200/api/attendance/limit/1?startDate=null&endDate=null&role=null&status=null
         [HttpGet("limit/{count}")]
-        public async Task<ActionResult<IEnumerable<Attendance>>> GetLimitAttendance(int count, [FromQuery]string startDate, [FromQuery]string endDate)
+        public async Task<ActionResult<IEnumerable<Attendance>>> GetLimitAttendance(int count, [FromQuery]string startDate, [FromQuery]string endDate, [FromQuery]string role, [FromQuery]string status)
         {
             Console.Clear();
-            if(startDate == "null" || endDate == "null")
+            var roleList = role=="null" ? new List<string> { "Student", "Teacher", "Admin" } : new List<string> { role };
+            var statusList = (status == "null") ? new List<string> { "Present", "Holiday", "Sunday", "Leave" } : new List<string> { status };
+
+            if (startDate == "null" || endDate == "null")
             {
                 Console.WriteLine("The Date are null");
                 var attendances = await _context.Attendances
+                    .Where(a => statusList.Contains(a.Status) && roleList.Contains(a.User.Role))
                     .OrderByDescending(a => a.Date)
                     .Skip((count - 1) * 10)
                     .Take(10)
@@ -69,7 +73,7 @@ namespace Attendance_management.Controllers
                 var eDate = DateOnly.Parse(endDate);
 
                 var attendances = await _context.Attendances
-                    .Where(a => a.Date >= sDate && a.Date <= eDate)
+                    .Where(a => a.Date >= sDate && a.Date <= eDate && statusList.Contains(a.Status) && roleList.Contains(a.User.Role))
                     .OrderByDescending(a => a.Date)
                     .Skip((count - 1) * 10)
                     .Take(10)
@@ -112,14 +116,15 @@ namespace Attendance_management.Controllers
         }
 
         [HttpGet("{id}/limit/{count}")]
-        public async Task<ActionResult<Attendance>> GetAttendanceLimit(int id, int count,[FromQuery] string startDate, [FromQuery] string endDate)
+        public async Task<ActionResult<Attendance>> GetAttendanceLimit(int id, int count,[FromQuery] string startDate, [FromQuery] string endDate,[FromQuery]string role, [FromQuery] string status)
         {
             Console.Clear();
+            var statusList = (status == "null") ? new List<string> { "Present", "Holiday", "Sunday", "Leave" } : new List<string> { status };
             if (startDate == "null" || endDate == "null")
             {
                 Console.WriteLine("The Date are null");
                 var attendances = await _context.Attendances
-                    .Where(a => a.UserId == id)
+                    .Where(a => a.UserId == id && statusList.Contains(a.Status))
                     .OrderByDescending(a => a.Date)
                     .Skip((count - 1) * 10)
                     .Take(10)
@@ -135,7 +140,7 @@ namespace Attendance_management.Controllers
                 var eDate = DateOnly.Parse(endDate);
 
                 var attendances = await _context.Attendances
-                    .Where(a => a.UserId == id && a.Date >= sDate && a.Date <= eDate)
+                    .Where(a => a.UserId == id && a.Date >= sDate && a.Date <= eDate && statusList.Contains(a.Status))
                     .OrderByDescending(a => a.Date)
                     .Skip((count - 1) * 10)
                     .Take(10)
@@ -149,69 +154,6 @@ namespace Attendance_management.Controllers
         }
 
 
-        //To Get attendance details Based on Role
-        [HttpGet("role/{role}/{count}")]
-        public async Task<ActionResult<Attendance>> GetAttendanceRole(string role, int count,[FromQuery] string startDate, [FromQuery] string endDate)
-        {
-            Console.Clear();
-            if (startDate == "null" || endDate == "null")
-            {
-                Console.WriteLine("The Date are null");
-                var attendances = await _context.Attendances
-                    .Include(a => a.User)
-                    .Where(a => a.User.Role == role)
-                    .OrderByDescending(a => a.Date)
-                    .Skip((count - 1) * 10)
-                    .Take(10)
-                    .Select(a => new Attendance
-                    {
-                        UserId = a.UserId,
-                        Date = a.Date,
-                        Status = a.Status,
-                        UpdatedAt = a.UpdatedAt,
-                        User = new User
-                        {
-                            Name = a.User.Name,
-                            Role = a.User.Role
-                        }
-                    })
-                    .ToListAsync();
-                if (attendances != null)
-                {
-                    return Ok(attendances);
-                }
-            }
-            else
-            {
-                var sDate = DateOnly.Parse(startDate);
-                var eDate = DateOnly.Parse(endDate);
-
-                var attendances = await _context.Attendances
-                    .Include(a => a.User)
-                    .Where(a => a.User.Role == role && a.Date >= sDate && a.Date <= eDate)
-                    .OrderByDescending(a => a.Date)
-                    .Skip((count - 1) * 10)
-                    .Take(10)
-                    .Select(a => new Attendance
-                    {
-                        UserId = a.UserId,
-                        Date = a.Date,
-                        Status = a.Status,
-                        UpdatedAt = a.UpdatedAt,
-                        User = new User
-                        {
-                            Name = a.User.Name,
-                            Role = a.User.Role
-                        }
-                    })
-                    .ToListAsync();
-                if (attendances != null)
-                {
-                    return Ok(attendances);
-                }
-            }
-            return BadRequest();
-        }
 
         [HttpGet("{id}/count")]
         public async Task<ActionResult<int>> GetAttendanceCount(int id)

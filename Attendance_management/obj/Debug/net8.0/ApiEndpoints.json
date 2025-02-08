@@ -151,6 +151,16 @@
         "Name": "endDate",
         "Type": "System.String",
         "IsRequired": false
+      },
+      {
+        "Name": "role",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "status",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -207,40 +217,9 @@
         "Name": "endDate",
         "Type": "System.String",
         "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[Attendance_management.Models.Attendance, Attendance_management, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "Attendance_management.Controllers.AttendanceController",
-    "Method": "GetLimitAttendance",
-    "RelativePath": "api/Attendance/limit/{count}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "count",
-        "Type": "System.Int32",
-        "IsRequired": true
       },
       {
-        "Name": "startDate",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "endDate",
+        "Name": "role",
         "Type": "System.String",
         "IsRequired": false
       },
@@ -253,47 +232,6 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.IEnumerable\u00601[[Attendance_management.Models.Attendance, Attendance_management, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "Attendance_management.Controllers.AttendanceController",
-    "Method": "GetAttendanceRole",
-    "RelativePath": "api/Attendance/role/{role}/{count}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "role",
-        "Type": "System.String",
-        "IsRequired": true
-      },
-      {
-        "Name": "count",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "startDate",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "endDate",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "Attendance_management.Models.Attendance",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -326,20 +264,20 @@
   {
     "ContainingType": "Attendance_management.Controllers.PermissionController",
     "Method": "GetPermission",
-    "RelativePath": "api/Permission/{id}",
+    "RelativePath": "api/Permission/{role}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Int32",
+        "Name": "role",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "Attendance_management.Models.Permission",
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Attendance_management.Models.Permission, Attendance_management, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

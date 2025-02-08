@@ -1,0 +1,12 @@
+.userdetails{
+    display: flex;
+}
+
+.detailslist{
+    list-style-type: none;
+}
+
+.detailslist span{
+    padding-left: 5px;
+    padding-right: 10px;
+}

@@ -19,6 +19,9 @@ Store:      The central hub that holds the application state and provides method
 
 2. Define the User State
 
+	Create a ts file.
+	src/store/user/user.state.ts
+
     export interface UserState2{
         id:number|null;
         name:string|null;
@@ -41,6 +44,9 @@ Store:      The central hub that holds the application state and provides method
 
 3. Create User Actions
 
+	Create a ts file.
+	src/store/user/user.actions.ts
+
     import { createAction, props } from "@ngrx/store";
 
     export interface SaveUserDataPayload {
@@ -61,6 +67,9 @@ Store:      The central hub that holds the application state and provides method
 
 3. Create User Reducer
 
+	Create a ts file.
+	src/store/user/user.reducer.ts
+
     import { createReducer, on } from "@ngrx/store";
     import { initialStateUserData } from "./userdata.state";
     import { saveUserData } from "./userdata.actions";
@@ -80,35 +89,38 @@ Store:      The central hub that holds the application state and provides method
 
 4. app.config.ts
 
-    providers: [
-        provideStore({userdata:userdataReducer}),
-    ]
+	import { provideStore } from '@ngrx/store';
+	import { userReducer } from '../store/user/user.reducer';
+
+   	providers: [
+       	 	provideStore({userdata:userdataReducer}),
+    	]
 
 
 
 5. Dispatch Actions
+	//Load User value from state
+	import { Component, inject } from '@angular/core';
+	import { Store } from '@ngrx/store';
+	import { UserState } from '../../../store/user/user.state';
+	import { saveUserData } from '../../../store/user/user.actions';
+	import { Router } from '@angular/router';
 
-    private userstore = inject(Store<{userdata:UserState2}>);
-    userdata$ = this.userstore.select(state => state.userdata);
+	private userstore = inject(Store<{user:UserState}>)
+  	public user:any;
 
-    ngOnInit(){
-        const userdatas:SaveUserDataPayload = {
-        id: 100,
-        name: "Bejesh",
-        email: "bejesh@gmail.com",
-        role: "Student",
-        permissions: ["Attendance","ManageAttendance"],
-        profilepicture: "BejeshPic"
-        };
-        this.userstore.dispatch(saveUserData(userdatas));
-
-        this.userdata$.subscribe(data => console.log(data));
-    }
-
-    onSelectUser(userId:number){
-        this.store.dispatch(selectUser({userId}));
-    }
-
-    <ul>
-        <li>{{userdata$ | async | json}}</li>
-    </ul>
+ 	 constructor(private _route:Router){}
+  
+  	ngOnInit(){
+        // Get User data from store and save it in user variable.
+   		this.userstore.select(state => state.user).subscribe(date => this.user=date);
+        if(!this.user.id){
+            var localuser:any = localStorage.getItem('user');
+                if(!!localuser){
+                this.userstore.dispatch(saveUserData(JSON.parse(localuser)));
+                }
+            else{
+                this._route.navigate(['/']);
+            }
+        }
+  	}

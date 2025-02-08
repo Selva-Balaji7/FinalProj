@@ -49,19 +49,23 @@ namespace Attendance_management.Controllers
             }
         }
 
-        // GET: api/Permission/{id}
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Permission>> GetPermission(int id)
+       
+        [HttpGet("{role}")]
+        public async Task<ActionResult<IEnumerable<Permission>>> GetPermission(string role)
         {
             try
             {
                 var permission = await _context.Permissions
-                    .Include(p => p.Role)
-                    .FirstOrDefaultAsync(p => p.Id == id);
+                    .Where(p => p.Role.RoleName == role)
+                    .Select(p => new Permission
+                    {
+                        PermissionName = p.PermissionName
+                    })
+                    .ToListAsync();
 
                 if (permission == null)
                 {
-                    return NotFound($"Permission with ID {id} not found.");
+                    return NotFound($"Not Permission for Role {role}");
                 }
 
                 return Ok(permission);

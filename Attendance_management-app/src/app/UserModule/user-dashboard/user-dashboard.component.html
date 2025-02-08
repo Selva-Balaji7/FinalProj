@@ -1,1 +1,13 @@
-<p>user-dashboard works!</p>
+<div>
+    {{user.profilepicture}}
+    <h5>Logout</h5>
+</div>
+<div>
+    <ul>
+        <li *ngFor="let permission of user.permissions">
+            {{permission}}
+        </li>
+    </ul>
+</div>
+
+<router-outlet></router-outlet>

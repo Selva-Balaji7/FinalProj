@@ -28,14 +28,34 @@ INSERT INTO roles (id, role_name) values
 (1,"Student"), (2,"Teacher"), (3,"Admin");
 
 
-INSERT INTO permissions (id, role_id, permission_name) values 
-(1, 1, "GiveAttendance"), (2, 1, "ViewAttendance"), 
-(3, 2,"GiveAttendance"), (4, 2, "ViewAttendance"), (5, 2, "ManageAttendance"),
-(6, 3, "ViewAttendance"), (7, 3, "ManageAttendance");
+DELETE FROM permissions;
+INSERT INTO permissions (role_id, permission_name) values 
+(1, "ViewProfile"), (2, "ViewProfile"), (3, "ViewProfile"),
+(1, "EditProfile"), (2, "EditProfile"), (3, "EditProfile"),
+(1, "MarkAttendance"), (2, "MarkAttendance"), (3, "MarkAttendance"),
+(1, "AttendanceHistory"), (2, "AttendanceHistory"), (3, "AttendanceHistory"),
+(1, "ViewStudentAttendance"), (2, "ViewStudentAttendance"), (3, "ViewStudentAttendance"),
+(1, "ViewTeacherAttendance"), (2, "ViewTeacherAttendance"), (3, "ViewTeacherAttendance"),
+(1, "ViewAllAttendance"), (2, "ViewAllAttendance"), (3, "ViewAllAttendance"),
+(1, "ViewRoles"), (2, "ViewRoles"), (3, "ViewRoles"),
+(1, "EditRoles"), (2, "EditRoles"), (3, "EditRoles"),
+(1, "ViewPermissions"), (2, "ViewPermissions"), (3, "ViewPermissions"),
+(1, "EditPermissions"), (2, "EditPermissions"), (3, "EditPermissions"),
+(1, "LeaveHistory"), (2, "LeaveHistory"), (3, "LeaveHistory"),
+(1, "MakeLeaveRequest"), (2, "MakeLeaveRequest"), (3, "MakeLeaveRequest"),
+(1, "StudentLeaveRequest"), (2, "StudentLeaveRequest"), (3, "StudentLeaveRequest"),
+(1, "TeacherLeaveRequest"), (2, "TeacherLeaveRequest"), (3, "TeacherLeaveRequest"),
+(1, "EditAttendance"), (2, "EditAttendance"), (3, "EditAttendance"),
+(1, "StudentAttendanceRequest"), (2, "StudentAttendanceRequest"), (3, "StudentAttendanceRequest"),
+(1, "TeachersAttendanceRequest"), (2, "TeachersAttendanceRequest"), (3, "TeachersAttendanceRequest"),
+(1, "EditUsers"), (2, "EditUsers"), (3, "EditUsers"),
+(1, "ViewUsers"), (2, "ViewUsers"), (3, "ViewUsers");
 
 
 
-
-
-
-
+//Not for Sql
+public PermissionList = 
+["ViewProfile"/*0*/,"EditProfile"/*1*/,"MarkAttendance"/*2*/,"AttendanceHistory"/*3*/,"ViewStudentAttendance"/*4*/,
+"ViewTeacherAttendance"/*5*/,"ViewAllAttendance"/*6*/,"ViewRoles"/*7*/,"EditRoles"/*8*/,"ViewPermissions"/*9*/,
+"EditPermissions"/*10*/,"LeaveHistory"/*11*/,"MakeLeaveRequest"/*12*/,"StudentLeaveRequest"/*13*/,"TeacherLeaveRequest"/*14*/, 
+"EditAttendance"/*15*/, "StudentAttendanceRequest"/*16*/, "TeachersAttendanceRequest"/*17*/, "EditUsers"/*18*/, "ViewUsers"/*19*/]
