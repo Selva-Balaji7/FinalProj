@@ -11,7 +11,7 @@ namespace Attendance_management.Controllers
     public class UsersregistrationController : ControllerBase
     {
         
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
         public UsersregistrationController(ApplicationDbContext context)
         {
             _context = context;
@@ -44,26 +44,39 @@ namespace Attendance_management.Controllers
         [HttpPost]
         public async Task<ActionResult> AddUserRegistration(Usersregistration user)
         {
-            Console.Clear();
-            Console.WriteLine("post userregistration");
+
+            try
+            {
+                if (string.IsNullOrEmpty(user.Name) || string.IsNullOrEmpty(user.Email) || string.IsNullOrEmpty(user.Password))
+                {
+                    return BadRequest("Name, Email, and Password are required.");
+                }
 
                 var newUser = new Usersregistration
+                {
+                    Id = user.Id,
+                    Name = user.Name,
+                    Email = user.Email,
+                    Password = user.Password,
+                    Role = user.Role,
+                    ProfilePicture = user.ProfilePicture,
+                    //CreatedAt = DateTime.UtcNow,
+                    //UpdatedAt = DateTime.UtcNow
+                };
+
+                //_context.Usersregistrations.Add(newUser);
+                _context.Entry(newUser).State = EntityState.Added;
+
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction("GetAllUserRegistration", new { id = newUser.Id }, newUser);
+            }
+            catch (Exception ex)
             {
-                Id = user.Id,
-                Name = user.Name,
-                Email = user.Email,
-                Password = user.Password,
-                Role = user.Role,
-                ProfilePicture = user.ProfilePicture,
-                //CreatedAt = user.CreatedAt,
-                //UpdatedAt = user.UpdatedAt
-            };
-
-            _context.Usersregistrations.Add(newUser);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetAllUserRegistration", new { id = newUser.Id }, newUser);
+                return StatusCode(500, "An internal server error occurred.");
+            }
         }
+
 
 
         [HttpDelete("{id}")]

@@ -1,11 +1,5 @@
 <div>
     <!-- (ngSubmit)="AuthenticateUser(LoginForm)" -->
-    <img [src]="profilePic" height="200px">
-    <div>
-        <!-- (change)="onFileSelected($event)"  -->
-        <input type="file" (change)="onFileSelected($event)" accept="image/*" formControlName="profilePicture"/>
-        <button (click)="onUpload()">Upload</button>
-    </div>
     <form [formGroup]="regForm" (ngSubmit)="registerUser()">
         <div class="">
             <label for="userid">User Id</label>
@@ -25,12 +19,16 @@
         </div>
         <div class="">
             <label for="userrole">Role</label>
-            <input type="radio" id="userrole1" name="role" value="student" formControlName="role">Student
-            <input type="radio" id="userrole2" name="role" value="teacher" formControlName="role">Teacher
-            <input type="radio" id="userrole3" name="role" value="staff"  formControlName="role">Staff
-            <input type="radio" id="userrole4" name="role" value="admin" formControlName="role">Admin
+            <select name="role" formControlName="role" id="">
+                <option  *ngFor="let onerole of roles"  [value]="onerole.roleName">{{onerole.roleName}}</option>
+            </select>
         </div>
-        <button type="submit" >loggin</button>
-    </form>
-
+        <div *ngIf="regForm.valid">
+            <!-- (change)="onFileSelected($event)"  -->
+            <input type="file" (change)="onFileSelected($event)" accept="image/*"/>
+            <img [src]="profilePic" height="200px">
+        </div>
+        <button type="submit" *ngIf="hasUploadedProfileImage">Register</button>
+    </form>    
+    <button (click)="onUpload()" *ngIf="!hasUploadedProfileImage">Upload</button>
 </div>

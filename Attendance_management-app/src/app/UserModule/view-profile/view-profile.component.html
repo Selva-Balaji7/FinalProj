@@ -1,0 +1,22 @@
+<div>
+    <img [src]="profileImageUrl" alt="">
+</div>
+
+<div class="userdetails">
+    <div>
+        <ul class="detailslist">
+            <li>Id</li>
+            <li>Name</li>
+            <li>Email</li>
+            <li>Role</li>
+        </ul>
+    </div>
+    <div>
+        <ul class="detailslist">
+            <li><span>:</span>{{user.id}}</li>
+            <li><span>:</span>{{user.name | titlecase}}</li>
+            <li><span>:</span>{{user.email}}</li>
+            <li><span>:</span>{{user.role | titlecase}}</li>
+        </ul>
+    </div>
+</div>

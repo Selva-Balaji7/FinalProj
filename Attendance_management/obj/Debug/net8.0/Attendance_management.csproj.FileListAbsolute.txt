@@ -211,7 +211,6 @@ D:\Atendance_Management_Final\Attendance_management\obj\Debug\net8.0\staticwebas
 D:\Atendance_Management_Final\Attendance_management\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Attendance_management.props
 D:\Atendance_Management_Final\Attendance_management\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Attendance_management.props
 D:\Atendance_Management_Final\Attendance_management\obj\Debug\net8.0\staticwebassets.pack.json
-D:\Atendance_Management_Final\Attendance_management\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 D:\Atendance_Management_Final\Attendance_management\obj\Debug\net8.0\Attendan.912D7562.Up2Date
 D:\Atendance_Management_Final\Attendance_management\obj\Debug\net8.0\Attendance_management.dll
 D:\Atendance_Management_Final\Attendance_management\obj\Debug\net8.0\refint\Attendance_management.dll

@@ -1,21 +1,23 @@
 import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UserState } from '../../../store/user/user.state';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { saveUserData } from '../../../store/user/user.actions';
 import { CommonModule } from '@angular/common';
+import { DbservicesService } from '../../services/db/dbservices.service';
 
 @Component({
   selector: 'app-user-dashboard',
-  imports: [RouterOutlet, CommonModule],
+  imports: [RouterOutlet, CommonModule, RouterLink],
   templateUrl: './user-dashboard.component.html',
   styleUrl: './user-dashboard.component.css'
 })
 export class UserDashboardComponent {
   private userstore = inject(Store<{user:UserState}>)
   public user:any;
+  public profileImageUrl:any;
 
-  constructor(private _route:Router){}
+  constructor(private _route:Router, private _http: DbservicesService){}
   
   ngOnInit(){
     this.userstore.select(state => state.user).subscribe(data => this.user=data);
@@ -28,6 +30,13 @@ export class UserDashboardComponent {
         this._route.navigate(['/']);
       }
     }
+    console.log(this.user);
+    this.profileImageUrl =`${this._http.baseURL}/Image/Get/${this.user.id}.jpg`;
+  };
+
+  LogoutSequence(){
+    localStorage.removeItem('user');
+    window.location.reload();
   }
 
 }

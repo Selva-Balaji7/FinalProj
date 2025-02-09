@@ -17,14 +17,33 @@ namespace Attendance_management.Controllers
             _context = context;
         }
 
+        [HttpGet("onlyroles")]
+        public async Task<ActionResult<IEnumerable<Role>>> GetRolesOnly()
+        {
+            var roles = await _context.Roles
+                .Select(r => new
+                {
+                    Id = r.Id,
+                    RoleName = r.RoleName
+                })
+                .ToListAsync();
+            return Ok(roles);
+        }
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Role>>> GetRoles()
         {
             var roles = await _context.Roles
-                .Include(r => r.Permissions)
-                .Select(r=>new Role { 
+                .Select(r => new
+                {
+                    Id = r.Id,
                     RoleName = r.RoleName,
                     Permissions = r.Permissions
+                    .Select(p => new
+                    {
+                        PermissionName = p.PermissionName
+                    })
+                .ToList()
                 })
                 .ToListAsync();
             return Ok(roles);
@@ -62,6 +81,23 @@ namespace Attendance_management.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetRole), new { id = newRole.Id }, newRole);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateRole(int id, [FromBody] Role updaterole)
+        {
+            if (updaterole.Id != id && await _context.Roles.AnyAsync(r => r.Id == updaterole.Id))
+            {
+                return BadRequest("The new ID already exists in the database.");
+            }
+
+            var sql = @"
+            UPDATE Roles
+            SET id = {0}, role_name = {1}
+            WHERE id = {2}";
+            await _context.Database.ExecuteSqlRawAsync(sql, updaterole.Id, updaterole.RoleName, id);
+
+            return NoContent();
         }
 
         [HttpDelete("{id}")]

@@ -13,5 +13,5 @@ public partial class Role
 
     public DateTime? UpdatedAt { get; set; }
 
-    public virtual List<Permission> Permissions { get; set; } = new List<Permission>();
+    public virtual ICollection<Permission> Permissions { get; set; } = new List<Permission>();
 }

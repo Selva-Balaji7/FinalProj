@@ -55,18 +55,6 @@ namespace Attendance_management.Controllers
         }
 
 
-        [HttpGet("images/{fileName}")]
-        public IActionResult GetImage(string fileName)
-        {
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", fileName);
-            if (!System.IO.File.Exists(filePath))
-                return NotFound();
-
-            var imageFileStream = System.IO.File.OpenRead(filePath);
-            return File(imageFileStream, "image/jpeg"); // Adjust MIME type as needed
-        }
-
-
 
         [HttpPost]
         public async Task<ActionResult> AddUser(User user)
@@ -87,32 +75,6 @@ namespace Attendance_management.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetUser", new { id = newUser.Id }, newUser);
-        }
-
-
-
-        [HttpPost("profileimage")]
-        public async Task<IActionResult> UploadProfileImage(int id, IFormFile image)
-        {
-            Console.Clear();
-            Console.WriteLine("--------------------------------Profile Image Upload-------------------------------");
-            if (image == null || image.Length == 0)
-                return BadRequest("No file uploaded.");
-
-            // Save the file to a folder (e.g., wwwroot/images)
-            var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
-            if (!Directory.Exists(folderPath))
-                Directory.CreateDirectory(folderPath);
-
-            var filePath = Path.Combine(folderPath, image.FileName);
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                await image.CopyToAsync(stream);
-            }
-
-            // Return the URL of the uploaded image
-            var imageUrl = $"{Request.Scheme}://{Request.Host}/images/{image.FileName}";
-            return Ok(new { imageUrl });
         }
 
 

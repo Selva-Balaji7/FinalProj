@@ -13,6 +13,30 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "D:\\Atendance_Management_Final\\Attendance_management\\wwwroot\\images\\100.jpg",
+      "PackagePath": "staticwebassets\\images\\100.jpg"
+    },
+    {
+      "Id": "D:\\Atendance_Management_Final\\Attendance_management\\wwwroot\\images\\110.jpg",
+      "PackagePath": "staticwebassets\\images\\110.jpg"
+    },
+    {
+      "Id": "D:\\Atendance_Management_Final\\Attendance_management\\wwwroot\\images\\500.jpg",
+      "PackagePath": "staticwebassets\\images\\500.jpg"
+    },
+    {
+      "Id": "D:\\Atendance_Management_Final\\Attendance_management\\wwwroot\\images\\600",
+      "PackagePath": "staticwebassets\\images"
+    },
+    {
+      "Id": "D:\\Atendance_Management_Final\\Attendance_management\\wwwroot\\images\\600.png",
+      "PackagePath": "staticwebassets\\images\\600.png"
+    },
+    {
+      "Id": "D:\\Atendance_Management_Final\\Attendance_management\\wwwroot\\images\\999.jpg",
+      "PackagePath": "staticwebassets\\images\\999.jpg"
+    },
+    {
       "Id": "D:\\Atendance_Management_Final\\Attendance_management\\wwwroot\\images\\Screenshot (1).png",
       "PackagePath": "staticwebassets\\images\\Screenshot (1).png"
     },

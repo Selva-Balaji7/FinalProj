@@ -31,15 +31,11 @@ export class AttendanceHistoryComponent {
   
     ngOnInit(){
       this.userstore.select(state => state.user).subscribe(date => this.user=date);
-      if(!this.user.id){
-          var localuser:any = localStorage.getItem('user');
-              if(!!localuser){
-              this.userstore.dispatch(saveUserData(JSON.parse(localuser)));
-              }
-          else{
-              this._route.navigate(['/']);
-          }
-      }
+
+      if(!this.user.permissions.includes("AttendanceHistory"))
+        this._route.navigate(['/']);
+      else
+        this.getAttendanceDetails();
       
       this.filterForm = new FormGroup({
         startDate:new FormControl("", [Validators.required]),
@@ -47,36 +43,21 @@ export class AttendanceHistoryComponent {
         status: new FormControl("", [Validators.required])
       })
       
-      this.getAttendanceDetails();
     }
   
     
   
     getAttendanceDetails(){
       console.log("Trying to get details");
-      var reqUrl:string = "Attendance/";
+      var reqUrl:string = `Attendance/${this.user.id}/limit/${this.page}`;
   
-      if(this.user.role == "student" || (this.user.role == "teacher" && !this.showStudents))
-        reqUrl += `${this.user.id}/limit/${this.page}`
-  
-      if(this.user.role == "teacher" && this.showStudents)
-        reqUrl += `limit/${this.page}`
-  
-      if(this.user.role == "admin")
-        reqUrl += `limit/${this.page}`
-      
-      
       if(this.startDate && this.endDate)
         reqUrl += `?startDate=${this.startDate}&endDate=${this.endDate}`;
       else
       reqUrl += `?startDate=null&endDate=null`;
   
-      if(this.showStudents)
-        reqUrl += `&role=student`
-      else if(this.showTeachers)
-        reqUrl += `&role=teacher`
-      else
-        reqUrl += `&role=null`
+      
+      reqUrl += `&role=${this.user.role}`
   
       if(this.status)
         reqUrl += `&status=${this.status}`
@@ -121,29 +102,6 @@ export class AttendanceHistoryComponent {
         window.alert("Both Dates are required");
       
         
-      this.getAttendanceDetails();
-    }
-  
-  
-    changeToStudents(){
-      this.showStudents = true;
-      this.showTeachers = false;
-      this.page = 1;
-  
-      this.getAttendanceDetails();
-    }
-    changeToTeachers(){
-      this.showStudents = false;
-      this.showTeachers = true;
-      this.page = 1;
-  
-      this.getAttendanceDetails();
-    }
-    changeToYours(){
-      this.showStudents = false;
-      this.showTeachers = false;
-      this.page = 1;
-  
       this.getAttendanceDetails();
     }
 

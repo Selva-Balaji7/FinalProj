@@ -38,8 +38,10 @@ export class ViewAllAttendanceComponent {
           }
       }
   
-      if(!this.user.permissions.includes("AttendanceHistory"))
+      if(!this.user.permissions.includes("ViewAllAttendance"))
         this._route.navigate(['/']);
+      else
+        this.getAttendanceDetails();
   
       this.filterForm = new FormGroup({
         startDate:new FormControl("", [Validators.required]),
@@ -47,7 +49,6 @@ export class ViewAllAttendanceComponent {
         status: new FormControl("", [Validators.required])
       })
       
-      this.getAttendanceDetails();
     }
   
     

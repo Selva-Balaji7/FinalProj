@@ -1,0 +1,39 @@
+
+<div class="">
+    <form [formGroup]="roleEditForm">
+    <table>
+        <thead>
+            <tr>
+                <th>Role Id</th>
+                <th>Role Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let role of Roles"> 
+                <td *ngIf="role.id!=editingValueForId;then trueidpart; else falseidpart"></td>
+                <td *ngIf="role.id!=editingValueForId;then truenamepart; else falsenamepart">{{role.roleName}}</td>
+                <td>
+                    <button *ngIf="role.id!=editingValueForId" type="button" type="button" (click)="changeEdit(role.id)">Edit</button>
+                    <button *ngIf="role.id==editingValueForId" type="button" (click)="editingValueForId=-1">Cancel</button>
+                    <button *ngIf="role.id==editingValueForId" type="submit" (click)="UpdateRole()">Update</button>
+                </td>
+                
+                <ng-template #trueidpart>
+                    {{role.id}}
+                </ng-template>
+                <ng-template #falseidpart>
+                        <input type="text" [value]="role.id" formControlName="roleId">
+                        <input type="text" [value]="role.roleName" formControlName="roleName">
+                    </ng-template>
+                    
+                    <ng-template #truenamepart>
+                        {{role.roleName}}
+                    </ng-template>
+                    <ng-template #falsenamepart>
+                    </ng-template>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>

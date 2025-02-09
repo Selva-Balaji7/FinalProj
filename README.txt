@@ -29,3 +29,21 @@ CHANGE LOG - 08/02/2025 7PM
     iv.AttendanceModule/(view-teacher-attendance) - Shows the Attendance details of all teachers
 
 6. Given Some Routing.
+
+
+
+
+
+
+
+
+CHANGE LOG - 09/02/2025 11:30PM
+1. Changed The Validation of Login Page Form
+2. Updated How Messages Are displayed in the UI
+3. Updated Dashboard to correspond to the permissions available to the user.
+4. Added a Profile page
+5. Changed the User Registration Page and The Add some required controller for handling Image uploads.
+6. Added some api's for Role and Permissions Controller
+7. Added Roles and Permissions Module. And Some other modules.
+8. Added New Permissions in the MYSQL, so check for data changes.
+10. AND MANY OTHER.

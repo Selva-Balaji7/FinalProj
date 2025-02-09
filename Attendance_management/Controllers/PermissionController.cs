@@ -27,6 +27,7 @@ namespace Attendance_management.Controllers
                     .Include(p => p.Role)
                     .Select(p => new Permission
                     {
+                        Id = p.Id,
                         RoleId = p.RoleId,
                        PermissionName=p.PermissionName,
                        Role = new Role
@@ -76,6 +77,41 @@ namespace Attendance_management.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<ActionResult<Permission>> Post([FromBody] Permission permission)
+        {
+            if (permission == null)
+            {
+                return BadRequest("Permission cannot be null.");
+            }
+            var newPermission = new Permission
+            {
+                RoleId = permission.RoleId,
+                PermissionName = permission.PermissionName
+            };
+
+            _context.Permissions.Add(newPermission);
+            await _context.SaveChangesAsync();
+
+            return Ok(newPermission);
+            //CreatedAtAction(nameof(GetPermission), new { role = permission.Role.RoleName }, newPermission);
+        }
+
+        [HttpDelete("{permissionname}")]
+        public async Task<IActionResult> Delete(string permissionname, [FromQuery]int roleid)
+        {
+            var permission = await _context.Permissions
+                .Where(p => p.PermissionName == permissionname && p.RoleId == roleid)
+                .FirstAsync();
+
+            if (permission == null)
+                return NotFound();
+
+            _context.Permissions.Remove(permission);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
 
 
     }

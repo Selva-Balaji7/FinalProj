@@ -16,6 +16,11 @@ namespace Attendance_management.Controllers
         {
             _context = context;
         }
+        [HttpGet("isOnline")]
+        public ActionResult checkOnline()
+        {
+            return Ok();
+        }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Attendance>>> GetAllAttendancesCount()
@@ -124,7 +129,7 @@ namespace Attendance_management.Controllers
             {
                 Console.WriteLine("The Date are null");
                 var attendances = await _context.Attendances
-                    .Where(a => a.UserId == id && statusList.Contains(a.Status))
+                    .Where(a => a.UserId == id && statusList.Contains(a.Status) && a.User.Role == role)
                     .OrderByDescending(a => a.Date)
                     .Skip((count - 1) * 10)
                     .Take(10)

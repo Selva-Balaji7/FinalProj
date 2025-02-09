@@ -28,18 +28,12 @@ export class ViewTeacherAttendanceComponent {
   
     ngOnInit(){
       this.userstore.select(state => state.user).subscribe(data => this.user=data);
-      if(!this.user.id){
-          var localuser:any = localStorage.getItem('user');
-              if(!!localuser){
-              this.userstore.dispatch(saveUserData(JSON.parse(localuser)));
-              }
-          else{
-              this._route.navigate(['/']);
-          }
-      }
   
-      if(!this.user.permissions.includes("AttendanceHistory"))
+      if(!this.user.permissions.includes("ViewTeacherAttendance"))
         this._route.navigate(['/']);
+      else
+        this.getAttendanceDetails();
+
   
       this.filterForm = new FormGroup({
         startDate:new FormControl("", [Validators.required]),
@@ -47,7 +41,6 @@ export class ViewTeacherAttendanceComponent {
         status: new FormControl("", [Validators.required])
       })
       
-      this.getAttendanceDetails();
     }
   
     

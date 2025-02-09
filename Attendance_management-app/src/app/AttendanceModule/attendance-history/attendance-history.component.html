@@ -1,11 +1,4 @@
-<div *ngIf="user.role=='teacher'">
-    <button type="button" (click)="changeToStudents()">Show Students</button>
-    <button type="button" *ngIf="showStudents" (click)="changeToYours()">Your attendance</button>
-</div>
-<div *ngIf="user.role=='admin'">
-    <button type="button" (click)="changeToStudents()">Show Students</button>
-    <button type="button" (click)="changeToTeachers()">Show Teachers</button>
-</div>
+
 <div>
     Filter : 
     <form [formGroup]="filterForm" (ngSubmit)="setFiler()">
@@ -26,18 +19,12 @@
 <div>
     <table>
         <tr>
-            <th *ngIf="user.role == 'admin' ||showStudents || showTeachers">User Id</th>
-            <th *ngIf="user.role == 'admin' || showStudents || showTeachers">Name</th>
-            <th *ngIf="user.role == 'admin' ||showStudents || showTeachers">Role</th>
             <th>Date</th>
             <th>Time</th>
             <th>Status</th>
             <th>Remarks</th>
         </tr>
         <tr *ngFor="let attendance of attendances">
-            <td *ngIf="user.role == 'admin' ||showStudents || showTeachers">{{attendance.userId}}</td>
-            <td *ngIf="user.role == 'admin' ||showStudents || showTeachers">{{attendance.user.name}}</td>
-            <td *ngIf="user.role == 'admin' ||showStudents || showTeachers">{{attendance.user.role}}</td>
             <td>{{attendance.date}}</td>
             <td>{{attendance.updatedAt | date:'HH:mm'}}</td>
             <td>{{attendance.status}}</td>

@@ -1,13 +1,17 @@
+//dotnet run --urls="https://localhost:7200;http://localhost:7201"
 using Attendance_management.Data;
 using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
     ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))));
+
 
 builder.Services.AddCors(options =>
 {
@@ -20,6 +24,8 @@ builder.Services.AddCors(options =>
         });
 });
 
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -30,13 +36,14 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseCors("AllowAllOrigins");
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
 
 app.UseAuthorization();
-app.UseCors("AllowAllOrigins");
 
 app.MapControllerRoute(
     name: "default",
