@@ -19,6 +19,12 @@ export class UserRegistrationComponent {
 
   constructor(private http : DbservicesService, private _route:Router){}
 
+  showPassword:boolean=false;
+
+  togglePassword(){
+    this.showPassword = !this.showPassword;
+  }
+
   ngOnInit():void{
     this.regForm = new FormGroup({
       id:new FormControl("",[Validators.required]),
@@ -62,7 +68,7 @@ export class UserRegistrationComponent {
         console.log("New User");
       }
     )
-    this.http.getRecord(`Usersregistration/${this.regForm.value.id}`).subscribe(
+    this.http.getRecord(`UserRegistration/${this.regForm.value.id}`).subscribe(
       (response:any) => {
         console.log("User Already Registered", response);
         return;
@@ -83,7 +89,7 @@ export class UserRegistrationComponent {
     console.log(user);
 
 
-    this.http.postRecord('Usersregistration', user).subscribe(
+    this.http.postRecord('Userregistration', user).subscribe(
       (response:any) => {
         console.log("User Registered Successfully", response);
         this._route.navigate(['/']);

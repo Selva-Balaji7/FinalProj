@@ -10,12 +10,12 @@ namespace Attendance_management.Controllers
     [ApiController]
     [Route("api/[controller]")]
 
-    public class UserLoginController : ControllerBase
+    public class UserController : ControllerBase
     {
         private ApplicationDbContext _context;
         HashServiceClass hashserv = new HashServiceClass();
 
-        public UserLoginController(ApplicationDbContext context)
+        public UserController(ApplicationDbContext context)
         {
             _context = context;
         }

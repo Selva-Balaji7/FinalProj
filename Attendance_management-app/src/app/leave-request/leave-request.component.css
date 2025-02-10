@@ -1,5 +1,7 @@
 /* Container Styling */
 .container {
+  font-style: italic;
+    font-family: none;
   max-width: 600px;
   margin: 50px auto;
   color: #2d93a0;
@@ -25,27 +27,7 @@
     
   }
   
-  /* Mat-Form Field Styling */
-  mat-form-field {
-    margin-bottom: 20px;
-  }
-  
-  mat-form-field mat-label {
-    color: #1976d2; /* Label color */
-    margin-left: 10px;
-  }
-  
-  mat-form-field input, mat-form-field textarea {
-    background-color: #ffffff;
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-  }
-  
-  /* Textarea Styling */
-  textarea.mat-input-element {
-    resize: vertical;
-  }
+ 
   
   /* Submit Button Styling */
   button {
@@ -66,11 +48,7 @@
     background-color: #1565c0;
   }
   
-  /* Focus styling for inputs */
-  mat-form-field input:focus, mat-form-field textarea:focus {
-    border-color: #1976d2;
-    box-shadow: 0 0 5px rgba(25, 118, 210, 0.6);
-  }
+  
   
   /* Responsive Styling */
   @media (max-width: 768px) {

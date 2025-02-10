@@ -222,6 +222,79 @@
     ]
   },
   {
+    "ContainingType": "EditUsersController",
+    "Method": "GetUsers",
+    "RelativePath": "api/EditUsers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Attendance_management.Models.User, Attendance_management, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EditUsersController",
+    "Method": "GetUserById",
+    "RelativePath": "api/EditUsers/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EditUsersController",
+    "Method": "UpdateUser",
+    "RelativePath": "api/EditUsers/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedUser",
+        "Type": "Attendance_management.Models.User",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EditUsersController",
+    "Method": "DeleteUser",
+    "RelativePath": "api/EditUsers/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Attendance_management.Controllers.LeaveRequestsController",
     "Method": "GetLeaveRequests",
     "RelativePath": "api/LeaveRequests",
@@ -440,9 +513,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Attendance_management.Controllers.UserLoginController",
+    "ContainingType": "Attendance_management.Controllers.UserController",
     "Method": "GetAllUser",
-    "RelativePath": "api/UserLogin",
+    "RelativePath": "api/User",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -460,9 +533,9 @@
     ]
   },
   {
-    "ContainingType": "Attendance_management.Controllers.UserLoginController",
+    "ContainingType": "Attendance_management.Controllers.UserController",
     "Method": "AddUser",
-    "RelativePath": "api/UserLogin",
+    "RelativePath": "api/User",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -476,9 +549,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Attendance_management.Controllers.UserLoginController",
+    "ContainingType": "Attendance_management.Controllers.UserController",
     "Method": "GetUser",
-    "RelativePath": "api/UserLogin/{id}",
+    "RelativePath": "api/User/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -492,9 +565,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Attendance_management.Controllers.UserLoginController",
+    "ContainingType": "Attendance_management.Controllers.UserController",
     "Method": "UpdateUser",
-    "RelativePath": "api/UserLogin/{id}",
+    "RelativePath": "api/User/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -513,9 +586,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Attendance_management.Controllers.UserLoginController",
+    "ContainingType": "Attendance_management.Controllers.UserController",
     "Method": "DeleteUser",
-    "RelativePath": "api/UserLogin/{id}",
+    "RelativePath": "api/User/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -529,9 +602,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Attendance_management.Controllers.UserLoginController",
+    "ContainingType": "Attendance_management.Controllers.UserController",
     "Method": "UploadProfileImage",
-    "RelativePath": "api/UserLogin/{id}/profileimage",
+    "RelativePath": "api/User/{id}/profileimage",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -550,9 +623,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "Attendance_management.Controllers.UserLoginController",
+    "ContainingType": "Attendance_management.Controllers.UserController",
     "Method": "VerifyUser",
-    "RelativePath": "api/UserLogin/{id}/verify",
+    "RelativePath": "api/User/{id}/verify",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -581,9 +654,9 @@
     ]
   },
   {
-    "ContainingType": "Attendance_management.Controllers.UserLoginController",
+    "ContainingType": "Attendance_management.Controllers.UserController",
     "Method": "GetImage",
-    "RelativePath": "api/UserLogin/images/{fileName}",
+    "RelativePath": "api/User/images/{fileName}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

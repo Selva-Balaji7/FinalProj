@@ -2428,19 +2428,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\selva.balaji\\.nuget\\packages\\": {}
+    "C:\\Users\\tharu\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\selva.balaji\\Desktop\\FinalProj\\Attendance_management\\Attendance_management.csproj",
+      "projectUniqueName": "C:\\Users\\tharu\\OneDrive\\Desktop\\FinalProj\\Attendance_management\\Attendance_management.csproj",
       "projectName": "Attendance_management",
-      "projectPath": "C:\\Users\\selva.balaji\\Desktop\\FinalProj\\Attendance_management\\Attendance_management.csproj",
-      "packagesPath": "C:\\Users\\selva.balaji\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\selva.balaji\\Desktop\\FinalProj\\Attendance_management\\obj\\",
+      "projectPath": "C:\\Users\\tharu\\OneDrive\\Desktop\\FinalProj\\Attendance_management\\Attendance_management.csproj",
+      "packagesPath": "C:\\Users\\tharu\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\tharu\\OneDrive\\Desktop\\FinalProj\\Attendance_management\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\selva.balaji\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\tharu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2448,7 +2453,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -2466,7 +2470,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.100"
     },
     "frameworks": {
       "net8.0": {
@@ -2524,7 +2529,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
       }
     }
   },

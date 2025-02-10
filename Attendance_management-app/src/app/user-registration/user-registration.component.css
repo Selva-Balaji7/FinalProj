@@ -1,0 +1,88 @@
+
+ .container {
+    /* max-width: 500px; */
+    /* margin-top: 5px; */
+    margin-bottom: 5px;
+}
+
+/* Card Styles */
+.card {
+    border-radius: 15px;
+    font-style: italic;
+    font-family: none;
+    /* background: rgb(255, 255, 255); */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Profile Image */
+img {
+    border: 4px solid #4e54c8;
+    padding: 5px;
+    transition: transform 0.3s ease-in-out;
+}
+
+img:hover {
+    transform: scale(1.05);
+}
+
+/* Form Inputs */
+.form-control {
+        border-radius: 8px;
+        border: 1px solid #b33e23;
+        transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        font-style: italic;
+}
+
+.form-control:focus {
+    border-color: #4e54c8;
+    box-shadow: 0px 0px 10px rgba(78, 84, 200, 0.3);
+}
+
+/* Buttons */
+.btn {
+    border-radius: 50px;
+    font-weight: bold;
+    font-style: italic;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+}
+
+.btn-primary {
+    background: #4e54c8;
+    border: none;
+}
+
+.btn-primary:hover {
+    background: #383f9e;
+    transform: scale(1.05);
+}
+
+.btn-success {
+    background: #28a745;
+    border: none;
+}
+
+.btn-success:hover {
+    background: #1e7e34;
+    transform: scale(1.05);
+}
+
+/* Role Selection */
+.form-check-input:checked {
+    background-color: #4e54c8;
+    border-color: #4e54c8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+}
+.text-center{
+    font-weight: 600;
+}

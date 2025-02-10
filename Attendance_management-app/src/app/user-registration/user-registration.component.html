@@ -1,9 +1,9 @@
-<div>
-    <!-- (ngSubmit)="AuthenticateUser(LoginForm)" -->
-    <img [src]="profilePic" height="200px">
-    <div>
-        <!-- (change)="onFileSelected($event)"  -->
-        <input type="file" (change)="onFileSelected($event)" accept="image/*" formControlName="profilePicture"/>
+<!-- <div>
+    <-- (ngSubmit)="AuthenticateUser(LoginForm)" -->
+<!-- <img [src]="profilePic" height="200px">
+    <div> -->
+<!-- (change)="onFileSelected($event)"  -->
+<!-- <input type="file" (change)="onFileSelected($event)" accept="image/*" formControlName="profilePicture"/>
         <button (click)="onUpload()">Upload</button>
     </div>
     <form [formGroup]="regForm" (ngSubmit)="registerUser()">
@@ -31,6 +31,137 @@
             <input type="radio" id="userrole4" name="role" value="admin" formControlName="role">Admin
         </div>
         <button type="submit" >loggin</button>
-    </form>
+    </form> -->
 
+<!-- </div> -->
+<div style="background-color:#7bc4f7; margin: 0px; height:100mx-content;padding:15px">
+  <div class="container w-50" >
+    <!-- Profile Picture Section -->
+    <div class="card p-4 shadow-lg">
+      <h3 class="text-center mb-3">Upload Profile Picture</h3>
+      <div class="text-center">
+        <img [src]="profilePic" class="rounded-circle border" height="200px" />
+      </div>
+      <div class="mt-3 text-center">
+        <input
+          type="file"
+          class="form-control"
+          (change)="onFileSelected($event)"
+          accept="image/*"
+          formControlName="profilePicture"
+        />
+        <button class="btn btn-primary mt-2" (click)="onUpload()">Upload</button>
+      </div>
+    </div>
+  
+    <!-- Registration Form -->
+    <div class="card p-4 shadow-lg mt-4">
+      <h3 class="text-center mb-4">User Registration</h3>
+      <form [formGroup]="regForm" (ngSubmit)="registerUser()">
+        <div class="mb-md-4">
+          <label for="userid" class="form-label">User Id</label>
+          <input
+            type="text"
+            id="userid"
+            class="form-control"
+            name="id"
+            formControlName="id"
+          />
+        </div>
+        <div class="mb-md-4">
+          <label for="username" class="form-label">User Name</label>
+          <input
+            type="text"
+            id="username"
+            class="form-control"
+            name="name"
+            formControlName="name"
+          />
+        </div>
+        <div class="mb-md-4">
+          <label for="useremail" class="form-label">User Email</label>
+          <input
+            type="text"
+            id="useremail"
+            class="form-control"
+            name="email"
+            formControlName="email"
+          />
+        </div>
+        <div class="mb-md-4 position-relative">
+          <label for="userpassword" class="form-label">Password</label>
+          <input [type]="showPassword ? 'text' : 'password'" id="userpassword" class="form-control" name="password" formControlName="password"/>
+          <span (click)="togglePassword()" style="position: absolute; right: 10px; top: 38px; cursor: pointer">
+            <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi bi-eye'"></i>
+          </span>
+  
+        </div>
+  
+        <!-- Role Selection -->
+        <div class="mb-md-4">
+          <label class="form-label">Role</label>
+          <div class="form-check">
+            <input
+              type="radio"
+              id="userrole1"
+              class="form-check-input"
+              name="role"
+              value="student"
+              formControlName="role"
+            />
+            <label for="userrole1" class="form-check-label">Student</label>
+          </div>
+          <div class="form-check">
+            <input
+              type="radio"
+              id="userrole2"
+              class="form-check-input"
+              name="role"
+              value="teacher"
+              formControlName="role"
+            />
+            <label for="userrole2" class="form-check-label">Teacher</label>
+          </div>
+          <div class="form-check">
+            <input
+              type="radio"
+              id="userrole3"
+              class="form-check-input"
+              name="role"
+              value="staff"
+              formControlName="role"
+            />
+            <label for="userrole3" class="form-check-label">Staff</label>
+          </div>
+          <div class="form-check">
+            <input
+              type="radio"
+              id="userrole4"
+              class="form-check-input"
+              name="role"
+              value="admin"
+              formControlName="role"
+            />
+            <label for="userrole4" class="form-check-label">Admin</label>
+          </div>
+        </div>
+  
+        <!-- Submit Button -->
+        <div class="text-center">
+          <button type="submit" class="btn btn-success w-50">Register</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
+
+
+<!-- <div class="mb-md-4 position-relative">
+    <label for="userpassword" class="form-label">Password</label>
+    <input [type]="showPassword ? 'text' : 'password'" id="userpassword" class="form-control" name="password" formControlName="password"/>
+    
+    <span (click)="togglePassword()" class="position-absolute" style="right: 10px; top: 38px; cursor: pointer;">
+        <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+    </span>
+</div> -->
+

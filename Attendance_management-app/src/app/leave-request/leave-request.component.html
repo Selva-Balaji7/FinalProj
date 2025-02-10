@@ -1,27 +1,40 @@
-<div class="container">
-    <h2>Apply for Leave</h2>
-    <form [formGroup]="leaveForm" (ngSubmit)="submitLeaveRequest()">
-      <mat-form-field appearance="fill">
-        <label>User ID</label>
-        <input matInput formControlName="userId">
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <label>Leave Type ID</label>
-        <input matInput formControlName="leaveTypeId">
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <label>Start Date</label>
-        <input matInput type="date" formControlName="startDate">
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <label>End Date</label>
-        <input matInput type="date" formControlName="endDate">
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <label>Reason</label>
-        <textarea matInput formControlName="reason"></textarea>
-      </mat-form-field>
-      <button mat-raised-button color="primary" type="submit">Submit</button>
-    </form>
+<div style="background-color:#7bc4f7; margin: 0px; min-height:100vh; padding:15px">
+  <div class="container w-50">
+    <div class="card p-4 shadow-lg">
+      <h3 class="text-center mb-4" style="font-size: x-large;font-weight: 600
+      ;">Apply for Leave</h3>
+      <form [formGroup]="leaveForm" (ngSubmit)="submitLeaveRequest()">
+        
+        <div class="mb-md-4">
+          <label for="userId" class="form-label">User ID</label>
+          <input type="text" id="userId" class="form-control" formControlName="userId">
+        </div>
+
+        <div class="mb-md-4">
+          <label for="leaveTypeId" class="form-label">Leave Type ID</label>
+          <input type="text" id="leaveTypeId" class="form-control" formControlName="leaveTypeId">
+        </div>
+
+        <div class="mb-md-4">
+          <label for="startDate" class="form-label">Start Date</label>
+          <input type="date" id="startDate" class="form-control" formControlName="startDate">
+        </div>
+
+        <div class="mb-md-4">
+          <label for="endDate" class="form-label">End Date</label>
+          <input type="date" id="endDate" class="form-control" formControlName="endDate">
+        </div>
+
+        <div class="mb-md-4">
+          <label for="reason" class="form-label">Reason</label>
+          <textarea id="reason" class="form-control" formControlName="reason" rows="3"></textarea>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-success w-50">Submit</button>
+        </div>
+        
+      </form>
+    </div>
   </div>
-  
+</div>
