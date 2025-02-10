@@ -12,7 +12,8 @@ import { DbservicesService } from '../../Services/dbservices.service';
 export class AttendanceMarkComponent  {
   
   attendanceDate: string = '';  
-  userId: number = 1;
+  userId: number =100;
+  status: string ='present';
   constructor(private attendancemark: DbservicesService) {}
 
   submitAttendance() {
@@ -23,15 +24,17 @@ export class AttendanceMarkComponent  {
 
     const attendanceData = {
       date: this.attendanceDate,
-      userId: this.userId
+      userId: this.userId,
+      status:this.status
+
     };
 
-    this.attendancemark.markAttendance(attendanceData).subscribe({
+    this.attendancemark.postRecord("Attendancerequest",attendanceData).subscribe({
       next: () => {
         alert('Attendance marked successfully!');
         this.attendanceDate = ''; // Reset the input after submission
       },
-      error: (error) => {
+      error: (error:any) => {
         console.error('Error marking attendance:', error);
         alert('Failed to mark attendance. Please try again.');
       }
