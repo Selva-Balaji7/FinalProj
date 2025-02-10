@@ -1,13 +1,22 @@
 using Attendance_management.Data;
 using Microsoft.EntityFrameworkCore;
 
-using Attendance_management.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.AllowAnyOrigin()  // Allows any origin
+                   .AllowAnyMethod()  // Allows any HTTP method (GET, POST, etc.)
+                   .AllowAnyHeader(); // Allows any header
+        });
+});
 
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -24,6 +33,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseCors("AllowAllOrigins");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

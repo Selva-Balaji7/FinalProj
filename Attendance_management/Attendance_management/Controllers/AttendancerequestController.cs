@@ -17,6 +17,7 @@ namespace Attendance_management.Controllers
     public class AttendancerequestController : Controller
     {
 
+
         private readonly ApplicationDbContext _context;
 
         public AttendancerequestController(ApplicationDbContext context)
@@ -24,31 +25,148 @@ namespace Attendance_management.Controllers
             _context = context;
         }
 
-       
-
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Attendancerequest>>> GetAllrequests()
+        public async Task<ActionResult<IEnumerable<Attendancerequest>>> GetAllAttendancerequestsCount()
         {
-            var attendancerequestsAll = await _context.Attendancerequests.ToListAsync();
-            return Ok(attendancerequestsAll);
+            var attendancerequests = await _context.Attendancerequests.ToListAsync();
+            return Ok(attendancerequests);
+        }
+
+        [HttpGet("count")]
+        public async Task<ActionResult<int>> GetAllAttendancerequests()
+        {
+            var attendancerequests = await _context.Attendancerequests.ToListAsync();
+            return Ok(attendancerequests.Count);
+        }
+
+        //[HttpGet("limit/{count}")]
+        //public async Task<ActionResult<IEnumerable<Attendancerequest>>> GetLimitAttendancerequest(int count, [FromQuery] string startDate, [FromQuery] string endDate, [FromQuery] string role, [FromQuery] string status)
+        //{
+        //    Console.Clear();
+        //    var roleList = role == "null" ? new List<string> { "Student", "Teacher", "Admin" } : new List<string> { role };
+        //    var statusList = (status == "null") ? new List<string> { "Present", "Holiday", "Sunday", "Leave" } : new List<string> { status };
+
+        //    if (startDate == "null" || endDate == "null")
+        //    {
+        //        var attendancerequests = await _context.Attendancerequests
+        //            .Where(a => statusList.Contains(a.Status) && roleList.Contains(a.User.Role))
+        //            .OrderByDescending(a => a.Date)
+        //            .Skip((count - 1) * 10)
+        //            .Take(10)
+        //            .ToListAsync();
+        //        return Ok(attendancerequests);
+        //    }
+        //    else
+        //    {
+        //        var sDate = DateOnly.Parse(startDate);
+        //        var eDate = DateOnly.Parse(endDate);
+
+        //        var attendancerequests = await _context.Attendancerequests
+        //            .Where(a => a.Date >= sDate && a.Date <= eDate && statusList.Contains(a.Status) && roleList.Contains(a.User.Role))
+        //            .OrderByDescending(a => a.Date)
+        //            .Skip((count - 1) * 10)
+        //            .Take(10)
+        //            .ToListAsync();
+        //        return Ok(attendancerequests);
+        //    }
+        //}
+
+        ///api/AttendanceRequest?role=Teacher
+        /////http://your-api-base-url/api/AttendanceRequest?role=Teacher&userId=5
+
+
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<Attendancerequest>>> GetAllAttendancerequestsCount([FromQuery] string role)
+        //{
+        //    if (string.IsNullOrEmpty(role))
+        //    {
+        //        return BadRequest("Role is required.");
+        //    }
+
+        //    // Fetch only attendance requests for 'Teacher' and 'Student' roles
+        //    var attendancerequests = await _context.Attendancerequests
+        //        .Include(a => a.User)
+        //        .Where(a => a.User != null && (a.User.Role == "Teacher" || a.User.Role == "Student"))
+        //        .Where(a => a.User.Role== role) // Filters only requested role
+        //        .ToListAsync();
+
+        //    if (!attendancerequests.Any())
+        //    {
+        //        return NotFound("No attendance requests found for the specified role.");
+        //    }
+
+        //    return Ok(attendancerequests);
+        //}
+
+
+        [HttpGet("byrole")]
+        public async Task<ActionResult<IEnumerable<Attendancerequest>>> GetAllAttendancerequestsCount(
+    [FromQuery] string role)
+        {
+            if (string.IsNullOrEmpty(role))
+            {
+                return BadRequest("Role is required.");
+            }
+
+            // Fetch attendance requests where User has the specified role
+            //var query = from ar in _context.Attendancerequests
+            //            join u in _context.Users on ar.UserId equals u.Id
+            //            where (u.Role == "Teacher" || u.Role == "Student")
+            //                  && u.Role == role
+            //            select ar;
+
+            var attendancereq = await _context.Attendancerequests
+                .Where(p => p.User.Role == role)
+                .Select(p => new Attendancerequest
+                {
+                    UserId = p.UserId,
+                    Date = p.Date,
+                    Status = p.Status,
+                    Remarks = p.Remarks,
+                    User = new User
+                    {
+                        Role = p.User.Role
+                    }
+                })
+                .ToListAsync();
+
+            //if (userId.HasValue)
+            //{
+            //    query = query.Where(a => a.UserId == userId.Value);
+            //}
+            if(attendancereq == null)
+            {
+                return NotFound("No attendace request Found");
+            }
+
+            //var attendancerequests = await query.ToListAsync();
+
+            //if (!attendancerequests.Any())
+            //{
+            //    return NotFound("No attendance requests found for the specified role.");
+            //}
+
+            return Ok(attendancereq);
         }
 
 
 
 
+
+
         [HttpGet("{id}")]
-        public async Task<ActionResult<Attendancerequest>> GetAttendancerequestById(int id)
+        public async Task<ActionResult<Attendancerequest>> GetAttendancerequest(int id)
         {
-            var attendancerequestsById = await _context.Attendancerequests
+            var attendancerequest = await _context.Attendancerequests
                 .Where(a => a.UserId == id)
                 .OrderByDescending(a => a.Date)
                 .ToListAsync();
 
-            if (attendancerequestsById == null)
+            if (attendancerequest == null)
             {
                 return NotFound();
             }
-            return Ok(attendancerequestsById);
+            return Ok(attendancerequest);
         }
 
 
@@ -57,18 +175,18 @@ namespace Attendance_management.Controllers
         {
             var newAttendancerequest = new Attendancerequest
             {
-                //UserId = attendance.UserId,
+                UserId = attendancerequest.UserId,
                 Date = attendancerequest.Date,
                 Status = attendancerequest.Status,
                 Remarks = attendancerequest.Remarks,
-                //CreatedAt = DateTime.UtcNow,
-                // UpdatedAt = DateTime.UtcNow
+                // CreatedAt = DateTime.UtcNow,
+                //  UpdatedAt = DateTime.UtcNow
             };
 
             _context.Attendancerequests.Add(newAttendancerequest);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAttendance", new { id = newAttendancerequest.Id }, newAttendancerequest);
+            return CreatedAtAction("GetAttendancerequest", new { id = newAttendancerequest.Id }, newAttendancerequest);
         }
 
         [HttpPut("{id}")]
@@ -88,8 +206,8 @@ namespace Attendance_management.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                var attendancerequestExists = await _context.Attendancerequests.AnyAsync(a => a.Id == id);
-                if (!attendancerequestExists)
+                var exists = await _context.Attendancerequests.AnyAsync(a => a.Id == id);
+                if (!exists)
                 {
                     return NotFound();
                 }
@@ -103,7 +221,7 @@ namespace Attendance_management.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteAttendance(int id)
+        public async Task<ActionResult> DeleteAttendancerequest(int id)
         {
             var attendancerequest = await _context.Attendancerequests.FindAsync(id);
             if (attendancerequest == null)
@@ -120,68 +238,6 @@ namespace Attendance_management.Controllers
 
 
 
-        // GET: api/Attendancerequest/{id}
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> GetRequestById(int id)
-        //{
-        //    var request = await _context.Attendancerequests
-        //        .Include(a => a.User)
-        //        .FirstOrDefaultAsync(a => a.Id == id);
-
-        //    if (request == null)
-        //        return NotFound(new { message = "Attendance request not found" });
-
-        //    return Ok(request);
-        //}
-
-        //// POST: api/Attendancerequest (Create new request)
-        //[HttpPost]
-        //public async Task<IActionResult> CreateRequest([FromBody] Attendancerequest request)
-        //{
-        //    if (request == null)
-        //        return BadRequest(new { message = "Invalid data" });
-
-        //    request.Status = "Pending";
-        //    request.CreatedAt = DateTime.UtcNow;
-        //    request.UpdatedAt = DateTime.UtcNow;
-
-        //    _context.Attendancerequests.Add(request);
-        //    await _context.SaveChangesAsync();
-
-        //    return CreatedAtAction(nameof(GetRequestById), new { id = request.Id }, request);
-        //}
-
-        // PUT: api/Attendancerequest/{id} (Update request status)
-        //    [HttpPut("{id}")]
-        //    public async Task<IActionResult> UpdateRequest(int id, [FromBody] Attendancerequest updatedRequest)
-        //    {
-        //        var request = await _context.Attendancerequests.FindAsync(id);
-        //        if (request == null)
-        //            return NotFound(new { message = "Attendance request not found" });
-
-        //        request.Status = updatedRequest.Status;
-        //        request.Remarks = updatedRequest.Remarks;
-        //        request.UpdatedAt = DateTime.UtcNow;
-
-        //        _context.Attendancerequests.Update(request);
-        //        await _context.SaveChangesAsync();
-
-        //        return Ok(request);
-        //    }
-
-        //    // DELETE: api/Attendancerequest/{id}
-        //    [HttpDelete("{id}")]
-        //    public async Task<IActionResult> DeleteRequest(int id)
-        //    {
-        //        var request = await _context.Attendancerequests.FindAsync(id);
-        //        if (request == null)
-        //            return NotFound(new { message = "Attendance request not found" });
-
-        //        _context.Attendancerequests.Remove(request);
-        //        await _context.SaveChangesAsync();
-
-        //        return Ok(new { message = "Attendance request deleted successfully" });
-        //    }
-        }
-
     }
+
+}

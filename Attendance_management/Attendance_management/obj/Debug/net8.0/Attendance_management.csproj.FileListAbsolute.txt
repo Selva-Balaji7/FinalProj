@@ -209,7 +209,6 @@ C:\MyFinal_CapstoneProject\Attendance_management\Attendance_management\obj\Debug
 C:\MyFinal_CapstoneProject\Attendance_management\Attendance_management\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Attendance_management.props
 C:\MyFinal_CapstoneProject\Attendance_management\Attendance_management\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Attendance_management.props
 C:\MyFinal_CapstoneProject\Attendance_management\Attendance_management\obj\Debug\net8.0\staticwebassets.pack.json
-C:\MyFinal_CapstoneProject\Attendance_management\Attendance_management\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\MyFinal_CapstoneProject\Attendance_management\Attendance_management\obj\Debug\net8.0\Attendan.912D7562.Up2Date
 C:\MyFinal_CapstoneProject\Attendance_management\Attendance_management\obj\Debug\net8.0\Attendance_management.dll
 C:\MyFinal_CapstoneProject\Attendance_management\Attendance_management\obj\Debug\net8.0\refint\Attendance_management.dll
@@ -325,3 +324,5 @@ D:\Capstone_FinalProject_Final\Attendance_management\Attendance_management\obj\D
 D:\Capstone_FinalProject_Final\Attendance_management\Attendance_management\obj\Debug\net8.0\Attendance_management.pdb
 D:\Capstone_FinalProject_Final\Attendance_management\Attendance_management\obj\Debug\net8.0\Attendance_management.genruntimeconfig.cache
 D:\Capstone_FinalProject_Final\Attendance_management\Attendance_management\obj\Debug\net8.0\ref\Attendance_management.dll
+C:\MyFinal_CapstoneProject\Attendance_management\Attendance_management\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\MyFinal_CapstoneProject\Attendance_management\Attendance_management\bin\Debug\net8.0\System.Web.Cors.dll

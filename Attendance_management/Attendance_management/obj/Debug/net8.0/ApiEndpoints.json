@@ -223,7 +223,7 @@
   },
   {
     "ContainingType": "Attendance_management.Controllers.AttendancerequestController",
-    "Method": "GetAllrequests",
+    "Method": "GetAllAttendancerequestsCount",
     "RelativePath": "api/Attendancerequest",
     "HttpMethod": "GET",
     "IsController": true,
@@ -259,7 +259,7 @@
   },
   {
     "ContainingType": "Attendance_management.Controllers.AttendancerequestController",
-    "Method": "GetAttendancerequestById",
+    "Method": "GetAttendancerequest",
     "RelativePath": "api/Attendancerequest/{id}",
     "HttpMethod": "GET",
     "IsController": true,
@@ -306,7 +306,7 @@
   },
   {
     "ContainingType": "Attendance_management.Controllers.AttendancerequestController",
-    "Method": "DeleteAttendance",
+    "Method": "DeleteAttendancerequest",
     "RelativePath": "api/Attendancerequest/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
@@ -319,6 +319,52 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Attendance_management.Controllers.AttendancerequestController",
+    "Method": "GetAllAttendancerequestsCount",
+    "RelativePath": "api/Attendancerequest/byrole",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "role",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Attendance_management.Models.Attendancerequest, Attendance_management, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Attendance_management.Controllers.AttendancerequestController",
+    "Method": "GetAllAttendancerequests",
+    "RelativePath": "api/Attendancerequest/count",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Int32",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "Attendance_management.Controllers.PermissionController",

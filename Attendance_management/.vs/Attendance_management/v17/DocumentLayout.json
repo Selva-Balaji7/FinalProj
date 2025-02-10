@@ -1,61 +1,29 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Capstone_FinalProject_Final\\Attendance_management\\",
+  "WorkspaceRootPath": "C:\\MyFinal_CapstoneProject\\Attendance_management\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|d:\\capstone_finalproject_final\\attendance_management\\attendance_management\\controllers\\attendancerequestcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|solutionrelative:attendance_management\\controllers\\attendancerequestcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|d:\\capstone_finalproject_final\\attendance_management\\attendance_management\\controllers\\attendancecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|solutionrelative:attendance_management\\controllers\\attendancecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|d:\\capstone_finalproject_final\\attendance_management\\attendance_management\\models\\attendancerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|solutionrelative:attendance_management\\models\\attendancerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|d:\\capstone_finalproject_final\\attendance_management\\attendance_management\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|solutionrelative:attendance_management\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|d:\\capstone_finalproject_final\\attendance_management\\attendance_management\\controllers\\rolecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|solutionrelative:attendance_management\\controllers\\rolecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|d:\\capstone_finalproject_final\\attendance_management\\attendance_management\\models\\attendance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|solutionrelative:attendance_management\\models\\attendance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|d:\\capstone_finalproject_final\\attendance_management\\attendance_management\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|solutionrelative:attendance_management\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|d:\\capstone_finalproject_final\\attendance_management\\attendance_management\\models\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|solutionrelative:attendance_management\\models\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|d:\\capstone_finalproject_final\\attendance_management\\attendance_management\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|solutionrelative:attendance_management\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|d:\\capstone_finalproject_final\\attendance_management\\attendance_management\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|c:\\myfinal_capstoneproject\\attendance_management\\attendance_management\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|solutionrelative:attendance_management\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|d:\\capstone_finalproject_final\\attendance_management\\attendance_management\\controllers\\usersregistrationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|solutionrelative:attendance_management\\controllers\\usersregistrationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|c:\\myfinal_capstoneproject\\attendance_management\\attendance_management\\controllers\\attendancerequestcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|solutionrelative:attendance_management\\controllers\\attendancerequestcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|d:\\capstone_finalproject_final\\attendance_management\\attendance_management\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|solutionrelative:attendance_management\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|c:\\myfinal_capstoneproject\\attendance_management\\attendance_management\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|solutionrelative:attendance_management\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|d:\\capstone_finalproject_final\\attendance_management\\attendance_management\\controllers\\permissioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|solutionrelative:attendance_management\\controllers\\permissioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|c:\\myfinal_capstoneproject\\attendance_management\\attendance_management\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|solutionrelative:attendance_management\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|d:\\capstone_finalproject_final\\attendance_management\\attendance_management\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|c:\\myfinal_capstoneproject\\attendance_management\\attendance_management\\controllers\\attendancecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|solutionrelative:attendance_management\\controllers\\attendancecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|c:\\myfinal_capstoneproject\\attendance_management\\attendance_management\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{590C6B54-9D8C-482C-8538-F4E2023D31CC}|Attendance_management\\Attendance_management.csproj|solutionrelative:attendance_management\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -66,181 +34,84 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "AttendanceController.cs",
-              "DocumentMoniker": "D:\\Capstone_FinalProject_Final\\Attendance_management\\Attendance_management\\Controllers\\AttendanceController.cs",
-              "RelativeDocumentMoniker": "Attendance_management\\Controllers\\AttendanceController.cs",
-              "ToolTip": "D:\\Capstone_FinalProject_Final\\Attendance_management\\Attendance_management\\Controllers\\AttendanceController.cs",
-              "RelativeToolTip": "Attendance_management\\Controllers\\AttendanceController.cs",
-              "ViewState": "AgIAAOcAAAAAAAAAAAAwwP0AAAALAAAAAAAAAA==",
+              "Title": "AttendancerequestController.cs",
+              "DocumentMoniker": "C:\\MyFinal_CapstoneProject\\Attendance_management\\Attendance_management\\Controllers\\AttendancerequestController.cs",
+              "RelativeDocumentMoniker": "Attendance_management\\Controllers\\AttendancerequestController.cs",
+              "ToolTip": "C:\\MyFinal_CapstoneProject\\Attendance_management\\Attendance_management\\Controllers\\AttendancerequestController.cs",
+              "RelativeToolTip": "Attendance_management\\Controllers\\AttendancerequestController.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAswI0AAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-07T10:56:33.267Z",
+              "WhenOpened": "2025-02-10T06:49:07.411Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "D:\\Capstone_FinalProject_Final\\Attendance_management\\Attendance_management\\Data\\ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\MyFinal_CapstoneProject\\Attendance_management\\Attendance_management\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "Attendance_management\\Data\\ApplicationDbContext.cs",
-              "ToolTip": "D:\\Capstone_FinalProject_Final\\Attendance_management\\Attendance_management\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\MyFinal_CapstoneProject\\Attendance_management\\Attendance_management\\Data\\ApplicationDbContext.cs",
               "RelativeToolTip": "Attendance_management\\Data\\ApplicationDbContext.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAUwCUAAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAAoAAAAAAAAAAAA1wBgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-04T09:35:55.027Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Attendancerequest.cs",
-              "DocumentMoniker": "D:\\Capstone_FinalProject_Final\\Attendance_management\\Attendance_management\\Models\\Attendancerequest.cs",
-              "RelativeDocumentMoniker": "Attendance_management\\Models\\Attendancerequest.cs",
-              "ToolTip": "D:\\Capstone_FinalProject_Final\\Attendance_management\\Attendance_management\\Models\\Attendancerequest.cs",
-              "RelativeToolTip": "Attendance_management\\Models\\Attendancerequest.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAYwA8AAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-06T06:16:02.659Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AttendancerequestController.cs",
-              "DocumentMoniker": "D:\\Capstone_FinalProject_Final\\Attendance_management\\Attendance_management\\Controllers\\AttendancerequestController.cs",
-              "RelativeDocumentMoniker": "Attendance_management\\Controllers\\AttendancerequestController.cs",
-              "ToolTip": "D:\\Capstone_FinalProject_Final\\Attendance_management\\Attendance_management\\Controllers\\AttendancerequestController.cs",
-              "RelativeToolTip": "Attendance_management\\Controllers\\AttendancerequestController.cs",
-              "ViewState": "AgIAAKUAAAAAAAAAAAAwwKkAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-09T03:38:10.278Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Attendance.cs",
-              "DocumentMoniker": "D:\\Capstone_FinalProject_Final\\Attendance_management\\Attendance_management\\Models\\Attendance.cs",
-              "RelativeDocumentMoniker": "Attendance_management\\Models\\Attendance.cs",
-              "ToolTip": "D:\\Capstone_FinalProject_Final\\Attendance_management\\Attendance_management\\Models\\Attendance.cs",
-              "RelativeToolTip": "Attendance_management\\Models\\Attendance.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAUwAoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-04T09:57:58.076Z",
+              "WhenOpened": "2025-02-10T06:46:27.439Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "RoleController.cs",
-              "DocumentMoniker": "D:\\Capstone_FinalProject_Final\\Attendance_management\\Attendance_management\\Controllers\\RoleController.cs",
-              "RelativeDocumentMoniker": "Attendance_management\\Controllers\\RoleController.cs",
-              "ToolTip": "D:\\Capstone_FinalProject_Final\\Attendance_management\\Attendance_management\\Controllers\\RoleController.cs",
-              "RelativeToolTip": "Attendance_management\\Controllers\\RoleController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAABAAAAAAAAAA==",
+              "Title": "AttendanceController.cs",
+              "DocumentMoniker": "C:\\MyFinal_CapstoneProject\\Attendance_management\\Attendance_management\\Controllers\\AttendanceController.cs",
+              "RelativeDocumentMoniker": "Attendance_management\\Controllers\\AttendanceController.cs",
+              "ToolTip": "C:\\MyFinal_CapstoneProject\\Attendance_management\\Attendance_management\\Controllers\\AttendanceController.cs",
+              "RelativeToolTip": "Attendance_management\\Controllers\\AttendanceController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-07T09:02:15.357Z",
+              "WhenOpened": "2025-02-10T06:44:39.753Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Role.cs",
-              "DocumentMoniker": "D:\\Capstone_FinalProject_Final\\Attendance_management\\Attendance_management\\Models\\Role.cs",
-              "RelativeDocumentMoniker": "Attendance_management\\Models\\Role.cs",
-              "ToolTip": "D:\\Capstone_FinalProject_Final\\Attendance_management\\Attendance_management\\Models\\Role.cs",
-              "RelativeToolTip": "Attendance_management\\Models\\Role.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-07T17:29:58.456Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "User.cs",
-              "DocumentMoniker": "D:\\Capstone_FinalProject_Final\\Attendance_management\\Attendance_management\\Models\\User.cs",
-              "RelativeDocumentMoniker": "Attendance_management\\Models\\User.cs",
-              "ToolTip": "D:\\Capstone_FinalProject_Final\\Attendance_management\\Attendance_management\\Models\\User.cs",
-              "RelativeToolTip": "Attendance_management\\Models\\User.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAADwvxgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-04T07:08:29.074Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 2,
               "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\Capstone_FinalProject_Final\\Attendance_management\\Attendance_management\\appsettings.json",
+              "DocumentMoniker": "C:\\MyFinal_CapstoneProject\\Attendance_management\\Attendance_management\\appsettings.json",
               "RelativeDocumentMoniker": "Attendance_management\\appsettings.json",
-              "ToolTip": "D:\\Capstone_FinalProject_Final\\Attendance_management\\Attendance_management\\appsettings.json",
+              "ToolTip": "C:\\MyFinal_CapstoneProject\\Attendance_management\\Attendance_management\\appsettings.json",
               "RelativeToolTip": "Attendance_management\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-02-04T07:43:45.506Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "D:\\Capstone_FinalProject_Final\\Attendance_management\\Attendance_management\\Program.cs",
+              "DocumentMoniker": "C:\\MyFinal_CapstoneProject\\Attendance_management\\Attendance_management\\Program.cs",
               "RelativeDocumentMoniker": "Attendance_management\\Program.cs",
-              "ToolTip": "D:\\Capstone_FinalProject_Final\\Attendance_management\\Attendance_management\\Program.cs",
+              "ToolTip": "C:\\MyFinal_CapstoneProject\\Attendance_management\\Attendance_management\\Program.cs",
               "RelativeToolTip": "Attendance_management\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAuAAAAAAAAAA==",
+              "ViewState": "AgIAABUAAAAAAAAAAAAmwCEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-04T07:53:01.633Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "UsersregistrationController.cs",
-              "DocumentMoniker": "D:\\Capstone_FinalProject_Final\\Attendance_management\\Attendance_management\\Controllers\\UsersregistrationController.cs",
-              "RelativeDocumentMoniker": "Attendance_management\\Controllers\\UsersregistrationController.cs",
-              "ToolTip": "D:\\Capstone_FinalProject_Final\\Attendance_management\\Attendance_management\\Controllers\\UsersregistrationController.cs",
-              "RelativeToolTip": "Attendance_management\\Controllers\\UsersregistrationController.cs",
-              "ViewState": "AgIAAEkAAAAAAAAAAAAowFcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-07T08:54:48.396Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "D:\\Capstone_FinalProject_Final\\Attendance_management\\Attendance_management\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "Attendance_management\\Controllers\\UserController.cs",
-              "ToolTip": "D:\\Capstone_FinalProject_Final\\Attendance_management\\Attendance_management\\Controllers\\UserController.cs",
-              "RelativeToolTip": "Attendance_management\\Controllers\\UserController.cs",
-              "ViewState": "AgIAAKAAAAAAAAAAAAAowLUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-07T08:50:45.409Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "PermissionController.cs",
-              "DocumentMoniker": "D:\\Capstone_FinalProject_Final\\Attendance_management\\Attendance_management\\Controllers\\PermissionController.cs",
-              "RelativeDocumentMoniker": "Attendance_management\\Controllers\\PermissionController.cs",
-              "ToolTip": "D:\\Capstone_FinalProject_Final\\Attendance_management\\Attendance_management\\Controllers\\PermissionController.cs",
-              "RelativeToolTip": "Attendance_management\\Controllers\\PermissionController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-07T08:59:19.523Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 5,
               "Title": "HomeController.cs",
-              "DocumentMoniker": "D:\\Capstone_FinalProject_Final\\Attendance_management\\Attendance_management\\Controllers\\HomeController.cs",
+              "DocumentMoniker": "C:\\MyFinal_CapstoneProject\\Attendance_management\\Attendance_management\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "Attendance_management\\Controllers\\HomeController.cs",
-              "ToolTip": "D:\\Capstone_FinalProject_Final\\Attendance_management\\Attendance_management\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\MyFinal_CapstoneProject\\Attendance_management\\Attendance_management\\Controllers\\HomeController.cs",
               "RelativeToolTip": "Attendance_management\\Controllers\\HomeController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",

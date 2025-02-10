@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { AttendanceMarkComponent } from './AttendanceModule/attendance-mark/attendance-mark.component';
+
+import { AttendanceRequestTeacherComponent } from './AttendanceModule/attendance-request-teacher/attendance-request-teacher.component';
+import { AttendanceRequestStudentComponent } from './AttendanceModule/attendance-request-student/attendance-request-student.component';
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,AttendanceMarkComponent],
+  imports: [RouterOutlet,AttendanceRequestTeacherComponent,AttendanceRequestStudentComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

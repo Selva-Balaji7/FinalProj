@@ -1,51 +1,37 @@
-
+<!-- 
 
   <div class="container">
     <h2>Attendance </h2>
   
     
-    <div *ngIf="role === 'Student'">
+    <div >
   
   
       <label for="date">Select Date:</label>
       <input type="date" id="date" [(ngModel)]="attendance.date" required />
       <br />
   
-      <button (click)="submitAttendanceRequest()">Submit Attendance Request</button>
+      <button >Submit Attendance Request</button>
     </div>
+   -->
   
+
+   <div class="container">
+    <h2>Mark Attendance</h2>
   
+    <form (ngSubmit)="submitAttendance()">
+      <div class="form-group">
+        <label for="attendanceDate">Select Date:</label>
+        <input
+          type="date"
+          id="attendanceDate"
+          class="form-control"
+          [(ngModel)]="attendanceDate"
+          name="attendanceDate"
+          required
+        />
+      </div>
   
-    <div *ngIf="role === 'Teacher'">
-  
-  
-      <label for="date">Select Date:</label>
-      <input type="date" id="date" [(ngModel)]="attendance.date" required />
-      <br />
-      <br />
-      
-      <button (click)="submitAttendanceRequest()">Submit Attendance Request</button>
-  
-      <h3>Attendance Requests from Students</h3>
-  
-      <ul>
-        <li *ngFor="let request of studentRequests">
-          {{ request.studentName }} ({{ request.date }}) -
-          <button (click)="markAttendance(request, 'Present')">Mark Present</button>
-          <button (click)="markAttendance(request, 'Absent')">Mark Absent</button>
-        </li>
-      </ul>
-    </div>
-  
-  
-    <div *ngIf="role === 'Admin'">
-      <h3>Attendance Requests from Teachers</h3>
-      <ul>
-        <li *ngFor="let request of teacherRequests">
-          {{ request.teacherName }} ({{ request.date }}) -
-          <button (click)="markAttendance(request, 'Present')">Mark Present</button>
-          <button (click)="markAttendance(request, 'Absent')">Mark Absent</button>
-        </li>
-      </ul>
-    </div>
+      <button type="submit" class="btn btn-primary">Submit Attendance</button>
+    </form>
   </div>
