@@ -37,7 +37,7 @@ public partial class ApplicationDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySql("server=localhost;database=attendance_management;user=root;port=3306;password=Database@123", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.3.0-mysql"));
+        => optionsBuilder.UseMySql("server=localhost;database=attendance_management;user=root;port=3306;password=Database@123", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.40-mysql"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -74,6 +74,7 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasOne(d => d.User).WithMany(p => p.Attendances)
                 .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("attendance_ibfk_1");
         });
 
@@ -106,6 +107,7 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasOne(d => d.User).WithMany(p => p.Attendancerequests)
                 .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("attendancerequests_ibfk_1");
         });
 
@@ -133,12 +135,11 @@ public partial class ApplicationDbContext : DbContext
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp")
                 .HasColumnName("created_at");
-            entity.Property(e => e.EndDate).HasColumnName("end_date");
+            entity.Property(e => e.Date).HasColumnName("date");
             entity.Property(e => e.LeaveTypeId).HasColumnName("leave_type_id");
             entity.Property(e => e.Reason)
                 .HasColumnType("text")
                 .HasColumnName("reason");
-            entity.Property(e => e.StartDate).HasColumnName("start_date");
             entity.Property(e => e.Status)
                 .HasMaxLength(255)
                 .HasColumnName("status");
@@ -151,10 +152,12 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasOne(d => d.LeaveType).WithMany(p => p.Leaverequests)
                 .HasForeignKey(d => d.LeaveTypeId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("leaverequests_ibfk_2");
 
             entity.HasOne(d => d.User).WithMany(p => p.Leaverequests)
                 .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("leaverequests_ibfk_1");
         });
 

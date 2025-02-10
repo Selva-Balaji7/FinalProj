@@ -48,7 +48,7 @@
         <summary>Admin</summary>
         <a *ngIf="user.permissions.includes('ViewUsers')" [routerLink]="" title="View all Available Users">View Users<br></a>
         <a *ngIf="user.permissions.includes('EditUsers')" [routerLink]="" title="Edit Available Users">Edit Users<br></a>
-        <a *ngIf="user.permissions.includes('NewUserRequests')" [routerLink]="" title="Edit Available Users">New User Requests<br></a>
+        <a *ngIf="user.permissions.includes('NewUserRequests')" [routerLink]="['/dasboard/newuserreq']" title="Edit Available Users">New User Requests<br></a>
     </details>
 </div>
 

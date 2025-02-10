@@ -60,7 +60,7 @@ export class ViewRolesComponent {
         this.editingValueForName = role.roleName
     })
 
-    const EditRole = {roleId:roleid, roleName:this.editingValueForName }; // Example default value
+    const EditRole = {roleId:roleid, roleName:this.editingValueForName }; 
     this.roleEditForm.patchValue(EditRole);
   }
 

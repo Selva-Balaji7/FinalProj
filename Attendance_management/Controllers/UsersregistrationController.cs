@@ -87,11 +87,17 @@ namespace Attendance_management.Controllers
             {
                 return NotFound();
             }
+            try
+            {
+                _context.Usersregistrations.Remove(user);
+                await _context.SaveChangesAsync();
+                return NoContent(); // 204 status code
+            }
+            catch
+            {
+                return BadRequest($"Unable to delete User with ID {id}");
+            }
 
-            _context.Usersregistrations.Remove(user);
-            await _context.SaveChangesAsync();
-
-            return NoContent(); // 204 status code
         }
 
 

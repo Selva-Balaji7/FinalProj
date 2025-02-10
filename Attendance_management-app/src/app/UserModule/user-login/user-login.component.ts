@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { DbservicesService } from '../../services/db/dbservices.service';
 import { Store } from '@ngrx/store';
 import { UserState } from '../../../store/user/user.state';
 import { saveUserData } from '../../../store/user/user.actions';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-user-login',

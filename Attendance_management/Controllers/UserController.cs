@@ -67,8 +67,8 @@ namespace Attendance_management.Controllers
                 Password = user.Password,
                 Role = user.Role,
                 ProfilePicture = user.ProfilePicture,
-                CreatedAt = user.CreatedAt,
-                UpdatedAt = user.UpdatedAt
+                //CreatedAt = user.CreatedAt,
+                //UpdatedAt = user.UpdatedAt
             };
 
             _context.Users.Add(newUser);
