@@ -21,13 +21,15 @@ public partial class ApplicationDbContext : DbContext
 
     public virtual DbSet<Attendancerequest> Attendancerequests { get; set; }
 
+    public virtual DbSet<Holiday> Holidays { get; set; }
+
     public virtual DbSet<Leaverequest> Leaverequests { get; set; }
 
     public virtual DbSet<Leavetype> Leavetypes { get; set; }
 
-    public virtual DbSet<PermissionDto> Permissions { get; set; }
+    public virtual DbSet<Permission> Permissions { get; set; }
 
-    public virtual DbSet<RoleDto> Roles { get; set; }
+    public virtual DbSet<Role> Roles { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
 
@@ -51,9 +53,7 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasIndex(e => e.UserId, "user_id");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp")
@@ -85,9 +85,7 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasIndex(e => e.UserId, "user_id");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp")
@@ -111,6 +109,15 @@ public partial class ApplicationDbContext : DbContext
                 .HasConstraintName("attendancerequests_ibfk_1");
         });
 
+        modelBuilder.Entity<Holiday>(entity =>
+        {
+            entity.HasKey(e => e.HolidayDate).HasName("PRIMARY");
+
+            entity.ToTable("holidays");
+
+            entity.Property(e => e.HolidayDate).HasColumnName("holiday_date");
+        });
+
         modelBuilder.Entity<Leaverequest>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
@@ -121,9 +128,7 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasIndex(e => e.UserId, "user_id");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp")
@@ -159,9 +164,7 @@ public partial class ApplicationDbContext : DbContext
 
             entity.ToTable("leavetypes");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp")
@@ -179,7 +182,7 @@ public partial class ApplicationDbContext : DbContext
                 .HasColumnName("updated_at");
         });
 
-        modelBuilder.Entity<PermissionDto>(entity =>
+        modelBuilder.Entity<Permission>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
@@ -187,9 +190,7 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasIndex(e => e.RoleId, "role_id");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp")
@@ -209,15 +210,13 @@ public partial class ApplicationDbContext : DbContext
                 .HasConstraintName("permissions_ibfk_1");
         });
 
-        modelBuilder.Entity<RoleDto>(entity =>
+        modelBuilder.Entity<Role>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PRIMARY");
 
             entity.ToTable("roles");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp")
@@ -240,9 +239,7 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasIndex(e => e.Email, "email").IsUnique();
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp")
@@ -275,9 +272,7 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasIndex(e => e.Email, "email").IsUnique();
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp")

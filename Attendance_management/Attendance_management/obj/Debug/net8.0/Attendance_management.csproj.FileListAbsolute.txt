@@ -317,10 +317,10 @@ C:\Users\sanka\Desktop\FINAL_TEAM_PROJECT\Attendance_management\Attendance_manag
 C:\Users\sanka\Desktop\FINAL_TEAM_PROJECT\Attendance_management\Attendance_management\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Attendance_management.props
 C:\Users\sanka\Desktop\FINAL_TEAM_PROJECT\Attendance_management\Attendance_management\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Attendance_management.props
 C:\Users\sanka\Desktop\FINAL_TEAM_PROJECT\Attendance_management\Attendance_management\obj\Debug\net8.0\staticwebassets.pack.json
-C:\Users\sanka\Desktop\FINAL_TEAM_PROJECT\Attendance_management\Attendance_management\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\sanka\Desktop\FINAL_TEAM_PROJECT\Attendance_management\Attendance_management\obj\Debug\net8.0\Attendan.912D7562.Up2Date
 C:\Users\sanka\Desktop\FINAL_TEAM_PROJECT\Attendance_management\Attendance_management\obj\Debug\net8.0\Attendance_management.dll
 C:\Users\sanka\Desktop\FINAL_TEAM_PROJECT\Attendance_management\Attendance_management\obj\Debug\net8.0\refint\Attendance_management.dll
 C:\Users\sanka\Desktop\FINAL_TEAM_PROJECT\Attendance_management\Attendance_management\obj\Debug\net8.0\Attendance_management.pdb
 C:\Users\sanka\Desktop\FINAL_TEAM_PROJECT\Attendance_management\Attendance_management\obj\Debug\net8.0\Attendance_management.genruntimeconfig.cache
 C:\Users\sanka\Desktop\FINAL_TEAM_PROJECT\Attendance_management\Attendance_management\obj\Debug\net8.0\ref\Attendance_management.dll
+C:\Users\sanka\Desktop\FINAL_TEAM_PROJECT\Attendance_management\Attendance_management\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

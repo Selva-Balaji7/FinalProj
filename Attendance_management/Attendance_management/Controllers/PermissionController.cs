@@ -21,12 +21,12 @@ namespace Attendance_management.Controllers
 
         // GET: api/Permission
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PermissionDto>>> GetPermissions()
+        public async Task<ActionResult<IEnumerable<Permission>>> GetPermissions()
         {
             try
             {
                 var permissions = await _context.Permissions
-                    .Include(p => p.Role)
+
                     .ToListAsync();
 
                 if (permissions == null || permissions.Count == 0)
@@ -44,12 +44,12 @@ namespace Attendance_management.Controllers
 
         // GET: api/Permission/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<PermissionDto>> GetPermission(int id)
+        public async Task<ActionResult<Permission>> GetPermission(int id)
         {
             try
             {
                 var permission = await _context.Permissions
-                    .Include(p => p.Role)
+
                     .FirstOrDefaultAsync(p => p.Id == id);
 
                 if (permission == null)
@@ -67,7 +67,7 @@ namespace Attendance_management.Controllers
 
         // POST: api/Permission
         [HttpPost]
-        public async Task<ActionResult<PermissionDto>> Post([FromBody] PermissionDto permission)
+        public async Task<ActionResult<Permission>> Post([FromBody] Permission permission)
         {
             if (permission == null)
             {
@@ -83,7 +83,7 @@ namespace Attendance_management.Controllers
 
         // PUT: api/Permission/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] PermissionDto permission)
+        public async Task<IActionResult> Put(int id, [FromBody] Permission permission)
         {
             if (id != permission.Id)
             {
@@ -132,3 +132,6 @@ namespace Attendance_management.Controllers
         }
     }
 }
+
+
+

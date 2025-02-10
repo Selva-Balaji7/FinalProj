@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Attendance_management.Models;
 
-public partial class RoleDto
+public partial class Role
 {
     public int Id { get; set; }
 
@@ -13,5 +13,5 @@ public partial class RoleDto
 
     public DateTime? UpdatedAt { get; set; }
 
-    public virtual ICollection<PermissionDto> Permissions { get; set; } = new List<PermissionDto>();
+    public virtual ICollection<Permission> Permissions { get; set; } = new List<Permission>();
 }
