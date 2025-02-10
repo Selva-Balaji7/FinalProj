@@ -113,7 +113,7 @@ export class UserLoginComponent {
           this.addMessage({type:"warning", message:"Password Field is Requied"});
       }
       if(this.LoginForm.get(formcontrolname).errors.pattern){
-        this.addMessage({type:"warning", message:"Id Should 3 or 4 Digit Number"});
+        this.addMessage({type:"warning", message:"Id is a 3 or 4 Digit Number"});
       }
     }
   }

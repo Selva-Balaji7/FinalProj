@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\Atendance_Management_Final\\Attendance_management\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{AAF0BDF8-FF99-407A-A48E-0E35171A2904}|Attendance_management.csproj|d:\\atendance_management_final\\attendance_management\\controllers\\imagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AAF0BDF8-FF99-407A-A48E-0E35171A2904}|Attendance_management.csproj|solutionrelative:controllers\\imagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{AAF0BDF8-FF99-407A-A48E-0E35171A2904}|Attendance_management.csproj|d:\\atendance_management_final\\attendance_management\\controllers\\usersregistrationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AAF0BDF8-FF99-407A-A48E-0E35171A2904}|Attendance_management.csproj|solutionrelative:controllers\\usersregistrationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -23,10 +27,6 @@
       "RelativeMoniker": "D:0:0:{AAF0BDF8-FF99-407A-A48E-0E35171A2904}|Attendance_management.csproj|solutionrelative:models\\usersregistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{AAF0BDF8-FF99-407A-A48E-0E35171A2904}|Attendance_management.csproj|d:\\atendance_management_final\\attendance_management\\controllers\\imagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AAF0BDF8-FF99-407A-A48E-0E35171A2904}|Attendance_management.csproj|solutionrelative:controllers\\imagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{AAF0BDF8-FF99-407A-A48E-0E35171A2904}|Attendance_management.csproj|d:\\atendance_management_final\\attendance_management\\controllers\\rolecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{AAF0BDF8-FF99-407A-A48E-0E35171A2904}|Attendance_management.csproj|solutionrelative:controllers\\rolecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -42,24 +42,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "UsersregistrationController.cs",
               "DocumentMoniker": "D:\\Atendance_Management_Final\\Attendance_management\\Controllers\\UsersregistrationController.cs",
               "RelativeDocumentMoniker": "Controllers\\UsersregistrationController.cs",
               "ToolTip": "D:\\Atendance_Management_Final\\Attendance_management\\Controllers\\UsersregistrationController.cs",
               "RelativeToolTip": "Controllers\\UsersregistrationController.cs",
-              "ViewState": "AgIAADUAAAAAAAAAAAApwC0AAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEoAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-09T16:25:30.092Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
+              "Title": "ImageController.cs",
+              "DocumentMoniker": "D:\\Atendance_Management_Final\\Attendance_management\\Controllers\\ImageController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ImageController.cs",
+              "ToolTip": "D:\\Atendance_Management_Final\\Attendance_management\\Controllers\\ImageController.cs",
+              "RelativeToolTip": "Controllers\\ImageController.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAowCUAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-09T13:49:18.098Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\Atendance_Management_Final\\Attendance_management\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -72,19 +85,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ImageController.cs",
-              "DocumentMoniker": "D:\\Atendance_Management_Final\\Attendance_management\\Controllers\\ImageController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ImageController.cs",
-              "ToolTip": "D:\\Atendance_Management_Final\\Attendance_management\\Controllers\\ImageController.cs",
-              "RelativeToolTip": "Controllers\\ImageController.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAAgwBoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-09T13:49:18.098Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Atendance_Management_Final\\Attendance_management\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -109,7 +110,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "UserController.cs",
               "DocumentMoniker": "D:\\Atendance_Management_Final\\Attendance_management\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
@@ -121,7 +122,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Usersregistration.cs",
               "DocumentMoniker": "D:\\Atendance_Management_Final\\Attendance_management\\Models\\Usersregistration.cs",
               "RelativeDocumentMoniker": "Models\\Usersregistration.cs",
