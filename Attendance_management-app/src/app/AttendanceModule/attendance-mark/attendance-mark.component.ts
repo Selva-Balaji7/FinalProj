@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Import CommonModule
-import { FormsModule } from '@angular/forms';   // Import FormsModule
-import {DbservicesService} from '../../Services/dbservices.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+
+
 @Component({
   selector: 'app-attendance-mark',
   imports: [CommonModule,FormsModule],
@@ -10,13 +12,12 @@ import {DbservicesService} from '../../Services/dbservices.service';
 })
 export class AttendanceMarkComponent  {
   
- 
-  // user:any = {id:100, name:"William", email:"william@gmail.com",role:"student", permisssions:["","",""],
+// user:any = {id:100, name:"William", email:"william@gmail.com",role:"student", permisssions:["","",""],
     
   // }
 
 
-role: string = "Admin";  // Role of the user (Student, Teacher, Admin)
+  role: string = "Teacher";  // Role of the user (Student, Teacher, Admin)
 
 
 

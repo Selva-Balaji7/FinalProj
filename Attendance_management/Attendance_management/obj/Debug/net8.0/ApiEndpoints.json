@@ -222,6 +222,105 @@
     ]
   },
   {
+    "ContainingType": "Attendance_management.Controllers.AttendancerequestController",
+    "Method": "GetAllrequests",
+    "RelativePath": "api/Attendancerequest",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Attendance_management.Models.Attendancerequest, Attendance_management, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Attendance_management.Controllers.AttendancerequestController",
+    "Method": "AddAttendance",
+    "RelativePath": "api/Attendancerequest",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "attendancerequest",
+        "Type": "Attendance_management.Models.Attendancerequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Attendance_management.Controllers.AttendancerequestController",
+    "Method": "GetAttendancerequestById",
+    "RelativePath": "api/Attendancerequest/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Attendance_management.Models.Attendancerequest",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Attendance_management.Controllers.AttendancerequestController",
+    "Method": "UpdateAttendancerequest",
+    "RelativePath": "api/Attendancerequest/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updatedAttendancerequest",
+        "Type": "Attendance_management.Models.Attendancerequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Attendance_management.Controllers.AttendancerequestController",
+    "Method": "DeleteAttendance",
+    "RelativePath": "api/Attendancerequest/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Attendance_management.Controllers.PermissionController",
     "Method": "GetPermissions",
     "RelativePath": "api/Permission",
