@@ -6,27 +6,28 @@ namespace Attendance_management.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AttendancerequestController : ControllerBase
+    public class LeaverequestController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public AttendancerequestController(ApplicationDbContext context)
+        public LeaverequestController(ApplicationDbContext context)
         {
             _context = context;
         }
 
+
         [HttpGet("check/{id}")]
-        public async Task<ActionResult<bool>> checkAttendanceRequest(int id, [FromQuery] string Date)
+        public async Task<ActionResult<bool>> checkLeaveRequest(int id, [FromQuery] string Date)
         {
             var cDate = DateOnly.Parse(Date);
 
             try
             {
-                var attreq = await _context.Attendancerequests
-                    .Where(ar => ar.UserId == id && ar.Date == cDate)
+                var leavereq = await _context.Leaverequests
+                    .Where(lr => lr.UserId == id && lr.Date == cDate)
                     .ToListAsync();
 
-                if(attreq.Count == 0)
+                if (leavereq.Count == 0)
                 {
                     return Ok(true);
                 }
@@ -39,8 +40,9 @@ namespace Attendance_management.Controllers
             {
                 return BadRequest(false);
             }
-        }
 
+
+        }
 
     }
 }

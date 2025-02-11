@@ -8,7 +8,7 @@ namespace Attendance_management.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AttendanceController : Controller
+    public class AttendanceController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
@@ -174,6 +174,33 @@ namespace Attendance_management.Controllers
                 return NotFound();
             }
             return Ok(attendance.Count);
+        }
+
+
+        [HttpGet("check/{id}")]
+        public async Task<ActionResult<bool>> checkAttendance(int id, [FromQuery] string Date)
+        {
+            var cDate = DateOnly.Parse(Date);
+
+            try
+            {
+                var att = await _context.Attendances
+                    .Where(a => a.UserId == id && a.Date == cDate)
+                    .ToListAsync();
+
+                if(att.Count == 0)
+                {
+                    return Ok(true);
+                }
+                else
+                {
+                    return Ok(false);
+                }
+            }
+            catch
+            {
+                return BadRequest(false);
+            }
         }
 
 
