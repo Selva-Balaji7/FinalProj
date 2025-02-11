@@ -1,0 +1,27 @@
+<!-- <p>view-all-attendancerequest works!</p> -->
+
+
+
+
+<div class="container">
+    <h2>All Attendance Requests</h2>
+  
+    <table border="1">
+      <thead>
+        <tr>
+          <th>User ID</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let request of allattendanceRequests">
+          <td>{{ request.userId }}</td>
+          <td>{{ request.date }}</td>
+          <td>{{ request.status }}</td>
+          <td><button (click)="onSubmit(request)">Submit</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
