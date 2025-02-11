@@ -18,11 +18,22 @@ export class DbservicesService {
 
   }
 
+
+  getRecord(table: string) {
+    return this.http.get<any[]>(`${this.apiUrl1}/${table}`);
+
+  }
+
   
   postRecord(tableName:any, val:any){
     return this.http.post(`${this.apiUrl1}/${tableName}`, val);
   }
 
+  
 
+
+    deleteRecord(tableName:any){
+      return this.http.delete(`${this.apiUrl1}/${tableName}`);
+    }
 
 }

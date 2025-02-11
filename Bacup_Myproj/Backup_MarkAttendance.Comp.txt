@@ -1,0 +1,135 @@
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { DbservicesService } from '../../Services/dbservices.service';
+
+@Component({
+  selector: 'app-attendance-mark',
+  imports: [CommonModule,FormsModule],
+  templateUrl: './attendance-mark.component.html',
+  styleUrl: './attendance-mark.component.css'
+})
+export class AttendanceMarkComponent  {
+  
+  attendanceDate: string = '';  
+  userId: number =100;
+  status: string ='present';
+  constructor(private attendancemark: DbservicesService) {}
+
+//  checkAttendance: any[]=[];
+//  checkLeaveReq: any[]=[];
+//  checkAttendanceReq: any[]=[];
+
+// const boolean =false;
+
+  submitAttendance() {
+    if (!this.attendanceDate) {
+      alert('Please select a date before submitting.');
+      return;
+    }
+
+    const attendanceData = {
+      date: this.attendanceDate,
+      userId: this.userId,
+      status:this.status
+
+    };
+
+//(use boolean value to check all three api varaiable )
+    
+// this.attendancemark.getRecord('Attendance').subscribe(
+//   (data:any) => {
+//     this.checkAttendance= data;
+//   },
+//   (error:any) => {
+//     console.error('Error fetching attendance requests', error);
+//   }
+// );
+
+// this.attendancemark.getRecord('LeaveRequest').subscribe(
+//   (data:any )=>{
+//     this.checkLeaveReq=data;
+
+//   },
+//   (error: any)=>{
+//     console.error('Error fetching attendance requests', error);
+
+//   }
+// );
+
+// this.attendancemark.getRecord('Attendancerequest').subscribe(
+//   (data: any)=>{
+//     this.checkAttendanceReq=data;
+//   },
+//   (error:any )=>{
+//     console.error('Error fetching attendance requests', error);
+
+//   }
+// );
+  
+// if()
+
+
+
+    this.attendancemark.postRecord("Attendancerequest",attendanceData).subscribe({
+      next: () => {
+        alert('Attendance marked successfully!');
+        this.attendanceDate = ''; // Reset the input after submission
+      },
+      error: (error:any) => {
+        console.error('Error marking attendance:', error);
+        alert('Failed to mark attendance. Please try again.');
+      }
+    });
+  }
+
+
+
+}
+
+
+/*
+
+
+import { Component } from '@angular/core';
+import { attendancemark } from '../services/attendance.service';
+
+@Component({
+  selector: 'app-mark-attendance',
+  templateUrl: './mark-attendance.component.html',
+  styleUrls: ['./mark-attendance.component.css']
+})
+export class MarkAttendanceComponent {
+  attendanceDate: string = '';  // Holds the selected date
+  userId: number = 1; // Replace with the actual logged-in user ID
+
+  constructor(private attendancemark: attendancemark) {}
+
+  submitAttendance() {
+    if (!this.attendanceDate) {
+      alert('Please select a date before submitting.');
+      return;
+    }
+
+    const attendanceData = {
+      date: this.attendanceDate,
+      userId: this.userId
+    };
+
+    this.attendancemark.markAttendance(attendanceData).subscribe({
+      next: () => {
+        alert('Attendance marked successfully!');
+        this.attendanceDate = ''; // Reset the input after submission
+      },
+      error: (error) => {
+        console.error('Error marking attendance:', error);
+        alert('Failed to mark attendance. Please try again.');
+      }
+    });
+  }
+}.    
+
+
+
+
+*/

@@ -1,0 +1,57 @@
+
+    this.attendancemark.getRequests(`Attendancerequest/check/${this.userId}?date=${this.attendanceDate}`).subscribe(
+      
+      (attendanceRequestExists) => {
+        hasAttendanceRequest = attendanceRequestExists;
+       
+        this.attendancemark.getRequests(`Attendance/check/${this.userId}?date=${this.attendanceDate}`).subscribe(
+          (attendanceExists) => {
+            hasAttendance = attendanceExists;
+  
+            
+            this.attendancemark.getRequests(`LeaveRequest/check/${this.userId}?date=${this.attendanceDate}`).subscribe(
+              (leaveRequestExists) => {
+                hasLeaveRequest = leaveRequestExists;
+  
+                
+                if (hasAttendanceRequest && hasAttendance && hasLeaveRequest) {
+                
+                  const attendanceData = {
+                    date: this.attendanceDate,
+                    userId: this.userId,
+                    status: this.status
+                  };
+  
+                  this.attendancemark.postRecord(`Attendancerequest`, attendanceData).subscribe({
+                    next: () => {
+                      alert('Attendance marked successfully!');
+                      this.attendanceDate = ''; // Reset the input after submission
+                    },
+                    error: (error: any) => {
+                      console.error('Error marking attendance:', error);
+                      alert('Failed to mark attendance. Please try again.');
+                    }
+                  });
+                    } else {
+                  
+                      alert('You already requested attendance or leave for this date.'); // Alert if any request exists
+              
+                }
+              },
+              (error) => {
+                console.error('Error checking leave requests:', error);
+                alert('Failed to check existing requests. Please try again later.');
+              }
+            );
+          },
+          (error) => {
+            console.error('Error checking attendance:', error);
+            alert('Failed to check existing requests. Please try again later.');
+          }
+        );
+      },
+      (error) => {
+        console.error('Error checking attendance requests:', error);
+        alert('Failed to check existing requests. Please try again later.');
+      }
+    );

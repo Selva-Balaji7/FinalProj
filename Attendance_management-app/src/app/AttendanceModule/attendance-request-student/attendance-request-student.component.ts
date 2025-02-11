@@ -19,10 +19,10 @@ export class AttendanceRequestStudentComponent implements OnInit {
 
   loadAttendanceRequests(): void {
     this.attendanceReqstudent.getRequests('Attendancerequest/byrole?role=Student').subscribe(
-      (data:any) => {
+      (data: any) => {
         this.attendanceRequests = data;
       },
-      (error:any) => {
+      (error: any) => {
         console.error('Error fetching attendance requests', error);
       }
     );
@@ -30,8 +30,88 @@ export class AttendanceRequestStudentComponent implements OnInit {
 
   onSubmit(request: any): void {
     console.log('Submitting request:', request);
-    // Add API call to update attendance status
+
+
+    const updatedData = {
+      userId: request.userId,
+      date: request.date,
+      status: 'present',
+      remarks: null
+    };
+    console.log('Attendance request updated successfully', updatedData);
+
+
+    this.attendanceReqstudent.postRecord('Attendance', updatedData).subscribe(
+      (response: any) => {
+        console.log('Attendance request updated successfully', response);
+
+
+        this.attendanceReqstudent.deleteRecord(`Attendancerequest/${request.id}`).subscribe(
+          (deleteResponse: any) => {
+            console.log('Attendance request deleted successfully', deleteResponse);
+
+            this.loadAttendanceRequests();
+          },
+          (deleteError: any) => {
+            console.error('Error deleting attendance request', deleteError);
+          }
+        );
+
+
+        this.loadAttendanceRequests();
+      },
+      (error: any) => {
+        console.error('Error updating attendance request', error);
+      }
+    );
 
   }
+
+
+
+
+  onReject(request: any): void {
+    console.log('Submitting request:', request);
+
+
+
+    this.attendanceReqstudent.deleteRecord(`Attendancerequest/${request.id}`).subscribe(
+      (deleteResponse: any) => {
+        console.log('Attendance request deleted successfully', deleteResponse);
+
+
+        const updatedData = {
+          userId: request.userId,
+          date: request.date,
+          status: 'Absent',
+          remarks: null
+        };
+        console.log('Attendance request updated successfully', updatedData);
+
+
+
+        this.attendanceReqstudent.postRecord('Attendance', updatedData).subscribe(
+          (response: any) => {
+            console.log('Attendance request updated successfully', response);
+
+
+
+          }
+        );
+
+
+        this.loadAttendanceRequests();
+      },
+      (deleteError: any) => {
+        console.error('Error deleting attendance request', deleteError);
+      }
+    );
+
+
+  }
+
+
+
+
 
 }

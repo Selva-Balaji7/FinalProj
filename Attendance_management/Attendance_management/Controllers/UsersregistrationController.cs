@@ -12,14 +12,7 @@ namespace Attendance_management.Controllers
     [Route("api/[controller]")]
     public class UsersregistrationController : Controller
     {
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
-
-
-
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
         public UsersregistrationController(ApplicationDbContext context)
         {
             _context = context;
@@ -52,26 +45,39 @@ namespace Attendance_management.Controllers
         [HttpPost]
         public async Task<ActionResult> AddUserRegistration(Usersregistration user)
         {
-            Console.Clear();
-            Console.WriteLine("post userregistration");
 
-            var newUser = new Usersregistration
+            try
             {
-                Id = user.Id,
-                Name = user.Name,
-                Email = user.Email,
-                Password = user.Password,
-                Role = user.Role,
-                ProfilePicture = user.ProfilePicture,
-                //CreatedAt = user.CreatedAt,
-                //UpdatedAt = user.UpdatedAt
-            };
+                if (string.IsNullOrEmpty(user.Name) || string.IsNullOrEmpty(user.Email) || string.IsNullOrEmpty(user.Password))
+                {
+                    return BadRequest("Name, Email, and Password are required.");
+                }
 
-            _context.Usersregistrations.Add(newUser);
-            await _context.SaveChangesAsync();
+                var newUser = new Usersregistration
+                {
+                    Id = user.Id,
+                    Name = user.Name,
+                    Email = user.Email,
+                    Password = user.Password,
+                    Role = user.Role,
+                    ProfilePicture = user.ProfilePicture,
+                    //CreatedAt = DateTime.UtcNow,
+                    //UpdatedAt = DateTime.UtcNow
+                };
 
-            return CreatedAtAction("GetAllUserRegistration", new { id = newUser.Id }, newUser);
+                //_context.Usersregistrations.Add(newUser);
+                _context.Entry(newUser).State = EntityState.Added;
+
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction("GetAllUserRegistration", new { id = newUser.Id }, newUser);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "An internal server error occurred.");
+            }
         }
+
 
 
         [HttpDelete("{id}")]
@@ -82,11 +88,17 @@ namespace Attendance_management.Controllers
             {
                 return NotFound();
             }
+            try
+            {
+                _context.Usersregistrations.Remove(user);
+                await _context.SaveChangesAsync();
+                return NoContent(); // 204 status code
+            }
+            catch
+            {
+                return BadRequest($"Unable to delete User with ID {id}");
+            }
 
-            _context.Usersregistrations.Remove(user);
-            await _context.SaveChangesAsync();
-
-            return NoContent(); // 204 status code
         }
 
 
