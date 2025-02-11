@@ -21,6 +21,8 @@ public partial class ApplicationDbContext : DbContext
 
     public virtual DbSet<Attendancerequest> Attendancerequests { get; set; }
 
+    public virtual DbSet<Holiday> Holidays { get; set; }
+
     public virtual DbSet<Leaverequest> Leaverequests { get; set; }
 
     public virtual DbSet<Leavetype> Leavetypes { get; set; }
@@ -32,7 +34,6 @@ public partial class ApplicationDbContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     public virtual DbSet<Usersregistration> Usersregistrations { get; set; }
-    public IEnumerable<object> Attendance { get; internal set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -52,9 +53,7 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasIndex(e => e.UserId, "user_id");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp")
@@ -75,6 +74,7 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasOne(d => d.User).WithMany(p => p.Attendances)
                 .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("attendance_ibfk_1");
         });
 
@@ -86,9 +86,7 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasIndex(e => e.UserId, "user_id");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp")
@@ -109,7 +107,17 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasOne(d => d.User).WithMany(p => p.Attendancerequests)
                 .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("attendancerequests_ibfk_1");
+        });
+
+        modelBuilder.Entity<Holiday>(entity =>
+        {
+            entity.HasKey(e => e.HolidayDate).HasName("PRIMARY");
+
+            entity.ToTable("holidays");
+
+            entity.Property(e => e.HolidayDate).HasColumnName("holiday_date");
         });
 
         modelBuilder.Entity<Leaverequest>(entity =>
@@ -122,19 +130,16 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasIndex(e => e.UserId, "user_id");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp")
                 .HasColumnName("created_at");
-            entity.Property(e => e.EndDate).HasColumnName("end_date");
+            entity.Property(e => e.Date).HasColumnName("date");
             entity.Property(e => e.LeaveTypeId).HasColumnName("leave_type_id");
             entity.Property(e => e.Reason)
                 .HasColumnType("text")
                 .HasColumnName("reason");
-            entity.Property(e => e.StartDate).HasColumnName("start_date");
             entity.Property(e => e.Status)
                 .HasMaxLength(255)
                 .HasColumnName("status");
@@ -147,10 +152,12 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasOne(d => d.LeaveType).WithMany(p => p.Leaverequests)
                 .HasForeignKey(d => d.LeaveTypeId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("leaverequests_ibfk_2");
 
             entity.HasOne(d => d.User).WithMany(p => p.Leaverequests)
                 .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("leaverequests_ibfk_1");
         });
 
@@ -160,9 +167,7 @@ public partial class ApplicationDbContext : DbContext
 
             entity.ToTable("leavetypes");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp")
@@ -188,9 +193,7 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasIndex(e => e.RoleId, "role_id");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp")
@@ -207,6 +210,7 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasOne(d => d.Role).WithMany(p => p.Permissions)
                 .HasForeignKey(d => d.RoleId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("permissions_ibfk_1");
         });
 
@@ -216,9 +220,7 @@ public partial class ApplicationDbContext : DbContext
 
             entity.ToTable("roles");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp")
@@ -241,9 +243,7 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasIndex(e => e.Email, "email").IsUnique();
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp")
@@ -276,9 +276,7 @@ public partial class ApplicationDbContext : DbContext
 
             entity.HasIndex(e => e.Email, "email").IsUnique();
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp")

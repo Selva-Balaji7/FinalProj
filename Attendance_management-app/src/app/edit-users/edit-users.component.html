@@ -1,6 +1,6 @@
 <div class="container mt-4">
   <h2 class="text-center">User Management</h2>
-  <button class="btn btn-primary mb-3" (click)="openUserForm()">
+  <button class="btn btn-primary mb-3" [routerLink]="'/userregistration'">
     <i class="bi bi-plus-circle"></i> Add User
   </button>
 
@@ -15,6 +15,7 @@
         <th>Profile_Picture</th>
         <th>Created_at</th>
         <th>Updated_at</th>
+        <th>Edit/Remove</th>
       </tr>
     </thead>
     <tbody>
@@ -25,8 +26,8 @@
         <td>{{ user.password }}</td>
         <td>{{ user.role }}</td>
         <td><img [src]="user.profile_picture" alt="Profile" width="50" /></td>
-        <td>{{  user.created_at}}</td>  <!-- Ensure data exists -->
-        <td>{{user.updated_at}}</td>  <!-- Ensure data exists -->
+        <td>{{  user.created_at | date:'yyyy-MM-dd HH:mm:ss' }}</td>  <!-- Ensure data exists -->
+        <td>{{user.updated_at | date:'yyyy-MM-dd HH:mm:ss'}}</td>  <!-- Ensure data exists -->
         <td>
           <button
             class="btn btn-warning btn-sm me-2"

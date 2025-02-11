@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder,FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { DbservicesService } from '../services/db.service'; // Ensure correct path
 
 @Component({
   selector: 'app-leave-type',
@@ -11,9 +12,11 @@ import { FormBuilder,FormGroup, FormsModule, ReactiveFormsModule, Validators } f
 })
 export class LeaveTypeComponent implements OnInit {
   leaveForm: FormGroup;
-  leaveTypes: any[] = []; // Stores leave type data
+  leaveTypes: any; // Stores leave type data
+  //private apiUrl = 'https://localhost:7189/api/LeaveTypes'; // Ensure correct path
+  
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  constructor(private fb: FormBuilder, private http: DbservicesService, private _route: Router) {
     this.leaveForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
@@ -26,11 +29,11 @@ export class LeaveTypeComponent implements OnInit {
 
   // Fetch existing leave types from API
   fetchLeaveTypes(): void {
-    this.http.get<any[]>('http://localhost:7189/api/LeaveTypes').subscribe(
-      (data) => {
+    this.http.getRecord('LeaveTypes').subscribe(
+      (data: any) => {
         this.leaveTypes = data;
       },
-      (error) => {
+      (error: any) => {
         console.error('Error fetching leave types', error);
       }
     );
@@ -39,7 +42,7 @@ export class LeaveTypeComponent implements OnInit {
   // Submit a new leave type
   submitLeaveType(): void {
     if (this.leaveForm.valid) {
-      this.http.post('http://localhost:7189/api/LeaveTypes', this.leaveForm.value).subscribe(
+      this.http.postRecord('LeaveTypes', this.leaveForm.value).subscribe(
         () => {
           alert('Leave Type Added Successfully');
           this.leaveForm.reset();
@@ -49,6 +52,17 @@ export class LeaveTypeComponent implements OnInit {
           console.error('Error adding leave type', error);
         }
       );
+    }
+  }
+
+  
+  deleteLeaveType(id: number) {
+    console.log('Deleting Leave Type', id); 
+    if (confirm('Are you sure you want to delete this Leave type?')) {
+      this.http.deleteRecord(`LeaveTypes/${id}`).subscribe(() => this.fetchLeaveTypes());
+    }
+    (error: any) => {
+      console.error('Error deleting Leave Type:', error);
     }
   }
 }

@@ -2,10 +2,11 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-edit-users',
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,RouterModule],
   templateUrl: './edit-users.component.html',
   styleUrl: './edit-users.component.css'
 })
@@ -20,6 +21,7 @@ export class EditUsersComponent implements OnInit {
   
     ngOnInit() {
       this.loadUsers();
+
     }
   
     loadUsers() {
@@ -27,8 +29,8 @@ export class EditUsersComponent implements OnInit {
       this.http.get<any[]>(this.apiUrl).subscribe((data) => {
         this.users = data.map(user => ({
           ...user,
-          created_at: new Date(user.created_at),   // Convert to Date object
-          updated_at: new Date(user.updated_at)
+          created_at: new Date(user.createdAt),   // Convert to Date object
+          updated_at: new Date(user.updatedAt)
         }));
        console.log(data);
       });
@@ -49,10 +51,10 @@ export class EditUsersComponent implements OnInit {
     saveUser() {
         const currentTime = new Date().toISOString();
         
-        if (!this.selectedUser.created_at) {
-          this.selectedUser.created_at = currentTime; // Set only if it's a new user
-        }
-        this.selectedUser.updated_at = currentTime; // Always update
+        // if (!this.selectedUser.created_at) {
+        //   this.selectedUser.created_at = currentTime; // Set only if it's a new user
+        // }
+        // this.selectedUser.updated_at = currentTime; // Always update
       
         if (this.isEditing) {
           this.http.put(`${this.apiUrl}/${this.selectedUser.id}`, this.selectedUser)

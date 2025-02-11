@@ -20,7 +20,7 @@ export class RolesComponent implements OnInit{
   roles: Role[] = [];
   newRoleName: string = '';
 
-  private apiUrl = 'https://localhost:7171/api/role'; // Change to your API URL
+  private apiUrl = 'https://localhost:7189/api/role'; // Change to your API URL
 
   constructor(private http: HttpClient) {}
 

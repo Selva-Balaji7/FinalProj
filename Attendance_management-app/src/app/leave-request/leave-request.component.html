@@ -5,10 +5,6 @@
       ;">Apply for Leave</h3>
       <form [formGroup]="leaveForm" (ngSubmit)="submitLeaveRequest()">
         
-        <div class="mb-md-4">
-          <label for="userId" class="form-label">User ID</label>
-          <input type="text" id="userId" class="form-control" formControlName="userId">
-        </div>
 
         <div class="mb-md-4">
           <label for="leaveTypeId" class="form-label">Leave Type ID</label>
@@ -16,13 +12,14 @@
         </div>
 
         <div class="mb-md-4">
-          <label for="startDate" class="form-label">Start Date</label>
-          <input type="date" id="startDate" class="form-control" formControlName="startDate">
+          <label for="leaveTypeName" class="form-label">Leave Type Name</label>
+          <input type="text" id="leaveTypeName" class="form-control" formControlName="leaveTypeName">
+
         </div>
 
         <div class="mb-md-4">
-          <label for="endDate" class="form-label">End Date</label>
-          <input type="date" id="endDate" class="form-control" formControlName="endDate">
+          <label for="startDate" class="form-label"> Date</label>
+          <input type="date" id="startDate" class="form-control" formControlName="startDate">
         </div>
 
         <div class="mb-md-4">

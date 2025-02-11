@@ -19,32 +19,29 @@ namespace Attendance_management.Controllers
 
         // GET: api/LeaveRequests - Get all leave requests
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Leaverequest>>> GetLeaveRequests([FromQuery]string role)
+        public async Task<ActionResult<IEnumerable<Leaverequest>>> GetLeaveRequests()
         {
-            if (role == "null")
-                return await _context.Leaverequests
-                                 //.Include(l => l.User)s
+            return await _context.Leaverequests
+                                 .Include(l => l.User)
+                                 .Include(l => l.LeaveType)
                                  .ToListAsync();
-            else
-                return await _context.Leaverequests
-                        .Where(l => l.User.Role == role)
-                        .ToListAsync();
         }
 
         // GET: api/LeaveRequests/{id} - Get a leave request by ID
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerator<Leaverequest>>> GetLeaveRequest(int id)
+        public async Task<ActionResult<Leaverequest>> GetLeaveRequest(int id)
         {
             var leaveRequest = await _context.Leaverequests
-                                            .Where(l => l.UserId == id)
-                                             .ToListAsync();
+                                             .Include(l => l.User)
+                                             .Include(l => l.LeaveType)
+                                             .FirstOrDefaultAsync(l => l.Id == id);
 
             if (leaveRequest == null)
             {
                 return NotFound();
             }
 
-            return Ok(leaveRequest);
+            return leaveRequest;
         }
 
         // POST: api/LeaveRequests - Create a new leave request
