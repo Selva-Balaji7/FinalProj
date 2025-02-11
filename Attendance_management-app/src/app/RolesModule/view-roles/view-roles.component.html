@@ -6,7 +6,7 @@
             <tr>
                 <th>Role Id</th>
                 <th>Role Name</th>
-                <th></th>
+                <th *ngIf="CanEdit">Option</th>
             </tr>
         </thead>
         <tbody>
@@ -14,7 +14,8 @@
                 <td *ngIf="role.id!=editingValueForId;then trueidpart; else falseidpart"></td>
                 <td *ngIf="role.id!=editingValueForId;then truenamepart; else falsenamepart">{{role.roleName}}</td>
                 <td>
-                    <button *ngIf="role.id!=editingValueForId" type="button" type="button" (click)="changeEdit(role.id)">Edit</button>
+                    <button *ngIf="role.id!=editingValueForId && CanEdit" type="button" type="button" (click)="changeEdit(role.id)">Edit</button>
+                    <button *ngIf="role.id!=editingValueForId && CanEdit" type="button" type="button" (click)="deleteRole(role.id)">Delete</button>
                     <button *ngIf="role.id==editingValueForId" type="button" (click)="editingValueForId=-1">Cancel</button>
                     <button *ngIf="role.id==editingValueForId" type="submit" (click)="UpdateRole()">Update</button>
                 </td>
@@ -35,5 +36,13 @@
                 </tr>
             </tbody>
         </table>
+    </form>
+</div>
+<div>
+    <button type="button" (click)="changeroAddRole()">Add</button>
+    <form action="" *ngIf="isAddingNewRole" [formGroup]="roleEditForm" (ngSubmit)="addRole()">
+        <label for="">Role to Add</label>
+        <input type="text" formControlName="roleName">
+        <button type="submit">Add</button>
     </form>
 </div>

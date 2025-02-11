@@ -19,16 +19,22 @@ export class ViewRolesComponent {
   private userstore = inject(Store<{user:UserState}>)
   public user:any;  
   Roles:any = [];
+  CanEdit:any = false;
   editingValueForId:any = -1;
   editingValueForName:any = "";
   roleEditForm:any;
   addpermissionforID:any;
   PermissionList:any = PermissionList;
+  isAddingNewRole:boolean = false;
 
   constructor(private _route:Router, private _http:DbservicesService){}
 
   ngOnInit(){
     this.userstore.select(state => state.user).subscribe(data => this.user=data);
+    
+    if(this.user.permissions.includes("EditRoles")){
+      this.CanEdit = true;
+    } 
 
     if(!this.user.permissions.includes("ViewRoles"))
       this._route.navigate(['/']);
@@ -122,7 +128,30 @@ export class ViewRolesComponent {
       },
       (error) => {console.log(error);}
     )
-  
-    
   }
+
+
+  deleteRole(roleid:any){
+    this._http.deleteRecord(`role/${roleid}`).subscribe(
+      (res)=>{this.getRoles();},
+      (error)=>{console.log(error);}
+    )
+  }
+
+
+  changeroAddRole(){
+    this.editingValueForId = -1;
+    this.isAddingNewRole = true;
+  }
+
+  addRole(){
+    var newRole = {
+      roleName:this.roleEditForm.value.roleName
+    }
+    this._http.postRecord("role", newRole).subscribe(
+      (res)=>{this.isAddingNewRole = false;this.getRoles();},
+      (error)=>{console.log("error");}
+    );
+  }
+
 }

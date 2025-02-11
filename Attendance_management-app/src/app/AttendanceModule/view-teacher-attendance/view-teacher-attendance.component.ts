@@ -14,32 +14,57 @@ import { CommonModule } from '@angular/common';
   styleUrl: './view-teacher-attendance.component.css'
 })
 export class ViewTeacherAttendanceComponent {
+  
   private userstore = inject(Store<{user:UserState}>)
     public user:any;
+    Statuses:any;
+    UpdateStatuses:any = [];
   
     page:number = 1;
     filterForm:any;
     startDate:string = "";
     endDate:string = "";
     status:string = "";
+    filterid:any="";
     attendances:any = [];
+
+    canEditAttendance:boolean = false;
+    public isEditingId:number = -1;
+    editAttendanceForm:any;
   
     constructor(private _route:Router, private _http:DbservicesService){}
   
     ngOnInit(){
       this.userstore.select(state => state.user).subscribe(data => this.user=data);
   
-      if(!this.user.permissions.includes("ViewTeacherAttendance"))
+      if(!this.user.permissions.includes("ViewStudentAttendance"))
         this._route.navigate(['/']);
       else
         this.getAttendanceDetails();
 
+      if(this.user.permissions.includes("EditAttendance"))
+        this.canEditAttendance = true;
   
       this.filterForm = new FormGroup({
         startDate:new FormControl("", [Validators.required]),
         endDate:new FormControl("", [Validators.required]),
-        status: new FormControl("", [Validators.required])
+        status: new FormControl("", [Validators.required]),
+        id: new FormControl("", [Validators.required]),
       })
+      this.editAttendanceForm = new FormGroup({
+        status:new FormControl("", [Validators.required])
+      });
+
+      this._http.getRecord("attendance/GetStatus").subscribe(
+        (res)=>{
+          this.Statuses = res;
+          this.Statuses = ["",...this.Statuses];
+          this.UpdateStatuses = res;
+        },
+        (error) => {
+          console.log("Unable to Fetch status");
+        }
+      )
       
     }
   
@@ -47,14 +72,18 @@ export class ViewTeacherAttendanceComponent {
   
     getAttendanceDetails(){
       console.log("Trying to get details");
-      var reqUrl:string = `Attendance/limit/${this.page}`;
+      if(this.filterid)
+        var reqUrl:string = `Attendance/${this.filterid}/limit/${this.page}`;
+      else
+        var reqUrl:string = `Attendance/limit/${this.page}`;
       
       if(this.startDate && this.endDate)
         reqUrl += `?startDate=${this.startDate}&endDate=${this.endDate}`;
       else
-      reqUrl += `?startDate=null&endDate=null`;
+        reqUrl += `?startDate=null&endDate=null`;
   
-      reqUrl += `&role=teacher`
+      if(!this.filterid)  
+        reqUrl += `&role=teacher`
   
       if(this.status)
         reqUrl += `&status=${this.status}`
@@ -93,6 +122,7 @@ export class ViewTeacherAttendanceComponent {
       this.startDate = this.filterForm.value.startDate;
       this.endDate = this.filterForm.value.endDate;
       this.status = this.filterForm.value.status;
+      this.filterid = this.filterForm.value.id;
       this.page = 1;
   
       if((this.startDate && !this.startDate) || (!this.startDate && this.startDate))  
@@ -100,5 +130,36 @@ export class ViewTeacherAttendanceComponent {
       
         
       this.getAttendanceDetails();
+    }
+
+    editStatusof(attendance:any){
+      this.isEditingId = attendance.id;
+      console.log("Changing state for ", this.isEditingId);
+
+      this.editAttendanceForm.setValue({
+        status:attendance.status
+      });
+    }
+
+    updateAttendance(attendance:any){
+      var updatedAttendance = {
+        id:attendance.id,
+        userId:attendance.userId,
+        date:attendance.date,
+        status:this.editAttendanceForm.value.status,
+        remarks:attendance.remarks,
+        createdAt:attendance.createdAt
+      }
+      this._http.updateRecord(`attendance/${updatedAttendance.id}`, updatedAttendance).subscribe(
+        (res)=>{this.getAttendanceDetails();this.isEditingId=-1},
+        (error)=>{console.log(error);}
+      )
+    }
+
+    deleteStatusof(attendance:any){
+      this._http.deleteRecord(`attendance/${attendance.id}`).subscribe(
+        (res)=>{this.getAttendanceDetails();},
+        (error)=>{console.log(error);}
+      )
     }
 }

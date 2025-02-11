@@ -30,7 +30,7 @@ export class ViewProfileComponent {
       this.userstore.select(state => state.user).subscribe(data => this.user=data);
       console.log(this.user);
       
-      if(!this.user.permissions.includes("NewUserRequests"))
+      if(!this.user.permissions.includes("ViewProfile"))
         this._route.navigate(['/']);
       if(this.user.permissions.includes("EditProfile")) 
         this.canEdit = true;
@@ -41,7 +41,7 @@ export class ViewProfileComponent {
             password:new FormControl("",[Validators.required])
           })
       
-      this.profileImageUrl = `${this._http.baseURL}/Image/Get/${this.user.id}.jpg`;
+      this.profileImageUrl = `${this._http.baseURL}/Image/Get/${this.user.profilepicture}`;
     };
 
     onFileSelected(event:any){
@@ -62,7 +62,13 @@ export class ViewProfileComponent {
       this._http.postRecord("Image/Upload", formData).subscribe(
         (response: any) => {
           console.log('upload successful', response);
-          this.profileImageUrl = `${this._http.baseURL}/Image/Get/${this.user.id}.jpg`;
+          var User = {
+            ...this.user,
+            profilepicture:`${this.user.id}.jpg`,
+          }
+          this.userstore.dispatch(saveUserData(User));
+          localStorage.setItem('user', JSON.stringify(User));
+          this.profileImageUrl = `${this._http.baseURL}/Image/Get/${this.user.profilepicture}`;
           this.editingPhoto=false;
           window.location.reload();
         },

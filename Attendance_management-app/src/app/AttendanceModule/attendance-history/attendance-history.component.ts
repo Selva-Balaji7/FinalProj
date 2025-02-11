@@ -17,31 +17,53 @@ export class AttendanceHistoryComponent {
 
   private userstore = inject(Store<{user:UserState}>)
     public user:any;
+    Statuses:any;
+    UpdateStatuses:any = [];
   
-    showStudents:boolean = false;
-    showTeachers:boolean = false;
     page:number = 1;
     filterForm:any;
     startDate:string = "";
     endDate:string = "";
     status:string = "";
     attendances:any = [];
+    
+    canEditAttendance:boolean = false;
+    public isEditingId:number = -1;
+    editAttendanceForm:any;
   
     constructor(private _route:Router, private _http:DbservicesService){}
   
     ngOnInit(){
-      this.userstore.select(state => state.user).subscribe(date => this.user=date);
-
+      this.userstore.select(state => state.user).subscribe(data => this.user=data);
+  
       if(!this.user.permissions.includes("AttendanceHistory"))
         this._route.navigate(['/']);
       else
         this.getAttendanceDetails();
-      
+
+      if(this.user.permissions.includes("EditAttendance"))
+        this.canEditAttendance = true;
+  
       this.filterForm = new FormGroup({
         startDate:new FormControl("", [Validators.required]),
         endDate:new FormControl("", [Validators.required]),
-        status: new FormControl("", [Validators.required])
-      })
+        status: new FormControl("", [Validators.required]),
+      });
+
+      this.editAttendanceForm = new FormGroup({
+        status:new FormControl("", [Validators.required])
+      });
+
+      this._http.getRecord("attendance/GetStatus").subscribe(
+        (res)=>{
+          this.Statuses = res;
+          this.Statuses = ["",...this.Statuses];
+          this.UpdateStatuses = res;
+        },
+        (error) => {
+          console.log("Unable to Fetch status");
+        }
+      )
       
     }
   
@@ -49,16 +71,13 @@ export class AttendanceHistoryComponent {
   
     getAttendanceDetails(){
       console.log("Trying to get details");
-      var reqUrl:string = `Attendance/${this.user.id}/limit/${this.page}`;
-  
+        var reqUrl:string = `Attendance/${this.user.id}/limit/${this.page}`;
+      
       if(this.startDate && this.endDate)
         reqUrl += `?startDate=${this.startDate}&endDate=${this.endDate}`;
       else
-      reqUrl += `?startDate=null&endDate=null`;
-  
-      
-      reqUrl += `&role=${this.user.role}`
-  
+        reqUrl += `?startDate=null&endDate=null`;
+    
       if(this.status)
         reqUrl += `&status=${this.status}`
       else
@@ -104,5 +123,39 @@ export class AttendanceHistoryComponent {
         
       this.getAttendanceDetails();
     }
+
+    editStatusof(attendance:any){
+      this.isEditingId = attendance.id;
+      console.log("Changing state for ", this.isEditingId);
+
+      this.editAttendanceForm.setValue({
+        status:attendance.status
+      });
+    }
+
+    updateAttendance(attendance:any){
+      var updatedAttendance = {
+        id:attendance.id,
+        userId:attendance.userId,
+        date:attendance.date,
+        status:this.editAttendanceForm.value.status,
+        remarks:attendance.remarks,
+        createdAt:attendance.createdAt
+      }
+      this._http.updateRecord(`attendance/${updatedAttendance.id}`, updatedAttendance).subscribe(
+        (res)=>{this.getAttendanceDetails();this.isEditingId=-1},
+        (error)=>{console.log(error);}
+      )
+    }
+
+    deleteStatusof(attendance:any){
+      this._http.deleteRecord(`attendance/${attendance.id}`).subscribe(
+        (res)=>{this.getAttendanceDetails();},
+        (error)=>{console.log(error);}
+      )
+    }
+
+
+
 
 }

@@ -2,6 +2,8 @@ DESC LeaveTypes;
 DESC LeaveRequests;
 
 SELECT * FROM LeaveTypes;
+SELECT * FROM AttendanceRequests;
+SELECT * FROM LeaveRequests;
 
 INSERT INTO LeaveTypes (name, description) VALUES
 ("SL", "Sick Leave"), ("EL", "Emergency Leave");

@@ -73,7 +73,7 @@ namespace Attendance_management.Controllers
         {
             var newRole = new Role
             {
-                Id = role.Id,
+                // Id = role.Id,
                 RoleName = role.RoleName,
             };
 
@@ -107,10 +107,15 @@ namespace Attendance_management.Controllers
             if (role == null)
                 return NotFound();
 
-            _context.Roles.Remove(role);
-            await _context.SaveChangesAsync();
+            try{
+                _context.Roles.Remove(role);
+                await _context.SaveChangesAsync();
 
-            return NoContent();
+                return NoContent();
+            }
+            catch{
+                return BadRequest();
+            }
         }
 
 

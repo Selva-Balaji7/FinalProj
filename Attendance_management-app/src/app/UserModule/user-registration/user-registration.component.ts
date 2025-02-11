@@ -16,6 +16,7 @@ export class UserRegistrationComponent {
   regForm:any;
   roles:any = [];
   hasUploadedProfileImage:Boolean = false;
+  isNotUploadingProfileImage:boolean = false;
 
   profilePic:string = "ProfilePhotoPlaceholder.png";
 
@@ -61,6 +62,7 @@ export class UserRegistrationComponent {
         console.log('upload successful', response);
         this.profilePic = `${this.http.baseURL}/Image/Get/${this.regForm.value.id}.jpg`;
         this.hasUploadedProfileImage = true;
+        this.isNotUploadingProfileImage=false;
       },
       (error: any) => {
         console.error('upload failed', error);
@@ -84,8 +86,12 @@ export class UserRegistrationComponent {
           (error:any) => {
             console.log("New UserRegistration");
 
+            let fileName:string;
+            if(this.isNotUploadingProfileImage)
+              fileName = `ProfilePhotoPlaceholder.jpg`;
+            else
+              fileName = `${this.regForm.value.id}.jpg`;
 
-            let fileName:string = `${this.regForm.value.id}.jpg`;
             console.log("Trying to create a user ");
             let user = {
               "id":this.regForm.value.id,

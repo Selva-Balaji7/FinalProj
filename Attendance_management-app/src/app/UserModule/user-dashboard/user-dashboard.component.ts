@@ -31,7 +31,7 @@ export class UserDashboardComponent {
       }
     }
     console.log(this.user);
-    this.profileImageUrl =`${this._http.baseURL}/Image/Get/${this.user.id}.jpg`;
+    this.profileImageUrl =`${this._http.baseURL}/Image/Get/${this.user.profilepicture}`;
   };
 
   LogoutSequence(){

@@ -10,7 +10,6 @@ import { ViewAllAttendanceComponent } from './AttendanceModule/view-all-attendan
 import { ViewPermissionsComponent } from './PermissionModule/view-permissions/view-permissions.component';
 import { EditPermissionsComponent } from './PermissionModule/edit-permissions/edit-permissions.component';
 import { ViewRolesComponent } from './RolesModule/view-roles/view-roles.component';
-import { EditRolesComponent } from './RolesModule/edit-roles/edit-roles.component';
 import { ViewProfileComponent } from './UserModule/view-profile/view-profile.component';
 import { NewUserRequestsComponent } from './UserModule/new-user-requests/new-user-requests.component';
 import { ForgotPasswordComponent } from './UserModule/forgot-password/forgot-password.component';
@@ -29,7 +28,6 @@ export const routes: Routes = [
         {path:"viewpermissions", component:ViewPermissionsComponent},
         {path:"editpermissions", component:EditPermissionsComponent},
         {path:"viewroles", component:ViewRolesComponent},
-        {path:"editroles", component:EditRolesComponent},
         {path:"newuserreq", component:NewUserRequestsComponent},
     ]},
     {path:"**", component:UserLoginComponent}

@@ -1,40 +1,65 @@
-
 <div>
-    Filter : 
-    <form [formGroup]="filterForm" (ngSubmit)="setFiler()">
-        START DATE : <input type="date" formControlName="startDate">
-        END DATE : <input type="date" formControlName="endDate" > 
-        <div>
-            Status : <select formControlName="status" id="">
-                        <option value="Present">Present</option>
-                        <option value="Holiday">Holiday</option>
-                        <option value="Leave">Leave</option>
-                        <option value="Sunday">Sunday</option>
-                    </select> 
-        </div>
-        <button type="submit">Filter</button>
-    </form>
-</div>
-
-<div>
-    <table>
-        <tr>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Status</th>
-            <th>Remarks</th>
-        </tr>
-        <tr *ngFor="let attendance of attendances">
-            <td>{{attendance.date}}</td>
-            <td>{{attendance.updatedAt | date:'HH:mm'}}</td>
-            <td>{{attendance.status}}</td>
-            <td>{{attendance.remarks || "-"}}</td>
-        </tr>
-    </table>
-</div>
-<div>
-    <p>page = {{page}}</p>
-    <button type="button" (click)="prevPage(1)">prev</button>
-    <button type="button" (click)="nextPage(1)">next</button>
-    <button type="button" *ngIf="page!=1" (click)="reset()">latest</button>
+    <div>
+        Filter : 
+        <form [formGroup]="filterForm" (ngSubmit)="setFiler()">
+            START DATE : <input type="date" formControlName="startDate">
+            END DATE : <input type="date" formControlName="endDate" > 
+            <div>
+                Status : <select formControlName="status" id="">
+                            <option *ngFor="let status of Statuses" [value]="status">{{status}}</option>
+                        </select> 
+            </div>
+            <button type="submit">Filter</button>
+        </form>
+    </div>
+    
+    <div *ngIf="attendances.length != 0">
+        <form action="" [formGroup]="editAttendanceForm">
+            <table>
+                <tr>
+                    <th>User Id</th>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th>Remarks</th>
+                    <th *ngIf="canEditAttendance">Option</th>
+                </tr>
+                <tr *ngFor="let attendance of attendances">
+                    <td>{{attendance.userId}}</td>
+                    <td>{{attendance.user.name}}</td>
+                    <td>{{attendance.user.role}}</td>
+                    <td>{{attendance.date}}</td>
+                    <td>{{attendance.updatedAt | date:'HH:mm'}}</td>
+                    <td *ngIf="isEditingId == attendance.id;then falsepart; else truepart"></td>
+                    <td>{{attendance.remarks || "-"}}</td>
+                    <td *ngIf="canEditAttendance">
+                        <button *ngIf="isEditingId != attendance.id" type="button" (click)="editStatusof(attendance)">Edit</button>
+                        <button *ngIf="isEditingId != attendance.id" type="button" (click)="deleteStatusof(attendance)">Delete</button>
+                        <button *ngIf="isEditingId == attendance.id" type="button" (click)="this.isEditingId = -1;">cancel</button>
+                    </td>
+    
+                    <ng-template #truepart>
+                        {{attendance.status}}
+                    </ng-template>
+                    <ng-template #falsepart>
+                        <select id="" formControlName="status">
+                            <option *ngFor="let status of UpdateStatuses" [value]="status">{{status}}</option>
+                        </select>
+                        <button type="submit" (click)="updateAttendance(attendance)">Update</button>
+                    </ng-template>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div class="" *ngIf="attendances.length == 0">
+        No Records Found, Try again...
+    </div>
+    <div>
+        <p>page = {{page}}</p>
+        <button type="button" (click)="prevPage(1)">prev</button>
+        <button type="button" (click)="nextPage(1)">next</button>
+        <button type="button" *ngIf="page!=1" (click)="reset()">latest</button>
+    </div>
 </div>

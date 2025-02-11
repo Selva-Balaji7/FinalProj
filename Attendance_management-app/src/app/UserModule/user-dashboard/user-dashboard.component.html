@@ -7,7 +7,7 @@
     <details>
         <summary>Profile</summary>
         <a *ngIf="user.permissions.includes('ViewProfile')" [routerLink]="['/dasboard/profile']" title="View Your Profile Details">Your Profile<br></a>
-        <a *ngIf="user.permissions.includes('EditProfile')" [routerLink]="" title="Edit Your Profile Details">Edit Profile<br></a>
+        <a *ngIf="user.permissions.includes('EditProfile')" [routerLink]="['/dasboard/profile']" title="Edit Your Profile Details">Edit Profile<br></a>
     </details>
     <details>
         <summary>Attendance</summary>
@@ -15,12 +15,12 @@
         <a *ngIf="user.permissions.includes('AttendanceHistory')" [routerLink]="['/dasboard/atthistory']" title="View Your Previous Attendances">Attendance Histoy<br></a>
         <a *ngIf="user.permissions.includes('ViewStudentAttendance')" [routerLink]="['/dasboard/studentatt']" title="View Previous Student Attendances">View Student Attendances<br></a>
         <a *ngIf="user.permissions.includes('ViewTeacherAttendance')" [routerLink]="['/dasboard/teacheratt']" title="View Previous Teacher Attendances">View Teacher Attendances<br></a>
-        <a *ngIf="user.permissions.includes('ViewAllAttendance')" [routerLink]="['/dasboard/attendance']" title="View Previous Teacher Attendances">View All Attendances<br></a>
+        <a *ngIf="user.permissions.includes('ViewAllAttendance')" [routerLink]="['/dasboard/allattendance']" title="View Previous Teacher Attendances">View All Attendances<br></a>
     </details>
     <details>
         <summary>Roles</summary>
         <a *ngIf="user.permissions.includes('ViewRoles')" [routerLink]="['/dasboard/viewroles']" title="View Available Roles">View Roles<br></a>
-        <a *ngIf="user.permissions.includes('EditRoles')" [routerLink]="['/dasboard/editroles']" title="Edit Available Roles">Edit Roles<br></a>
+        <a *ngIf="user.permissions.includes('EditRoles')" [routerLink]="['/dasboard/viewroles']" title="Edit Available Roles">Edit Roles<br></a>
     </details>
     <details>
         <summary>Permissions</summary>
