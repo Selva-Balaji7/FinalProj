@@ -4,12 +4,14 @@ import { saveUserData } from "./user.actions";
 
 export const userReducer = createReducer(
     initialStateUserData,
-    on(saveUserData, (state, {id,name,email,role,permissions,profilepicture}) => ({
+    on(saveUserData, (state, {id,name,email,password,role,permissions,profilepicture,createdat}) => ({
         id,
         name,
         email,
+        password,
         role,
         permissions,
-        profilepicture
+        profilepicture,
+        createdat
     }))
 )

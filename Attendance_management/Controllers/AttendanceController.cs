@@ -43,8 +43,10 @@ namespace Attendance_management.Controllers
         public async Task<ActionResult<IEnumerable<Attendance>>> GetLimitAttendance(int count, [FromQuery]string startDate, [FromQuery]string endDate, [FromQuery]string role, [FromQuery]string status)
         {
             Console.Clear();
-            var roleList = role=="null" ? new List<string> { "Student", "Teacher", "Admin" } : new List<string> { role };
-            var statusList = (status == "null") ? new List<string> { "Present", "Holiday", "Sunday", "Leave" } : new List<string> { status };
+            //var roleList = role=="null" ? new List<string> { "Student", "Teacher", "Admin" } : new List<string> { role };
+            var roleList = role=="null" ? await _context.Roles.Select(r=> r.RoleName).ToListAsync() : new List<string> { role };
+            //var statusList = (status == "null") ? new List<string> { "Present", "Holiday", "Sunday", "Leave" } : new List<string> { status };
+            var statusList = (status == "null") ? await _context.Attendances.Select(a => a.Status).Distinct().ToListAsync() : new List<string> { status };
 
             if (startDate == "null" || endDate == "null")
             {

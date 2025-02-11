@@ -60,6 +60,27 @@ ON SCHEDULE EVERY 1 day
 STARTS TIMESTAMP(CURRENT_DATE, '00:00:01')
 DO
 CALL autoinsert_attendance();
+
+
+DELIMITER $$
+CREATE EVENT CheckAttendanceAndLeaveRequests
+ON SCHEDULE EVERY 1 DAY
+STARTS TIMESTAMP(CURRENT_DATE, '10:00:00')
+DO
+BEGIN
+    DECLARE currentdate DATE;
+    SET currentdate = CURDATE();
+
+    -- Insert "Absent" records for users without LeaveRequest or Attendance for the current date
+    INSERT INTO Attendance (user_id, date, status, created_at, updated_at)
+    SELECT u.id, currentdate, 'Absent', NOW(), NOW()
+    FROM Users u
+    LEFT JOIN LeaveRequests lr ON u.id = lr.user_id AND lr.date = currentdate
+    LEFT JOIN Attendance a ON u.id = a.user_id AND a.date = currentdate
+    LEFT JOIN AttendanceRequests ar ON u.id = ar.user_id AND a.date = currentdate
+    WHERE lr.id IS NULL AND a.id IS NULL AND ar.id IS NULL;
+END$$
+DELIMITER ;
 	
 SHOW TRIGGERS;
 SHOW EVENTS;

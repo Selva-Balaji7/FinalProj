@@ -88,9 +88,11 @@ export class UserLoginComponent {
                 id:userData.id,
                 name:userData.name,
                 email:userData.email,
+                password:userData.password,
                 role:userData.role,
                 permissions:permissions,
                 profilepicture:userData.profilePicture,
+                createdat:userData.createdAt,
               }
               this.userstore.dispatch(saveUserData(this.User));
               localStorage.setItem('user', JSON.stringify(this.User));
