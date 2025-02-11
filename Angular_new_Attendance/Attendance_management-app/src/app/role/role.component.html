@@ -1,18 +1,39 @@
-<!-- <p>role works!</p> -->
-
-
-<div class="role-container">
-    <h2>Roles Management</h2>
-  
-    <div>
-        <input [(ngModel)]="newRoleName" placeholder="Enter Role Name" />
-        <button (click)="addRole()">Add Role</button>
+<div class="container mt-4">
+  <div class="card shadow">
+      <div class="card-header bg-primary text-white">
+          <h4 class="mb-0">Roles Management</h4>
       </div>
-      
-      <ul>
-        <li *ngFor="let role of roles">
-          {{ role.roleName }}
-          <button (click)="deleteRole(role.id)">Delete</button>
-        </li>
-      </ul>
+      <div class="card-body">
+          <!-- Error Message -->
+          <div *ngIf="errorMessage" class="alert alert-danger">
+              {{ errorMessage }}
+          </div>
+
+          <!-- Input field with dynamic Add/Update button -->
+          <div class="input-group mb-3">
+              <input [(ngModel)]="newRoleName" type="text" class="form-control" placeholder="Enter Role Name" />
+              <button class="btn btn-success btn-icon btn-icon-success" (click)="addOrUpdateRole()" title="{{ editingRole ? 'Update Role' : 'Add Role' }}">
+                  <i class="bi" [ngClass]="editingRole ? 'bi-pencil-square' : 'bi-plus-lg'"></i>
+              </button>
+              <button *ngIf="editingRole" class="btn btn-secondary btn-icon btn-icon-secondary ms-2" (click)="resetForm()" title="Cancel">
+                  <i class="bi bi-x-circle"></i>
+              </button>
+          </div>
+          
+          <!-- Roles List -->
+          <ul class="list-group">
+              <li *ngFor="let role of roles" class="list-group-item d-flex justify-content-between align-items-center">
+                  <span>{{ role.roleName }}</span>
+                  <div>
+                      <button class="btn btn-warning btn-sm btn-icon-small btn-icon-warning me-2" (click)="editRole(role)" title="Edit">
+                          <i class="bi bi-pencil-square"></i>
+                      </button>
+                      <button class="btn btn-danger btn-sm btn-icon-small btn-icon-danger" (click)="deleteRole(role.id)" title="Delete">
+                          <i class="bi bi-trash"></i>
+                      </button>
+                  </div>
+              </li>
+          </ul>
+      </div>
   </div>
+</div>

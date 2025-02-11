@@ -1,39 +1,30 @@
-// import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app-attendance-request-teacher',
-//   imports: [],
-//   templateUrl: './attendance-request-teacher.component.html',
-//   styleUrl: './attendance-request-teacher.component.css'
-// })
-// export class AttendanceRequestTeacherComponent {
-
-// }
-
-
 import { Component, OnInit } from '@angular/core';
-import { AttendanceRequestService } from '../../Services/db-service.service';
-
+import { DbservicesService } from '../../Services/db-service.service';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-attendance-request-teacher',
-  templateUrl: './attendanceRequest-Teacher.Component.html',
-  styleUrls: ['./attendanceRequest-Teacher.Component.css']
+  imports: [CommonModule],
+  templateUrl: './attendance-request-teacher.component.html',
+  styleUrl: './attendance-request-teacher.component.css'
 })
-export class AttendanceRequestTeacherComponent implements OnInit {
+export class AttendanceRequestTeacherComponent implements OnInit{
+
+
   attendanceRequests: any[] = [];
 
-  constructor(private attendanceRequestService: AttendanceRequestService) {}
+  constructor(private attendanceReqTeacher: DbservicesService) {}
 
   ngOnInit(): void {
     this.loadAttendanceRequests();
   }
 
   loadAttendanceRequests(): void {
-    this.attendanceRequestService.getAttendanceRequests('Teacher').subscribe(
-      (data) => {
+    this.attendanceReqTeacher.getRequests('Attendancerequest/byrole?role=Teacher').subscribe(
+      (data:any) => {
         this.attendanceRequests = data;
+        console.log(this.attendanceRequests);
       },
-      (error) => {
+      (error:any) => {
         console.error('Error fetching attendance requests', error);
       }
     );
@@ -43,4 +34,6 @@ export class AttendanceRequestTeacherComponent implements OnInit {
     console.log('Submitting request:', request);
     // Add API call to update attendance status
   }
+
+
 }

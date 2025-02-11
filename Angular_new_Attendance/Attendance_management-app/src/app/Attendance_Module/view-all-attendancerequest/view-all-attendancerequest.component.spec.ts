@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AttendanceRequestTeacherComponent } from './attendance-request-teacher.component';
+import { ViewAllAttendanceRequestComponent } from './view-all-attendancerequest.component';
 
 describe('AttendanceRequestTeacherComponent', () => {
-  let component: AttendanceRequestTeacherComponent;
-  let fixture: ComponentFixture<AttendanceRequestTeacherComponent>;
+  let component: ViewAllAttendanceRequestComponent;
+  let fixture: ComponentFixture<ViewAllAttendanceRequestComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AttendanceRequestTeacherComponent]
+      imports: [ViewAllAttendanceRequestComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AttendanceRequestTeacherComponent);
+    fixture = TestBed.createComponent(ViewAllAttendanceRequestComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

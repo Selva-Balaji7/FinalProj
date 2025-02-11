@@ -569,6 +569,27 @@
   },
   {
     "ContainingType": "Attendance_management.Controllers.RoleController",
+    "Method": "UpdateRole",
+    "RelativePath": "api/Role/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updaterole",
+        "Type": "Attendance_management.Models.Role",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Attendance_management.Controllers.RoleController",
     "Method": "DeleteRole",
     "RelativePath": "api/Role/{id}",
     "HttpMethod": "DELETE",
@@ -582,5 +603,25 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Attendance_management.Controllers.RoleController",
+    "Method": "GetRolesOnly",
+    "RelativePath": "api/Role/onlyroles",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Attendance_management.Models.Role, Attendance_management, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   }
 ]

@@ -11,7 +11,9 @@ public partial class Leaverequest
 
     public int? LeaveTypeId { get; set; }
 
-    public DateOnly Date { get; set; }
+    public DateOnly StartDate { get; set; }
+
+    public DateOnly EndDate { get; set; }
 
     public string Status { get; set; } = null!;
 

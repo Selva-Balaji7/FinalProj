@@ -1,26 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { DbservicesService } from '../../Services/db-service.service';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
 @Component({
-  selector: 'app-attendance-request-student',
-  imports: [CommonModule],
-  templateUrl: './attendance-request-student.component.html',
-  styleUrl: './attendance-request-student.component.css'
+  selector: 'app-view-all-attendance-request',
+  imports: [FormsModule,CommonModule],
+  templateUrl: './view-all-attendance-request.component.html',
+  styleUrl: './view-all-attendance-request.component.css'
 })
-export class AttendanceRequestStudentComponent implements OnInit {
+export class ViewAllAttendanceRequestComponent implements OnInit {
 
-  attendanceRequests: any[] = [];
 
-  constructor(private attendanceReqstudent: DbservicesService) { }
+  allattendanceRequests: any[] = [];
+
+  constructor(private allAttendanceReq: DbservicesService) { }
 
   ngOnInit(): void {
     this.loadAttendanceRequests();
   }
 
   loadAttendanceRequests(): void {
-    this.attendanceReqstudent.getRequests('Attendancerequest').subscribe(
+    this.allAttendanceReq.getRequests('Attendancerequest').subscribe(
       (data:any) => {
-        this.attendanceRequests = data;
+        this.allattendanceRequests = data;
       },
       (error:any) => {
         console.error('Error fetching attendance requests', error);

@@ -1,11 +1,83 @@
+/* Container Styling */
 .role-container {
-    padding: 20px;
-  }
-  
-  .add-role {
-    margin-bottom: 20px;
-  }
-  
-  button {
-    margin-left: 10px;
-  }
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+}
+
+/* Card Styling */
+.card {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border: none;
+}
+
+/* Header Styling */
+.card-header {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 15px;
+}
+
+/* Input Group Styling */
+.add-role {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.add-role input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+/* Button Styling */
+.btn {
+  min-width: 110px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+  border-radius: 6px;
+}
+
+.btn:hover {
+  opacity: 0.85;
+}
+
+/* Role List Styling */
+.list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  transition: transform 0.2s;
+}
+
+.list-group-item:hover {
+  transform: translateY(-2px);
+  background-color: #f8f9fa;
+}
+
+/* Button Margin */
+.btn-warning {
+  margin-right: 5px;
+}
+
+/* Error Message Styling */
+.alert {
+  padding: 10px;
+  font-size: 0.9rem;
+  text-align: center;
+  border-radius: 6px;
+}

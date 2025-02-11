@@ -1,15 +1,23 @@
-﻿using System.Globalization;
+﻿using Microsoft.AspNetCore.Mvc;
+
 using Attendance_management.Data;
-using Attendance_management.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Attendance_management.Models;
+
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+
 
 namespace Attendance_management.Controllers
 {
-    [ApiController]
+
     [Route("api/[controller]")]
+    [ApiController]
     public class AttendancerequestController : Controller
     {
+
+
         private readonly ApplicationDbContext _context;
 
         public AttendancerequestController(ApplicationDbContext context)
@@ -126,7 +134,7 @@ namespace Attendance_management.Controllers
             //{
             //    query = query.Where(a => a.UserId == userId.Value);
             //}
-            if(attendancereq == null)
+            if (attendancereq == null)
             {
                 return NotFound("No attendace request Found");
             }
@@ -226,5 +234,10 @@ namespace Attendance_management.Controllers
 
             return NoContent();
         }
+
+
+
+
     }
+
 }
