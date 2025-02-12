@@ -216,4 +216,3 @@ D:\Atendance_Management_Final\Attendance_management\obj\Debug\net8.0\refint\Atte
 D:\Atendance_Management_Final\Attendance_management\obj\Debug\net8.0\Attendance_management.pdb
 D:\Atendance_Management_Final\Attendance_management\obj\Debug\net8.0\Attendance_management.genruntimeconfig.cache
 D:\Atendance_Management_Final\Attendance_management\obj\Debug\net8.0\ref\Attendance_management.dll
-D:\Atendance_Management_Final\Attendance_management\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

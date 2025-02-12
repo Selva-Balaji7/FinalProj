@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { DbservicesService } from '../../services/db/dbservices.service';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { addMessage } from '../../../common/popupmessage';
 
 @Component({
   selector: 'app-new-user-requests',
@@ -25,8 +26,12 @@ export class NewUserRequestsComponent {
   ngOnInit(){
     this.userstore.select(state => state.user).subscribe(data => this.user=data);
 
-    if(!this.user.permissions.includes("NewUserRequests"))
-      this._route.navigate(['/']);
+    if(!this.user.permissions.includes("NewUserRequests")){
+      setTimeout(() => {
+        this._route.navigate(['/']);        
+      }, 1000);
+      addMessage({type:"warning", message:"You Have no permission"});
+    }
     else
       this.getUserRequests();
 
@@ -42,7 +47,9 @@ export class NewUserRequestsComponent {
     this._http.getRecord("role/onlyroles").subscribe(
       (res)=>{
         this.Roles = res;
-        console.log(res);
+      },
+      (error)=>{
+        addMessage({type:"failure", message:"Error Getting Data From Server"});
       }
     )
   }
@@ -50,10 +57,11 @@ export class NewUserRequestsComponent {
   getUserRequests(){
     this._http.getRecord("usersregistration").subscribe(
       (res)=>{
-        console.log(res);
         this.userRequests = res;
       },
-      (error)=>{console.log(error)}
+      (error)=>{
+        addMessage({type:"failure", message:"Error Getting Data From Server"});
+      }
     )
   }
 
@@ -70,38 +78,42 @@ export class NewUserRequestsComponent {
     
 
     this._http.postRecord("user", newUser).subscribe(
-      (res) =>{
-        console.log("User Added to User Table");
-
+      (res) =>{        
         this._http.deleteRecord(`usersregistration/${newUser.id}`).subscribe(
           (res)=>{
-            console.log("User Request Deleted from Table");
+            addMessage({type:"success", message:"User Approved Successfully"});
             this.viewRequestOf = -1;
             this.getUserRequests();
           },
-          (er) => {console.log(er);}
+          (er) => {
+            addMessage({type:"failure", message:"Unable to Approved User"});
+          }
         )
-
+        
       },
-      (error)=>{console.log(error)}
+      (error)=>{
+        addMessage({type:"failure", message:"Unable to Approved User"});
+      }
     )
-
+    
   }
 
   rejectUser(){
     this._http.deleteRecord(`Usersregistration/${this.viewRequestOf}`).subscribe(
       (res)=>{
-        console.log("reject for user id", this.viewRequestOf);
+        addMessage({type:"warning", message:"User Reject"});
+        
         this.viewRequestOf = -1;
         this.getUserRequests();
       },
-      (error)=>{console.log(error);}
+      (error)=>{
+        addMessage({type:"failure", message:"Unable to Reject User"});
+      }
     )
   }
 
   
   setvalues(requests:any){
-    console.log("Setting Value");
     this.viewRequestOf = requests.id;
 
     this.updateRequestForm.setValue({

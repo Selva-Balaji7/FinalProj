@@ -6,6 +6,7 @@ import { DbservicesService } from '../../services/db/dbservices.service';
 import { Store } from '@ngrx/store';
 import { UserState } from '../../../store/user/user.state';
 import { saveUserData } from '../../../store/user/user.actions';
+import { addMessage } from '../../../common/popupmessage';
 
 @Component({
   selector: 'app-user-login',
@@ -39,10 +40,10 @@ export class UserLoginComponent {
 
     this._http.getRecord('Attendance/isOnline').subscribe(
       (res:any) => {
-        this.addMessage({type:"success", message:"Server Online"});
+        addMessage({type:"success", message:"Server Online"});
       },
       (error:any) => {
-        this.addMessage({type:"failure", message:"Server Offline"});
+        addMessage({type:"failure", message:"Server Offline"});
       }
     )
 
@@ -53,19 +54,18 @@ export class UserLoginComponent {
     this.LData = this.LoginForm.value;
     this.reqUrl = `user/${this.LData.id}/verify?password=${this.LData.password}`;
 
-    console.log(this.reqUrl);
     this._http.getRecord(this.reqUrl).subscribe(
       (res)=>{
         if(res){
-          this.addMessage({type:"success", message:"Loged In"});
+          addMessage({type:"success", message:"Loged In"});
           this.LogginSequence();
         }
         else{
-          this.addMessage({type:"failure", message:"Wrong Password"});
+          addMessage({type:"failure", message:"Wrong Password"});
         }
       },
       (error)=>{
-        this.addMessage({type:"failure", message:error.error});
+        addMessage({type:"failure", message:"User Not Found"});
       }
     )
 
@@ -96,13 +96,14 @@ export class UserLoginComponent {
               }
               this.userstore.dispatch(saveUserData(this.User));
               localStorage.setItem('user', JSON.stringify(this.User));
-              this._route.navigate(["/dasboard"]);
-              console.log(this.User);
+              setTimeout(() => {
+                this._route.navigate(["/dasboard"]);
+              }, 1000);
           },
-          (error) => {console.log(error)}
+          (error) => {addMessage({type:"failure", message:"Error Getting Data From Server"});}
         )
       },
-      (error) => {console.log(error)}
+      (error) => {addMessage({type:"failure", message:"Error Getting Data From Server"});}
     )    
   }
 
@@ -110,35 +111,16 @@ export class UserLoginComponent {
     if(this.LoginForm.get(formcontrolname).touched && this.LoginForm.get(formcontrolname).invalid){
       if(this.LoginForm.get(formcontrolname).errors.required){
         if(formcontrolname == "id")
-          this.addMessage({type:"warning", message:"Id Field is Requied"});
+          addMessage({type:"warning", message:"Id Field is Requied"});
         else
-          this.addMessage({type:"warning", message:"Password Field is Requied"});
+          addMessage({type:"warning", message:"Password Field is Requied"});
       }
       if(this.LoginForm.get(formcontrolname).errors.pattern){
-        this.addMessage({type:"warning", message:"Id is a 3 or 4 Digit Number"});
+        addMessage({type:"warning", message:"Id is a 3 or 4 Digit Number"});
       }
     }
   }
 
 
-  addMessage(message:any){
-    console.log("adding message", message.message);
-    var messagebox = document.getElementById("MessageBox");
-    var messagetext = document.createElement("div");
-    messagetext.innerHTML = message.message;
-    messagetext.classList.add("messagetext")
-    messagebox?.appendChild(messagetext);
-    
-    if(message.type == "success")
-      messagetext.classList.add("successmessage")
-    if(message.type == "warning")
-      messagetext.classList.add("warningmessage")
-    if(message.type == "failure")
-      messagetext.classList.add("failuremessage")   
-    
-    setTimeout(() => {
-      messagetext.remove();
-    }, 5800);
-  }
   
 }

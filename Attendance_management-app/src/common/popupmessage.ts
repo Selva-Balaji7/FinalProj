@@ -1,26 +1,5 @@
-import { addMessage } from '../../../common/popupmessage';
-
-addMessage({type:"success", message:"Server Online"});
-addMessage({type:"warning", message:"Check Value"});
-addMessage({type:"failure", message:"Server Offline"});
-
-
-addMessage({type:"warning", message:"You Have no permission"});
-
-addMessage({type:"failure", message:"Error Getting Data From Server"});
-
-
-
-setTimeout(() => {
-        this._route.navigate(['/']);        
-      }, 1000);
-      addMessage({type:"warning", message:"You Have no permission"});
-
-
-
-
-addMessage(message:any){
-
+export function addMessage(message:any){
+    console.log("adding message", message.message);
     var messagebox = document.getElementById("MessageBox");
     var messagetext = document.createElement("div");
     messagetext.innerHTML = message.message;
@@ -37,5 +16,4 @@ addMessage(message:any){
     setTimeout(() => {
       messagetext.remove();
     }, 5800);
-  }
-
+}

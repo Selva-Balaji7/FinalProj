@@ -3,6 +3,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { DbservicesService } from '../../services/db/dbservices.service';
+import { addMessage } from '../../../common/popupmessage';
 
 @Component({
   selector: 'app-forgot-password',
@@ -37,18 +38,18 @@ export class ForgotPasswordComponent {
 
     this._http.getRecord(`User/${this.FPdata.id}`).subscribe(
       (res:any)=>{
-        this.addMessage({type:"success", message:"Found User"});
+        addMessage({type:"success", message:"Found User"});
         if(this.FPdata.email == res.email){
-          this.addMessage({type:"success", message:"User Verifies"});
+          addMessage({type:"success", message:"User Verifies"});
           this.User = res;
           this.isVerifiedUser = true;
         }
         else{
-          this.addMessage({type:"failure", message:"Verification Failed"});
+          addMessage({type:"failure", message:"Verification Failed"});
         }
       },
       (error)=>{
-        this.addMessage({type:"failure", message:"No User Found"});
+        addMessage({type:"failure", message:"No User Found"});
       }
     )
 
@@ -66,10 +67,13 @@ export class ForgotPasswordComponent {
    
     this._http.postRecord("User", this.User).subscribe(
       (res)=>{
-        this.addMessage({type:"success", message:"Password Updated"});
+        addMessage({type:"success", message:"Password Updated"});
+        setTimeout(() => {
+          this._route.navigate(['/']);          
+        }, 2000);
       },
       (error)=>{
-        this.addMessage({type:"failure", message:"Unable to Update Password"});
+        addMessage({type:"failure", message:"Unable to Update Password"});
       }
     )
   }
@@ -78,35 +82,14 @@ export class ForgotPasswordComponent {
     if(this.ForgotPasswordForm.get(formcontrolname).touched && this.ForgotPasswordForm.get(formcontrolname).invalid){
       if(this.ForgotPasswordForm.get(formcontrolname).errors.required){
         if(formcontrolname == "id")
-          this.addMessage({type:"warning", message:"Id Field is Requied"});
+          addMessage({type:"warning", message:"Id Field is Requied"});
         else
-          this.addMessage({type:"warning", message:"Email Field is Requied"});
+          addMessage({type:"warning", message:"Email Field is Requied"});
       }
       if(this.ForgotPasswordForm.get(formcontrolname).errors.pattern){
-        this.addMessage({type:"warning", message:"Email is invalid"});
+        addMessage({type:"warning", message:"Email is invalid"});
       }
     }
-  }
-
-
-  addMessage(message:any){
-    console.log("adding message", message.message);
-    var messagebox = document.getElementById("MessageBox");
-    var messagetext = document.createElement("div");
-    messagetext.innerHTML = message.message;
-    messagetext.classList.add("messagetext")
-    messagebox?.appendChild(messagetext);
-    
-    if(message.type == "success")
-      messagetext.classList.add("successmessage")
-    if(message.type == "warning")
-      messagetext.classList.add("warningmessage")
-    if(message.type == "failure")
-      messagetext.classList.add("failuremessage")   
-    
-    setTimeout(() => {
-      messagetext.remove();
-    }, 5800);
   }
 
 }

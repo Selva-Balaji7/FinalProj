@@ -5,6 +5,8 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { saveUserData } from '../../../store/user/user.actions';
 import { CommonModule } from '@angular/common';
 import { DbservicesService } from '../../services/db/dbservices.service';
+import { addMessage } from '../../../common/popupmessage';
+
 
 @Component({
   selector: 'app-user-dashboard',
@@ -27,7 +29,10 @@ export class UserDashboardComponent {
         this.userstore.dispatch(saveUserData(JSON.parse(localuser)));
       }
       else{
-        this._route.navigate(['/']);
+        addMessage({type:"warning", message:"Login to Access Again"});
+        setTimeout(() => {
+          this._route.navigate(['/']);
+        }, 1000);
       }
     }
     console.log(this.user);
@@ -36,7 +41,10 @@ export class UserDashboardComponent {
 
   LogoutSequence(){
     localStorage.removeItem('user');
-    window.location.reload();
+    addMessage({type:"success", message:"Logged Out"});
+    setTimeout(() => {
+      window.location.reload();      
+    }, 1000);
   }
 
 }

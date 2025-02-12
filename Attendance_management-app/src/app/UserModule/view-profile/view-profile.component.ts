@@ -6,6 +6,7 @@ import { saveUserData } from '../../../store/user/user.actions';
 import { CommonModule } from '@angular/common';
 import { DbservicesService } from '../../services/db/dbservices.service';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { addMessage } from '../../../common/popupmessage';
 
 @Component({
   selector: 'app-view-profile',
@@ -28,10 +29,15 @@ export class ViewProfileComponent {
     
     ngOnInit(){
       this.userstore.select(state => state.user).subscribe(data => this.user=data);
-      console.log(this.user);
       
       if(!this.user.permissions.includes("ViewProfile"))
-        this._route.navigate(['/']);
+      {
+        addMessage({type:"warning", message:"You Have no permission"});
+        setTimeout(() => {
+          this._route.navigate(['/']);        
+        }, 1000);
+      }
+
       if(this.user.permissions.includes("EditProfile")) 
         this.canEdit = true;
 
@@ -46,22 +52,27 @@ export class ViewProfileComponent {
 
     onFileSelected(event:any){
       this.selectedFile = event.target.files[0];
-      console.log(this.selectedFile);
+      addMessage({type:"warning", message:"Now Upload The Image"});
     }
   
     onUpload() {
-      if (!this.selectedFile) return;
-    
+      if (!this.selectedFile) {
+        addMessage({type:"warning", message:"Please Select an Image"});
+        return;
+      }
+      
       const fileExtension = this.selectedFile.name.split('.').pop();
-      if(fileExtension != "jpg") return;
+      if(fileExtension != "jpg"){
+        addMessage({type:"warning", message:"Please Select an JPG file"});
+        return;        
+      }
   
       const formData = new FormData();
       formData.append('file', this.selectedFile, `${this.user.id}.${fileExtension}`);
-    
+      
       // Send the file to the server
       this._http.postRecord("Image/Upload", formData).subscribe(
         (response: any) => {
-          console.log('upload successful', response);
           var User = {
             ...this.user,
             profilepicture:`${this.user.id}.jpg`,
@@ -70,10 +81,13 @@ export class ViewProfileComponent {
           localStorage.setItem('user', JSON.stringify(User));
           this.profileImageUrl = `${this._http.baseURL}/Image/Get/${this.user.profilepicture}`;
           this.editingPhoto=false;
-          window.location.reload();
+          addMessage({type:"success", message:"Uploaded the Image"});
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
         },
         (error: any) => {
-          console.error('upload failed', error);
+          addMessage({type:"failure", message:"Upload Failed"});
         }
       );
     }
@@ -81,7 +95,6 @@ export class ViewProfileComponent {
     changeToForm(){
       this.editingDetails = true;
       this.editingPhoto=false;
-      console.log(this.user.password);
 
       this.detailsForm.setValue({
         name: this.user.name,
@@ -102,10 +115,9 @@ export class ViewProfileComponent {
         profilepicture: this.user.profilepicture,
         createdat:this.user.createdat
     }
-    console.log("Changing user data to ", updatedUser);
     this._http.updateRecord(`User/${this.user.id}`, updatedUser).subscribe(
       (res)=>{
-        console.log("Updated Successfully");
+        addMessage({type:"success", message:"Updated Successfully"});
         
         var User = {
           id:this.user.id,
@@ -122,7 +134,7 @@ export class ViewProfileComponent {
         this.editingDetails = false;
       },
       (error)=>{
-        console.log(error);
+        addMessage({type:"failure", message:"Update Failes"});
       }
     )
     }

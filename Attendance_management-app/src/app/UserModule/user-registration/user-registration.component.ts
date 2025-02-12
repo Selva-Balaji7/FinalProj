@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule , ReactiveFormsModule, FormGroup, FormControl, Validators} from '@angular/forms';
 import { DbservicesService } from '../../services/db/dbservices.service';
 import { Router } from '@angular/router';
+import { addMessage } from '../../../common/popupmessage';
 
 @Component({
   selector: 'app-user-registration',
@@ -34,10 +35,9 @@ export class UserRegistrationComponent {
     this.http.getRecord("role/onlyroles").subscribe(
     (res)=>{
       this.roles = res;
-      console.log(res);
     },
     (error)=>{
-      console.log(error);
+      addMessage({type:"failure", message:"Error Getting Data From Server"});
     }
   )
   }
@@ -59,13 +59,13 @@ export class UserRegistrationComponent {
     // Send the file to the server
     this.http.postRecord("Image/Upload", formData).subscribe(
       (response: any) => {
-        console.log('upload successful', response);
+        addMessage({type:"success", message:"Image uploaded"});
         this.profilePic = `${this.http.baseURL}/Image/Get/${this.regForm.value.id}.jpg`;
         this.hasUploadedProfileImage = true;
         this.isNotUploadingProfileImage=false;
       },
       (error: any) => {
-        console.error('upload failed', error);
+        addMessage({type:"failure", message:"Upload Failed"});
       }
     );
   }
@@ -73,18 +73,17 @@ export class UserRegistrationComponent {
   registerUser(){
     this.http.getRecord(`User/${this.regForm.value.id}`).subscribe(
       (response:any) => {
-        console.log("You are already a User", response);
+        addMessage({type:"warning", message:"You are already a User"});
         return;
       },
       (error:any) => {
         console.log("New User");
         this.http.getRecord(`Usersregistration/${this.regForm.value.id}`).subscribe(
           (response:any) => {
-            console.log("User Already Registered", response);
+            addMessage({type:"warning", message:"You have already registered"});
             return;
           },
           (error:any) => {
-            console.log("New UserRegistration");
 
             let fileName:string;
             if(this.isNotUploadingProfileImage)
@@ -92,7 +91,6 @@ export class UserRegistrationComponent {
             else
               fileName = `${this.regForm.value.id}.jpg`;
 
-            console.log("Trying to create a user ");
             let user = {
               "id":this.regForm.value.id,
               "name": this.regForm.value.name,
@@ -100,17 +98,18 @@ export class UserRegistrationComponent {
               "password": this.regForm.value.password,
               "role": this.regForm.value.role,
               "profilePicture":fileName};
-            console.log(user);
         
         
             this.http.postRecord('Usersregistration', user).subscribe(
               (response:any) => {
                 this.onUpload();
-                console.log("User Registered Successfully", response);
-                this._route.navigate(['/']);
+                addMessage({type:"success", message:"User Registered Successfully"});
+                setTimeout(() => {
+                  this._route.navigate(['/']);                  
+                }, 1500);
               },
               (error:any) => {
-                console.error("Registration Failed", error);
+                addMessage({type:"failure", message:"Failed To Register"});
               }
             );
 
@@ -124,25 +123,4 @@ export class UserRegistrationComponent {
 
   }
 
-
-
-  addMessage(message:any){
-
-    var messagebox = document.getElementById("MessageBox");
-    var messagetext = document.createElement("div");
-    messagetext.innerHTML = message.message;
-    messagetext.classList.add("messagetext")
-    messagebox?.appendChild(messagetext);
-    
-    if(message.type == "success")
-      messagetext.classList.add("successmessage")
-    if(message.type == "warning")
-      messagetext.classList.add("warningmessage")
-    if(message.type == "failure")
-      messagetext.classList.add("failuremessage")   
-    
-    setTimeout(() => {
-      messagetext.remove();
-    }, 5800);
-  }
 }
