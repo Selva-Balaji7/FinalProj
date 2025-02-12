@@ -1,0 +1,16 @@
+
+   <div class="container">
+    <h2>Mark Attendance</h2>
+  
+    <form >
+      <div class="form-group">
+        <label for="attendanceDate">Select Date:</label>
+        <input type="date" id="attendanceDate" class="form-control" [(ngModel)]="attendanceDate" name="attendanceDate" required/>
+      </div>
+  
+      <button (click)="submitAttendance()" class="btn btn-primary">Submit Attendance</button>
+    </form>
+  </div>
+
+
+  

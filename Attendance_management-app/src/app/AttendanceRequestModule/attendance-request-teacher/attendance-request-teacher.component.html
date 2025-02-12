@@ -1,0 +1,25 @@
+<!-- <p>attendance-request-teacher works!</p> -->
+
+
+<div class="container">
+    <h2>Teachers Attendance Requests </h2>
+  
+    <table border="1">
+      <thead>
+        <tr>
+          <th>User ID</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let request of attendanceRequests">
+          <td>{{ request.userId }}</td>
+          <td>{{ request.date }}</td>
+          <td>{{ request.status }}</td>
+          <td><button (click)="onSubmit(request)">Approve</button> <button (click)="onReject(request)">Reject</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
