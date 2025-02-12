@@ -128,25 +128,7 @@ namespace Attendance_management.Controllers
 
             return NoContent();
 
-        }
-
-
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteUser(int id)
-        //{
-        //    var user = await _context.Users.FindAsync(id);
-        //    if (user == null)
-        //    {
-        //        return NotFound(new { message = "User not found" });
-        //    }
-        //    var attendanceRecords = _context.Attendances.Where(a => a.UserId == id);
-        //    _context.Attendances.RemoveRange(attendanceRecords);
-
-
-        //    _context.Users.Remove(user);
-        //    await _context.SaveChangesAsync();
-        //    return Ok(new { message = "User deleted successfully" });
-        //}
+        } 
 
 
         [HttpDelete("{id}")]

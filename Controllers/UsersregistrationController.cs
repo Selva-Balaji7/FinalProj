@@ -79,7 +79,6 @@ namespace Attendance_management.Controllers
 
 
 
-
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteUserRegistration(int id)
         {

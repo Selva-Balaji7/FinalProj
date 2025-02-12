@@ -11,11 +11,18 @@ import { DbservicesService } from '../../services/db/dbservices.service';
 })
 export class AttendanceMarkComponent  {
   
-  attendanceDate: string = '2022-01-01';  
+  attendanceDate:any;  
   userId: number =500;
   status: string ='present';
+
   constructor(private attendancemark: DbservicesService) {}
 
+
+  ngOnInit(){
+    this.attendancemark.getRecord("User/getDate").subscribe(
+      (res:any)=>{this.attendanceDate=res.date;console.log(this.attendanceDate);}
+    )
+  }
 
 
   submitAttendance() {

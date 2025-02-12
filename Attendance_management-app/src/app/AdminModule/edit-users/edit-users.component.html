@@ -1,6 +1,6 @@
 <div class="container mt-4">
   <h2 class="text-center">User Management</h2>
-  <button class="btn btn-primary mb-3" [routerLink]="'/userregistration'">
+  <button class="btn btn-primary mb-3" (click)="openAddUserForm()">
     <i class="bi bi-plus-circle"></i> Add User
   </button>
 
@@ -23,7 +23,7 @@
         <td>{{ user.email }}</td>
         <td>{{ user.password }}</td>
         <td>{{ user.role }}</td>
-        <td><img [src]="user.profile_picture" alt="Profile" width="50" /></td>
+        <td><img [src]="http.baseURL +'/Image/Get/'+user.profilePicture" alt="Profile" width="50" /></td>
         <td>
           <button
             class="btn btn-warning btn-sm me-2"
@@ -40,12 +40,12 @@
   </table>
 </div>
 
-<!-- User Form Modal -->
+<!-- User Edit Form Modal -->
 <div *ngIf="showUserForm" class="modal d-block" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">{{ isEditing ? "Edit User" : "Add User" }}</h5>
+        <h5 class="modal-title">Edit User</h5>
         <button
           type="button"
           class="btn-close"
@@ -54,6 +54,69 @@
       </div>
       <div class="modal-body">
          <form (ngSubmit)="saveUser()">
+          <div class="mb-3">
+            <label>Name:</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="selectedUser.name"
+              name="name"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label>Email:</label>
+            <input
+              type="email"
+              class="form-control"
+              [(ngModel)]="selectedUser.email"
+              name="email"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label>Password:</label>
+            <input type="password" class="form-control" [(ngModel)]="selectedUser.password" name="password" required />
+          </div>
+          <div class="mb-3">
+            <label>Role:</label>
+            <select
+              class="form-control"
+              [(ngModel)]="selectedUser.role"
+              name="role"
+              required
+            >
+              <option value="Admin">Admin</option>
+              <option value="Teacher">Teacher</option>
+              <option value="Student">Student</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label>Profile Picture URL:</label>
+            <input type="text" class="form-control" [(ngModel)]="selectedUser.profile_picture" name="profile_picture" />
+          </div>
+          <button type="submit" class="btn btn-success w-100">Save</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- User Add Form -->
+<div *ngIf="showAddUserForm" class="modal d-block" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add User</h5>
+        <button
+          type="button"
+          class="btn-close"
+          (click)="closeAddUserForm()"
+        ></button>
+      </div>
+      <div class="modal-body">
+         <form (ngSubmit)="addUser()">
           <div class="mb-3">
             <label>Name:</label>
             <input

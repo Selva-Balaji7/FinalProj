@@ -25,5 +25,7 @@ public partial class User
 
     public virtual ICollection<Attendance> Attendances { get; set; } = new List<Attendance>();
 
+    public virtual ICollection<Leaverequesthistory> Leaverequesthistories { get; set; } = new List<Leaverequesthistory>();
+
     public virtual ICollection<Leaverequest> Leaverequests { get; set; } = new List<Leaverequest>();
 }

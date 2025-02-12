@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 export class LeaveRequestComponent {
   leaveForm: FormGroup;
   LeaveTypes: any;
+  MinDate:any;  
 
   constructor(private http: DbservicesService, private fb: FormBuilder) {
     this.leaveForm = this.fb.group({
@@ -21,6 +22,10 @@ export class LeaveRequestComponent {
       Date: [null, Validators.required],
       reason: ['', Validators.required]
     });
+
+    this.http.getRecord("User/getDate").subscribe(
+      (res:any)=>{this.MinDate=res.date;console.log(this.MinDate);}
+    )
   }
 
   ngOnInit(): void {

@@ -754,6 +754,16 @@
     ]
   },
   {
+    "ContainingType": "Attendance_management.Controllers.UserController",
+    "Method": "GetDate",
+    "RelativePath": "api/User/getDate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Attendance_management.Controllers.UsersregistrationController",
     "Method": "GetAllUserRegistration",
     "RelativePath": "api/Usersregistration",

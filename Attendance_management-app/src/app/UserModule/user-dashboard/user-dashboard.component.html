@@ -31,23 +31,23 @@
         <summary>Leave</summary>
         <a *ngIf="user.permissions.includes('MakeLeaveRequest')" [routerLink]="['/dasboard/reqleave']" title="Request Leave for some day">Request Leave<br></a>
         <a *ngIf="user.permissions.includes('LeaveHistory')" [routerLink]="['/dasboard/reqleavehistory']" title="View Your Previous Leave Requests">Leave Request History<br></a>
-        <a *ngIf="user.permissions.includes('StudentLeaveRequest')"  [routerLink]="['/dasboard/teacherleavereq']" title="View Leave Requests from Students">Student Leave Requests<br></a>
-        <a *ngIf="user.permissions.includes('TeacherLeaveRequest')"  [routerLink]="['/dasboard/viewpermissions']" title="View Leave Requests from Teachers">Teacher Leave Requests<br></a>
+        <a *ngIf="user.permissions.includes('StudentLeaveRequest')"  [routerLink]="['/dasboard/studentleavereq']" title="View Leave Requests from Students">Student Leave Requests<br></a>
+        <a *ngIf="user.permissions.includes('TeacherLeaveRequest')"  [routerLink]="['/dasboard/teacherleavereq']" title="View Leave Requests from Teachers">Teacher Leave Requests<br></a>
         <a *ngIf="user.permissions.includes('AllLeaveRequest')"  [routerLink]="['/dasboard/viewpermissions']" title="View Leave Requests from Everyone">All Leave Requests<br></a>
-        <a *ngIf="user.permissions.includes('ViewLeaveTypes')"  [routerLink]="['/dasboard/viewpermissions']" title="View Different Leave Types">Leave Types<br></a>
-        <a *ngIf="user.permissions.includes('EditLeaveTypes')"  [routerLink]="['/dasboard/viewpermissions']" title="Edit leave Types">Edit Leave Tyes<br></a>
+        <a *ngIf="user.permissions.includes('ViewLeaveTypes')"  [routerLink]="['/dasboard/leavetypes']" title="View Different Leave Types">Leave Types<br></a>
+        <a *ngIf="user.permissions.includes('EditLeaveTypes')"  [routerLink]="['/dasboard/leavetypes']" title="Edit leave Types">Edit Leave Tyes<br></a>
     </details>
     <details>
         <summary>Manage Attendance</summary>
-        <a *ngIf="user.permissions.includes('EditAttendance')" [routerLink]="['/dasboard/viewpermissions']" title="Edit Attendance History">Edit Attendance<br></a>
-        <a *ngIf="user.permissions.includes('StudentAttendanceRequest')" [routerLink]="['/dasboard/viewpermissions']" title="View Attendance Requests from Students for Today">Student Attendance Requests<br></a>
-        <a *ngIf="user.permissions.includes('TeachersAttendanceRequest')" [routerLink]="['/dasboard/viewpermissions']" title="View Attendance Requests from Teacher for Today">Teacher Attendance Requests<br></a>
-        <a *ngIf="user.permissions.includes('AllAttendanceRequest')" [routerLink]="['/dasboard/viewpermissions']" title="View Attendance Requests from Everyone for Today">All Attendance Requests<br></a>
+        <a *ngIf="user.permissions.includes('EditAttendance')" [routerLink]="['/dasboard/allattendance']" title="Edit Attendance History">Edit Attendance<br></a>
+        <a *ngIf="user.permissions.includes('StudentAttendanceRequest')" [routerLink]="['/dasboard/studentattreq']" title="View Attendance Requests from Students for Today">Student Attendance Requests<br></a>
+        <a *ngIf="user.permissions.includes('TeachersAttendanceRequest')" [routerLink]="['/dasboard/teacherattreq']" title="View Attendance Requests from Teacher for Today">Teacher Attendance Requests<br></a>
+        <a *ngIf="user.permissions.includes('AllAttendanceRequest')" [routerLink]="['/dasboard/allattreq']" title="View Attendance Requests from Everyone for Today">All Attendance Requests<br></a>
     </details>
     <details>
         <summary>Admin</summary>
-        <a *ngIf="user.permissions.includes('ViewUsers')"  [routerLink]="['/dasboard/viewpermissions']" title="View all Available Users">View Users<br></a>
-        <a *ngIf="user.permissions.includes('EditUsers')" [routerLink]="['/dasboard/viewpermissions']" title="Edit Available Users">Edit Users<br></a>
+        <a *ngIf="user.permissions.includes('ViewUsers')"  [routerLink]="['/dasboard/userlist']" title="View all Available Users">View Users<br></a>
+        <a *ngIf="user.permissions.includes('EditUsers')" [routerLink]="['/dasboard/userlist']" title="Edit Available Users">Edit Users<br></a>
         <a *ngIf="user.permissions.includes('NewUserRequests')" [routerLink]="['/dasboard/newuserreq']" title="Edit Available Users">New User Requests<br></a>
     </details>
 </div>

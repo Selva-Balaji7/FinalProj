@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { DbservicesService } from '../../services/db/dbservices.service';
 
 @Component({
   selector: 'app-edit-users',
@@ -11,27 +12,30 @@ import { RouterModule } from '@angular/router';
   styleUrl: './edit-users.component.css'
 })
 export class EditUsersComponent implements OnInit {
-    users: any[] = [];
+    users:any;
+    addUserForm:any;
     showUserForm = false;
+    showAddUserForm = false;
     isEditing = false;
     selectedUser: any = {};
-    private apiUrl = 'https://localhost:7189/api/editusers';
   
-    constructor(private http: HttpClient) {}
+    constructor(public http: DbservicesService) {}
   
     ngOnInit() {
       this.loadUsers();
-
+      this.addUserForm  = new FormGroup({
+        id: new FormControl("",[Validators.required]),
+        name: new FormControl("",[Validators.required]),
+        email: new FormControl("",[Validators.required]),
+        password: new FormControl("",[Validators.required]),
+        role:new FormControl("",[Validators.required]),
+      })
     }
   
     loadUsers() {
       console.log('loadUsers');
-      this.http.get<any[]>(this.apiUrl).subscribe((data) => {
-        this.users = data.map(user => ({
-          ...user,
-          created_at: new Date(user.createdAt),   // Convert to Date object
-          updated_at: new Date(user.updatedAt)
-        }));
+      this.http.getRecord("User").subscribe((data) => {
+        this.users = data
        console.log(data);
       });
   }
@@ -47,6 +51,16 @@ export class EditUsersComponent implements OnInit {
       this.selectedUser = {};
 
     }
+
+    openAddUserForm() {
+      this.isEditing = false;
+      this.showUserForm = false;
+      this.showAddUserForm=true
+    }
+    
+    closeAddUserForm() {
+      this.showAddUserForm=false
+    }
   
     saveUser() {
         const currentTime = new Date().toISOString();
@@ -57,12 +71,12 @@ export class EditUsersComponent implements OnInit {
         // this.selectedUser.updated_at = currentTime; // Always update
       
         if (this.isEditing) {
-          this.http.put(`${this.apiUrl}/${this.selectedUser.id}`, this.selectedUser)
+          this.http.updateRecord(`User/${this.selectedUser.id}`, this.selectedUser)
             .subscribe(() => {
               this.loadUsers();
             });
         } else {
-          this.http.post(this.apiUrl, this.selectedUser)
+          this.http.postRecord("User", this.selectedUser)
             .subscribe(() => {
               this.loadUsers();
             });
@@ -71,9 +85,14 @@ export class EditUsersComponent implements OnInit {
         this.closeUserForm();
       }
 
+      addUser(){
+
+      }
+
+
       deleteUser(id: number) {
         if (confirm('Are you sure you want to delete this user?')) {
-          this.http.delete(`${this.apiUrl}/${id}`).subscribe(() => this.loadUsers());
+          this.http.deleteRecord(`User/${id}`).subscribe(() => this.loadUsers());
         }
       }
       
