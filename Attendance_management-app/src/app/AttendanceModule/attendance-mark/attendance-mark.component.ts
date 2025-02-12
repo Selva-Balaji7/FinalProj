@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DbservicesService } from '../../Services/dbservices.service';
+import { DbservicesService } from '../../services/db/dbservices.service'; 
 
 @Component({
   selector: 'app-attendance-mark',
@@ -29,24 +29,24 @@ export class AttendanceMarkComponent  {
     // let hasAttendance:any=false;
     // let hasLeaveRequest:any=false;
   
-    this.attendancemark.getRequests(`Attendancerequest/check/${this.userId}?date=${this.attendanceDate}`).subscribe(
-      (attendanceRequestExists) => { 
+    this.attendancemark.getRecord(`Attendancerequest/check/${this.userId}?date=${this.attendanceDate}`).subscribe(
+      (attendanceRequestExists:any) => { 
         if (!attendanceRequestExists) { 
           alert('You already requested attendance for this date.');
           return; 
         }
 
        
-        this.attendancemark.getRequests(`Attendance/check/${this.userId}?date=${this.attendanceDate}`).subscribe(
-          (attendanceExists) => { 
+        this.attendancemark.getRecord(`Attendance/check/${this.userId}?date=${this.attendanceDate}`).subscribe(
+          (attendanceExists:any) => { 
             if (!attendanceExists) { 
               alert('Attendance is already marked for this date.');
               return; 
             }
 
             
-            this.attendancemark.getRequests(`LeaveRequest/check/${this.userId}?date=${this.attendanceDate}`).subscribe(
-              (leaveRequestExists) => { 
+            this.attendancemark.getRecord(`LeaveRequest/check/${this.userId}?date=${this.attendanceDate}`).subscribe(
+              (leaveRequestExists:any) => { 
                 if (!leaveRequestExists) { 
                   alert('You already requested leave for this date.');
                   return; 

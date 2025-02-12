@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component,OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { DbservicesService } from '../services/db.service';
+import { DbservicesService } from '../../services/db/dbservices.service'; 
 import { CommonModule } from '@angular/common';
 
 
@@ -24,7 +24,7 @@ export class LeaveRequestComponent {
   }
 
   ngOnInit(): void {
-    this.http.getRecord('LeaveTypes').subscribe((data) => {
+    this.http.getRecord('LeaveTypes').subscribe((data:any) => {
       this.LeaveTypes = data;
     });
   }
@@ -42,17 +42,17 @@ export class LeaveRequestComponent {
     console.log("Trying send leave quest for", newLeaveRequest);
 
     this.http.getRecord(`Attendance/check/100?Date=${newLeaveRequest.date}`).subscribe(
-      (res) => {
+      (res:any) => {
         if(res){
           console.log("No attendance record found for user 100");
           console.log(`Attendancerequest/check/100?Date=${newLeaveRequest.date}`);
           this.http.getRecord(`Attendancerequest/check/100?Date=${newLeaveRequest.date}`).subscribe(
-            (attendanceRequest) => {
+            (attendanceRequest:any) => {
               if(attendanceRequest){
                 console.log("No attendanceHistory record found for user 100");
                 console.log(`Leaverequests/check/100?Date=${newLeaveRequest.date}`);
                 this.http.getRecord(`Leaverequests/check/100?Date=${newLeaveRequest.date}`).subscribe(
-                  (leaveRequest) => {
+                  (leaveRequest:any) => {
                     if(leaveRequest){
                       console.log("No leaverequest record found for user 100");
                       this.http.postRecord('LeaveRequests', newLeaveRequest)

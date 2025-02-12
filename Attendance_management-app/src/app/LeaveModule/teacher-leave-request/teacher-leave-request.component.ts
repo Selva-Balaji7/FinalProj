@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DbservicesService } from '../services/db.service';
+import { DbservicesService } from '../../services/db/dbservices.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -31,7 +31,7 @@ export class TeacherLeaveRequestComponent {
   updateLeaveStatus(request: any, status: string,) {
     // 1️ First, Check if Attendance Exists for Given Date
     this.http.getRecord(`Attendance/check/${request.user.id}?date=${request.date}`)
-      .subscribe(isAttendanceMarked => {
+      .subscribe((isAttendanceMarked:any) => {
         if (isAttendanceMarked === false) {
           alert("Attendance already exists  on this date. Cannot approve leave.");
           return;

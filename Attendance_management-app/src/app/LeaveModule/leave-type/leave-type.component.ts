@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { DbservicesService } from '../services/db.service'; // Ensure correct path
+import { DbservicesService } from '../../services/db/dbservices.service';
 
 @Component({
   selector: 'app-leave-type',
@@ -45,7 +45,7 @@ export class LeaveTypeComponent implements OnInit {
         }));
         console.log(data);
       },
-      (error) => console.error('Error fetching leave types', error)
+      (error:any) => console.error('Error fetching leave types', error)
     );
   }
 
@@ -67,7 +67,7 @@ export class LeaveTypeComponent implements OnInit {
             alert('Leave Type added successfully!');
             this.loadLeaveTypes();
           },
-          (error) => console.error('Error adding leave type', error)
+          (error:any) => console.error('Error adding leave type', error)
         );
     }
     this.cancelEdit();
@@ -92,7 +92,7 @@ export class LeaveTypeComponent implements OnInit {
             alert('Leave Type deleted successfully!');
             this.loadLeaveTypes();
           },
-          (error) => console.error('Error deleting leave type', error)
+          (error:any) => console.error('Error deleting leave type', error)
         );
     }
   }

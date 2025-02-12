@@ -18,6 +18,12 @@ namespace Attendance_management.Controllers
             _context = context;
         }
 
+        [HttpGet("getDate")]
+        public ActionResult<DateTime> getDate(){
+            return Ok(DateTime.Now.Date);
+        }
+
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetAllUser()
         {
