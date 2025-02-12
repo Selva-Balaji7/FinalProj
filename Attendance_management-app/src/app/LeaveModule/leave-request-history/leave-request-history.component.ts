@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DbservicesService } from '../../services/db/dbservices.service'; 
+import { DbservicesService } from '../services/db.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -21,36 +21,20 @@ export class LeaveRequestHistoryComponent {
 
   // Fetch all leave requests
   fetchAllRequests() {
-    this.http.getRecord('LeaveRequests?role=null')
+    this.http.getRecord(`LeaveRequests/${100}`)
       .subscribe((data) => {
         this.leaveRequests = data;
         console.log(this.leaveRequests);
       });
   }
 
-  // // Add new leave request
-  // addLeaveRequest() {
-  //   this.http.postRecord('LeaveRequests', this.newRequest)
-  //     .subscribe((newData) => {
-  //       this.leaveRequests.push(newData);
-  //       this.newRequest = { userName: '', leaveType: '', date: '', reason: '' }; // Reset form
-  //     });
-  // }
-
-  // // Update existing leave request
-  // editLeaveHistory(request: any) {
-  //   this.http.updateRecord(`LeaveRequests/${request.id}`, request)
-  //     .subscribe(() => {
-  //       alert("Leave Request history Updated!");
-  //     });
-  // }
 
   // // // Delete leave request
   deleteLeaveHistory(requestId: number) {
     if (confirm("Are you sure you want to delete this leave request?")) {
       this.http.deleteRecord(`LeaveRequests/${requestId}`)
         .subscribe(() => {
-          this.leaveRequests = this.leaveRequests.filter((req: { id: number; }) => req.id !== requestId);
+          this.fetchAllRequests();
         });
     }
   }
