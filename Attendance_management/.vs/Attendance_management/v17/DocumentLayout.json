@@ -74,8 +74,7 @@
               "RelativeToolTip": "Attendance_management\\Controllers\\AttendanceController.cs",
               "ViewState": "AgIAAAQBAAAAAAAAAAAuwA4BAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-11T05:00:54.963Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-11T05:00:54.963Z"
             },
             {
               "$type": "Document",
@@ -87,8 +86,7 @@
               "RelativeToolTip": "Attendance_management\\Controllers\\RoleController.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAABsAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-11T04:57:46.268Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-11T04:57:46.268Z"
             },
             {
               "$type": "Document",
@@ -100,8 +98,7 @@
               "RelativeToolTip": "Attendance_management\\Controllers\\UsersregistrationController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-11T04:51:13.829Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-11T04:51:13.829Z"
             },
             {
               "$type": "Document",
@@ -111,7 +108,7 @@
               "RelativeDocumentMoniker": "Attendance_management\\Controllers\\AttendancerequestController.cs",
               "ToolTip": "C:\\MyFinal_CapstoneProject\\Attendance_management\\Attendance_management\\Controllers\\AttendancerequestController.cs",
               "RelativeToolTip": "Attendance_management\\Controllers\\AttendancerequestController.cs",
-              "ViewState": "AgIAAEEAAAAAAAAAAAAwwEcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-10T17:24:28.059Z",
               "EditorCaption": ""
@@ -126,8 +123,7 @@
               "RelativeToolTip": "Attendance_management\\Program.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-04T07:53:01.633Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-04T07:53:01.633Z"
             },
             {
               "$type": "Document",
@@ -139,8 +135,7 @@
               "RelativeToolTip": "Attendance_management\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-02-04T07:43:45.506Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-04T07:43:45.506Z"
             },
             {
               "$type": "Document",
@@ -152,8 +147,7 @@
               "RelativeToolTip": "Attendance_management\\Controllers\\PermissionController.cs",
               "ViewState": "AgIAADUAAAAAAAAAAAAmwDcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-11T05:35:51.025Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-11T05:35:51.025Z"
             },
             {
               "$type": "Document",
@@ -165,8 +159,7 @@
               "RelativeToolTip": "Attendance_management\\Data\\ApplicationDbContext.cs",
               "ViewState": "AgIAABkAAAAAAAAAAAAcwBIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-10T17:23:15.379Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-10T17:23:15.379Z"
             },
             {
               "$type": "Document",
@@ -178,8 +171,7 @@
               "RelativeToolTip": "Attendance_management\\Controllers\\UserController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-11T05:33:56.466Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-11T05:33:56.466Z"
             },
             {
               "$type": "Document",
@@ -191,8 +183,7 @@
               "RelativeToolTip": "Attendance_management\\Controllers\\LeaverequestController.cs",
               "ViewState": "AgIAAAoAAAAAAAAAAAAiwBAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-11T05:41:41.897Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-11T05:41:41.897Z"
             },
             {
               "$type": "Document",
@@ -204,8 +195,7 @@
               "RelativeToolTip": "Attendance_management\\Controllers\\ImageController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-11T05:41:30.297Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-11T05:41:30.297Z"
             },
             {
               "$type": "Document",

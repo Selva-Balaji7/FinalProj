@@ -18,7 +18,7 @@
           <td>{{ request.userId }}</td>
           <td>{{ request.date }}</td>
           <td>{{ request.status }}</td>
-          <td><button (click)="onSubmit(request)">Approve</button> <button (click)="onReject(request)">Reject</button></td>
+          <td><button (click)="onSubmit(request)" [id]="'Approve' + request.userId + request.date">Approve</button> <button (click)="onReject(request)"[id]="'Reject' + request.userId + request.date">Reject</button></td>
         </tr>
       </tbody>
     </table>

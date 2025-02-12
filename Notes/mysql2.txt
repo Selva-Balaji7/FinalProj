@@ -1,0 +1,20 @@
+
+use attendance_management;
+desc attendancerequests;
+insert into attendancerequests (user_id,date,status,remarks)values
+(100,'2023-01-07','present','arived on time'),
+
+(100,'2023-01-08','present','arived on time'),
+
+(500,'2023-01-09','present','arived on time'),
+
+(500,'2023-01-10','present','arived on time'),
+
+(500,'2023-01-11','present','arived on time'),
+
+(500,'2023-01-12','present','arived on time');
+
+
+
+SELECT *FROM ATTENDANCE WHERE date='2022-03-21';
+
