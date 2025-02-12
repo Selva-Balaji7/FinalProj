@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class DbservicesService {
     baseURL:string="https://localhost:7189/api";
+  putRecord: any;
   
     constructor(private http : HttpClient) { }
     

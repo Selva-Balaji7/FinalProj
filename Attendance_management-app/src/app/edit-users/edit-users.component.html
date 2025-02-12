@@ -13,8 +13,6 @@
         <th>Password</th>
         <th>Role</th>
         <th>Profile_Picture</th>
-        <th>Created_at</th>
-        <th>Updated_at</th>
         <th>Edit/Remove</th>
       </tr>
     </thead>
@@ -26,8 +24,6 @@
         <td>{{ user.password }}</td>
         <td>{{ user.role }}</td>
         <td><img [src]="user.profile_picture" alt="Profile" width="50" /></td>
-        <td>{{  user.created_at | date:'yyyy-MM-dd HH:mm:ss' }}</td>  <!-- Ensure data exists -->
-        <td>{{user.updated_at | date:'yyyy-MM-dd HH:mm:ss'}}</td>  <!-- Ensure data exists -->
         <td>
           <button
             class="btn btn-warning btn-sm me-2"
@@ -98,14 +94,6 @@
           <div class="mb-3">
             <label>Profile Picture URL:</label>
             <input type="text" class="form-control" [(ngModel)]="selectedUser.profile_picture" name="profile_picture" />
-          </div>
-          <div class="mb-3">
-            <label>Created At:</label>
-            <input type="text" class="form-control" [(ngModel)]="selectedUser.created_at" name="created_at" readonly />
-          </div>
-          <div class="mb-3">
-            <label>Updated At:</label>
-            <input type="text" class="form-control" [(ngModel)]="selectedUser.updated_at" name="updated_at" readonly />
           </div>
           <button type="submit" class="btn btn-success w-100">Save</button>
         </form>

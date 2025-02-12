@@ -1,68 +1,105 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { DbservicesService } from '../services/db.service'; // Ensure correct path
 
 @Component({
   selector: 'app-leave-type',
-  imports: [FormsModule, CommonModule, ReactiveFormsModule],
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule, ReactiveFormsModule],
   templateUrl: './leave-type.component.html',
-  styleUrls: ['./leave-type.component.css'],
+  styleUrl: './leave-type.component.css',
 })
 export class LeaveTypeComponent implements OnInit {
-  leaveForm: FormGroup;
-  leaveTypes: any; // Stores leave type data
-  //private apiUrl = 'https://localhost:7189/api/LeaveTypes'; // Ensure correct path
-  
+  leaveTypes: any[] = [];
+  leaveForm!: FormGroup;
+  showLeaveForm = false;
+  isEditing = false;
+  selectedLeaveType: any = {};
+  changingId:any;
 
-  constructor(private fb: FormBuilder, private http: DbservicesService, private _route: Router) {
+
+  constructor(private fb: FormBuilder, private dbService: DbservicesService) {}
+
+  ngOnInit() {
+    this.initializeForm();
+    this.loadLeaveTypes();
+  }
+
+  initializeForm() {
     this.leaveForm = this.fb.group({
       name: ['', Validators.required],
-      description: ['', Validators.required],
+      description: ['', Validators.required]
     });
   }
 
-  ngOnInit(): void {
-    this.fetchLeaveTypes();
-  }
-
-  // Fetch existing leave types from API
-  fetchLeaveTypes(): void {
-    this.http.getRecord('LeaveTypes').subscribe(
+  loadLeaveTypes() {
+    console.log('Loading Leave Types...');
+    this.dbService.getRecord('LeaveTypes').subscribe(
       (data: any) => {
-        this.leaveTypes = data;
+        this.leaveTypes = data.map((leave: any) => ({
+          ...leave,
+          created_at: new Date(leave.createdAt),
+          updated_at: new Date(leave.updatedAt),
+        }));
+        console.log(data);
       },
-      (error: any) => {
-        console.error('Error fetching leave types', error);
-      }
+      (error) => console.error('Error fetching leave types', error)
     );
   }
 
-  // Submit a new leave type
-  submitLeaveType(): void {
-    if (this.leaveForm.valid) {
-      this.http.postRecord('LeaveTypes', this.leaveForm.value).subscribe(
-        () => {
-          alert('Leave Type Added Successfully');
-          this.leaveForm.reset();
-          this.fetchLeaveTypes(); // Refresh the table
-        },
-        (error) => {
-          console.error('Error adding leave type', error);
-        }
-      );
+  saveLeaveType() {
+    this.selectedLeaveType = this.leaveForm.value;
+    if (this.isEditing) {
+      this.dbService.updateRecord(`LeaveTypes/${this.changingId}`, this.selectedLeaveType)
+        .subscribe(
+          () => {
+            alert('Leave Type updated successfully!');
+            this.loadLeaveTypes();
+          },
+          (error: any) => console.error('Error updating leave type', error)
+        );
+    } else {
+      this.dbService.postRecord('LeaveTypes', this.selectedLeaveType)
+        .subscribe(
+          () =>{
+            alert('Leave Type added successfully!');
+            this.loadLeaveTypes();
+          },
+          (error) => console.error('Error adding leave type', error)
+        );
+    }
+    this.cancelEdit();
+  }
+
+  editLeaveType(leaveType: any) {
+    this.isEditing = true;
+    this.selectedLeaveType = { ...leaveType };
+
+    this.leaveForm.patchValue({
+      name: leaveType.name,
+      description: leaveType.description
+    });
+    this.changingId = leaveType.id;
+  }
+
+  deleteLeaveType(id: number) {
+    if (confirm('Are you sure you want to delete this leave type?')) {
+      this.dbService.deleteRecord(`LeaveTypes/${id}`)
+        .subscribe(
+          () => {
+            alert('Leave Type deleted successfully!');
+            this.loadLeaveTypes();
+          },
+          (error) => console.error('Error deleting leave type', error)
+        );
     }
   }
 
-  
-  deleteLeaveType(id: number) {
-    console.log('Deleting Leave Type', id); 
-    if (confirm('Are you sure you want to delete this Leave type?')) {
-      this.http.deleteRecord(`LeaveTypes/${id}`).subscribe(() => this.fetchLeaveTypes());
-    }
-    (error: any) => {
-      console.error('Error deleting Leave Type:', error);
-    }
+  cancelEdit() {
+    this.isEditing = false;
+    this.selectedLeaveType = {};
+    this.leaveForm.reset();
   }
 }

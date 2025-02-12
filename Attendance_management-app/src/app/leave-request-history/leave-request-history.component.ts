@@ -1,32 +1,57 @@
-import { Component, OnInit } from '@angular/core';
-import { DbservicesService } from '../services/db.service'; // Ensure correct path
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component } from '@angular/core';
+import { DbservicesService } from '../services/db.service';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-leave-request-history',
-  imports: [FormsModule,CommonModule,ReactiveFormsModule],
+  imports: [CommonModule,FormsModule],
   templateUrl: './leave-request-history.component.html',
-  styleUrls: ['./leave-request-history.component.css']
+  styleUrl: './leave-request-history.component.css'
 })
-export class LeaveRequestHistoryComponent implements OnInit {
-  leaveRequests: any[] = []; // Stores the leave request history
+export class LeaveRequestHistoryComponent {
+  leaveRequests: any;
+  newRequest = { userName: '', leaveType: '', date: '', reason: '' };
 
   constructor(private http: DbservicesService) {}
 
   ngOnInit(): void {
-    this.fetchLeaveRequestHistory();
+    this.fetchAllRequests();
   }
 
-  // Fetch logged-in user's leave request history
-  fetchLeaveRequestHistory(): void {
-    this.http.getRecord('LeaveRequestHistory').subscribe(
-      (data: any) => {
+  // Fetch all leave requests
+  fetchAllRequests() {
+    this.http.getRecord('LeaveRequests?role=null')
+      .subscribe((data) => {
         this.leaveRequests = data;
-      },
-      (error: any) => {
-        console.error('Error fetching leave request history', error);
-      }
-    );
+        console.log(this.leaveRequests);
+      });
+  }
+
+  // // Add new leave request
+  // addLeaveRequest() {
+  //   this.http.postRecord('LeaveRequests', this.newRequest)
+  //     .subscribe((newData) => {
+  //       this.leaveRequests.push(newData);
+  //       this.newRequest = { userName: '', leaveType: '', date: '', reason: '' }; // Reset form
+  //     });
+  // }
+
+  // // Update existing leave request
+  // editLeaveHistory(request: any) {
+  //   this.http.updateRecord(`LeaveRequests/${request.id}`, request)
+  //     .subscribe(() => {
+  //       alert("Leave Request history Updated!");
+  //     });
+  // }
+
+  // // // Delete leave request
+  deleteLeaveHistory(requestId: number) {
+    if (confirm("Are you sure you want to delete this leave request?")) {
+      this.http.deleteRecord(`LeaveRequests/${requestId}`)
+        .subscribe(() => {
+          this.leaveRequests = this.leaveRequests.filter((req: { id: number; }) => req.id !== requestId);
+        });
+    }
   }
 }

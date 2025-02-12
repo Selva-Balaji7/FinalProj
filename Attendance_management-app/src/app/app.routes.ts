@@ -7,6 +7,10 @@ import { EditUsersComponent } from './edit-users/edit-users.component';
 import { LeaveTypeComponent } from './leave-type/leave-type.component';
 import { RolesComponent } from './roles/roles.component';
 import { LeaveRequestHistoryComponent } from './leave-request-history/leave-request-history.component';
+import { StudentLeaveRequestComponent } from './student-leave-request/student-leave-request.component';
+import { TeacherLeaveRequestComponent } from './teacher-leave-request/teacher-leave-request.component';
+  
+
 
 export const routes: Routes = [
 
@@ -17,6 +21,8 @@ export const routes: Routes = [
     {path:"editusers", component:EditUsersComponent},
     {path:"leavetype",component:LeaveTypeComponent},
     {path:"roles",component:RolesComponent},
-    {path:"leavehistory",component:LeaveRequestHistoryComponent}
+    {path:"leavehistory",component:LeaveRequestHistoryComponent},
+    {path:"studentleave",component:StudentLeaveRequestComponent},
+    {path:"teacherleave",component:TeacherLeaveRequestComponent}
     // {path:"**", component:UserLoginComponent}
 ];

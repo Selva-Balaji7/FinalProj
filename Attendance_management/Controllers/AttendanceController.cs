@@ -1,4 +1,5 @@
-﻿using Attendance_management.Data;
+﻿using System.Globalization;
+using Attendance_management.Data;
 using Attendance_management.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,13 +8,18 @@ namespace Attendance_management.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AttendanceController : Controller
+    public class AttendanceController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
         public AttendanceController(ApplicationDbContext context)
         {
             _context = context;
+        }
+        [HttpGet("isOnline")]
+        public ActionResult checkOnline()
+        {
+            return Ok();
         }
 
         [HttpGet]
@@ -32,18 +38,36 @@ namespace Attendance_management.Controllers
 
 
         // https://localhost:7200/api/attendance/limit/1?startDate=2025-01-01&endDate=2025-01-30
-        // https://localhost:7200/api/attendance/limit/1?startDate=null&endDate=null
+        // https://localhost:7200/api/attendance/limit/1?startDate=null&endDate=null&role=null&status=null
         [HttpGet("limit/{count}")]
-        public async Task<ActionResult<IEnumerable<Attendance>>> GetLimitAttendance(int count, [FromQuery] string startDate, [FromQuery] string endDate)
+        public async Task<ActionResult<IEnumerable<Attendance>>> GetLimitAttendance(int count, [FromQuery] string startDate, [FromQuery] string endDate, [FromQuery] string role, [FromQuery] string status)
         {
             Console.Clear();
+            //var roleList = role=="null" ? new List<string> { "Student", "Teacher", "Admin" } : new List<string> { role };
+            var roleList = role == "null" ? await _context.Roles.Select(r => r.RoleName).ToListAsync() : new List<string> { role };
+            //var statusList = (status == "null") ? new List<string> { "Present", "Holiday", "Sunday", "Leave" } : new List<string> { status };
+            var statusList = (status == "null") ? await _context.Attendances.Select(a => a.Status).Distinct().ToListAsync() : new List<string> { status };
+
             if (startDate == "null" || endDate == "null")
             {
                 Console.WriteLine("The Date are null");
                 var attendances = await _context.Attendances
+                    .Where(a => statusList.Contains(a.Status) && roleList.Contains(a.User.Role))
                     .OrderByDescending(a => a.Date)
                     .Skip((count - 1) * 10)
                     .Take(10)
+                    .Select(a => new Attendance
+                    {
+                        UserId = a.UserId,
+                        Date = a.Date,
+                        Status = a.Status,
+                        UpdatedAt = a.UpdatedAt,
+                        User = new User
+                        {
+                            Name = a.User.Name,
+                            Role = a.User.Role
+                        }
+                    })
                     .ToListAsync();
                 if (attendances != null)
                 {
@@ -56,10 +80,22 @@ namespace Attendance_management.Controllers
                 var eDate = DateOnly.Parse(endDate);
 
                 var attendances = await _context.Attendances
-                    .Where(a => a.Date >= sDate && a.Date <= eDate)
+                    .Where(a => a.Date >= sDate && a.Date <= eDate && statusList.Contains(a.Status) && roleList.Contains(a.User.Role))
                     .OrderByDescending(a => a.Date)
                     .Skip((count - 1) * 10)
                     .Take(10)
+                    .Select(a => new Attendance
+                    {
+                        UserId = a.UserId,
+                        Date = a.Date,
+                        Status = a.Status,
+                        UpdatedAt = a.UpdatedAt,
+                        User = new User
+                        {
+                            Name = a.User.Name,
+                            Role = a.User.Role
+                        }
+                    })
                     .ToListAsync();
                 if (attendances != null)
                 {
@@ -87,14 +123,15 @@ namespace Attendance_management.Controllers
         }
 
         [HttpGet("{id}/limit/{count}")]
-        public async Task<ActionResult<Attendance>> GetAttendanceLimit(int id, int count, [FromQuery] string startDate, [FromQuery] string endDate)
+        public async Task<ActionResult<Attendance>> GetAttendanceLimit(int id, int count, [FromQuery] string startDate, [FromQuery] string endDate, [FromQuery] string role, [FromQuery] string status)
         {
             Console.Clear();
+            var statusList = (status == "null") ? new List<string> { "Present", "Holiday", "Sunday", "Leave" } : new List<string> { status };
             if (startDate == "null" || endDate == "null")
             {
                 Console.WriteLine("The Date are null");
                 var attendances = await _context.Attendances
-                    .Where(a => a.UserId == id)
+                    .Where(a => a.UserId == id && statusList.Contains(a.Status) && a.User.Role == role)
                     .OrderByDescending(a => a.Date)
                     .Skip((count - 1) * 10)
                     .Take(10)
@@ -110,7 +147,7 @@ namespace Attendance_management.Controllers
                 var eDate = DateOnly.Parse(endDate);
 
                 var attendances = await _context.Attendances
-                    .Where(a => a.UserId == id && a.Date >= sDate && a.Date <= eDate)
+                    .Where(a => a.UserId == id && a.Date >= sDate && a.Date <= eDate && statusList.Contains(a.Status))
                     .OrderByDescending(a => a.Date)
                     .Skip((count - 1) * 10)
                     .Take(10)
@@ -122,6 +159,8 @@ namespace Attendance_management.Controllers
             }
             return BadRequest();
         }
+
+
 
         [HttpGet("{id}/count")]
         public async Task<ActionResult<int>> GetAttendanceCount(int id)
@@ -135,6 +174,33 @@ namespace Attendance_management.Controllers
                 return NotFound();
             }
             return Ok(attendance.Count);
+        }
+
+
+        [HttpGet("check/{id}")]
+        public async Task<ActionResult<bool>> checkAttendance(int id, [FromQuery] string Date)
+        {
+            var cDate = DateOnly.Parse(Date);
+
+            try
+            {
+                var att = await _context.Attendances
+                    .Where(a => a.UserId == id && a.Date == cDate)
+                    .ToListAsync();
+
+                if (att.Count == 0)
+                {
+                    return Ok(true);
+                }
+                else
+                {
+                    return Ok(false);
+                }
+            }
+            catch
+            {
+                return BadRequest(false);
+            }
         }
 
 

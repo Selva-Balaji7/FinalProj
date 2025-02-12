@@ -24,10 +24,43 @@ namespace Attendance_management.Controllers
             if (role == "null")
                 return await _context.Leaverequests
                                  //.Include(l => l.User)s
+                                 .Select(l => new Leaverequest
+                                 {
+                                     Id=l.Id,
+                                     Date=l.Date,
+                                     LeaveType = new Leavetype{
+                                         Name = l.LeaveType.Name
+                                     },
+                                     User=new User
+                                     {
+                                         Id=l.User.Id,
+                                         Name = l.User.Name
+                                     },
+                                     Reason=l.Reason,
+                                     Status=l.Status,
+                                     CreatedAt = l.CreatedAt
+                                 })
                                  .ToListAsync();
             else
                 return await _context.Leaverequests
                         .Where(l => l.User.Role == role)
+                        .Select(l => new Leaverequest
+                        {
+                            Id = l.Id,
+                            Date = l.Date,
+                            LeaveType = new Leavetype
+                            {
+                                Name = l.LeaveType.Name
+                            },
+                            User = new User
+                            {
+                                Id = l.User.Id,
+                                Name = l.User.Name
+                            },
+                            Reason = l.Reason,
+                            Status = l.Status,
+                            CreatedAt = l.CreatedAt
+                        })
                         .ToListAsync();
         }
 
@@ -47,8 +80,39 @@ namespace Attendance_management.Controllers
             return Ok(leaveRequest);
         }
 
-        // POST: api/LeaveRequests - Create a new leave request
-        [HttpPost]
+        [HttpGet("check/{id}")]
+        public async Task<ActionResult<bool>> checkLeaveRequest(int id, [FromQuery] string Date)
+        {
+            var cDate = DateOnly.Parse(Date);
+
+            try
+            {
+                var leavereq = await _context.Leaverequests
+                    .Where(lr => lr.UserId == id && lr.Date == cDate)
+                    .ToListAsync();
+
+                if (leavereq.Count == 0)
+                {
+                    return Ok(true);
+                }
+                else
+                {
+                    return Ok(false);
+                }
+            }
+            catch
+            {
+                return BadRequest(false);
+            }
+
+
+        }
+
+   
+
+
+// POST: api/LeaveRequests - Create a new leave request
+[HttpPost]
         public async Task<ActionResult<Leaverequest>> PostLeaveRequest(Leaverequest leaveRequest)
         {
             leaveRequest.CreatedAt = DateTime.UtcNow;
