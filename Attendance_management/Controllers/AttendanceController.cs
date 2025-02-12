@@ -209,7 +209,7 @@ namespace Attendance_management.Controllers
         {
             var newAttendance = new Attendance
             {
-                //UserId = attendance.UserId,
+                UserId = attendance.UserId,
                 Date = attendance.Date,
                 Status = attendance.Status,
                 Remarks = attendance.Remarks,

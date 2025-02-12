@@ -16,4 +16,6 @@ public partial class Leavetype
     public DateTime? UpdatedAt { get; set; }
 
     public virtual ICollection<Leaverequest> Leaverequests { get; set; } = new List<Leaverequest>();
+
+    public virtual ICollection<Leaverequestshistory> Leaverequestshistories { get; set; } = new List<Leaverequestshistory>();
 }

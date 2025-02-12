@@ -23,9 +23,9 @@
               <td>{{ request.leaveType.name }}</td>
               <td>{{ request.date }}</td>
               <td>{{ request.reason }}</td>
+              <td><button type="button" (click)="updateLeaveStatus(request,'Leave')">Accept</button></td>
+              <td><button type="button" (click)="updateLeaveStatus(request,'absent')">Reject</button></td>
             </tr>
-            <td><button type="button" (click)="updateLeaveStatus(request,'Leave')">Accept</button></td>
-            <td><button type="button" (click)="updateLeaveStatus(request,'absent')">Reject</button></td>
           </tbody>
         </table>
         

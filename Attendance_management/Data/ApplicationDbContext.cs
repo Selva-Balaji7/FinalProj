@@ -25,6 +25,8 @@ public partial class ApplicationDbContext : DbContext
 
     public virtual DbSet<Leaverequest> Leaverequests { get; set; }
 
+    public virtual DbSet<Leaverequestshistory> Leaverequestshistories { get; set; }
+
     public virtual DbSet<Leavetype> Leavetypes { get; set; }
 
     public virtual DbSet<Permission> Permissions { get; set; }
@@ -159,6 +161,47 @@ public partial class ApplicationDbContext : DbContext
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("leaverequests_ibfk_1");
+        });
+
+        modelBuilder.Entity<Leaverequestshistory>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PRIMARY");
+
+            entity.ToTable("leaverequestshistory");
+
+            entity.HasIndex(e => e.LeaveTypeId, "leave_type_id");
+
+            entity.HasIndex(e => e.UserId, "user_id");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                .HasColumnType("timestamp")
+                .HasColumnName("created_at");
+            entity.Property(e => e.Date).HasColumnName("date");
+            entity.Property(e => e.LeaveTypeId).HasColumnName("leave_type_id");
+            entity.Property(e => e.Reason)
+                .HasColumnType("text")
+                .HasColumnName("reason");
+            entity.Property(e => e.Status)
+                .HasMaxLength(255)
+                .HasColumnName("status");
+            entity.Property(e => e.UpdatedAt)
+                .ValueGeneratedOnAddOrUpdate()
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                .HasColumnType("timestamp")
+                .HasColumnName("updated_at");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
+
+            entity.HasOne(d => d.LeaveType).WithMany(p => p.Leaverequestshistories)
+                .HasForeignKey(d => d.LeaveTypeId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("leaverequestshistory_ibfk_2");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Leaverequestshistories)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("leaverequestshistory_ibfk_1");
         });
 
         modelBuilder.Entity<Leavetype>(entity =>

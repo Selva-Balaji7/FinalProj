@@ -19,33 +19,100 @@ namespace Attendance_management.Controllers
 
         // GET: api/LeaveRequests - Get all leave requests
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Leaverequest>>> GetLeaveRequests()
+        public async Task<ActionResult<IEnumerable<Leaverequest>>> GetLeaveRequests([FromQuery]string role)
         {
-            return await _context.Leaverequests
-                                 .Include(l => l.User)
-                                 .Include(l => l.LeaveType)
+            if (role == "null")
+                return await _context.Leaverequests
+                                 //.Include(l => l.User)s
+                                 .Select(l => new Leaverequest
+                                 {
+                                     Id=l.Id,
+                                     Date=l.Date,
+                                     LeaveType = new Leavetype{
+                                         Name = l.LeaveType.Name
+                                     },
+                                     User=new User
+                                     {
+                                         Id=l.User.Id,
+                                         Name = l.User.Name
+                                     },
+                                     Reason=l.Reason,
+                                     Status=l.Status,
+                                     CreatedAt = l.CreatedAt
+                                 })
                                  .ToListAsync();
+            else
+                return await _context.Leaverequests
+                        .Where(l => l.User.Role == role)
+                        .Select(l => new Leaverequest
+                        {
+                            Id = l.Id,
+                            Date = l.Date,
+                            LeaveType = new Leavetype
+                            {
+                                Name = l.LeaveType.Name
+                            },
+                            User = new User
+                            {
+                                Id = l.User.Id,
+                                Name = l.User.Name
+                            },
+                            Reason = l.Reason,
+                            Status = l.Status,
+                            CreatedAt = l.CreatedAt
+                        })
+                        .ToListAsync();
         }
 
         // GET: api/LeaveRequests/{id} - Get a leave request by ID
         [HttpGet("{id}")]
-        public async Task<ActionResult<Leaverequest>> GetLeaveRequest(int id)
+        public async Task<ActionResult<IEnumerator<Leaverequest>>> GetLeaveRequest(int id)
         {
             var leaveRequest = await _context.Leaverequests
-                                             .Include(l => l.User)
-                                             .Include(l => l.LeaveType)
-                                             .FirstOrDefaultAsync(l => l.Id == id);
+                                            .Where(l => l.UserId == id)
+                                             .ToListAsync();
 
             if (leaveRequest == null)
             {
                 return NotFound();
             }
 
-            return leaveRequest;
+            return Ok(leaveRequest);
         }
 
-        // POST: api/LeaveRequests - Create a new leave request
-        [HttpPost]
+        [HttpGet("check/{id}")]
+        public async Task<ActionResult<bool>> checkLeaveRequest(int id, [FromQuery] string Date)
+        {
+            var cDate = DateOnly.Parse(Date);
+
+            try
+            {
+                var leavereq = await _context.Leaverequests
+                    .Where(lr => lr.UserId == id && lr.Date == cDate)
+                    .ToListAsync();
+
+                if (leavereq.Count == 0)
+                {
+                    return Ok(true);
+                }
+                else
+                {
+                    return Ok(false);
+                }
+            }
+            catch
+            {
+                return BadRequest(false);
+            }
+
+
+        }
+
+   
+
+
+// POST: api/LeaveRequests - Create a new leave request
+[HttpPost]
         public async Task<ActionResult<Leaverequest>> PostLeaveRequest(Leaverequest leaveRequest)
         {
             leaveRequest.CreatedAt = DateTime.UtcNow;

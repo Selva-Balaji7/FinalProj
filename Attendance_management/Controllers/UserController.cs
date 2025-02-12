@@ -20,6 +20,7 @@ namespace Attendance_management.Controllers
             _context = context;
         }
 
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetAllUser()
         {

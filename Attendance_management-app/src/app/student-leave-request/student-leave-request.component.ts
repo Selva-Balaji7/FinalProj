@@ -30,34 +30,71 @@ export class StudentLeaveRequestComponent implements OnInit {
   // Update Leave Status (Accept or Reject)
   updateLeaveStatus(request: any, status: string,) {
     // 1️ First, Check if Attendance Exists for Given Date
-    this.http.getRecord(`Attendance/check/${request.user.id}?date=${request.date}`)
-      .subscribe(isAttendanceMarked => {
-        if (isAttendanceMarked === false) {
-          alert("Attendance already exists for this user on this date. Cannot approve leave.");
-          return;
+    if(status === 'Leave'){
+      var requrl = `Attendance/check/${request.user.id}?date=${request.date}`;
+      console.log(requrl);
+      this.http.getRecord(requrl)
+        .subscribe(isAttendanceMarked => {
+          if (isAttendanceMarked === false) {
+            alert("Attendance already exists for this user on this date.");
+            return;
+          }
+    
+          // 2️ If Attendance Does NOT Exist, Proceed with Updating Status
+          const newAttance = { 
+            userId: request.user.id,
+            remarks: request.reason,
+            status:status,
+            date: request.date
+           };
+    
+          this.http.postRecord(`Attendance/`, newAttance)
+            .subscribe(() => {
+              // 3️ Update UI to Reflect the New Status
+              // this.leaveRequests = this.leaveRequests.map((request: { id: number; }) =>
+              //   request.id === requestId ? { ...request, status } : request
+              // );
+    
+              // alert(`Leave request has been updated to ${status}`);
+              var newLeaveRequestHistory = {
+                userId: request.user.id,
+                leaveTypeId:request.leaveTypeId,
+                date:request.date,
+                status: "Accepted",
+                reason: request.reason,
+              }
+              this.http.postRecord(`LeaveRequestsHistory`, newLeaveRequestHistory).subscribe(
+                (data) => {
+                  console.log("Leave Request History added successfully", data);
+                  this.deleteLeaveRequest(request.id);
+                },
+                (error) => {
+                  console.error("Error adding leave request history:", error);
+                }
+              );
+
+            }, (error: any) => {
+              console.error("Error updating leave request:", error);
+            });
+        });
+    }
+    else if(status==='Rejected'){
+      var newLeaveRequestHistory = {
+        userId: request.user.id,
+        leaveTypeId:request.leaveTypeId,
+        status: "Rejected",
+        reason: request.reason,
+      }
+      this.http.postRecord(`LeaveRequestsHistory`, newLeaveRequestHistory).subscribe(
+        (data) => {
+          console.log("Leave Request History added successfully", data);
+          this.deleteLeaveRequest(request.id);
+        },
+        (error) => {
+          console.error("Error adding leave request history:", error);
         }
-  
-        // 2️ If Attendance Does NOT Exist, Proceed with Updating Status
-        const newAttance = { 
-          userId: request.user.id,
-          remarks: request.reason,
-          status:status,
-          date: request.date
-         };
-  
-        this.http.postRecord(`Attendance/`, newAttance)
-          .subscribe(() => {
-            // 3️ Update UI to Reflect the New Status
-            // this.leaveRequests = this.leaveRequests.map((request: { id: number; }) =>
-            //   request.id === requestId ? { ...request, status } : request
-            // );
-  
-            // alert(`Leave request has been updated to ${status}`);
-            this.deleteLeaveRequest(request.id);
-          }, (error: any) => {
-            console.error("Error updating leave request:", error);
-          });
-      });
+      );
+    }
   }
   
 

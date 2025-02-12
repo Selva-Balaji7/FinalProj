@@ -27,6 +27,7 @@ namespace Attendance_management.Controllers
                                  .Select(l => new Leaverequest
                                  {
                                      Id=l.Id,
+                                     LeaveTypeId=l.LeaveTypeId,
                                      Date=l.Date,
                                      LeaveType = new Leavetype{
                                          Name = l.LeaveType.Name
@@ -47,6 +48,7 @@ namespace Attendance_management.Controllers
                         .Select(l => new Leaverequest
                         {
                             Id = l.Id,
+                            LeaveTypeId = l.LeaveTypeId,
                             Date = l.Date,
                             LeaveType = new Leavetype
                             {
@@ -70,6 +72,24 @@ namespace Attendance_management.Controllers
         {
             var leaveRequest = await _context.Leaverequests
                                             .Where(l => l.UserId == id)
+                                            .Select(l => new Leaverequest
+                                            {
+                                                Id = l.Id,
+                                                LeaveTypeId = l.LeaveTypeId,
+                                                Date = l.Date,
+                                                LeaveType = new Leavetype
+                                                {
+                                                    Name = l.LeaveType.Name
+                                                },
+                                                User = new User
+                                                {
+                                                    Id = l.User.Id,
+                                                    Name = l.User.Name
+                                                },
+                                                Reason = l.Reason,
+                                                Status = l.Status,
+                                                CreatedAt = l.CreatedAt
+                                            })
                                              .ToListAsync();
 
             if (leaveRequest == null)
@@ -104,8 +124,31 @@ namespace Attendance_management.Controllers
             {
                 return BadRequest(false);
             }
+        }
 
 
+        [HttpGet("Countleaves/{id}")]
+        public async Task<ActionResult<int>> getLeaveCount(int id, [FromQuery]string Date)
+        {
+            var checkDate = DateOnly.Parse(Date);
+
+            try
+            {
+                var leaves = @"
+                Select * from LeaveRequests l
+                WHERE user_id = {0} 
+                    and MONTH({1}) = month(l.date)
+                    and YEAR({1}) = YEAR(l.date)";
+                var result = await _context.Leaverequests
+            .FromSqlRaw(leaves, id, checkDate)
+            .CountAsync();
+
+                return Ok(result);
+            }
+            catch
+            {
+                return BadRequest();
+            }                
         }
 
    
@@ -115,9 +158,9 @@ namespace Attendance_management.Controllers
 [HttpPost]
         public async Task<ActionResult<Leaverequest>> PostLeaveRequest(Leaverequest leaveRequest)
         {
-            leaveRequest.CreatedAt = DateTime.UtcNow;
-            leaveRequest.UpdatedAt = DateTime.UtcNow;
-            leaveRequest.Status = "Pending";
+            //leaveRequest.CreatedAt = DateTime.UtcNow;
+            //leaveRequest.UpdatedAt = DateTime.UtcNow;
+            //leaveRequest.Status = "Pending";
 
             _context.Leaverequests.Add(leaveRequest);
             await _context.SaveChangesAsync();
@@ -171,6 +214,13 @@ namespace Attendance_management.Controllers
 
             return NoContent();
         }
+
+        
+
+
+
+
+
     }
 }
 
