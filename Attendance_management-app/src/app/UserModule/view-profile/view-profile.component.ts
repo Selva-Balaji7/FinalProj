@@ -90,7 +90,6 @@ export class ViewProfileComponent {
             profilepicture: this.user.profilepicture,
             createdat:this.user.createdat
           }
-          console.log("Updating user with", updatedUser);
           this._http.updateRecord(`User/${this.user.id}`, updatedUser).subscribe(
             (res)=>{
               addMessage({type:"success", message:"Uploaded the Image"});

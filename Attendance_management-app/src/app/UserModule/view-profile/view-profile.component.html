@@ -1,67 +1,4 @@
-<div *ngIf="!editingPhoto" >
-    <img [src]="profileImageUrl" alt="">
-    <button type="button" *ngIf="canEdit" (click)="editingPhoto=true;editingDetails=false">Change</button>
-</div>
-
-<div *ngIf="editingPhoto">
-    <img [src]="profileImageUrl" alt="">
-    <form>    
-        <div>
-            <input type="file" (change)="onFileSelected($event)" accept="image/jpg"/>
-        </div>
-    </form>    
-    <button (click)="onUpload()" >Upload</button>
-    <button (click)="editingPhoto=false" >Cancel</button>
-</div>
-
-<div class="userdetails" *ngIf="!editingDetails">
-    <div>
-        <ul class="detailslist">
-            <li>Id</li>
-            <li>Name</li>
-            <li>Email</li>
-            <li>Password</li>
-            <li>Role</li>
-        </ul>
-    </div>
-    <div>
-        <ul class="detailslist">
-            <li><span>:</span>{{user.id}}</li>
-            <li><span>:</span>{{user.name | titlecase}}</li>
-            <li><span>:</span>{{user.email}}</li>
-            <li><span>:</span>{{user.password}}</li>
-            <li><span>:</span>{{user.role | titlecase}}</li>
-        </ul>
-    </div>
-</div>
-<button type="button" (click)="changeToForm()">Change Details</button>
-
-
-<div *ngIf="editingDetails">
-
-    <form [formGroup]="detailsForm" (ngSubmit)="updateUser()">
-        <div class="">
-            <label for="username">User Name</label>
-            <input type="text" id="username" name="name" formControlName="name">
-        </div>
-        <div class="">
-            <label for="useremail">User Email</label>
-            <input type="text" id="useremail" name="email" formControlName="email">
-        </div>
-        <div class="">
-            <label for="userpassword">Password</label>
-            <input type="text" id="userpassword" name="password" formControlName="password">
-        </div>
-        <button type="submit" *ngIf="detailsForm.valid">Accept</button>
-    </form>   
-    <button type="button" (click)="editingDetails=false">Cancel</button>
-</div>
-
-
-======================================
-
-
-<div class="profile">
+<div class="profile mt-5">
     <div *ngIf="!editingPhoto" >
         <img [src]="profileImageUrl" alt=""><hr/>
     </div>
@@ -81,28 +18,30 @@
 
 </div>
 
-<div class="changedetails">
-<button type="button" class="btn btn-outline-primary" (click)="changeToForm()">Change Details</button>
-
-</div>
-<div class="userdetails" *ngIf="!editingDetails">
-    <div>
-        <ul class="detailslist">
-            <li>Id</li>
-            <li>Name</li>
-            <li>Email</li>
-            <li>Password</li>
-            <li>Role</li>
-        </ul>
+<div class="userdetailsContainer" *ngIf="!editingDetails">    
+    <div class="userdetails" >
+        <div>
+            <ul class="detailslist">
+                <li>Id</li>
+                <li>Name</li>
+                <li>Email</li>
+                <li>Password</li>
+                <li>Role</li>
+            </ul>
+        </div>
+        <div>
+            <ul class="detailslist">
+                <li><span>:</span>{{user.id}}</li>
+                <li><span>:</span>{{user.name | titlecase}}</li>
+                <li><span>:</span>{{user.email}}</li>
+                <li><span>:</span>{{user.password}}</li>
+                <li><span>:</span>{{user.role | titlecase}}</li>
+            </ul>
+        </div>
     </div>
-    <div>
-        <ul class="detailslist">
-            <li><span>:</span>{{user.id}}</li>
-            <li><span>:</span>{{user.name | titlecase}}</li>
-            <li><span>:</span>{{user.email}}</li>
-            <li><span>:</span>{{user.password}}</li>
-            <li><span>:</span>{{user.role | titlecase}}</li>
-        </ul>
+
+    <div class="changedetails">
+        <button type="button" class="btn btn-outline-primary" (click)="changeToForm()">Change Details</button>
     </div>
 </div>
 

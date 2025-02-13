@@ -1,34 +1,4 @@
-<!-- <p>view-all-attendancerequest works!</p> -->
-
-
-
-
-<div class="container">
-    <h2>All Attendance Requests</h2>
-  
-    <table border="1">
-      <thead>
-        <tr>
-          <th>User ID</th>
-          <th>Date</th>
-          <th>Status</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let request of allattendanceRequests">
-          <td>{{ request.userId }}</td>
-          <td>{{ request.date }}</td>
-          <td>{{ request.status }}</td>
-          <td><button (click)="onSubmit(request)">Approve</button> <button (click)="onReject(request)">Reject</button></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  ====================================================
-
-  <div class="d-flex justify-content-center align-items-center vh-100" style="background-color: #f8f9fa;">
+<div class="d-flex justify-content-center align-items-center vh-100" style="background-color: #f8f9fa;">
     <div class="card shadow-lg p-4" style="width: 800px; border-radius: 10px;">
         <h3 class="text-center mb-3 text-primary" style="font-weight:bold;">All Attendance Requests</h3>
   

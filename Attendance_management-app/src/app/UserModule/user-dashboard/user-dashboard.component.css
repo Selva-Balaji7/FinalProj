@@ -29,16 +29,17 @@ html, body {
     width: 250px; /* Adjust width if needed */
     overflow-y: auto; /*Enables vertical scrolling*/
     overflow-x: hidden;
+    z-index: 9;
   }
   
   .sidebar-open {
     left: 0 !important;
   }
   
-  /* Sidebar Menu */
-  .sidebar details {
-    margin: 10px 0;
+  .sidebar details{
+    margin-top: 5px;
   }
+  
   
   .sidebar summary {
     font-size: 18px;
@@ -79,7 +80,14 @@ html, body {
     cursor: pointer;
     padding: 10px 15px;
     border-radius: 5px;
+    z-index: 10;
   }
   .main-content.sidebar-open {
     margin-left: 250px; /* Adjust based on sidebar width */
+}
+
+
+summary:only-child {
+  display:none;
+  margin: 0px;
 }

@@ -2,12 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule , ReactiveFormsModule, FormGroup, FormControl, Validators} from '@angular/forms';
 import { DbservicesService } from '../../services/db/dbservices.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { addMessage } from '../../../common/popupmessage';
 
 @Component({
   selector: 'app-user-registration',
-  imports: [FormsModule, CommonModule, ReactiveFormsModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule,RouterLink],
   templateUrl: './user-registration.component.html',
   styleUrl: './user-registration.component.css'
 })
