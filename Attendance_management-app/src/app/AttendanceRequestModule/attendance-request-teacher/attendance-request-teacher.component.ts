@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DbservicesService } from '../../Services/dbservices.service';
+import { DbservicesService } from '../../services/db/dbservices.service';
 import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-attendance-request-teacher',
@@ -19,7 +19,7 @@ export class AttendanceRequestTeacherComponent implements OnInit {
   }
 
   loadAttendanceRequests(): void {
-    this.attendanceReqTeacher.getRequests('Attendancerequest/byrole?role=Teacher').subscribe(
+    this.attendanceReqTeacher.getRecord('Attendancerequest/byrole?role=Teacher').subscribe(
       (data: any) => {
         this.attendanceRequests = data;
         console.log(this.attendanceRequests);

@@ -1,16 +1,17 @@
+<div class="user">
 <div>
     <h2>Welcome {{user.name}}</h2>
 </div>
 <div class="userdetails">
     <div>
-        <ul class="detailslist">
+        <ul style=" font-weight: bold" class="detailslist">
             <li>Id</li>
             <li>Email</li>
             <li>Role</li>
         </ul>
     </div>
     <div>
-        <ul class="detailslist">
+        <ul style=" font-weight: 600; " class="detailslist">
             <li><span>:</span>{{user.id}}</li>
             <li><span>:</span>{{user.email}}</li>
             <li><span>:</span>{{user.role}}</li>
@@ -30,4 +31,6 @@
         <a  [routerLink]="['/leaverequest']">Request Leave</a>
     </div>
 </div> 
+</div>
+
 

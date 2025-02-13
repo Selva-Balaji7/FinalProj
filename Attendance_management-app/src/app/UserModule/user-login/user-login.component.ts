@@ -97,7 +97,7 @@ export class UserLoginComponent {
               this.userstore.dispatch(saveUserData(this.User));
               localStorage.setItem('user', JSON.stringify(this.User));
               setTimeout(() => {
-                this._route.navigate(["/dasboard"]);
+                this._route.navigate(["/dashboard"]);
               }, 1000);
           },
           (error) => {addMessage({type:"failure", message:"Error Getting Data From Server"});}

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DbservicesService } from '../services/db.service';
+import { DbservicesService } from '../../services/db/dbservices.service'; 
 import { CommonModule } from '@angular/common';
 
 @Component({

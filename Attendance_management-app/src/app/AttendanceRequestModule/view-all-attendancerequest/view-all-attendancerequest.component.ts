@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DbservicesService } from '../../services/db/dbservices.service';
+import { DbservicesService } from '../../services/db/dbservices.service'; 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -21,7 +21,7 @@ export class ViewAllAttendancerequestComponent {
   }
 
   loadAttendanceRequests(): void {
-    this.allAttendanceReq.getRequests('Attendancerequest').subscribe(
+    this.allAttendanceReq.getRecord('Attendancerequest').subscribe(
       (data:any) => {
         this.allattendanceRequests = data;
       },

@@ -754,6 +754,26 @@
     ]
   },
   {
+    "ContainingType": "Attendance_management.Controllers.UserController",
+    "Method": "getDate",
+    "RelativePath": "api/User/getDate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.DateTime",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Attendance_management.Controllers.UsersregistrationController",
     "Method": "GetAllUserRegistration",
     "RelativePath": "api/Usersregistration",

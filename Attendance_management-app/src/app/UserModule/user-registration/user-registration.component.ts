@@ -12,6 +12,9 @@ import { addMessage } from '../../../common/popupmessage';
   styleUrl: './user-registration.component.css'
 })
 export class UserRegistrationComponent {
+togglePassword() {
+throw new Error('Method not implemented.');
+}
 
   selectedFile:any;
   regForm:any;
@@ -20,6 +23,7 @@ export class UserRegistrationComponent {
   isNotUploadingProfileImage:boolean = false;
 
   profilePic:string = "ProfilePhotoPlaceholder.png";
+showPassword: any;
 
   constructor(private http : DbservicesService, private _route:Router){}
 

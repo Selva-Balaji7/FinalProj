@@ -81,10 +81,27 @@ export class ViewProfileComponent {
           localStorage.setItem('user', JSON.stringify(User));
           this.profileImageUrl = `${this._http.baseURL}/Image/Get/${this.user.profilepicture}`;
           this.editingPhoto=false;
-          addMessage({type:"success", message:"Uploaded the Image"});
-          setTimeout(() => {
-            window.location.reload();
-          }, 1000);
+          var updatedUser = {
+            id: this.user.id,
+            name: this.user.name,
+            email: this.user.email,
+            password: this.user.password,
+            role: this.user.role,
+            profilepicture: this.user.profilepicture,
+            createdat:this.user.createdat
+          }
+          console.log("Updating user with", updatedUser);
+          this._http.updateRecord(`User/${this.user.id}`, updatedUser).subscribe(
+            (res)=>{
+              addMessage({type:"success", message:"Uploaded the Image"});
+              setTimeout(() => {
+                window.location.reload();
+              }, 1000);
+            },
+            (error)=>{
+              addMessage({type:"failure", message:"Upload Failed"});
+            }
+          );
         },
         (error: any) => {
           addMessage({type:"failure", message:"Upload Failed"});

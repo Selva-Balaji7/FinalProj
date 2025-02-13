@@ -1,39 +1,72 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
+import { DbservicesService } from '../../services/db/dbservices.service';
+import { inject } from '@angular/core';
+	import { Store } from '@ngrx/store';
+	import { UserState } from '../../../store/user/user.state';
 
 @Component({
   selector: 'app-edit-users',
-  imports: [CommonModule,FormsModule,RouterModule],
+  imports: [CommonModule,FormsModule,RouterModule, ReactiveFormsModule],
   templateUrl: './edit-users.component.html',
   styleUrl: './edit-users.component.css'
 })
 export class EditUsersComponent implements OnInit {
-    users: any[] = [];
+  private userstore = inject(Store<{user:UserState}>);
+  	public user:any;
+
+    users:any;
+    roles:any;
+    addUserForm:any;
     showUserForm = false;
+    showAddUserForm = false;
     isEditing = false;
     selectedUser: any = {};
-    private apiUrl = 'https://localhost:7189/api/editusers';
+
+    canEditUsers:boolean= false;
   
-    constructor(private http: HttpClient) {}
+    constructor(private _route:Router,public http: DbservicesService) {}
   
     ngOnInit() {
-      this.loadUsers();
+      this.userstore.select(state => state.user).subscribe(data => this.user=data);
 
+      if(!this.user.permissions.includes("ViewUsers"))
+        this._route.navigate(['/']);
+      else
+      this.loadUsers();
+      
+      if(this.user.permissions.includes("EditUsers"))
+        this.canEditUsers = true;
+
+      this.addUserForm  = new FormGroup({
+        id: new FormControl("",[Validators.required]),
+        name: new FormControl("",[Validators.required]),
+        email: new FormControl("",[Validators.required]),
+        password: new FormControl("",[Validators.required]),
+        role:new FormControl("",[Validators.required]),
+      })
+
+      this.http.getRecord("role/onlyroles").subscribe(
+        (res)=>{
+          this.roles = res;
+        },
+        (error)=>{
+          
+        }
+      )
     }
   
     loadUsers() {
       console.log('loadUsers');
-      this.http.get<any[]>(this.apiUrl).subscribe((data) => {
-        this.users = data.map(user => ({
-          ...user,
-          created_at: new Date(user.createdAt),   // Convert to Date object
-          updated_at: new Date(user.updatedAt)
-        }));
+      this.http.getRecord("User").subscribe((data) => {
+        this.users = data
        console.log(data);
       });
+
+      
   }
   
     openUserForm(user: any = {}) {
@@ -47,33 +80,58 @@ export class EditUsersComponent implements OnInit {
       this.selectedUser = {};
 
     }
+
+    openAddUserForm() {
+      this.isEditing = false;
+      this.showUserForm = false;
+      this.showAddUserForm=true
+    }
+    
+    closeAddUserForm() {
+      this.showAddUserForm=false
+      this.addUserForm.setValue({
+        id:"",
+        name:"",
+        email:"",
+        password:"",
+        role:""
+      })
+    }
   
     saveUser() {
-        const currentTime = new Date().toISOString();
         
-        // if (!this.selectedUser.created_at) {
-        //   this.selectedUser.created_at = currentTime; // Set only if it's a new user
-        // }
-        // this.selectedUser.updated_at = currentTime; // Always update
-      
+        
+      console.log("Updading user", this.selectedUser);
         if (this.isEditing) {
-          this.http.put(`${this.apiUrl}/${this.selectedUser.id}`, this.selectedUser)
+          this.http.updateRecord(`User/${this.selectedUser.id}`, this.selectedUser)
             .subscribe(() => {
+              console.log("Updated User1");
               this.loadUsers();
             });
-        } else {
-          this.http.post(this.apiUrl, this.selectedUser)
-            .subscribe(() => {
-              this.loadUsers();
-            });
-        }
+        } 
       
         this.closeUserForm();
       }
 
+      addUser(){
+        var newUser = {...this.addUserForm.value, profilePicture:"ProfilePhotoPlaceholder.jpg"};
+        console.log(newUser);
+        this.http.postRecord("user", newUser).subscribe(
+          (res)=>{
+            alert("New user Added");
+            this.closeAddUserForm();
+            this.loadUsers();
+          },
+          (error)=>{
+            console.log("Failed to add user, Check the Users Table for Duplicate ID");
+          }
+        )
+      }
+
+
       deleteUser(id: number) {
         if (confirm('Are you sure you want to delete this user?')) {
-          this.http.delete(`${this.apiUrl}/${id}`).subscribe(() => this.loadUsers());
+          this.http.deleteRecord(`User/${id}`).subscribe(() => this.loadUsers());
         }
       }
       
@@ -82,5 +140,3 @@ export class EditUsersComponent implements OnInit {
    
   
   
-
-

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UserState } from '../../../store/user/user.state';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
@@ -18,6 +18,9 @@ export class UserDashboardComponent {
   private userstore = inject(Store<{user:UserState}>)
   public user:any;
   public profileImageUrl:any;
+  @ViewChild('sidebar') sidebar!: ElementRef;  
+  @ViewChild('mainContent') mainContent!: ElementRef;  
+  public isSidebarOpen: boolean=false;
 
   constructor(private _route:Router, private _http: DbservicesService){}
   
@@ -47,4 +50,13 @@ export class UserDashboardComponent {
     }, 1000);
   }
 
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+
+    //  Ensure elements exist before accessing them
+    if (this.sidebar && this.sidebar.nativeElement && this.mainContent && this.mainContent.nativeElement) {
+      this.sidebar.nativeElement.style.left = this.isSidebarOpen ? '0px' : '-250px';
+      this.mainContent.nativeElement.style.marginLeft = this.isSidebarOpen ? '250px' : '0px';
+    }
+}
 }

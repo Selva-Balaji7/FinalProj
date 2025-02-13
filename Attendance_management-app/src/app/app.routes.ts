@@ -35,7 +35,7 @@ export const routes: Routes = [
     {path:"", component:UserLoginComponent},
     {path:"userregistration", component:UserRegistrationComponent},
     {path:"forgotpassword", component:ForgotPasswordComponent},
-    {path:"dasboard", component:UserDashboardComponent, children:[
+    {path:"dashboard", component:UserDashboardComponent, children:[
         {path:"", component:UserDetailsComponent},
         {path:"profile", component:ViewProfileComponent},
 

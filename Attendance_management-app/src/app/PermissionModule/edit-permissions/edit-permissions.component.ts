@@ -119,4 +119,21 @@ export class EditPermissionsComponent {
         }
         
       }
+
+      togglePermission(role: any, permission: string, event: any) {
+        if (event.target.checked) {
+            // Add permission if not already present
+            if (!role.permissions.includes(permission)) {
+                role.permissions.push(permission);
+            }
+        } else {
+            // Remove permission if it exists
+            role.permissions = role.permissions.filter((perm: string) => perm !== permission);
+        }
+    }
+    
+
+
+
+
 }

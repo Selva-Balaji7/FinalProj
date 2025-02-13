@@ -1,19 +1,27 @@
-<div *ngIf="!editingPhoto" >
-    <img [src]="profileImageUrl" alt="">
-    <button type="button" *ngIf="canEdit" (click)="editingPhoto=true;editingDetails=false">Change</button>
+<div class="profile">
+    <div *ngIf="!editingPhoto" >
+        <img [src]="profileImageUrl" alt=""><hr/>
+    </div>
+    <button type="button" style="font-weight: 600; margin: 10px;" class="btn btn-outline-dark" *ngIf="canEdit" (click)="editingPhoto=true;editingDetails=false">Change profile</button>
+    
+    <div class="editprofile" *ngIf="editingPhoto">
+        <img [src]="profileImageUrl" alt="">
+        <form>    
+            <div>
+                <input type="file" (change)="onFileSelected($event)" accept="image/jpg"/>
+            </div>
+        </form>    
+        <button (click)="onUpload()" class="btn btn-success me-1" >Upload</button>
+        <button (click)="editingPhoto=false" class="btn btn-danger ms-0">Cancel</button>
+    </div>
+
+
 </div>
 
-<div *ngIf="editingPhoto">
-    <img [src]="profileImageUrl" alt="">
-    <form>    
-        <div>
-            <input type="file" (change)="onFileSelected($event)" accept="image/jpg"/>
-        </div>
-    </form>    
-    <button (click)="onUpload()" >Upload</button>
-    <button (click)="editingPhoto=false" >Cancel</button>
-</div>
+<div class="changedetails">
+<button type="button" class="btn btn-outline-primary" (click)="changeToForm()">Change Details</button>
 
+</div>
 <div class="userdetails" *ngIf="!editingDetails">
     <div>
         <ul class="detailslist">
@@ -34,7 +42,6 @@
         </ul>
     </div>
 </div>
-<button type="button" (click)="changeToForm()">Change Details</button>
 
 
 <div *ngIf="editingDetails">
@@ -52,7 +59,13 @@
             <label for="userpassword">Password</label>
             <input type="text" id="userpassword" name="password" formControlName="password">
         </div>
-        <button type="submit" *ngIf="detailsForm.valid">Accept</button>
+        <button class="btn btn-success w-25" type="submit" *ngIf="detailsForm.valid">submit</button>
+        <button class="btn btn-danger w-25 m-10" type="button" (click)="editingDetails=false">Cancel</button>
+
     </form>   
-    <button type="button" (click)="editingDetails=false">Cancel</button>
-</div>
+</div> 
+
+
+
+
+  

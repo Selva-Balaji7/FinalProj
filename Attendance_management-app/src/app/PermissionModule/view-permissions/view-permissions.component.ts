@@ -20,6 +20,7 @@ export class ViewPermissionsComponent {
       public user:any;  
       Roles:any = [];
       PermissionList:any = PermissionList;
+givepermissionForm: any;
     
       constructor(private _route:Router, private _http:DbservicesService){}
     

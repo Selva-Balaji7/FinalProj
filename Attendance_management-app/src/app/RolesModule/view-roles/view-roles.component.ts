@@ -154,4 +154,13 @@ export class ViewRolesComponent {
     );
   }
 
+  togglePermission(role: any, permission: string, event: any) {
+    if (event.target.checked) {
+        role.permissions.push(permission); // Add permission
+    } else {
+        role.permissions = role.permissions.filter((p: string) => p !== permission); // Remove permission
+    }
+}
+
+
 }

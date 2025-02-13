@@ -2325,23 +2325,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Bejesh\\.nuget\\packages\\": {},
+    "C:\\Users\\tharu\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Atendance_Management_Final\\Attendance_management\\Attendance_management.csproj",
+      "projectUniqueName": "C:\\Users\\tharu\\OneDrive\\Desktop\\FinalProj(bejesh)\\FinalProj\\Attendance_management\\Attendance_management.csproj",
       "projectName": "Attendance_management",
-      "projectPath": "D:\\Atendance_Management_Final\\Attendance_management\\Attendance_management.csproj",
-      "packagesPath": "C:\\Users\\Bejesh\\.nuget\\packages\\",
-      "outputPath": "D:\\Atendance_Management_Final\\Attendance_management\\obj\\",
+      "projectPath": "C:\\Users\\tharu\\OneDrive\\Desktop\\FinalProj(bejesh)\\FinalProj\\Attendance_management\\Attendance_management.csproj",
+      "packagesPath": "C:\\Users\\tharu\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\tharu\\OneDrive\\Desktop\\FinalProj(bejesh)\\FinalProj\\Attendance_management\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Bejesh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\tharu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -2427,6 +2427,12 @@
     }
   },
   "logs": [
+    {
+      "code": "NU1900",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json."
+    },
     {
       "code": "NU1701",
       "level": "Warning",
