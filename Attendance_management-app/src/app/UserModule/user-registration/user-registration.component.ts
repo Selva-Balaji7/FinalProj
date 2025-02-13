@@ -18,6 +18,8 @@ export class UserRegistrationComponent {
   roles:any = [];
   hasUploadedProfileImage:Boolean = false;
   isNotUploadingProfileImage:boolean = false;
+  
+showPassword: any;
 
   profilePic:string = "ProfilePhotoPlaceholder.png";
 

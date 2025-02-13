@@ -25,11 +25,11 @@ export class ForgotPasswordComponent {
   ngOnInit(){
     this.ForgotPasswordForm = new FormGroup({
       id:new FormControl("", [Validators.required, Validators.pattern("^[0-9]{3,4}$")]),
-      email:new FormControl("", [Validators.required])
+      email:new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")])
     }) 
     this.newPasswordForm = new FormGroup({
-      password:new FormControl("", [Validators.required]),
-      confirmpassword:new FormControl("", [Validators.required]),
+      password:new FormControl("", [Validators.required, Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")]),
+      confirmpassword:new FormControl("", [Validators.required, Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")      ]),
     }) 
   }
 
@@ -56,6 +56,11 @@ export class ForgotPasswordComponent {
   }
 
   ChangePassword(){
+    if(this.newPasswordForm.value.confirmpassword != this.newPasswordForm.value.password)
+    {
+      addMessage({type:"warning", message:"Passwords Not Same"});
+      return;
+    }
     this.User = {
       id:this.User.id,
       name:this.User.name,
@@ -65,7 +70,7 @@ export class ForgotPasswordComponent {
       profilePicture:this.User.profilePicture
     }
    
-    this._http.postRecord("User", this.User).subscribe(
+    this._http.updateRecord(`User/${this.User.id}`, this.User).subscribe(
       (res)=>{
         addMessage({type:"success", message:"Password Updated"});
         setTimeout(() => {
@@ -78,18 +83,55 @@ export class ForgotPasswordComponent {
     )
   }
 
-  validate(formcontrolname:any){
-    if(this.ForgotPasswordForm.get(formcontrolname).touched && this.ForgotPasswordForm.get(formcontrolname).invalid){
-      if(this.ForgotPasswordForm.get(formcontrolname).errors.required){
-        if(formcontrolname == "id")
-          addMessage({type:"warning", message:"Id Field is Requied"});
-        else
-          addMessage({type:"warning", message:"Email Field is Requied"});
-      }
-      if(this.ForgotPasswordForm.get(formcontrolname).errors.pattern){
-        addMessage({type:"warning", message:"Email is invalid"});
+  validate1(formcontrolname:any){
+    if(formcontrolname == "id"){
+      if(this.ForgotPasswordForm.get("id").invalid){
+        if(this.ForgotPasswordForm.get("id").errors.pattern){
+          addMessage({type:"warning", message:"Id is a 3 or 4 Digit Number"});
+        }
+        if(this.ForgotPasswordForm.get("id").errors.required){
+          addMessage({type:"warning", message:"id Field is Requied"});
+        }
       }
     }
+    else if(formcontrolname == "email"){
+      if(this.ForgotPasswordForm.get("email").invalid){
+        if(this.ForgotPasswordForm.get("email").errors.pattern){
+          addMessage({type:"warning", message:"InValid Email"});
+        }
+        if(this.ForgotPasswordForm.get("email").errors.required){
+          addMessage({type:"warning", message:"Email is Requied"});
+        }
+      }
+    }
+  }
+
+  validate2(formcontrolname:any){
+    if(formcontrolname == "password"){
+      if(this.newPasswordForm.get("password").invalid){
+        if(this.newPasswordForm.get("password").errors.pattern){
+          addMessage({
+            type:"warning", 
+            message:"Password should have Lower, Upper, Digits, Special Characters "});
+        }
+        if(this.newPasswordForm.get("password").errors.required){
+          addMessage({type:"warning", message:"Password Field is Requied"});
+        }
+      }
+    }
+    else if(formcontrolname == "confirmpassword"){
+      if(this.newPasswordForm.get("confirmpassword").invalid){
+        if(this.newPasswordForm.get("confirmpassword").errors.pattern){
+          addMessage({
+            type:"warning", 
+            message:"Password should have Lower, Upper, Digits, Special Characters "});
+        }
+        if(this.newPasswordForm.get("confirmpassword").errors.required){
+          addMessage({type:"warning", message:"Confirm Password Field is Requied"});
+        }
+      }
+    }
+    
   }
 
 }

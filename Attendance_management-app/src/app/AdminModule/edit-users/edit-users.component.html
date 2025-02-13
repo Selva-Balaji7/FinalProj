@@ -129,6 +129,7 @@
               type="text"
               class="form-control"
               formControlName="id"
+              (blur)="validate('id')"
               required
             />
           </div>
@@ -138,6 +139,7 @@
               type="text"
               class="form-control"
               formControlName="name"
+              (blur)="validate('name')"
               required
             />
           </div>
@@ -147,6 +149,7 @@
               type="email"
               class="form-control"
               formControlName="email"
+              (blur)="validate('email')"
               required
             />
           </div>
@@ -155,19 +158,22 @@
             <input 
               type="text" 
               class="form-control" 
-              formControlName="password" required />
+              formControlName="password"
+              (blur)="validate('password')" required />
           </div>
           <div class="mb-3">
             <label>Role:</label>
             <select
               class="form-control"
               formControlName="role"
+              (blur)="validate('role')"
               required
             >
             <option *ngFor="let role of roles" [value]="role.roleName">{{role.roleName}}</option>
             </select>
           </div>
-          <button type="submit" class="btn btn-success w-100">Save</button>
+          <button *ngIf="addUserForm.valid" type="submit" class="btn btn-success w-100">Save</button>
+          <button *ngIf="!addUserForm.valid" type="submit" class="btn btn-success w-100" disabled>Save</button>
         </form>
       </div>
     </div>
