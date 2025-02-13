@@ -128,7 +128,7 @@ namespace Attendance_management.Controllers
 
 
         [HttpGet("Countleaves/{id}")]
-        public async Task<ActionResult<int>> getLeaveCount(int id, [FromQuery] string Date)
+        public async Task<ActionResult<object>> getLeaveCount(int id, [FromQuery] string Date)
         {
             var checkDate = DateOnly.Parse(Date);
 
@@ -139,9 +139,14 @@ namespace Attendance_management.Controllers
                 WHERE user_id = {0} 
                     and MONTH({1}) = month(l.date)
                     and YEAR({1}) = YEAR(l.date)";
-                var result = await _context.Leaverequests
+                var leavecount = await _context.Leaverequests
             .FromSqlRaw(leaves, id, checkDate)
             .CountAsync();
+
+                var result = new
+                {
+                    count = leavecount
+                };
 
                 return Ok(result);
             }

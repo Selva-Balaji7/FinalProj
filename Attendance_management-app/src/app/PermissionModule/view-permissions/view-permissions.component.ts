@@ -42,7 +42,6 @@ export class ViewPermissionsComponent {
               (role:any)=>{
                 return {...role,permissions:role.permissions.map((val:any)=>{return val.permissionName})}
               })
-            console.log(this.Roles);
           }
         )
       }

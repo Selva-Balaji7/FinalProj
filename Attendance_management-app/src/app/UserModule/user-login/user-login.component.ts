@@ -35,7 +35,7 @@ export class UserLoginComponent {
   ngOnInit(){
     this.LoginForm = new FormGroup({
       id:new FormControl("", [Validators.required, Validators.pattern("^[0-9]{3,4}$")]),
-      password:new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z@_0-9]{3,20}$")])
+      password:new FormControl("", [Validators.required, Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")])
     })
 
     this._http.getRecord('Attendance/isOnline').subscribe(
@@ -97,7 +97,7 @@ export class UserLoginComponent {
               this.userstore.dispatch(saveUserData(this.User));
               localStorage.setItem('user', JSON.stringify(this.User));
               setTimeout(() => {
-                this._route.navigate(["/dasboard"]);
+                this._route.navigate(["/dashboard"]);
               }, 1000);
           },
           (error) => {addMessage({type:"failure", message:"Error Getting Data From Server"});}
@@ -108,17 +108,27 @@ export class UserLoginComponent {
   }
 
   validate(formcontrolname:any){
-    if(this.LoginForm.get(formcontrolname).touched && this.LoginForm.get(formcontrolname).invalid){
-      if(this.LoginForm.get(formcontrolname).errors.required){
-        if(formcontrolname == "id")
-          addMessage({type:"warning", message:"Id Field is Requied"});
-        else
-          addMessage({type:"warning", message:"Password Field is Requied"});
-      }
-      if(this.LoginForm.get(formcontrolname).errors.pattern){
-        addMessage({type:"warning", message:"Id is a 3 or 4 Digit Number"});
+    if(formcontrolname == "id"){
+      if(this.LoginForm.get("id").invalid){
+        if(this.LoginForm.get("id").errors.pattern){
+          addMessage({type:"warning", message:"Id is a 3 or 4 Digit Number"});
+        }
+        if(this.LoginForm.get("id").errors.required){
+          addMessage({type:"warning", message:"id Field is Requied"});
+        }
       }
     }
+    else if(formcontrolname == "password"){
+      if(this.LoginForm.get("password").invalid){
+        if(this.LoginForm.get("password").errors.pattern){
+          addMessage({type:"warning", message:"InValid Password"});
+        }
+        if(this.LoginForm.get("password").errors.required){
+          addMessage({type:"warning", message:"Password Field is Requied"});
+        }
+      }
+    }
+    
   }
 
 

@@ -1,28 +1,46 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import { DbservicesService } from '../../services/db/dbservices.service';
+import { inject } from '@angular/core';
+	import { Store } from '@ngrx/store';
+	import { UserState } from '../../../store/user/user.state';
 
 @Component({
   selector: 'app-edit-users',
-  imports: [CommonModule,FormsModule,RouterModule],
+  imports: [CommonModule,FormsModule,RouterModule, ReactiveFormsModule],
   templateUrl: './edit-users.component.html',
   styleUrl: './edit-users.component.css'
 })
 export class EditUsersComponent implements OnInit {
+  private userstore = inject(Store<{user:UserState}>);
+  	public user:any;
+
     users:any;
+    roles:any;
     addUserForm:any;
     showUserForm = false;
     showAddUserForm = false;
     isEditing = false;
     selectedUser: any = {};
+
+    canEditUsers:boolean= false;
   
-    constructor(public http: DbservicesService) {}
+    constructor(private _route:Router,public http: DbservicesService) {}
   
     ngOnInit() {
+      this.userstore.select(state => state.user).subscribe(data => this.user=data);
+
+      if(!this.user.permissions.includes("ViewUsers"))
+        this._route.navigate(['/']);
+      else
       this.loadUsers();
+      
+      if(this.user.permissions.includes("EditUsers"))
+        this.canEditUsers = true;
+
       this.addUserForm  = new FormGroup({
         id: new FormControl("",[Validators.required]),
         name: new FormControl("",[Validators.required]),
@@ -30,6 +48,15 @@ export class EditUsersComponent implements OnInit {
         password: new FormControl("",[Validators.required]),
         role:new FormControl("",[Validators.required]),
       })
+
+      this.http.getRecord("role/onlyroles").subscribe(
+        (res)=>{
+          this.roles = res;
+        },
+        (error)=>{
+          
+        }
+      )
     }
   
     loadUsers() {
@@ -38,6 +65,8 @@ export class EditUsersComponent implements OnInit {
         this.users = data
        console.log(data);
       });
+
+      
   }
   
     openUserForm(user: any = {}) {
@@ -60,33 +89,43 @@ export class EditUsersComponent implements OnInit {
     
     closeAddUserForm() {
       this.showAddUserForm=false
+      this.addUserForm.setValue({
+        id:"",
+        name:"",
+        email:"",
+        password:"",
+        role:""
+      })
     }
   
     saveUser() {
-        const currentTime = new Date().toISOString();
         
-        // if (!this.selectedUser.created_at) {
-        //   this.selectedUser.created_at = currentTime; // Set only if it's a new user
-        // }
-        // this.selectedUser.updated_at = currentTime; // Always update
-      
+        
+      console.log("Updading user", this.selectedUser);
         if (this.isEditing) {
           this.http.updateRecord(`User/${this.selectedUser.id}`, this.selectedUser)
             .subscribe(() => {
+              console.log("Updated User1");
               this.loadUsers();
             });
-        } else {
-          this.http.postRecord("User", this.selectedUser)
-            .subscribe(() => {
-              this.loadUsers();
-            });
-        }
+        } 
       
         this.closeUserForm();
       }
 
       addUser(){
-
+        var newUser = {...this.addUserForm.value, profilePicture:"ProfilePhotoPlaceholder.jpg"};
+        console.log(newUser);
+        this.http.postRecord("user", newUser).subscribe(
+          (res)=>{
+            alert("New user Added");
+            this.closeAddUserForm();
+            this.loadUsers();
+          },
+          (error)=>{
+            console.log("Failed to add user, Check the Users Table for Duplicate ID");
+          }
+        )
       }
 
 

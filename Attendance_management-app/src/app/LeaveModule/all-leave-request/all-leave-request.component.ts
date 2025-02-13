@@ -1,18 +1,19 @@
-import { Component, inject } from '@angular/core';
-import { DbservicesService } from '../../services/db/dbservices.service';
+import { Component } from '@angular/core';
+import { DbservicesService } from '../../services/db/dbservices.service'; 
 import { CommonModule } from '@angular/common';
 import { addMessage } from '../../../common/popupmessage';
-import { Store } from '@ngrx/store';
+import { inject } from '@angular/core';
+	import { Store } from '@ngrx/store';
 	import { UserState } from '../../../store/user/user.state';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-teacher-leave-request',
+  selector: 'app-all-leave-request',
   imports: [CommonModule],
-  templateUrl: './teacher-leave-request.component.html',
-  styleUrl: './teacher-leave-request.component.css'
+  templateUrl: './all-leave-request.component.html',
+  styleUrl: './all-leave-request.component.css'
 })
-export class TeacherLeaveRequestComponent {
+export class AllLeaveRequestComponent {
   private userstore = inject(Store<{user:UserState}>);
       public user:any;
   
@@ -24,7 +25,7 @@ export class TeacherLeaveRequestComponent {
     ngOnInit(): void {
       this.userstore.select(state => state.user).subscribe(date => this.user=date);
   
-      if(!this.user.permissions.includes("TeacherLeaveRequest"))
+      if(!this.user.permissions.includes("AllLeaveRequest"))
         this._route.navigate(['/']);
       else
         this.fetchStudentRequests();
@@ -32,7 +33,7 @@ export class TeacherLeaveRequestComponent {
     }
   
     fetchStudentRequests() {
-      this.http.getRecord('LeaveRequest?role=teacher')
+      this.http.getRecord('LeaveRequest?role=null')
         .subscribe((data) => {
           this.leaveRequests = data;
         });
@@ -108,4 +109,5 @@ export class TeacherLeaveRequestComponent {
         addMessage({type:"failed", message:`Unable to remove rquest`});
       });
   }
+
 }

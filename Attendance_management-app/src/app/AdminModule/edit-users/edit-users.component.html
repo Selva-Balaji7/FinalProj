@@ -1,6 +1,6 @@
 <div class="container mt-4">
   <h2 class="text-center">User Management</h2>
-  <button class="btn btn-primary mb-3" (click)="openAddUserForm()">
+  <button *ngIf="canEditUsers" class="btn btn-primary mb-3" (click)="openAddUserForm()">
     <i class="bi bi-plus-circle"></i> Add User
   </button>
 
@@ -13,7 +13,7 @@
         <th>Password</th>
         <th>Role</th>
         <th>Profile_Picture</th>
-        <th>Edit/Remove</th>
+        <th *ngIf="canEditUsers">Edit/Remove</th>
       </tr>
     </thead>
     <tbody>
@@ -24,7 +24,7 @@
         <td>{{ user.password }}</td>
         <td>{{ user.role }}</td>
         <td><img [src]="http.baseURL +'/Image/Get/'+user.profilePicture" alt="Profile" width="50" /></td>
-        <td>
+        <td *ngIf="canEditUsers">
           <button
             class="btn btn-warning btn-sm me-2"
             (click)="openUserForm(user)"
@@ -76,7 +76,7 @@
           </div>
           <div class="mb-3">
             <label>Password:</label>
-            <input type="password" class="form-control" [(ngModel)]="selectedUser.password" name="password" required />
+            <input type="text" class="form-control" [(ngModel)]="selectedUser.password" name="password" required />
           </div>
           <div class="mb-3">
             <label>Role:</label>
@@ -86,14 +86,20 @@
               name="role"
               required
             >
-              <option value="Admin">Admin</option>
-              <option value="Teacher">Teacher</option>
-              <option value="Student">Student</option>
+              <option  *ngFor="let role of roles" [value]="role.roleName">{{role.roleName}}</option>
             </select>
           </div>
           <div class="mb-3">
-            <label>Profile Picture URL:</label>
-            <input type="text" class="form-control" [(ngModel)]="selectedUser.profile_picture" name="profile_picture" />
+            <label>Profile Picture</label>
+            <select
+              class="form-control"
+              [(ngModel)]="selectedUser.profilePicture"
+              name="role"
+              required
+            >
+              <option [value]="selectedUser.profilePicture">{{selectedUser.profilePicture}}</option>
+              <option value="ProfilePhotoPlaceholder.jpg">None</option>
+            </select>
           </div>
           <button type="submit" class="btn btn-success w-100">Save</button>
         </form>
@@ -116,14 +122,22 @@
         ></button>
       </div>
       <div class="modal-body">
-         <form (ngSubmit)="addUser()">
+         <form [formGroup]="addUserForm" (ngSubmit)="addUser()">
+          <div class="mb-3">
+            <label>Id:</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="id"
+              required
+            />
+          </div>
           <div class="mb-3">
             <label>Name:</label>
             <input
               type="text"
               class="form-control"
-              [(ngModel)]="selectedUser.name"
-              name="name"
+              formControlName="name"
               required
             />
           </div>
@@ -132,31 +146,26 @@
             <input
               type="email"
               class="form-control"
-              [(ngModel)]="selectedUser.email"
-              name="email"
+              formControlName="email"
               required
             />
           </div>
           <div class="mb-3">
             <label>Password:</label>
-            <input type="password" class="form-control" [(ngModel)]="selectedUser.password" name="password" required />
+            <input 
+              type="text" 
+              class="form-control" 
+              formControlName="password" required />
           </div>
           <div class="mb-3">
             <label>Role:</label>
             <select
               class="form-control"
-              [(ngModel)]="selectedUser.role"
-              name="role"
+              formControlName="role"
               required
             >
-              <option value="Admin">Admin</option>
-              <option value="Teacher">Teacher</option>
-              <option value="Student">Student</option>
+            <option *ngFor="let role of roles" [value]="role.roleName">{{role.roleName}}</option>
             </select>
-          </div>
-          <div class="mb-3">
-            <label>Profile Picture URL:</label>
-            <input type="text" class="form-control" [(ngModel)]="selectedUser.profile_picture" name="profile_picture" />
           </div>
           <button type="submit" class="btn btn-success w-100">Save</button>
         </form>

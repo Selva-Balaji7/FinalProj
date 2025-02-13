@@ -132,21 +132,14 @@ Store:      The central hub that holds the application state and provides method
 
 
 
-import { Component, inject } from '@angular/core';
+	import { inject } from '@angular/core';
 	import { Store } from '@ngrx/store';
 	import { UserState } from '../../../store/user/user.state';
-	import { saveUserData } from '../../../store/user/user.actions';
-	import { Router } from '@angular/router';
 
-	private userstore = inject(Store<{user:UserState}>)
+	private userstore = inject(Store<{user:UserState}>);
   	public user:any;
-
- 	 constructor(private _route:Router){}
   
-  	ngOnInit(){
-        // Get User data from store and save it in user variable.
+  
    		this.userstore.select(state => state.user).subscribe(date => this.user=date);
         
         
-
-  	}

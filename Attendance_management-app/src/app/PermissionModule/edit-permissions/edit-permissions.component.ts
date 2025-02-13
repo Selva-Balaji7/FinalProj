@@ -7,6 +7,7 @@ import { saveUserData } from '../../../store/user/user.actions';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import {PermissionList} from '../../../common/commondate'
+import { addMessage } from '../../../common/popupmessage';
 
 @Component({
   selector: 'app-edit-permissions',
@@ -50,13 +51,14 @@ export class EditPermissionsComponent {
               (role:any)=>{
                 return {...role,permissions:role.permissions.map((val:any)=>{return val.permissionName})}
               })
-            console.log(this.Roles);
+          },
+          (error)=>{
+            addMessage({type:"failure", message:"Error Getting Data From Server"});
           }
         )
       }
 
       AddPermission(){
-        console.log(this.givepermissionForm.value);
         var hasPermission:Boolean = false;
         const formDetails:any = this.givepermissionForm.value;
         var permission:any ={roleId:"", permissionName:""}
@@ -72,26 +74,24 @@ export class EditPermissionsComponent {
         });
 
         if(hasPermission){
-          window.alert(`${formDetails.roleSelect} already have permission to ${formDetails.permissionSelect}`)
+          addMessage({type:"warning", message:`${formDetails.roleSelect} already have that permission`});
         }
         else{
           permission.permissionName = formDetails.permissionSelect;
           permission.roleId = this.addpermissionforID;
-          console.log(permission);
           this._http.postRecord(`permission`,permission).subscribe(
             (res) => {
+              addMessage({type:"success", message:"Permission Added"});
               this.getPermissionsDetails();
-              console.log(res)
             },
-            (error) => {console.log(error)}
+            (error) => {
+              addMessage({type:"success", message:"Unable to Give Permission"});
+            }
           );
         }
-        console.log(hasPermission);
-
       }
       
       UpdatePermission(){
-        console.log(this.givepermissionForm.value);
         var hasPermission:Boolean = false;
         const formDetails:any = this.givepermissionForm.value;
 
@@ -106,15 +106,17 @@ export class EditPermissionsComponent {
         });
 
         if(!hasPermission){
-          window.alert(`${formDetails.roleSelect} doesn't have permission to ${formDetails.permissionSelect}`)
+          addMessage({type:"warning", message:"This Permission Not given"});
         }
         else{
           this._http.deleteRecord(`permission/${formDetails.permissionSelect}?roleid=${this.addpermissionforID}`).subscribe(
             (res)=>{
-              window.alert(`Deleted permission ${formDetails.permissionSelect} for role ${formDetails.roleSelect}`);
+              addMessage({type:"success", message:`Permission Deleted for ${formDetails.roleSelect}`});
               this.getPermissionsDetails();
             },
-            (error) => {console.log(error);}
+            (error) => {
+              addMessage({type:"failure", message:`Unable to Deleted permission`});
+            }
           )
         }
         

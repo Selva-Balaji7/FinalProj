@@ -1,8 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { DbservicesService } from '../../services/db/dbservices.service';
+import { inject } from '@angular/core';
+	import { Store } from '@ngrx/store';
+	import { UserState } from '../../../store/user/user.state';
+import { addMessage } from '../../../common/popupmessage';
 
 @Component({
   selector: 'app-leave-type',
@@ -12,6 +16,8 @@ import { DbservicesService } from '../../services/db/dbservices.service';
   styleUrl: './leave-type.component.css',
 })
 export class LeaveTypeComponent implements OnInit {
+  private userstore = inject(Store<{user:UserState}>);
+  	public user:any;
   leaveTypes: any[] = [];
   leaveForm!: FormGroup;
   showLeaveForm = false;
@@ -19,12 +25,24 @@ export class LeaveTypeComponent implements OnInit {
   selectedLeaveType: any = {};
   changingId:any;
 
+  canEditRole:boolean = false;
 
-  constructor(private fb: FormBuilder, private dbService: DbservicesService) {}
+  constructor(private fb: FormBuilder, private dbService: DbservicesService,private _route:Router) {}
 
   ngOnInit() {
-    this.initializeForm();
-    this.loadLeaveTypes();
+    this.userstore.select(state => state.user).subscribe(data => this.user=data);
+
+    if(!this.user.permissions.includes("ViewLeaveTypes"))
+      this._route.navigate(['/']);
+    else{
+      this.initializeForm();
+      this.loadLeaveTypes();
+    }
+
+    if(this.user.permissions.includes("EditLeaveTypes")){
+      this.canEditRole = true;
+    }
+
   }
 
   initializeForm() {
@@ -43,9 +61,8 @@ export class LeaveTypeComponent implements OnInit {
           created_at: new Date(leave.createdAt),
           updated_at: new Date(leave.updatedAt),
         }));
-        console.log(data);
       },
-      (error:any) => console.error('Error fetching leave types', error)
+      (error:any) => addMessage({type:"failure", message:"Server Offline"})
     );
   }
 
@@ -55,19 +72,19 @@ export class LeaveTypeComponent implements OnInit {
       this.dbService.updateRecord(`LeaveTypes/${this.changingId}`, this.selectedLeaveType)
         .subscribe(
           () => {
-            alert('Leave Type updated successfully!');
+            addMessage({type:"success", message:"Type Updates Successfully"});
             this.loadLeaveTypes();
           },
-          (error: any) => console.error('Error updating leave type', error)
+          (error: any) => addMessage({type:"failure", message:"Failes to Update"})
         );
-    } else {
-      this.dbService.postRecord('LeaveTypes', this.selectedLeaveType)
+      } else {
+        this.dbService.postRecord('LeaveTypes', this.selectedLeaveType)
         .subscribe(
           () =>{
-            alert('Leave Type added successfully!');
+            addMessage({type:"success", message:"Type Added Successfully"});
             this.loadLeaveTypes();
           },
-          (error:any) => console.error('Error adding leave type', error)
+          (error:any) => addMessage({type:"failure", message:"Failes to Add"})
         );
     }
     this.cancelEdit();
@@ -89,10 +106,10 @@ export class LeaveTypeComponent implements OnInit {
       this.dbService.deleteRecord(`LeaveTypes/${id}`)
         .subscribe(
           () => {
-            alert('Leave Type deleted successfully!');
+            addMessage({type:"success", message:"Type Deleted Successfully"});
             this.loadLeaveTypes();
           },
-          (error:any) => console.error('Error deleting leave type', error)
+          (error:any) => addMessage({type:"failure", message:"Failes to Delete"})
         );
     }
   }

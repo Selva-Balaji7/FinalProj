@@ -1,54 +1,54 @@
 <div>
     <img [src]="profileImageUrl" alt="">
     <h5 (click)="LogoutSequence()">Logout</h5>
-    <h4 [routerLink]="['/dasboard']">Dashboard</h4>
+    <h4 [routerLink]="['/dashboard']">Dashboard</h4>
 </div>
 <div>
     <details>
         <summary>Profile</summary>
-        <a *ngIf="user.permissions.includes('ViewProfile')" [routerLink]="['/dasboard/profile']" title="View Your Profile Details">Your Profile<br></a>
-        <a *ngIf="user.permissions.includes('EditProfile')" [routerLink]="['/dasboard/profile']" title="Edit Your Profile Details">Edit Profile<br></a>
+        <a *ngIf="user.permissions.includes('ViewProfile')" [routerLink]="['/dashboard/profile']" title="View Your Profile Details">Your Profile<br></a>
+        <a *ngIf="user.permissions.includes('EditProfile')" [routerLink]="['/dashboard/profile']" title="Edit Your Profile Details">Edit Profile<br></a>
     </details>
     <details>
         <summary>Attendance</summary>
-        <a *ngIf="user.permissions.includes('MarkAttendance')" [routerLink]="['/dasboard/markatt']" title="Give Your Daily Attendance">Mark Attendance<br></a>
-        <a *ngIf="user.permissions.includes('AttendanceHistory')" [routerLink]="['/dasboard/atthistory']" title="View Your Previous Attendances">Attendance Histoy<br></a>
-        <a *ngIf="user.permissions.includes('ViewStudentAttendance')" [routerLink]="['/dasboard/studentatt']" title="View Previous Student Attendances">View Student Attendances<br></a>
-        <a *ngIf="user.permissions.includes('ViewTeacherAttendance')" [routerLink]="['/dasboard/teacheratt']" title="View Previous Teacher Attendances">View Teacher Attendances<br></a>
-        <a *ngIf="user.permissions.includes('ViewAllAttendance')" [routerLink]="['/dasboard/allattendance']" title="View Previous Teacher Attendances">View All Attendances<br></a>
+        <a *ngIf="user.permissions.includes('MarkAttendance')" [routerLink]="['/dashboard/markatt']" title="Give Your Daily Attendance">Mark Attendance<br></a>
+        <a *ngIf="user.permissions.includes('AttendanceHistory')" [routerLink]="['/dashboard/atthistory']" title="View Your Previous Attendances">Attendance Histoy<br></a>
+        <a *ngIf="user.permissions.includes('ViewStudentAttendance')" [routerLink]="['/dashboard/studentatt']" title="View Previous Student Attendances">View Student Attendances<br></a>
+        <a *ngIf="user.permissions.includes('ViewTeacherAttendance')" [routerLink]="['/dashboard/teacheratt']" title="View Previous Teacher Attendances">View Teacher Attendances<br></a>
+        <a *ngIf="user.permissions.includes('ViewAllAttendance')" [routerLink]="['/dashboard/allattendance']" title="View Previous Teacher Attendances">View All Attendances<br></a>
     </details>
     <details>
         <summary>Roles</summary>
-        <a *ngIf="user.permissions.includes('ViewRoles')" [routerLink]="['/dasboard/viewroles']" title="View Available Roles">View Roles<br></a>
-        <a *ngIf="user.permissions.includes('EditRoles')" [routerLink]="['/dasboard/viewroles']" title="Edit Available Roles">Edit Roles<br></a>
+        <a *ngIf="user.permissions.includes('ViewRoles')" [routerLink]="['/dashboard/viewroles']" title="View Available Roles">View Roles<br></a>
+        <a *ngIf="user.permissions.includes('EditRoles')" [routerLink]="['/dashboard/viewroles']" title="Edit Available Roles">Edit Roles<br></a>
     </details>
     <details>
         <summary>Permissions</summary>
-        <a *ngIf="user.permissions.includes('ViewPermissions')" [routerLink]="['/dasboard/viewpermissions']" title="View Available Permissions for the Roles">View Permissions<br></a>
-        <a *ngIf="user.permissions.includes('EditPermissions')" [routerLink]="['/dasboard/viewpermissions']" title="Edit Available Permissions for the Roles">Edit Permissions<br></a>
+        <a *ngIf="user.permissions.includes('ViewPermissions')" [routerLink]="['/dashboard/viewpermissions']" title="View Available Permissions for the Roles">View Permissions<br></a>
+        <a *ngIf="user.permissions.includes('EditPermissions')" [routerLink]="['/dashboard/editpermissions']" title="Edit Available Permissions for the Roles">Edit Permissions<br></a>
     </details>
     <details>
         <summary>Leave</summary>
-        <a *ngIf="user.permissions.includes('MakeLeaveRequest')" [routerLink]="['/dasboard/reqleave']" title="Request Leave for some day">Request Leave<br></a>
-        <a *ngIf="user.permissions.includes('LeaveHistory')" [routerLink]="['/dasboard/reqleavehistory']" title="View Your Previous Leave Requests">Leave Request History<br></a>
-        <a *ngIf="user.permissions.includes('StudentLeaveRequest')"  [routerLink]="['/dasboard/studentleavereq']" title="View Leave Requests from Students">Student Leave Requests<br></a>
-        <a *ngIf="user.permissions.includes('TeacherLeaveRequest')"  [routerLink]="['/dasboard/teacherleavereq']" title="View Leave Requests from Teachers">Teacher Leave Requests<br></a>
-        <a *ngIf="user.permissions.includes('AllLeaveRequest')"  [routerLink]="['/dasboard/viewpermissions']" title="View Leave Requests from Everyone">All Leave Requests<br></a>
-        <a *ngIf="user.permissions.includes('ViewLeaveTypes')"  [routerLink]="['/dasboard/leavetypes']" title="View Different Leave Types">Leave Types<br></a>
-        <a *ngIf="user.permissions.includes('EditLeaveTypes')"  [routerLink]="['/dasboard/leavetypes']" title="Edit leave Types">Edit Leave Tyes<br></a>
+        <a *ngIf="user.permissions.includes('MakeLeaveRequest')" [routerLink]="['/dashboard/reqleave']" title="Request Leave for some day">Request Leave<br></a>
+        <a *ngIf="user.permissions.includes('LeaveRequestHistory')" [routerLink]="['/dashboard/reqleavehistory']" title="View Your Previous Leave Requests">Leave Request History<br></a>
+        <a *ngIf="user.permissions.includes('StudentLeaveRequest')"  [routerLink]="['/dashboard/studentleavereq']" title="View Leave Requests from Students">Student Leave Requests<br></a>
+        <a *ngIf="user.permissions.includes('TeacherLeaveRequest')"  [routerLink]="['/dashboard/teacherleavereq']" title="View Leave Requests from Teachers">Teacher Leave Requests<br></a>
+        <a *ngIf="user.permissions.includes('AllLeaveRequest')"  [routerLink]="['/dashboard/allleavereq']" title="View Leave Requests from Everyone">All Leave Requests<br></a>
+        <a *ngIf="user.permissions.includes('ViewLeaveTypes')"  [routerLink]="['/dashboard/leavetypes']" title="View Different Leave Types">Leave Types<br></a>
+        <a *ngIf="user.permissions.includes('EditLeaveTypes')"  [routerLink]="['/dashboard/leavetypes']" title="Edit leave Types">Edit Leave Tyes<br></a>
     </details>
     <details>
         <summary>Manage Attendance</summary>
-        <a *ngIf="user.permissions.includes('EditAttendance')" [routerLink]="['/dasboard/allattendance']" title="Edit Attendance History">Edit Attendance<br></a>
-        <a *ngIf="user.permissions.includes('StudentAttendanceRequest')" [routerLink]="['/dasboard/studentattreq']" title="View Attendance Requests from Students for Today">Student Attendance Requests<br></a>
-        <a *ngIf="user.permissions.includes('TeachersAttendanceRequest')" [routerLink]="['/dasboard/teacherattreq']" title="View Attendance Requests from Teacher for Today">Teacher Attendance Requests<br></a>
-        <a *ngIf="user.permissions.includes('AllAttendanceRequest')" [routerLink]="['/dasboard/allattreq']" title="View Attendance Requests from Everyone for Today">All Attendance Requests<br></a>
+        <a *ngIf="user.permissions.includes('EditAttendance')" [routerLink]="['/dashboard/allattendance']" title="Edit Attendance History">Edit Attendance<br></a>
+        <a *ngIf="user.permissions.includes('StudentAttendanceRequest')" [routerLink]="['/dashboard/studentattreq']" title="View Attendance Requests from Students for Today">Student Attendance Requests<br></a>
+        <a *ngIf="user.permissions.includes('TeachersAttendanceRequest')" [routerLink]="['/dashboard/teacherattreq']" title="View Attendance Requests from Teacher for Today">Teacher Attendance Requests<br></a>
+        <a *ngIf="user.permissions.includes('AllAttendanceRequest')" [routerLink]="['/dashboard/allattreq']" title="View Attendance Requests from Everyone for Today">All Attendance Requests<br></a>
     </details>
     <details>
         <summary>Admin</summary>
-        <a *ngIf="user.permissions.includes('ViewUsers')"  [routerLink]="['/dasboard/userlist']" title="View all Available Users">View Users<br></a>
-        <a *ngIf="user.permissions.includes('EditUsers')" [routerLink]="['/dasboard/userlist']" title="Edit Available Users">Edit Users<br></a>
-        <a *ngIf="user.permissions.includes('NewUserRequests')" [routerLink]="['/dasboard/newuserreq']" title="Edit Available Users">New User Requests<br></a>
+        <a *ngIf="user.permissions.includes('ViewUsers')"  [routerLink]="['/dashboard/userlist']" title="View all Available Users">View Users<br></a>
+        <a *ngIf="user.permissions.includes('EditUsers')" [routerLink]="['/dashboard/userlist']" title="Edit Available Users">Edit Users<br></a>
+        <a *ngIf="user.permissions.includes('NewUserRequests')" [routerLink]="['/dashboard/newuserreq']" title="Edit Available Users">New User Requests<br></a>
     </details>
 </div>
 

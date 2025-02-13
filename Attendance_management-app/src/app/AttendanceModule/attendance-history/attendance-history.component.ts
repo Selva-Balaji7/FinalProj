@@ -6,6 +6,7 @@ import { saveUserData } from '../../../store/user/user.actions';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DbservicesService } from '../../services/db/dbservices.service';
 import { CommonModule } from '@angular/common';
+import { addMessage } from '../../../common/popupmessage';
 
 @Component({
   selector: 'app-attendance-history',
@@ -36,8 +37,10 @@ export class AttendanceHistoryComponent {
     ngOnInit(){
       this.userstore.select(state => state.user).subscribe(data => this.user=data);
   
-      if(!this.user.permissions.includes("AttendanceHistory"))
+      if(!this.user.permissions.includes("AttendanceHistory")){
+        addMessage({type:"warning", message:"You Have no permission"});
         this._route.navigate(['/']);
+      }
       else
         this.getAttendanceDetails();
 
@@ -61,7 +64,7 @@ export class AttendanceHistoryComponent {
           this.UpdateStatuses = res;
         },
         (error) => {
-          console.log("Unable to Fetch status");
+          addMessage({type:"failure", message:"Error Getting Data From Server"});
         }
       )
       
@@ -70,7 +73,6 @@ export class AttendanceHistoryComponent {
     
   
     getAttendanceDetails(){
-      console.log("Trying to get details");
         var reqUrl:string = `Attendance/${this.user.id}/limit/${this.page}`;
       
       if(this.startDate && this.endDate)
@@ -83,10 +85,9 @@ export class AttendanceHistoryComponent {
       else
         reqUrl += `&status=null`
   
-      console.log(reqUrl);
       this._http.getRecord(reqUrl).subscribe(
-        (res) => {this.attendances=res;console.log(this.attendances);},
-        (error) => {console.log(error)}
+        (res) => {this.attendances=res;},
+        (error) => {addMessage({type:"failure", message:"Error Getting Data From Server"});}
       )
     }
   
@@ -111,22 +112,19 @@ export class AttendanceHistoryComponent {
     }
   
     setFiler(){
-      console.log(this.filterForm.value);
       this.startDate = this.filterForm.value.startDate;
       this.endDate = this.filterForm.value.endDate;
       this.status = this.filterForm.value.status;
       this.page = 1;
   
       if((this.startDate && !this.startDate) || (!this.startDate && this.startDate))  
-        window.alert("Both Dates are required");
-      
+        addMessage({type:"warning", message:"Both Dates Are Required"});
         
       this.getAttendanceDetails();
     }
 
     editStatusof(attendance:any){
       this.isEditingId = attendance.id;
-      console.log("Changing state for ", this.isEditingId);
 
       this.editAttendanceForm.setValue({
         status:attendance.status
@@ -143,15 +141,27 @@ export class AttendanceHistoryComponent {
         createdAt:attendance.createdAt
       }
       this._http.updateRecord(`attendance/${updatedAttendance.id}`, updatedAttendance).subscribe(
-        (res)=>{this.getAttendanceDetails();this.isEditingId=-1},
-        (error)=>{console.log(error);}
+        (res)=>{
+          addMessage({type:"success", message:"Attendance Updated"});
+          this.getAttendanceDetails();
+          this.isEditingId=-1
+        },
+        (error)=>{
+          addMessage({type:"failure", message:"Unable to Update"});
+          this.isEditingId=-1
+        }
       )
     }
-
+    
     deleteStatusof(attendance:any){
       this._http.deleteRecord(`attendance/${attendance.id}`).subscribe(
-        (res)=>{this.getAttendanceDetails();},
-        (error)=>{console.log(error);}
+        (res)=>{
+          addMessage({type:"success", message:"Attendance Deleted"});
+          this.getAttendanceDetails();
+        },
+        (error)=>{
+          addMessage({type:"failure", message:"Unable to Delete"});
+        }
       )
     }
 

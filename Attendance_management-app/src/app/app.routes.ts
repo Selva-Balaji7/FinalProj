@@ -30,12 +30,13 @@ import { UserDashboardComponent } from './UserModule/user-dashboard/user-dashboa
 import { ViewProfileComponent } from './UserModule/view-profile/view-profile.component';
 import { ForgotPasswordComponent } from './UserModule/forgot-password/forgot-password.component';
 import { UserDetailsComponent } from './UserModule/user-details/user-details.component';
+import { AllLeaveRequestComponent } from './LeaveModule/all-leave-request/all-leave-request.component';
 
 export const routes: Routes = [
     {path:"", component:UserLoginComponent},
     {path:"userregistration", component:UserRegistrationComponent},
     {path:"forgotpassword", component:ForgotPasswordComponent},
-    {path:"dasboard", component:UserDashboardComponent, children:[
+    {path:"dashboard", component:UserDashboardComponent, children:[
         {path:"", component:UserDetailsComponent},
         {path:"profile", component:ViewProfileComponent},
 
@@ -54,6 +55,7 @@ export const routes: Routes = [
         {path:"leavetypes", component:LeaveTypeComponent},
         {path:"studentleavereq", component:StudentLeaveRequestComponent},
         {path:"teacherleavereq", component:TeacherLeaveRequestComponent},
+        {path:"allleavereq", component:AllLeaveRequestComponent},
 
         {path:"viewpermissions", component:ViewPermissionsComponent},
         {path:"editpermissions", component:EditPermissionsComponent},

@@ -2,7 +2,7 @@
   <div class="container w-50">
     
     <!-- Add/Edit Leave Type Form -->
-    <div class="card p-4 shadow-lg">
+    <div *ngIf="canEditRole" class="card p-4 shadow-lg">
       <h3 class="text-center mb-4">{{ isEditing ? 'Edit Leave Type' : 'Add Leave Type' }}</h3>
       <form [formGroup]="leaveForm" (ngSubmit)="saveLeaveType()">
         
@@ -38,7 +38,7 @@
             <th>ID</th>
             <th>Name</th>
             <th>Description</th>
-            <th>Actions</th>         
+            <th *ngIf="canEditRole">Actions</th>         
           </tr>
         </thead>
         <tbody>
@@ -46,7 +46,7 @@
             <td>{{ type.id }}</td>
             <td>{{ type.name }}</td>
             <td>{{ type.description || 'N/A' }}</td>
-            <td>
+            <td *ngIf="canEditRole">
               <button class="btn btn-primary btn-sm me-2" (click)="editLeaveType(type)">
                 <i class="bi bi-pencil-square"></i>
               </button>

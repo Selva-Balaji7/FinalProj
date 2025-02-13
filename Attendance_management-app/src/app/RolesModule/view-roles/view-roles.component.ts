@@ -3,10 +3,10 @@ import { Store } from '@ngrx/store';
 import { UserState } from '../../../store/user/user.state';
 import { Router } from '@angular/router';
 import { DbservicesService } from '../../services/db/dbservices.service';
-import { saveUserData } from '../../../store/user/user.actions';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import {PermissionList} from '../../../common/commondate'
+import { addMessage } from '../../../common/popupmessage';
 
 @Component({
   selector: 'app-view-roles',
@@ -53,12 +53,13 @@ export class ViewRolesComponent {
     this._http.getRecord("role/onlyroles").subscribe(
       (res) => {
         this.Roles = res;
-        console.log(this.Roles);
       }
     )
   }
 
   changeEdit(roleid:any){
+    
+
     this.editingValueForId = roleid;
     
     this.Roles.map((role:any)=>{
@@ -70,49 +71,16 @@ export class ViewRolesComponent {
     this.roleEditForm.patchValue(EditRole);
   }
 
-  /*
-  AddPermission(){
-    console.log(this.givepermissionForm.value);
-    var hasPermission:Boolean = false;
-    const formDetails:any = this.givepermissionForm.value;
-    var permission:any ={roleId:"", permissionName:""}
-
-    this.Roles.map((role:any)=>{
-      if(role.roleName == formDetails.roleSelect){
-        this.addpermissionforID = role.id;       
-        if(role.permissions.includes(formDetails.permissionSelect))
-        {
-          hasPermission = true;       
-        }
-      }
-    });
-
-    if(hasPermission){
-      window.alert(`${formDetails.roleSelect} already have permission to ${formDetails.permissionSelect}`)
-    }
-    else{
-      permission.permissionName = formDetails.permissionSelect;
-      permission.roleId = this.addpermissionforID;
-      console.log(permission);
-      this._http.postRecord(`permission`,permission).subscribe(
-        (res) => {
-          // this.getPermissionsDetails();
-          console.log(res)
-        },
-        (error) => {console.log(error)}
-      );
-    }
-    console.log(hasPermission);
-
-  }*/
-  
   UpdateRole(){
-    console.log(this.roleEditForm.value);
+    if(!confirm("Are you sure you want to update the Roles")){
+      this.editingValueForId = -1;
+      return;
+    }
     
     const editDetails:any = this.roleEditForm.value;
 
     if(this.editingValueForId==editDetails.roleId && this.editingValueForName==editDetails.roleName){
-      window.alert("No Changes found");
+      addMessage({type:"warning", message:"No Changes Found"});
       this.editingValueForId = -1;
       return;
     }
@@ -122,19 +90,30 @@ export class ViewRolesComponent {
     }
     this._http.updateRecord(`role/${this.editingValueForId}`, updatedRole).subscribe(
       (res)=>{
-        window.alert(`Update role (${this.editingValueForId})${this.editingValueForName} to (${editDetails.roleId})${editDetails.roleName}`);
+        addMessage({type:"success", message:"Role Updates"});
         this.getRoles();
         this.editingValueForId = -1;
       },
-      (error) => {console.log(error);}
+      (error) => {
+        addMessage({type:"failure", message:"Error Updating"});
+      }
     )
   }
 
 
   deleteRole(roleid:any){
+    if(!confirm("Are you sure you want to Delete the Roles")){
+      return;
+    }
+
     this._http.deleteRecord(`role/${roleid}`).subscribe(
-      (res)=>{this.getRoles();},
-      (error)=>{console.log(error);}
+      (res)=>{
+        addMessage({type:"success", message:"Role Deleted"});
+        this.getRoles();
+      },
+      (error)=>{
+        addMessage({type:"failure", message:"Error Deleting"});
+      }
     )
   }
 
@@ -149,8 +128,14 @@ export class ViewRolesComponent {
       roleName:this.roleEditForm.value.roleName
     }
     this._http.postRecord("role", newRole).subscribe(
-      (res)=>{this.isAddingNewRole = false;this.getRoles();},
-      (error)=>{console.log("error");}
+      (res)=>{
+        addMessage({type:"success", message:"Role Added"});
+        this.isAddingNewRole = false;
+        this.getRoles();
+      },
+      (error)=>{
+        addMessage({type:"failure", message:"Failed to Add"});
+      }
     );
   }
 

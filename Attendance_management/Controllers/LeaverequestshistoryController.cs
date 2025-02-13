@@ -115,14 +115,19 @@ namespace Attendance_management.Controllers
             try
             {
                 var leaves = @"
-                Select * from LeaveRequestsHistory l
+                Select * from LeaveRequestHistory l
                 WHERE user_id = {0} 
                     and MONTH({1}) = month(l.date)
                     and YEAR({1}) = YEAR(l.date)
                     and status = 'Accepted'";
-                var result = await _context.Leaverequesthistories
+                var leavecount = await _context.Leaverequesthistories
             .FromSqlRaw(leaves, id, checkDate)
             .CountAsync();
+
+                var result = new
+                {
+                    count = leavecount
+                };
 
                 return Ok(result);
             }

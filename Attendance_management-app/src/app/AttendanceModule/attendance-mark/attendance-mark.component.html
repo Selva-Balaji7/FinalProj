@@ -8,7 +8,8 @@
         <input type="date" id="attendanceDate" class="form-control" [value]="attendanceDate" [min]="attendanceDate" [max]="attendanceDate" name="attendanceDate" required/>
       </div>
   
-      <button (click)="submitAttendance()" class="btn btn-primary">Submit Attendance</button>
+      <button *ngIf="canGiveAttendance" (click)="submitAttendance()" class="btn btn-primary">Submit Attendance</button>
+      <button *ngIf="!canGiveAttendance" (click)="submitAttendance()" class="btn btn-primary" disabled>Submit Attendance</button>
     </form>
   </div>
 

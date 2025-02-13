@@ -42,7 +42,6 @@ namespace Attendance_management.Controllers
         [HttpGet("limit/{count}")]
         public async Task<ActionResult<IEnumerable<Attendance>>> GetLimitAttendance(int count, [FromQuery]string startDate, [FromQuery]string endDate, [FromQuery]string role, [FromQuery]string status)
         {
-            Console.Clear();
             var roleList = role=="null" ? await _context.Attendances.Select(a=> a.User.Role).Distinct().ToListAsync() : new List<string> { role };
             var statusList = (status == "null") ? await _context.Attendances.Select(a => a.Status).Distinct().ToListAsync() : new List<string> { status };
 

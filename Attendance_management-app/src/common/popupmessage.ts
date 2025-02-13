@@ -1,5 +1,4 @@
 export function addMessage(message:any){
-    console.log("adding message", message.message);
     var messagebox = document.getElementById("MessageBox");
     var messagetext = document.createElement("div");
     messagetext.innerHTML = message.message;
@@ -17,3 +16,4 @@ export function addMessage(message:any){
       messagetext.remove();
     }, 5800);
 }
+

@@ -25,11 +25,11 @@ export class UserRegistrationComponent {
 
   ngOnInit():void{
     this.regForm = new FormGroup({
-      id:new FormControl("",[Validators.required]),
-      name:new FormControl("",[Validators.required]),
-      email:new FormControl("", [Validators.required]),
-      password:new FormControl("",[Validators.required]),
-      role:new FormControl("", [Validators.required])
+      id:new FormControl("",[Validators.required,Validators.pattern("^[0-9]{3,4}$")]),
+      name:new FormControl("",[Validators.required, Validators.pattern("^[a-zA-Z ]{3,20}$")]),
+      email:new FormControl("", [Validators.required, Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")]),
+      password:new FormControl("",[Validators.required, Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")]),
+      role:new FormControl("", [Validators.required, ])
     })
 
     this.http.getRecord("role/onlyroles").subscribe(
@@ -119,8 +119,54 @@ export class UserRegistrationComponent {
       }
     );
     
+  }
 
 
+
+  validate(formcontrolname:any){
+    if(formcontrolname == "id"){
+      if(this.regForm.get("id").invalid){
+        if(this.regForm.get("id").errors.pattern){
+          addMessage({type:"warning", message:"Id is a 3 or 4 Digit Number"});
+        }
+        if(this.regForm.get("id").errors.required){
+          addMessage({type:"warning", message:"id Field is Requied"});
+        }
+      }
+    }
+    else if(formcontrolname == "password"){
+      if(this.regForm.get("password").invalid){
+        if(this.regForm.get("password").errors.pattern){
+          addMessage({
+            type:"warning", 
+            message:"Password should have Lower, Upper, Digits, Special Characters "});
+        }
+        if(this.regForm.get("password").errors.required){
+          addMessage({type:"warning", message:"Password Field is Requied"});
+        }
+      }
+    }
+    else if(formcontrolname == "email"){
+      if(this.regForm.get("email").invalid){
+        if(this.regForm.get("email").errors.pattern){
+          addMessage({type:"warning", message:"InValid Email"});
+        }
+        if(this.regForm.get("email").errors.required){
+          addMessage({type:"warning", message:"Email is Requied"});
+        }
+      }
+    }
+    else if(formcontrolname == "name"){
+      if(this.regForm.get("name").invalid){
+        if(this.regForm.get("name").errors.pattern){
+          addMessage({type:"warning", message:"Name should be 3 - 20 characters"});
+        }
+        if(this.regForm.get("name").errors.required){
+          addMessage({type:"warning", message:"Name Field is Requied"});
+        }
+      }
+    }
+    
   }
 
 }
