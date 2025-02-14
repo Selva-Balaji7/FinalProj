@@ -18,16 +18,14 @@ INSERT INTO AttendanceRequests (user_id, date, status, remarks) VALUES
 
 delete from leaveRequests where user_id = 999;
 insert into LeaveRequests (user_id, leave_type_id, date, status, reason) VALUES
-(999, 1, "2025-02-13", "pending", "Going to Doctors"),
-(500, 1, "2025-02-13", "Accepted", "Going to Doctors");
+(100, 1, "2025-02-1", "pending", "Going to Doctors"),
+(101, 1, "2025-02-25", "Accepted", "Going to Home Town"),
+(500, 2, "2025-02-20", "Accepted", "Marrage");
 insert into LeaveRequests (user_id, leave_type_id, date, status, reason) VALUES
 (100, 1, "2025-02-01", "pending", "Going to Doctors"),
 (102, 2, "2025-02-02", "pending", "Going to Doctors");
 
 
 insert into LeaveRequestHistory (user_id, leave_type_id, date, status, reason) VALUES
-(999, 1, "2025-02-14", "Accepted", "Going to Doctors"),
-(500, 1, "2025-02-14", "Accepted", "Going to Doctors");
-insert into LeaveRequestHistory (user_id, leave_type_id, date, status, reason) VALUES
-(100, 1, "2025-02-01", "Accepted", "Going to Doctors"),
-(102, 2, "2025-02-02", "Rejected", "Going to Doctors");
+(105, 2, "2025-02-12", "Accepted", "Going to Doctors"),
+(501, 1, "2025-02-14", "Accepted", "Not Feeling well");

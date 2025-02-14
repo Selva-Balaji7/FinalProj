@@ -1,10 +1,10 @@
 
-<div class="registerpage" style="margin: 0px; min-height: 100vh; padding:15px">
-    <div class="container w-50">
+<div class="div">
+  <button class="btn btn-primary mt-2" [routerLink]="'/'">Back</button>
+</div>
+<div class="registerpage" style="min-height: 100vh;">
+    <div class="container">
       
-      <div class="div">
-        <button class="btn btn-primary mt-2" [routerLink]="'/'">Back</button>
-      </div>
   
       <!-- Registration Form -->
       <div class="card p-4 shadow-lg mt-4">
@@ -13,24 +13,23 @@
           
           <div class="mb-3">
             <label for="userid" class="form-label">User Id</label>
-            <input type="text" id="userid" class="form-control" formControlName="id" />
+            <input type="text" id="userid" class="form-control" formControlName="id" (blur)="validate('id')"/>
           </div>
           
           <div class="mb-3">
             <label for="username" class="form-label">User Name</label>
-            <input type="text" id="username" class="form-control" formControlName="name" />
+            <input type="text" id="username" class="form-control" formControlName="name" (blur)="validate('name')"/>
           </div>
           
           <div class="mb-3">
             <label for="useremail" class="form-label">User Email</label>
-            <input type="text" id="useremail" class="form-control" formControlName="email" />
+            <input type="text" id="useremail" class="form-control" formControlName="email" (blur)="validate('email')" />
           </div>
           
           <div class="mb-3 position-relative">
             <label for="userpassword" class="form-label">Password</label>
-            <input [type]="showPassword ? 'text' : 'password'" id="userpassword" class="form-control" formControlName="password"/>
-            <!-- (click)="togglePassword()" -->
-            <span  style="position: absolute; right: 10px; top: 38px; cursor: pointer">
+            <input [type]="showPassword ? 'text' : 'password'" id="userpassword" class="form-control" formControlName="password" (blur)="validate('password')"/>
+            <span (click)="togglePassword()"  style="position: absolute; right: 10px; top: 38px; cursor: pointer;z-index: 5;">
               <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
             </span>
           </div>
@@ -60,13 +59,16 @@
 
           <!-- Submit Button -->
           <div class="text-center mt-2">
-            <button type="submit" class="btn btn-success w-50" *ngIf="hasUploadedProfileImage || isNotUploadingProfileImage">Register</button>
+            <button type="submit" class="regbtn btn btn-success w-50" *ngIf="hasUploadedProfileImage || isNotUploadingProfileImage && regForm.valid">Register</button>
           </div>
         </form>
         <div class="mt-2 text-center">
-          <button class="btn btn-primary mt-2" (click)="onUpload()" *ngIf="!hasUploadedProfileImage && regForm.valid">Upload</button>
-          <button class="btn btn-primary mt-2" (click)="isNotUploadingProfileImage=true" *ngIf="!hasUploadedProfileImage || regForm.valid">Not Now</button>
+          <button class="imagebtn btn btn-primary mt-2" (click)="onUpload()" *ngIf="!hasUploadedProfileImage && regForm.valid">Upload</button>
+          <button class="imagebtn btn btn-primary mt-2" (click)="isNotUploadingProfileImage=true" *ngIf="regForm.valid">Not Now</button>
         </div>
       </div>
+
+      
+
     </div>
   </div>

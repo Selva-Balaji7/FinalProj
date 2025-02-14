@@ -1,0 +1,17 @@
+.containers{
+    margin-right: 30vw;
+    margin-left:30vw;
+    padding-top: 50px;
+}
+.approvebtn{
+    margin-top: 10px;
+}
+
+label{
+    margin-top: 10px;
+}
+
+.rejectbtn{
+    margin-right: 5px;
+}
+

@@ -17,52 +17,52 @@ namespace Attendance_management.Controllers
         }
 
         // GET: api/Leaverequesthistories - G`et all leave requests
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<Leaverequest>>> GetLeaveRequests([FromQuery] string role)
-        //{
-        //    if (role == "null")
-        //        return await _context.Leaverequesthistories
-        //                         //.Include(l => l.User)s
-        //                         .Select(l => new Leaverequest
-        //                         {
-        //                             Id = l.Id,
-        //                             Date = l.Date,
-        //                             LeaveType = new Leavetype
-        //                             {
-        //                                 Name = l.LeaveType.Name
-        //                             },
-        //                             User = new User
-        //                             {
-        //                                 Id = l.User.Id,
-        //                                 Name = l.User.Name
-        //                             },
-        //                             Reason = l.Reason,
-        //                             Status = l.Status,
-        //                             CreatedAt = l.CreatedAt
-        //                         })
-        //                         .ToListAsync();
-        //    else
-        //        return await _context.Leaverequesthistories
-        //                .Where(l => l.User.Role == role)
-        //                .Select(l => new Leaverequest
-        //                {
-        //                    Id = l.Id,
-        //                    Date = l.Date,
-        //                    LeaveType = new Leavetype
-        //                    {
-        //                        Name = l.LeaveType.Name
-        //                    },
-        //                    User = new User
-        //                    {
-        //                        Id = l.User.Id,
-        //                        Name = l.User.Name
-        //                    },
-        //                    Reason = l.Reason,
-        //                    Status = l.Status,
-        //                    CreatedAt = l.CreatedAt
-        //                })
-        //                .ToListAsync();
-        //}
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Leaverequesthistory>>> GetLeaveRequests([FromQuery] string role)
+        {
+           if (role == "null")
+               return await _context.Leaverequesthistories
+                                //.Include(l => l.User)s
+                                .Select(l => new Leaverequesthistory
+                                {
+                                    Id = l.Id,
+                                    Date = l.Date,
+                                    LeaveType = new Leavetype
+                                    {
+                                        Name = l.LeaveType.Name
+                                    },
+                                    User = new User
+                                    {
+                                        Id = l.User.Id,
+                                        Name = l.User.Name
+                                    },
+                                    Reason = l.Reason,
+                                    Status = l.Status,
+                                    CreatedAt = l.CreatedAt
+                                })
+                                .ToListAsync();
+           else
+               return await _context.Leaverequesthistories
+                       .Where(l => l.User.Role == role)
+                       .Select(l => new Leaverequesthistory
+                       {
+                           Id = l.Id,
+                           Date = l.Date,
+                           LeaveType = new Leavetype
+                           {
+                               Name = l.LeaveType.Name
+                           },
+                           User = new User
+                           {
+                               Id = l.User.Id,
+                               Name = l.User.Name
+                           },
+                           Reason = l.Reason,
+                           Status = l.Status,
+                           CreatedAt = l.CreatedAt
+                       })
+                       .ToListAsync();
+        }
 
         // GET: api/Leaverequesthistories/{id} - Get a leave request by ID
 
@@ -93,10 +93,28 @@ namespace Attendance_management.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<IEnumerator<Leaverequest>>> GetLeaveRequest(int id)
+        public async Task<ActionResult<IEnumerator<Leaverequesthistory>>> GetLeaveRequest(int id)
         {
             var leaveRequest = await _context.Leaverequesthistories
                                             .Where(l => l.UserId == id)
+                                            .Select(l => new Leaverequesthistory
+                                            {
+                                                Id = l.Id,
+                                                LeaveTypeId = l.LeaveTypeId,
+                                                Date = l.Date,
+                                                LeaveType = new Leavetype
+                                                {
+                                                    Name = l.LeaveType.Name
+                                                },
+                                                User = new User
+                                                {
+                                                    Id = l.User.Id,
+                                                    Name = l.User.Name
+                                                },
+                                                Reason = l.Reason,
+                                                Status = l.Status,
+                                                CreatedAt = l.CreatedAt
+                                            })
                                              .ToListAsync();
 
             if (leaveRequest == null)

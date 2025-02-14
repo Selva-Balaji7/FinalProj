@@ -1,5 +1,12 @@
 /* Container Styling */
 
+.maincontainer{
+  background-image: url("../../../../public/LeaveModulebackground.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .leaverequestpage{
   font-style: italic;
   font-family: none;
@@ -8,6 +15,10 @@
   } 
 
 
+  .card{
+    width: 400px;
+  }
+  
   
 .container {
  
@@ -54,8 +65,6 @@
   button:hover {
     background-color: #1565c0;
   }
-  
-  
   
   /* Responsive Styling */
   @media (max-width: 768px) {

@@ -18,6 +18,7 @@ export class LeaveRequestHistoryComponent {
   private userstore = inject(Store<{user:UserState}>);
   	public user:any;
   leaveRequests: any;
+  leaveRequestHistory:any;
   newRequest = { userName: '', leaveType: '', date: '', reason: '' };
 
   constructor(private _route:Router, private _http: DbservicesService){}
@@ -37,6 +38,12 @@ export class LeaveRequestHistoryComponent {
       .subscribe((data) => {
         this.leaveRequests = data;
       });
+
+    this._http.getRecord(`LeaveRequestshistory/${this.user.id}`)
+      .subscribe((data)=>{
+        this.leaveRequestHistory = data;
+        console.log(data);
+      })
   }
 
 

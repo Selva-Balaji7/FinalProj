@@ -1,9 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 #MessageBox{
     width: 25vw;
+    /* height: 100vh; */
     position: absolute;
     right: 5px;
-    bottom:5px;
+    top:5px;
 }
 
 .messagetext{
@@ -14,13 +15,17 @@
     animation: boxinout 6s linear;
 }
 .successmessage{
-    color: green;
+    /* background-color: rgb(39, 165, 0); */
+    background: linear-gradient( to right,green , rgb(2, 216, 2));
+    color: rgb(255, 255, 255);
 }
 .warningmessage{
-    color: orangered;
+    background-color:  rgb(174, 81, 0);
+    color: rgb(241, 241, 241);
 }
 .failuremessage{
-    color: red;
+    background-color: brown;
+    color: rgb(255, 156, 156);
 }
 .successmessage::after,.warningmessage::after, .failuremessage::after{
     content: '';
@@ -31,7 +36,7 @@
     animation: loadbar 6s linear ;
 }
 .successmessage::after{
-    border: 1px solid green;
+    border: 1px solid rgb(0, 24, 0);
 }
 .warningmessage::after{
     border: 1px solid orangered;
@@ -51,6 +56,10 @@
 @keyframes boxinout {
     0%{
         opacity: 1;
+        left:-100%;
+    }
+    5%{
+        left:0px
     }
     80%{
         opacity: 1;

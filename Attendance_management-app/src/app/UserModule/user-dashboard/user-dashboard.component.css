@@ -37,7 +37,7 @@ html, body {
   }
   
   .sidebar details{
-    margin-top: 5px;
+    margin-top: 0px;
   }
   
   
@@ -89,5 +89,6 @@ html, body {
 
 summary:only-child {
   display:none;
-  margin: 0px;
+  margin-top: 0px;
 }
+

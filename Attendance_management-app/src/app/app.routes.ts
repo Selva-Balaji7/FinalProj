@@ -31,6 +31,8 @@ import { ViewProfileComponent } from './UserModule/view-profile/view-profile.com
 import { ForgotPasswordComponent } from './UserModule/forgot-password/forgot-password.component';
 import { UserDetailsComponent } from './UserModule/user-details/user-details.component';
 import { AllLeaveRequestComponent } from './LeaveModule/all-leave-request/all-leave-request.component';
+import { EditProfileComponent } from './UserModule/edit-profile/edit-profile.component';
+import { EditRolesComponent } from './RolesModule/edit-roles/edit-roles.component';
 
 export const routes: Routes = [
     {path:"", component:UserLoginComponent},
@@ -39,6 +41,7 @@ export const routes: Routes = [
     {path:"dashboard", component:UserDashboardComponent, children:[
         {path:"", component:UserDetailsComponent},
         {path:"profile", component:ViewProfileComponent},
+        {path:"editprofile", component:EditProfileComponent},
 
         {path:"markatt", component:AttendanceMarkComponent},
         {path:"atthistory", component:AttendanceHistoryComponent},
@@ -61,6 +64,7 @@ export const routes: Routes = [
         {path:"editpermissions", component:EditPermissionsComponent},
 
         {path:"viewroles", component:ViewRolesComponent},
+        {path:"editroles", component:EditRolesComponent},
 
         {path:"newuserreq", component:NewUserRequestsComponent},
         {path:"userlist", component:EditUsersComponent},

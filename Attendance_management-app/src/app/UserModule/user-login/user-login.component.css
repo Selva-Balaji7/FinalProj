@@ -17,6 +17,7 @@
 
 .card{
     z-index: 5;
+    background-color: rgba(255, 255, 255, 0.882);
 }
 
 .loginpage::after{
@@ -27,37 +28,112 @@
     top:50vh;
     left:50vw;
     transform: translate(-50%,-50%);
-    background: radial-gradient(rgba(0, 0, 0, 0.183), rgb(110 108 108 / 32%), #8d8b8b52);
-    animation: boxanimation 10s ease-in-out infinite;
+    background: radial-gradient(rgba(0, 0, 0, 0.183), rgb(110 108 108 / 32%), #8d8b8b);
+    animation: boxanimation1 10s ease-in-out infinite;
     border-radius: 20px;
 }
 .loginpage::before{
-
+    content: '';
+    width: 250px;
+    height:300px;
+    position: absolute;
+    top:50vh;
+    left:50vw;
+    transform: translate(-50%,-50%);
+    background: radial-gradient(rgba(0, 0, 0, 0.183), rgb(110 108 108 / 32%), #ab8585);
+    animation: boxanimation2 10.4s ease-in-out infinite;
+    border-radius: 20px;
 }
 
-@keyframes boxanimation {
+@keyframes boxanimation1 {
     0%{
-        left: 37vw;
-        top: 37vh;
-        width: 250px;
-        height:300px;
+        left: 40vw;
+        top: 40vh;
+        width: 300px;
+        height:350px;
     }
     25%{
         left: 50vw;
         top: 50vh;
+        width: 50px;
+        height:75px;
     }
     50%{
-        left: 67vw;
-        top: 67vh;
-        width: 250px;
-        height:300px;
+        left: 60vw;
+        top: 60vh;
+        width: 300px;
+        height:350px;
     }
     75%{
         left: 50vw;
         top: 50vh;
+        width: 50px;
+        height:75px;
     }
     100%{
-        left: 37vw;
-        top: 37vh;
+        left: 40vw;
+        top: 40vh;
+        width: 300px;
+        height:350px;
     }
+}
+
+@keyframes boxanimation2 {
+    0%{
+        left: 60vw;
+        top: 60vh;
+        width: 300px;
+        height:350px;
+    }
+    25%{
+        left: 50vw;
+        top: 50vh;
+        width: 50px;
+        height:75px;
+    }
+    50%{
+        left: 40vw;
+        top: 40vh;
+        width: 300px;
+        height:350px;
+    }
+    75%{
+        left: 50vw;
+        top: 50vh;
+        width: 50px;
+        height:75px;
+    }
+    100%{
+        left: 60vw;
+        top: 60vh;
+        width: 300px;
+        height:350px;
+    }
+}
+
+
+
+.secondspace{
+    position: relative;
+    overflow: hidden;
+}
+.secondspace:hover::after{
+    content: "";
+    position: absolute;
+    top: 0px;
+    right:0px;
+    width: 30%;
+    height: 100%;
+    background-image: url("../../../../public/svgs/login_20dp_FFFFFF.svg");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: contain;
+    animation: showsecondspace 0.3s linear;
+} 
+@keyframes showsecondspace {
+    0%{right:-100px}
+    100%{right:0px}
+}
+.hovereffect:hover{
+    transform: scale(1.05);
 }

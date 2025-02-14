@@ -18,6 +18,7 @@ export class AllLeaveRequestComponent {
       public user:any;
   
     leaveRequests: any;
+    leaveRequestHistory:any;
     isAttendanceMarked: boolean=false;
   
     constructor(private _route:Router,private http: DbservicesService) {}
@@ -28,15 +29,21 @@ export class AllLeaveRequestComponent {
       if(!this.user.permissions.includes("AllLeaveRequest"))
         this._route.navigate(['/']);
       else
-        this.fetchStudentRequests();
+        this.fetchAllRequests();
   
     }
   
-    fetchStudentRequests() {
+    fetchAllRequests() {
       this.http.getRecord('LeaveRequest?role=null')
         .subscribe((data) => {
           this.leaveRequests = data;
         });
+
+        this.http.getRecord(`LeaveRequestshistory/?role=null`)
+        .subscribe((data)=>{
+          this.leaveRequestHistory = data;
+          console.log(data);
+        })
     }
   
     
@@ -104,7 +111,7 @@ export class AllLeaveRequestComponent {
     this.http.deleteRecord(`LeaveRequest/${requestId}`)
       .subscribe(() => {
         addMessage({type:"success", message:`Request ${message}`});
-        this.fetchStudentRequests();
+        this.fetchAllRequests();
       }, (error: any) => {
         addMessage({type:"failed", message:`Unable to remove rquest`});
       });

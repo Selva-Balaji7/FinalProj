@@ -70,7 +70,6 @@ export class LeaveRequestComponent {
                       this.http.getRecord(`Leaverequest/Countleaves/${this.user.id}?Date=${newLeaveRequest.date}`).subscribe(
                         (res:any)=>{
                           this.leaverequestCount = res.count
-                          addMessage({type:"warning", message:`Leave Requests ${this.leaverequestCount}`});
                           this.http.getRecord(`Leaverequestshistory/Countleaves/${this.user.id}?Date=${newLeaveRequest.date}`).subscribe(
                             (res:any)=>{
                               this.leavehistoryCount = res.count;
@@ -93,13 +92,13 @@ export class LeaveRequestComponent {
                           )
                         }
                       )
-                    }
+                    }else addMessage({type:"warning", message:"Already Requested Leave For That date"})
                   }
                 );    
-              }
+              }else addMessage({type:"warning", message:"Attendance Request Found For That date"})
             }
           );
-        }
+        }else addMessage({type:"warning", message:"Attendance Found For That date"})
       }
     );
   }

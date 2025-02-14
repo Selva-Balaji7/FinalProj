@@ -155,4 +155,10 @@ export class ViewProfileComponent {
     )
     }
 
+    
+showPassword: any;
+togglePassword(){
+    this.showPassword = !this.showPassword;
+  }
+
 }
