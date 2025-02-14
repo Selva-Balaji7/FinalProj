@@ -104,3 +104,45 @@ Ensures at least one uppercase letter.
 Ensures at least one digit.
 Ensures at least one special character.
 Matches a string of at least 8 characters, allowing letters, numbers, and the specified special characters.
+
+
+
+
+.secondspace{
+    position: relative;
+    overflow: hidden;
+}
+.secondspace:hover::after{
+    content: "";
+    position: absolute;
+    top: 0px;
+    right:0px;
+    width: 30%;
+    height: 100%;
+    background-image: url("../../../../public/svgs/login_20dp_FFFFFF.svg");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: contain;
+    animation: showsecondspace 0.3s linear;
+} 
+@keyframes showsecondspace {
+    0%{right:-100px}
+    100%{right:0px}
+}
+.hovereffect:hover{
+    transform: scale(1.05);
+}
+
+
+
+<input [type]="showPassword ? 'text' : 'password'" id="showuserpassword" [value]="user.password" style="position: relative; width: max-content;" disabled>
+                                <span (click)="togglePassword()"  style="cursor: pointer">
+                                <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+                                </span>
+
+
+
+showPassword: any;
+togglePassword(){
+    this.showPassword = !this.showPassword;
+  }

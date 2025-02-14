@@ -21,9 +21,6 @@ insert into LeaveRequests (user_id, leave_type_id, date, status, reason) VALUES
 (100, 1, "2025-02-1", "pending", "Going to Doctors"),
 (101, 1, "2025-02-25", "Accepted", "Going to Home Town"),
 (500, 2, "2025-02-20", "Accepted", "Marrage");
-insert into LeaveRequests (user_id, leave_type_id, date, status, reason) VALUES
-(100, 1, "2025-02-01", "pending", "Going to Doctors"),
-(102, 2, "2025-02-02", "pending", "Going to Doctors");
 
 
 insert into LeaveRequestHistory (user_id, leave_type_id, date, status, reason) VALUES
