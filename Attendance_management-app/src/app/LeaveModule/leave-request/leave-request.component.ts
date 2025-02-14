@@ -83,7 +83,7 @@ export class LeaveRequestComponent {
                                   this.http.postRecord('LeaveRequest', newLeaveRequest)
                                   .subscribe(() => {
                                     addMessage({type:"warning", message:`Leave Requests ${this.leaverequestCount+=1}`});
-                                      alert('Leave Request Submitted!');
+                                      addMessage({type:"success", message:`Leave requested successfully`});
                                     });                                  
                                 }, 1000);
                               }

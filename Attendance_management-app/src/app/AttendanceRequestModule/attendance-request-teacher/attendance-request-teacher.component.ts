@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { DbservicesService } from '../../services/db/dbservices.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { inject } from '@angular/core';
+	import { Store } from '@ngrx/store';
+	import { UserState } from '../../../store/user/user.state';
+import { addMessage } from '../../../common/popupmessage';
+
 @Component({
   selector: 'app-attendance-request-teacher',
   imports: [CommonModule],
@@ -9,13 +15,21 @@ import { CommonModule } from '@angular/common';
 })
 export class AttendanceRequestTeacherComponent implements OnInit {
 
-
+  private userstore = inject(Store<{user:UserState}>);
+  	public user:any;
   attendanceRequests: any[] = [];
 
-  constructor(private attendanceReqTeacher: DbservicesService) { }
+  constructor(private _route:Router,private attendanceReqTeacher: DbservicesService) { }
 
   ngOnInit(): void {
-    this.loadAttendanceRequests();
+    setTimeout(() => {
+      if(!this.user.permissions.includes("TeachersAttendanceRequest") && !localStorage.getItem('user')){
+        addMessage({type:"warning", message:"Access Denied"});
+        this._route.navigate(['/']);
+      }
+      else
+        this.loadAttendanceRequests();
+    }, 3000);
   }
 
   loadAttendanceRequests(): void {

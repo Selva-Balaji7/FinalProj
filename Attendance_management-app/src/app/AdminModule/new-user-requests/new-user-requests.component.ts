@@ -26,14 +26,14 @@ export class NewUserRequestsComponent {
   ngOnInit(){
     this.userstore.select(state => state.user).subscribe(data => this.user=data);
 
-    if(!this.user.permissions.includes("NewUserRequests")){
-      setTimeout(() => {
-        this._route.navigate(['/']);        
-      }, 1000);
-      addMessage({type:"warning", message:"You Have no permission"});
-    }
-    else
-      this.getUserRequests();
+    setTimeout(() => {
+      if(!this.user.permissions.includes("NewUserRequests") && !localStorage.getItem('user')){
+          this._route.navigate(['/']);
+        addMessage({type:"warning", message:"You Have no permission"});
+      }
+      else
+        this.getUserRequests();      
+    }, 3000);
 
     this.updateRequestForm = new FormGroup({
       id: new FormControl("",[Validators.required]),

@@ -6,6 +6,7 @@ import { DbservicesService } from '../../services/db/dbservices.service';
 import { saveUserData } from '../../../store/user/user.actions';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { addMessage } from '../../../common/popupmessage';
 
 @Component({
   selector: 'app-view-all-attendance',
@@ -39,13 +40,17 @@ export class ViewAllAttendanceComponent {
     ngOnInit(){
       this.userstore.select(state => state.user).subscribe(data => this.user=data);
   
-      if(!this.user.permissions.includes("ViewAllAttendance"))
-        this._route.navigate(['/']);
-      else
-        this.getAttendanceDetails();
-
-      if(this.user.permissions.includes("EditAttendance"))
-        this.canEditAttendance = true;
+      setTimeout(() => {
+        if(!this.user.permissions.includes("ViewAllAttendance") && !localStorage.getItem('user')){
+          addMessage({type:"warning", message:"Access Denied"});
+          this._route.navigate(['/']);
+        }
+        else
+          this.getAttendanceDetails();
+  
+        if(this.user.permissions.includes("EditAttendance") && localStorage.getItem('user'))
+          this.canEditAttendance = true;        
+      }, 3000);
   
       this.filterForm = new FormGroup({
         startDate:new FormControl("", [Validators.required]),

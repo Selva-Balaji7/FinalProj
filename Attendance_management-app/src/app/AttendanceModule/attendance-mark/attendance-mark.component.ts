@@ -30,20 +30,27 @@ import { Router } from '@angular/router';
       
   ngOnInit(){
     this.userstore.select(state => state.user).subscribe(date => this.user=date);
-    this.attendancemark.getRecord("User/getDate").subscribe(
-      (res:any)=>{
-        this.attendanceDate=res.date;
 
-        this.checkAttendance();
-
-      },
-      (error)=>{
-        addMessage({type:"failure", message:"Error Getting Date"});
-        setTimeout(() => {
-          this.route.navigate(['/']);
-        }, 1000);
+    setTimeout(() => {
+      if(!this.user.permissions.includes("MarkAttendance") && !localStorage.getItem('user')){
+        addMessage({type:"warning", message:"Access Denied"});
+        this.route.navigate(['/']);
       }
-    )
+      else
+        this.attendancemark.getRecord("User/getDate").subscribe(
+          (res:any)=>{
+            this.attendanceDate=res.date;
+    
+            this.checkAttendance();
+    
+          },
+          (error)=>{
+            addMessage({type:"failure", message:"Error Getting Date"});
+              this.route.navigate(['/']);
+          }
+        )
+    }, 3000);
+
   }
 
   checkAttendance(){

@@ -13,7 +13,9 @@ INSERT INTO AttendanceRequests (user_id, date, status, remarks) VALUES
 (101, "2025-01-31", "Present", ""),
 (102, "2025-01-31", "Present", ""),
 (103, "2025-01-31", "Present", ""),
-(104, "2025-01-31", "Present", "");
+(104, "2025-01-31", "Present", ""),
+(500, "2025-01-31", "Present", ""),
+(501, "2025-01-31", "Present", "");
 
 
 delete from leaveRequests where user_id = 999;

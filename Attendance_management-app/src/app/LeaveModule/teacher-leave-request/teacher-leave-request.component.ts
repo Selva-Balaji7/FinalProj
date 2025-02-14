@@ -36,6 +36,7 @@ export class TeacherLeaveRequestComponent {
       this.http.getRecord('LeaveRequest?role=teacher')
         .subscribe((data) => {
           this.leaveRequests = data;
+          console.log(data);
         });
 
         this.http.getRecord(`LeaveRequestshistory/?role=teacher`)
@@ -83,7 +84,7 @@ export class TeacherLeaveRequestComponent {
                 
               }, (error: any) => {
                 addMessage({type:"failure", message:"Error Adding Attendance"});
-              });
+            });
             });
           }
           else if(status==='Rejected'){

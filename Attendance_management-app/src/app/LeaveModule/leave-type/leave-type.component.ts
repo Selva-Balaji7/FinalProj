@@ -32,16 +32,18 @@ export class LeaveTypeComponent implements OnInit {
   ngOnInit() {
     this.userstore.select(state => state.user).subscribe(data => this.user=data);
 
-    if(!this.user.permissions.includes("ViewLeaveTypes"))
-      this._route.navigate(['/']);
-    else{
-      this.initializeForm();
-      this.loadLeaveTypes();
-    }
-
-    if(this.user.permissions.includes("EditLeaveTypes")){
-      this.canEditRole = true;
-    }
+    setTimeout(() => {
+      if(!this.user.permissions.includes("ViewLeaveTypes") && !localStorage.getItem('user') )
+        this._route.navigate(['/']);
+      else{
+        this.initializeForm();
+        this.loadLeaveTypes();
+      }
+  
+      if(this.user.permissions.includes("EditLeaveTypes") && localStorage.getItem('user') ){
+        this.canEditRole = true;
+      }      
+    }, 3000);
 
   }
 

@@ -29,18 +29,58 @@ export class UserDashboardComponent {
     if(!this.user.id){
       var localuser:any = localStorage.getItem('user');
       if(!!localuser){
-        this.userstore.dispatch(saveUserData(JSON.parse(localuser)));
+        // this.userstore.dispatch(saveUserData(JSON.parse(localuser)));
+        this.ReloadData();
       }
       else{
-        addMessage({type:"warning", message:"Login to Access Again"});
         setTimeout(() => {
-          this._route.navigate(['/']);
-        }, 1000);
+          if(this.user.id){
+            addMessage({type:"warning", message:"Login to Access Again"});
+            this._route.navigate(['/']);
+          }
+        }, 5000);
       }
     }
     console.log(this.user);
     this.profileImageUrl =`${this._http.baseURL}/Image/Get/${this.user.profilepicture}`;
   };
+
+  ReloadData(){
+    var reqUrl = `user/${localStorage.getItem('user')}`;
+    var userData:any;
+    var permissions:any[] = [];
+    console.log("refilling user data");
+
+    this._http.getRecord(reqUrl).subscribe(
+      (res) => {
+        userData = res;
+        console.log(userData);
+        reqUrl = `permission/${userData.role}`
+        this._http.getRecord(reqUrl).subscribe(
+          (res) => {
+              permissions = Object.values(res).map((item:any)=>item.permissionName);
+
+              var User = {
+                id:userData.id,
+                name:userData.name,
+                email:userData.email,
+                password:userData.password,
+                role:userData.role,
+                permissions:permissions,
+                profilepicture:userData.profilePicture,
+                createdat:userData.createdAt,
+              }
+              this.userstore.dispatch(saveUserData(User));
+              console.log(User);
+              // localStorage.setItem('user', JSON.stringify(this.User));
+              localStorage.setItem('user', User.id);
+          },
+          (error) => {addMessage({type:"failure", message:"Error Getting Permissions"});}
+        )
+      },
+      (error) => {addMessage({type:"failure", message:"Error Getting user Data"});}
+    )    
+  }
 
   LogoutSequence(){
     localStorage.removeItem('user');

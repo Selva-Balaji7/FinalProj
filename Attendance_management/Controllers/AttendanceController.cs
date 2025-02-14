@@ -59,6 +59,7 @@ namespace Attendance_management.Controllers
                         UserId = a.UserId,
                         Date = a.Date,
                         Status = a.Status,
+                        Remarks = a.Remarks,
                         CreatedAt = a.CreatedAt,
                         UpdatedAt = a.UpdatedAt,
                         User = new User
@@ -89,6 +90,7 @@ namespace Attendance_management.Controllers
                         UserId = a.UserId,
                         Date = a.Date,
                         Status = a.Status,
+                        Remarks = a.Remarks,
                         CreatedAt = a.CreatedAt,
                         UpdatedAt = a.UpdatedAt,
                         User = new User
@@ -142,6 +144,7 @@ namespace Attendance_management.Controllers
                             UserId = a.UserId,
                             Date = a.Date,
                             Status = a.Status,
+                            Remarks = a.Remarks,
                             CreatedAt = a.CreatedAt,
                             UpdatedAt = a.UpdatedAt,
                             User = new User
@@ -172,6 +175,7 @@ namespace Attendance_management.Controllers
                             UserId = a.UserId,
                             Date = a.Date,
                             Status = a.Status,
+                            Remarks = a.Remarks,
                             CreatedAt = a.CreatedAt,
                             UpdatedAt = a.UpdatedAt,
                             User = new User

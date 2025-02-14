@@ -22,13 +22,13 @@
     <div class="quicklinks">
         <p>Quick Links</p>
         <div class=""  *ngIf="user.permissions.includes(PermissionList[2])" >
-            <a  [routerLink]="['/markattendance']">Give your attendance For the day</a>
+            <a  [routerLink]="['/dashboard/markatt']">Give your attendance For the day</a>
         </div>
         <div class=""  *ngIf="user.permissions.includes(PermissionList[16])" >
-            <a  [routerLink]="['/viewstudentattendance']">View Attendance Requests from Students</a>
+            <a  [routerLink]="['/dashboard/studentattreq']">View Attendance Requests from Students</a>
         </div>
         <div class=""  *ngIf="user.permissions.includes(PermissionList[12])" >
-            <a  [routerLink]="['/leaverequest']">Request Leave</a>
+            <a  [routerLink]="['/dashboard/reqleave']">Request Leave</a>
         </div>
     </div> 
 </div>

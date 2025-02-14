@@ -40,13 +40,14 @@ export class UserLoginComponent {
 
     this._http.getRecord('Attendance/isOnline').subscribe(
       (res:any) => {
-        addMessage({type:"success", message:"Server Online"});
+        // addMessage({type:"success", message:"Server Online"});
       },
       (error:any) => {
         addMessage({type:"failure", message:"Server Offline"});
       }
-    )
+    );
 
+    (!!localStorage.getItem('user')) &&  localStorage.clear();
     
   }
 
@@ -95,7 +96,8 @@ export class UserLoginComponent {
                 createdat:userData.createdAt,
               }
               this.userstore.dispatch(saveUserData(this.User));
-              localStorage.setItem('user', JSON.stringify(this.User));
+              // localStorage.setItem('user', JSON.stringify(this.User));
+              localStorage.setItem('user', this.User.id);
               setTimeout(() => {
                 this._route.navigate(["/dashboard"]);
               }, 1000);

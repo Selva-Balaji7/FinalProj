@@ -2,6 +2,11 @@ import { Component } from '@angular/core';
 import { DbservicesService } from '../../services/db/dbservices.service'; 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { addMessage } from '../../../common/popupmessage';
+import { inject } from '@angular/core';
+	import { Store } from '@ngrx/store';
+	import { UserState } from '../../../store/user/user.state';
 
 @Component({
   selector: 'app-view-all-attendancerequest',
@@ -11,13 +16,21 @@ import { FormsModule } from '@angular/forms';
 })
 export class ViewAllAttendancerequestComponent {
 
-
+  private userstore = inject(Store<{user:UserState}>);
+  public user:any;
   allattendanceRequests: any[] = [];
 
-  constructor(private allAttendanceReq: DbservicesService) { }
+  constructor(private _route:Router,private allAttendanceReq: DbservicesService) { }
 
   ngOnInit(): void {
-    this.loadAttendanceRequests();
+    setTimeout(() => {
+      if(!this.user.permissions.includes("AllAttendanceRequest") && !localStorage.getItem('user')){
+        addMessage({type:"warning", message:"Access Denied"});
+        this._route.navigate(['/']);
+      }
+      else
+        this.loadAttendanceRequests();
+    }, 3000);
   }
 
   loadAttendanceRequests(): void {
