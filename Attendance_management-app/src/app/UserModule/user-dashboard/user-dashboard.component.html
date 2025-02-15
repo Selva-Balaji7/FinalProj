@@ -1,13 +1,19 @@
+<div class="NavBar">
+  <button class="hamburger-btn btn btn-primary" (click)="toggleSidebar()">☰</button>
+  <img class="profileimage" [routerLink]="['/dashboard/profile']" [src]="profileImageUrl" alt="Profile Image">
+  <div class="bashboardbtngroup" style="margin-left: 20px;">
+    <h6 class="" style="color: white;">{{this.user.role | uppercase}}</h6>
+    <h4 class="text-styling dashboardbtn" [routerLink]="['/dashboard']" >Dashboard</h4>
+  </div>
+</div>
 <div class="d-flex">
-    <!-- Sidebar -->
-    <div id="sidebar" class="sidebar shadow-lg p-3" [ngClass]="{'sidebar-open': isSidebarOpen}">
-      <div class="sidebar-header text-center">
-        <img [src]="profileImageUrl" alt="Profile" class="rounded-circle border" height="80px"><hr/>
-        <h4 class="dashboard-link mt-3" [routerLink]="['/dashboard']" style="font-family:Georgia, 'Times New Roman', Times, serif;font-style: italic;">Dashboard</h4>
-        <button class="mt-2 btn btn-danger" (click)="LogoutSequence()" style="font-family:Georgia, 'Times New Roman', Times, serif;font-style: italic;">Logout</button>
-      </div>
-  
-      <div class="sidebar-menu mt-4" style="font-family:Georgia, 'Times New Roman', Times, serif;font-style: italic;">
+  <!-- Sidebar -->
+  <!-- [ngClass]="{'sidebar-open': isSidebarOpen}" -->
+  <div id="sidebar" class="sidebar shadow-lg p-3" >
+    <div class="sidebar-menu mt-4" style="font-family:Georgia, 'Times New Roman', Times, serif;font-style: italic;">
+      <button class="hamburger-btn btn btn-primary" (click)="toggleSidebar()">X</button>  
+      <button class="loggoutbtn btn btn-danger text-styling" (click)="LogoutSequence()" >Logout</button>
+      <h4 (click)="toggleSidebar()" class="text-styling" [routerLink]="['/dashboard']" style="cursor: pointer;">Dashboard</h4>
         <details>
           <summary>Profile</summary>
           <a (click)="toggleSidebar()" *ngIf="user.permissions.includes('ViewProfile')" [routerLink]="['/dashboard/profile']" title="View Your Profile Details">Your Profile<br></a>
@@ -47,24 +53,14 @@
           <a (click)="toggleSidebar()" *ngIf="user.permissions.includes('AllLeaveRequest')"  [routerLink]="['/dashboard/allleavereq']" title="View Leave Requests from Everyone">All Requests<br></a>
           <a (click)="toggleSidebar()" *ngIf="user.permissions.includes('ViewLeaveTypes')"  [routerLink]="['/dashboard/leavetypes']" title="View Different Leave Types">Leave Types<br></a>
       </details>
-      <!-- <details>
-          <summary>Attendance Requests</summary>
-          <a (click)="toggleSidebar()" *ngIf="user.permissions.includes('StudentAttendanceRequest')" [routerLink]="['/dashboard/studentattreq']" title="View Attendance Requests from Students for Today">Students<br></a>
-          <a (click)="toggleSidebar()" *ngIf="user.permissions.includes('TeachersAttendanceRequest')" [routerLink]="['/dashboard/teacherattreq']" title="View Attendance Requests from Teacher for Today">Teachers<br></a>
-          <a (click)="toggleSidebar()" *ngIf="user.permissions.includes('AllAttendanceRequest')" [routerLink]="['/dashboard/allattreq']" title="View Attendance Requests from Everyone for Today">All<br></a>
-      </details> -->
       <details>
-          <summary>Admin</summary>
-          <a (click)="toggleSidebar()" *ngIf="user.permissions.includes('ViewUsers')"  [routerLink]="['/dashboard/userlist']" title="View all Available Users">Users<br></a>
-          <a (click)="toggleSidebar()" *ngIf="user.permissions.includes('NewUserRequests')" [routerLink]="['/dashboard/newuserreq']" title="Edit Available Users">New User Requests<br></a>
+          <summary>Users</summary>
+          <a (click)="toggleSidebar()" *ngIf="user.permissions.includes('ViewUsers')"  [routerLink]="['/dashboard/userlist']" title="View all Available Users">View Users<br></a>
+          <a (click)="toggleSidebar()" *ngIf="user.permissions.includes('NewUserRequests')" [routerLink]="['/dashboard/newuserreq']" title="Edit Available Users">Approve User<br></a>
       </details>
       </div>
     </div>
-  
-    <!-- Main Content -->
-    <div class="main-content">
-      <button class="hamburger-btn btn btn-primary" (click)="toggleSidebar()">☰</button>
-      <router-outlet></router-outlet>
-    </div>
+ 
   </div>
+  <router-outlet></router-outlet>
   

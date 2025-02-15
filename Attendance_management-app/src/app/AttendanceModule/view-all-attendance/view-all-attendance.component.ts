@@ -40,17 +40,15 @@ export class ViewAllAttendanceComponent {
     ngOnInit(){
       this.userstore.select(state => state.user).subscribe(data => this.user=data);
   
-      setTimeout(() => {
-        if(!this.user.permissions.includes("ViewAllAttendance") && !localStorage.getItem('user')){
+        if(!this.user.permissions.includes("ViewAllAttendance") ){
           addMessage({type:"warning", message:"Access Denied"});
           this._route.navigate(['/']);
         }
         else
           this.getAttendanceDetails();
   
-        if(this.user.permissions.includes("EditAttendance") && localStorage.getItem('user'))
+        if(this.user.permissions.includes("EditAttendance"))
           this.canEditAttendance = true;        
-      }, 3000);
   
       this.filterForm = new FormGroup({
         startDate:new FormControl("", [Validators.required]),

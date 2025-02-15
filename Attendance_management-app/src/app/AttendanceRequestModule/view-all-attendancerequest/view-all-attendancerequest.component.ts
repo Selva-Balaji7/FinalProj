@@ -23,14 +23,12 @@ export class ViewAllAttendancerequestComponent {
   constructor(private _route:Router,private allAttendanceReq: DbservicesService) { }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      if(!this.user.permissions.includes("AllAttendanceRequest") && !localStorage.getItem('user')){
+      if(!this.user.permissions.includes("AllAttendanceRequest") ){
         addMessage({type:"warning", message:"Access Denied"});
         this._route.navigate(['/']);
       }
       else
         this.loadAttendanceRequests();
-    }, 3000);
   }
 
   loadAttendanceRequests(): void {

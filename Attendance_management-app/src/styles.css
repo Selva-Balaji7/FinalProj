@@ -2,7 +2,7 @@
 #MessageBox{
     width: 25vw;
     /* height: 100vh; */
-    position: absolute;
+    position: fixed;
     right: 5px;
     top:5px;
 }
@@ -20,14 +20,20 @@
     color: rgb(255, 255, 255);
 }
 .warningmessage{
-    background-color:  rgb(174, 81, 0);
+    /* background-color:  rgb(174, 81, 0); */
+    background: linear-gradient( to right,rgb(174, 81, 0),  rgb(210, 98, 0));
     color: rgb(241, 241, 241);
 }
 .failuremessage{
-    background-color: brown;
+    /* background-color: brown; */
+    background: linear-gradient(to right, brown, rgb(202, 53, 53));
     color: rgb(255, 156, 156);
 }
-.successmessage::after,.warningmessage::after, .failuremessage::after{
+.normalmessage{
+    background:linear-gradient(to right, rgb(239, 238, 238), rgb(226, 224, 224));
+    color: rgb(75, 75, 75);
+}
+.successmessage::after,.warningmessage::after, .failuremessage::after, .normalmessage::after{
     content: '';
     position:absolute;
     left: 0px;
@@ -36,13 +42,16 @@
     animation: loadbar 6s linear ;
 }
 .successmessage::after{
-    border: 1px solid rgb(0, 24, 0);
+    border: 2px solid rgb(0, 61, 0);
 }
 .warningmessage::after{
-    border: 1px solid orangered;
+    border: 2px solid orangered;
 }
 .failuremessage::after{
-    border: 1px solid red;
+    border: 2px solid red;
+}
+.normalmessage::after{
+    border: 2px solid rgb(74, 74, 74);
 }
 
 @keyframes loadbar {

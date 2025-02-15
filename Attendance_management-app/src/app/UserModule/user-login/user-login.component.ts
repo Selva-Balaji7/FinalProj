@@ -33,6 +33,7 @@ export class UserLoginComponent {
   constructor(private _http : DbservicesService, private _route:Router){}
 
   ngOnInit(){
+
     this.LoginForm = new FormGroup({
       id:new FormControl("", [Validators.required, Validators.pattern("^[0-9]{3,4}$")]),
       password:new FormControl("", [Validators.required, Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")])
@@ -40,14 +41,11 @@ export class UserLoginComponent {
 
     this._http.getRecord('Attendance/isOnline').subscribe(
       (res:any) => {
-        // addMessage({type:"success", message:"Server Online"});
       },
       (error:any) => {
         addMessage({type:"failure", message:"Server Offline"});
       }
     );
-
-    (!!localStorage.getItem('user')) &&  localStorage.clear();
     
   }
 
@@ -66,7 +64,11 @@ export class UserLoginComponent {
         }
       },
       (error)=>{
-        addMessage({type:"failure", message:"User Not Found"});
+
+        this._http.getRecord(`Usersregistration/${this.LData.id}`).subscribe(
+          () =>{ addMessage({type:"warning", message:"Approve User Pending"});},
+          () => {addMessage({type:"failure", message:"User Not Found"});}
+        );
       }
     )
 
@@ -96,17 +98,15 @@ export class UserLoginComponent {
                 createdat:userData.createdAt,
               }
               this.userstore.dispatch(saveUserData(this.User));
-              // localStorage.setItem('user', JSON.stringify(this.User));
-              localStorage.setItem('user', this.User.id);
               setTimeout(() => {
                 this._route.navigate(["/dashboard"]);
-              }, 1000);
+              }, 500);
           },
           (error) => {addMessage({type:"failure", message:"Error Getting Data From Server"});}
         )
       },
       (error) => {addMessage({type:"failure", message:"Error Getting Data From Server"});}
-    )    
+    )  
   }
 
   validate(formcontrolname:any){

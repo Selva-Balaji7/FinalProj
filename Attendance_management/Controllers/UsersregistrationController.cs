@@ -31,9 +31,15 @@ namespace Attendance_management.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult> GetUserRegistration(int id)
         {
-            var response = await _context.Usersregistrations.FindAsync(id);
+            var response = await _context.Usersregistrations
+                .Where(ur => ur.Id == id)
+                .Select(ur => new Usersregistration
+                {
+                    Id = ur.Id,
+                })
+                .ToListAsync();
 
-            if (response == null)
+            if (response.Count == 0)
             {
                 return NotFound();
             }

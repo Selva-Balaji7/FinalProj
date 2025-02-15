@@ -34,17 +34,15 @@ export class EditUsersComponent implements OnInit {
     ngOnInit() {
       this.userstore.select(state => state.user).subscribe(data => this.user=data);
 
-    setTimeout(() => {
-      if(!this.user.permissions.includes("ViewUsers")  && !localStorage.getItem('user')){
+      if(!this.user.permissions.includes("ViewUsers")){
         this._route.navigate(['/']);
         addMessage({type:"warning", message:"Access Denied"});
       }
       else
-      this.loadUsers();
+        this.loadUsers();
       
-      if(this.user.permissions.includes("EditUsers") && localStorage.getItem('user'))
+      if(this.user.permissions.includes("EditUsers"))
         this.canEditUsers = true;
-    }, 3000);
 
       this.addUserForm  = new FormGroup({
         id: new FormControl("",[Validators.required, Validators.pattern("^[0-9]{3,4}$")]),

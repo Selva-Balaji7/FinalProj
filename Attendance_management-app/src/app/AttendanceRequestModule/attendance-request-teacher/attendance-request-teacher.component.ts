@@ -22,14 +22,11 @@ export class AttendanceRequestTeacherComponent implements OnInit {
   constructor(private _route:Router,private attendanceReqTeacher: DbservicesService) { }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      if(!this.user.permissions.includes("TeachersAttendanceRequest") && !localStorage.getItem('user')){
-        addMessage({type:"warning", message:"Access Denied"});
+      if(!this.user.permissions.includes("TeachersAttendanceRequest")){
         this._route.navigate(['/']);
       }
       else
         this.loadAttendanceRequests();
-    }, 3000);
   }
 
   loadAttendanceRequests(): void {

@@ -4,20 +4,45 @@ html, body {
     margin: 0;
     padding: 0;
   }
-
-  .d-flex {
-    min-height: 100vh; /* Full viewport height */
-    height: 100vh;
+  .NavBar{
     display: flex;
-    max-height: 100vh;
-    overflow-y: auto;
-    z-index: 1;
+    padding:15px;
+    background-color: rgb(79, 79, 79);
+    align-items: center;
   }
- 
+
+  .profileimage{
+    width: 75px;
+    height: 75pxpx;
+    border-radius: 50%;
+    box-shadow: -10px 4px 25px rgb(0, 0, 0);
+    margin-left: 10px;
+    cursor: pointer;
+  }
 
 
+  .text-styling{
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+    color: white;
+  }
+
+
+  .dashboardbtn{
+    cursor: pointer;
+    /* margin-left: 20px; */
+    font-size: 35px;
+    font-weight: 900;
+  }
+  .loggoutbtn{
+    margin-left:10px
+  }
+  
+  
+  
 .sidebar {
-    width: 250px;
+  display: flex;
+    width: 200px;
     height: 100vh;
     background: #343a40;
     color: white;
@@ -26,7 +51,6 @@ html, body {
     left: -250px; /* Hidden by default */
     transition: left 0.3s ease-in-out;
     padding-top: 20px;
-    width: 250px; /* Adjust width if needed */
     overflow-y: auto; /*Enables vertical scrolling*/
     overflow-x: hidden;
     z-index: 9;
@@ -60,19 +84,10 @@ html, body {
     background: #6c757d;
   }
   
-  /* Main Content */
-  .main-content {
-    flex-grow: 1; /* Takes up the remaining space */
-   overflow-y: auto;/* Enables scrolling */
-  height: 100vh;
   
-  }
   
   /* Hamburger Button */
   .hamburger-btn {
-    position: absolute;
-    top: 15px;
-    left: 15px;
     font-size: 24px;
     background: #007bff;
     color: white;
@@ -80,11 +95,7 @@ html, body {
     cursor: pointer;
     padding: 10px 15px;
     border-radius: 5px;
-    z-index: 10;
   }
-  .main-content.sidebar-open {
-    margin-left: 250px; /* Adjust based on sidebar width */
-}
 
 
 summary:only-child {
