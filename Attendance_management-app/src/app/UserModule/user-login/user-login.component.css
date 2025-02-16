@@ -1,5 +1,5 @@
 .loginpage{
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     background-image: url('../../../../public/school.jpg');
     background-size: cover; /*Scales image to cover the entire background*/
@@ -136,4 +136,20 @@
 }
 .hovereffect:hover{
     transform: scale(1.05);
+}
+
+
+.passwordinput{
+    position: relative;
+}
+.showpasswordicon{
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    bottom: 8px;
+}
+
+.logginbutton{
+    width: 100%;
+    height: 50px;
 }

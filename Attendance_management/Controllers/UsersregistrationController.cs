@@ -1,5 +1,6 @@
 ﻿using Attendance_management.Data;
 using Attendance_management.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +8,7 @@ namespace Attendance_management.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
 
     public class UsersregistrationController : ControllerBase
     {

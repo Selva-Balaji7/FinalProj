@@ -1,6 +1,6 @@
 ﻿using Attendance_management.Data;
 using Attendance_management.Models;
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +8,7 @@ namespace Attendance_management.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
 
     public class UserController : ControllerBase
     {
@@ -46,17 +47,59 @@ namespace Attendance_management.Controllers
             return Ok(response);
         }
 
+        [HttpGet("limit/{count}")]
+        public async Task<ActionResult<IEnumerable<Attendance>>> GetLimitUsers(int count, [FromQuery]string role, [FromQuery]int id)
+        {
+            try{
+                var roleList = role=="null" ? await _context.Users.Select(u=> u.Role).Distinct().ToListAsync() : new List<string> { role };
+                
+                if (id == 0)
+                {
+                    var users = await _context.Users
+                        .Where(u => roleList.Contains(u.Role))
+                        .OrderBy(u => u.Id)
+                        .Skip((count - 1) * 10)
+                        .Take(10)
+                        .ToListAsync();
+                    return Ok(users);
+                }
+                else
+                {
+                    var users = await _context.Users
+                        .Where(u => u.Id == id)
+                        .OrderBy(u => u.Id)
+                        .Skip((count - 1) * 10)
+                        .Take(10)
+                        .ToListAsync();
+                    return Ok(users);
+                }
+
+            }
+            catch{
+                return BadRequest("Error Fetching Users");
+            }
+        }
+        
+
+
         [HttpGet("{id}")]
         public async Task<ActionResult> GetUser(int id)
         {
-            var response = await _context.Users.FindAsync(id);
-
-            if (response == null)
+            try
             {
-                return NotFound();
-            }
+                var response = await _context.Users.FindAsync(id);
 
-            return Ok(response);
+                if (response == null)
+                {
+                    return NotFound("User Not Found");
+                }
+
+                return Ok(response);
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
         [HttpGet("{id}/verify")]

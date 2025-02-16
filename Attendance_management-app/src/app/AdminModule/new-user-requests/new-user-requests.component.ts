@@ -58,7 +58,12 @@ export class NewUserRequestsComponent {
         this.userRequests = res;
       },
       (error)=>{
-        addMessage({type:"failure", message:"Error Getting Data From Server"});
+        if(error.status == 401){
+          addMessage({type:"warning", message:"Unauthorized! Wrong or Expired Token, Try Login again"});
+        }
+        else{
+          addMessage({type:"failure", message:"Error Getting Data From Server"});
+        }
       }
     )
   }

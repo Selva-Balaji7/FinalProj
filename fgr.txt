@@ -146,3 +146,29 @@ showPassword: any;
 togglePassword(){
     this.showPassword = !this.showPassword;
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width:721px) {
+    #MessageBox{
+        width: 50vw;
+    }  
+    
+}
+@media screen and (max-width:425px) {
+    #MessageBox{
+        width: 70vw;
+    }  
+    
+}

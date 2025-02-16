@@ -1,4 +1,4 @@
-<div class="loginpage d-flex justify-content-center align-items-center vh-100" style="background-color: #f8f9fa;">
+<div class="loginpage d-flex justify-content-center align-items-center">
     <div class="card shadow-lg p-4" style="width: 350px; border-radius: 10px;">
         <h3 class="text-center mb-3 text-primary" style="font-weight: bold;">Login</h3>
         <form [formGroup]="LoginForm" (ngSubmit)="AuthenticateUser()">
@@ -6,11 +6,14 @@
                 <label for="userid" class="form-label">User ID</label>
                 <input type="text" id="userid" formControlName="id" (blur)="validate('id')" class="form-control hovereffect" placeholder="Enter your User ID">
             </div>
-            <div class="mb-3">
+            <div class="mb-3 passwordinput">
                 <label for="userpassword" class="form-label">Password</label>
-                <input type="password" id="userpassword" formControlName="password" (blur)="validate('password')" class="form-control hovereffect" placeholder="Enter your Password">
+                <input [type]="showPassword?'text':'password'" id="userpassword" formControlName="password" (blur)="validate('password')" class="form-control hovereffect" placeholder="Enter your Password">
+                <span (click)="togglePassword()" class="showpasswordicon">
+                    <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+                </span>
             </div>
-            <button type="submit" class="btn btn-primary w-100 mt-3 hovereffect secondspace logginbutton" [disabled]="!LoginForm.valid" style="height: 7vh;">
+            <button type="submit" class="btn btn-primary hovereffect secondspace logginbutton" [disabled]="!LoginForm.valid">
                 Login
             </button>
             <div class="text-center mt-3">

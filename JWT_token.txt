@@ -1,27 +1,24 @@
-To implement JWT (JSON Web Token) authentication and authorization in your Angular and ASP.NET application, you need to follow these steps:
-
 1. Backend (ASP.NET) Setup
+
+
+
+
+
+
 1.1 Install Required Packages
-Install the following NuGet packages for JWT authentication:
+dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer --version 8.0.2
+dotnet add package Microsoft.IdentityModel.Tokens --version 8.0.2
+dotnet add package System.IdentityModel.Tokens.Jwt --version 8.0.2
 
-Microsoft.AspNetCore.Authentication.JwtBearer
 
-Microsoft.IdentityModel.Tokens
 
-System.IdentityModel.Tokens.Jwt
 
-You can install them via the NuGet Package Manager or the CLI:
 
-bash
-Copy
-dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
-dotnet add package Microsoft.IdentityModel.Tokens
-dotnet add package System.IdentityModel.Tokens.Jwt
-1.2 Configure JWT in Startup.cs or Program.cs
-Add JWT authentication to your ASP.NET application.
 
-csharp
-Copy
+
+
+
+1.2 Configure JWT in  Program.cs
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -59,18 +56,42 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-1.3 Add JWT Configuration in appsettings.json
-Add the JWT settings to your appsettings.json file:
 
-json
-Copy
-{
+
+
+
+
+
+
+
+
+
+
+
+
+1.3 Add JWT Configuration in appsettings.json
+
   "Jwt": {
     "SecretKey": "your-very-secure-secret-key",
     "Issuer": "your-issuer",
     "Audience": "your-audience"
   }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 1.4 Generate JWT Token on Login
 Create a method to generate a JWT token when the user logs in.
 

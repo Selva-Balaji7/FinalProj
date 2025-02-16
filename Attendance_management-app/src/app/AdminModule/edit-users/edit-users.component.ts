@@ -8,6 +8,7 @@ import { inject } from '@angular/core';
 	import { Store } from '@ngrx/store';
 	import { UserState } from '../../../store/user/user.state';
 import { addMessage } from '../../../common/popupmessage';
+import { AuthService } from '../../services/login/auth.service';
 
 @Component({
   selector: 'app-edit-users',
@@ -22,17 +23,36 @@ export class EditUsersComponent implements OnInit {
     users:any;
     roles:any;
     addUserForm:any;
+    filterForm:any;
     showUserForm = false;
     showAddUserForm = false;
     isEditing = false;
     selectedUser: any = {};
+    public Page:number = 1;
 
     canEditUsers:boolean= false;
   
-    constructor(private _route:Router,public http: DbservicesService) {}
+    constructor(private _route:Router,public http: DbservicesService, private authService: AuthService) {}
   
     ngOnInit() {
       this.userstore.select(state => state.user).subscribe(data => this.user=data);
+
+      // if(!this.authService.isAuthenticated()){
+      //   this._route.navigate(['/']);
+      //   addMessage({type:"warning", message:"Token Not Found"});
+      // }
+      this.addUserForm  = new FormGroup({
+        id: new FormControl("",[Validators.required, Validators.pattern("^[0-9]{3,4}$")]),
+        name: new FormControl("",[Validators.required, Validators.pattern("^[a-zA-Z ]{3,20}$")]),
+        email: new FormControl("",[Validators.required, Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")]),
+        password: new FormControl("",[Validators.required, Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")]),
+        role:new FormControl("",[Validators.required]),
+      })
+      
+      this.filterForm  = new FormGroup({
+        id: new FormControl("",[Validators.pattern("^[0-9]{3,4}$")]),
+        role:new FormControl(""),
+      })
 
       if(!this.user.permissions.includes("ViewUsers")){
         this._route.navigate(['/']);
@@ -43,15 +63,8 @@ export class EditUsersComponent implements OnInit {
       
       if(this.user.permissions.includes("EditUsers"))
         this.canEditUsers = true;
-
-      this.addUserForm  = new FormGroup({
-        id: new FormControl("",[Validators.required, Validators.pattern("^[0-9]{3,4}$")]),
-        name: new FormControl("",[Validators.required, Validators.pattern("^[a-zA-Z ]{3,20}$")]),
-        email: new FormControl("",[Validators.required, Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")]),
-        password: new FormControl("",[Validators.required, Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")]),
-        role:new FormControl("",[Validators.required]),
-      })
-
+      
+      
       this.http.getRecord("role/onlyroles").subscribe(
         (res)=>{
           this.roles = res;
@@ -61,16 +74,23 @@ export class EditUsersComponent implements OnInit {
         }
       )
     }
+
   
     loadUsers() {
-      console.log('loadUsers');
-      this.http.getRecord("User").subscribe((data) => {
+      console.log(this.filterForm.value);
+      const {id, role} = this.filterForm.value;
+      console.log(`User/limit/${this.Page}?role=${role||"null"}&&id=${id||0}`);
+      this.http.getRecord(`User/limit/${this.Page}?role=${role||"null"}&&id=${id||0}`).subscribe(
+        (data) => {
         this.users = data
-       console.log(data);
-      });
-
-      
-  }
+        },
+        (error)=>{
+          if(error.status == 401){
+            addMessage({type:"warning", message:"Unauthorized! Wrong or Expired Token, Try Login again"});
+          }
+        }
+      );
+    }
   
     openUserForm(user: any = {}) {
       this.selectedUser = { ...user };
@@ -191,6 +211,55 @@ export class EditUsersComponent implements OnInit {
         }
         
       }
+      
+      validate2(formcontrolname:any){
+        if(formcontrolname == "id"){
+          if(this.filterForm.get("id").invalid){
+            if(this.filterForm.get("id").errors.pattern){
+              addMessage({type:"warning", message:"Id is a 3 or 4 Digit Number"});
+              this.filterForm.get("role")?.enable();
+            }
+            if(this.filterForm.get("id").errors.required){
+              addMessage({type:"warning", message:"id Field is Requied"});
+              this.filterForm.get("role")?.enable();
+            }
+            if(this.filterForm.get('id').valid){
+              this.filterForm.get("role")?.disable();
+            }
+          }
+        }
+        else if(formcontrolname == "role"){
+          if(this.filterForm.get("role").invalid){
+            if(this.filterForm.get("role").errors.required){
+              addMessage({type:"warning", message:"Role Field is Requied"});
+            }
+          }
+        }
+        
+      }
+
+
+      reset(){
+        this.Page = 1;
+        this.loadUsers();
+      }
+      prevPage(count:number){
+        if(this.Page > 1){
+          this.Page-=count;
+          this.loadUsers();
+        }
+        return;
+      }
+    
+      nextPage(count:number){
+        if(this.users.length >= 10){
+          this.Page += count;
+          this.loadUsers();
+        }
+        return;
+      }
+
+      
   }
   
    

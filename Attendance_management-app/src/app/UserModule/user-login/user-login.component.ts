@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { UserState } from '../../../store/user/user.state';
 import { saveUserData } from '../../../store/user/user.actions';
 import { addMessage } from '../../../common/popupmessage';
+import { AuthService } from '../../services/login/auth.service';
 
 @Component({
   selector: 'app-user-login',
@@ -30,9 +31,12 @@ export class UserLoginComponent {
 
   private userstore = inject(Store<{user:UserState}>)
 
-  constructor(private _http : DbservicesService, private _route:Router){}
+  constructor(private _http : DbservicesService, private _route:Router, private authService: AuthService){}
 
   ngOnInit(){
+    localStorage.clear();
+
+    console.log(navigator.userAgent);
 
     this.LoginForm = new FormGroup({
       id:new FormControl("", [Validators.required, Validators.pattern("^[0-9]{3,4}$")]),
@@ -51,62 +55,8 @@ export class UserLoginComponent {
 
   AuthenticateUser(){
     this.LData = this.LoginForm.value;
-    this.reqUrl = `user/${this.LData.id}/verify?password=${this.LData.password}`;
 
-    this._http.getRecord(this.reqUrl).subscribe(
-      (res)=>{
-        if(res){
-          addMessage({type:"success", message:"Loged In"});
-          this.LogginSequence();
-        }
-        else{
-          addMessage({type:"failure", message:"Wrong Password"});
-        }
-      },
-      (error)=>{
-
-        this._http.getRecord(`Usersregistration/${this.LData.id}`).subscribe(
-          () =>{ addMessage({type:"warning", message:"Approve User Pending"});},
-          () => {addMessage({type:"failure", message:"User Not Found"});}
-        );
-      }
-    )
-
-  }
-
-  LogginSequence(){
-    this.reqUrl = `user/${this.LData.id}`;
-    var userData:any;
-    var permissions:any[] = [];
-
-    this._http.getRecord(this.reqUrl).subscribe(
-      (res) => {
-        userData = res;
-        this.reqUrl = `permission/${userData.role}`
-        this._http.getRecord(this.reqUrl).subscribe(
-          (res) => {
-              permissions = Object.values(res).map((item:any)=>item.permissionName);
-
-              this.User = {
-                id:userData.id,
-                name:userData.name,
-                email:userData.email,
-                password:userData.password,
-                role:userData.role,
-                permissions:permissions,
-                profilepicture:userData.profilePicture,
-                createdat:userData.createdAt,
-              }
-              this.userstore.dispatch(saveUserData(this.User));
-              setTimeout(() => {
-                this._route.navigate(["/dashboard"]);
-              }, 500);
-          },
-          (error) => {addMessage({type:"failure", message:"Error Getting Data From Server"});}
-        )
-      },
-      (error) => {addMessage({type:"failure", message:"Error Getting Data From Server"});}
-    )  
+    this.authService.login(this.LData.id, this.LData.password);
   }
 
   validate(formcontrolname:any){
@@ -131,6 +81,11 @@ export class UserLoginComponent {
       }
     }
     
+  }
+
+  showPassword: any;
+  togglePassword(){
+    this.showPassword = !this.showPassword;
   }
 
 

@@ -1,0 +1,11 @@
+#pagecountindicator{
+    width:50px;
+    border: 1px solid black;
+    margin: 0px;
+    display: grid;
+    align-items: center;
+}
+
+.filterformcontainer{
+    margin-bottom: 10px;
+}
