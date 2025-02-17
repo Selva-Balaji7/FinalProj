@@ -40,7 +40,7 @@ INSERT INTO permissions (role_id, permission_name) values
 (3, "ViewAllAttendance"),
 (3, "ViewRoles"),
 (3, "EditRoles"),
-(2, "ViewPermissions"), (3, "ViewPermissions"),
+(3, "ViewPermissions"),
 (3, "EditPermissions"),
 (1, "MakeLeaveRequest"), (2, "MakeLeaveRequest"), (3, "MakeLeaveRequest"),
 (1, "LeaveRequestHistory"), (2, "LeaveRequestHistory"), (3, "LeaveRequestHistory"),

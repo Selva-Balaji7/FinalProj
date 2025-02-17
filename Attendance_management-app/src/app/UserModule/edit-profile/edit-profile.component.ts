@@ -93,9 +93,6 @@ export class EditProfileComponent {
             this._http.updateRecord(`User/${this.user.id}`, updatedUser).subscribe(
               (res)=>{
                 addMessage({type:"success", message:"Uploaded the Image"});
-                setTimeout(() => {
-                  window.location.reload();
-                }, 1000);
               },
               (error)=>{
                 addMessage({type:"failure", message:"Upload Failed"});
