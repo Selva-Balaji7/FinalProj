@@ -12,7 +12,7 @@ import { saveUserData } from '../../../store/user/user.actions';
 export class AuthService {
   private tokenKey = 'authToken';
   // baseURL:string="https://localhost:7200/api";
-  baseURL:string= (window.location.host.includes("localhost"))? "https://localhost:7200/api" : "https://192.168.138.178:7200/api";
+  baseURL:string= (window.location.host.includes("localhost"))? "https://localhost:7200/api" : "https://172.17.7.114:7200/api";
 
   User:any;
   private userstore = inject(Store<{user:UserState}>)

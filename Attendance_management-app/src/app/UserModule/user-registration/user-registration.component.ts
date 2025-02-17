@@ -78,7 +78,10 @@ showPassword: any;
   registerUser(){
     this.http.getRecord(`User/${this.regForm.value.id}`).subscribe(
       (response:any) => {
-        addMessage({type:"warning", message:"You are already a User"});
+        addMessage({type:"warning", message:"Id is already a User, Try login"});
+        setTimeout(() => {
+          this._route.navigate(['/']);                  
+        }, 1500);
         return;
       },
       (error:any) => {
@@ -86,6 +89,9 @@ showPassword: any;
         this.http.getRecord(`Usersregistration/${this.regForm.value.id}`).subscribe(
           (response:any) => {
             addMessage({type:"warning", message:"You have already registered"});
+            setTimeout(() => {
+              this._route.navigate(['/']);                  
+            }, 1500);
             return;
           },
           (error:any) => {

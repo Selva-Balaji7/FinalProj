@@ -559,3 +559,11 @@ D:\Atendance_Management_Final\FinalProj\Attendance_management\obj\Debug\net8.0\r
 D:\Atendance_Management_Final\FinalProj\Attendance_management\obj\Debug\net8.0\Attendance_management.pdb
 D:\Atendance_Management_Final\FinalProj\Attendance_management\obj\Debug\net8.0\Attendance_management.genruntimeconfig.cache
 D:\Atendance_Management_Final\FinalProj\Attendance_management\obj\Debug\net8.0\ref\Attendance_management.dll
+D:\Bejesh\FinalProj\Attendance_management\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Bejesh\FinalProj\Attendance_management\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Bejesh\FinalProj\Attendance_management\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Bejesh\FinalProj\Attendance_management\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+D:\Bejesh\FinalProj\Attendance_management\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+D:\Bejesh\FinalProj\Attendance_management\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Bejesh\FinalProj\Attendance_management\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\Bejesh\FinalProj\Attendance_management\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll

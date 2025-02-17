@@ -168,7 +168,7 @@ export class ViewStudentAttendanceComponent {
     deleteStatusof(attendance:any){
       this._http.deleteRecord(`attendance/${attendance.id}`).subscribe(
         (res)=>{
-          addMessage({type:"success", message:"Deleted Successfully"});
+          addMessage({type:"warning", message:"Deleted Successfully"});
           this.getAttendanceDetails();
         },
         (error)=>{

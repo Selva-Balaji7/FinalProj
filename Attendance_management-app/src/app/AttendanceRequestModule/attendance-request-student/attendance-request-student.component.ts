@@ -35,48 +35,37 @@ export class AttendanceRequestStudentComponent {
     this.attendanceReqstudent.getRecord('Attendancerequest/byrole?role=Student').subscribe(
       (data: any) => {
         this.attendanceRequests = data;
-        console.log(data);
       },
       (error: any) => {
-        console.error('Error fetching attendance requests', error);
+        addMessage({type:"failure", message:"Error Getting Data From Server"});
       }
     );
   }
 
   onSubmit(request: any): void {
-    console.log('Submitting request:', request);
-
-
     const updatedData = {
       userId: request.userId,
       date: request.date,
       status: 'present',
       remarks: null
     };
-    console.log('Attendance request updated successfully', updatedData);
 
 
     this.attendanceReqstudent.postRecord('Attendance', updatedData).subscribe(
       (response: any) => {
-        console.log('Attendance request updated successfully', response);
-
 
         this.attendanceReqstudent.deleteRecord(`Attendancerequest/${request.id}`).subscribe(
           (deleteResponse: any) => {
-            console.log('Attendance request deleted successfully', deleteResponse);
-
+            addMessage({type:"success", message:"Request Accepted"});
             this.loadAttendanceRequests();
           },
           (deleteError: any) => {
-            console.error('Error deleting attendance request', deleteError);
+            addMessage({type:"failure", message:"Failed to Accept"});
           }
         );
-
-
-        this.loadAttendanceRequests();
       },
       (error: any) => {
-        console.error('Error updating attendance request', error);
+        addMessage({type:"failure", message:"Error Adding Attendance"});
       }
     );
 
@@ -86,14 +75,8 @@ export class AttendanceRequestStudentComponent {
 
 
   onReject(request: any): void {
-    console.log('Submitting request:', request);
-
-
-
     this.attendanceReqstudent.deleteRecord(`Attendancerequest/${request.id}`).subscribe(
       (deleteResponse: any) => {
-        console.log('Attendance request deleted successfully', deleteResponse);
-
 
         const updatedData = {
           userId: request.userId,
@@ -101,16 +84,13 @@ export class AttendanceRequestStudentComponent {
           status: 'Absent',
           remarks: null
         };
-        console.log('Attendance request updated successfully', updatedData);
-
-
 
         this.attendanceReqstudent.postRecord('Attendance', updatedData).subscribe(
           (response: any) => {
-            console.log('Attendance request updated successfully', response);
-
-
-
+            addMessage({type:"warning", message:"Rejected"});
+          }
+          ,()=>{
+            addMessage({type:"failure", message:"Error Adding Attendance"});
           }
         );
 
@@ -118,7 +98,8 @@ export class AttendanceRequestStudentComponent {
         this.loadAttendanceRequests();
       },
       (deleteError: any) => {
-        console.error('Error deleting attendance request', deleteError);
+        addMessage({type:"failure", message:"Error Deleting Request"});
+        
       }
     );
 

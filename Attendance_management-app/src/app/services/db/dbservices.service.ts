@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class DbservicesService {
 
   // baseURL:string=  "https://localhost:7200/api";
-  baseURL:string= (window.location.host.includes("localhost"))? "https://localhost:7200/api" : "https://192.168.138.178:7200/api";
+  baseURL:string= (window.location.host.includes("localhost"))? "https://localhost:7200/api" : "https://172.17.7.114:7200/api";
   
   constructor(private http : HttpClient) { }
 

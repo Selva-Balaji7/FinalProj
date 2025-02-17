@@ -108,7 +108,7 @@ export class EditRolesComponent {
   
       this._http.deleteRecord(`role/${roleid}`).subscribe(
         (res)=>{
-          addMessage({type:"success", message:"Role Deleted"});
+          addMessage({type:"warning", message:"Role Deleted"});
           this.getRoles();
         },
         (error)=>{

@@ -110,7 +110,7 @@ export class StudentLeaveRequestComponent  {
 deleteLeaveRequest(requestId: number, message:string) {
   this.http.deleteRecord(`LeaveRequest/${requestId}`)
     .subscribe(() => {
-      addMessage({type:"success", message:`Request ${message}`});
+      addMessage({type:"warning", message:`Request ${message}`});
       this.fetchStudentRequests();
     }, (error: any) => {
       addMessage({type:"failed", message:`Unable to remove rquest`});

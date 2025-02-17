@@ -32,7 +32,6 @@ export class UserDashboardComponent {
     window.addEventListener("beforeunload", this.handleBeforeUnload);
     if(!this.user.id){
       setTimeout(() => {
-        addMessage({type:"warning", message:"Please Log in Again"});  
         this._route.navigate(['/']);
       }, 750);
     }

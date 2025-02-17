@@ -87,7 +87,7 @@ export class AttendanceHistoryComponent {
         reqUrl += `&status=null`
   
       this._http.getRecord(reqUrl).subscribe(
-        (res) => {this.attendances=res;console.log(res);},
+        (res) => {this.attendances=res;},
         (error) => {addMessage({type:"failure", message:"Error Getting Data From Server"});}
       )
     }
@@ -157,7 +157,7 @@ export class AttendanceHistoryComponent {
     deleteStatusof(attendance:any){
       this._http.deleteRecord(`attendance/${attendance.id}`).subscribe(
         (res)=>{
-          addMessage({type:"success", message:"Attendance Deleted"});
+          addMessage({type:"warning", message:"Attendance Deleted"});
           this.getAttendanceDetails();
         },
         (error)=>{

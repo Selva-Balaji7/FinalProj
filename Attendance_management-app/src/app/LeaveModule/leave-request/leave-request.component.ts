@@ -84,6 +84,11 @@ export class LeaveRequestComponent {
                                   .subscribe(() => {
                                     addMessage({type:"warning", message:`Leave Requests this Month ${this.leaverequestCount+=1}`});
                                       addMessage({type:"success", message:`Leave requested successfully`});
+                                      this.leaveForm.setValue({
+                                        leaveTypeId: null,
+                                        Date: null,
+                                        reason: ''
+                                      });
                                     });                                  
                                 }, 1000);
                               }
@@ -101,5 +106,8 @@ export class LeaveRequestComponent {
         }else addMessage({type:"warning", message:"Attendance Found For That date"})
       }
     );
+
+    
+
   }
 }

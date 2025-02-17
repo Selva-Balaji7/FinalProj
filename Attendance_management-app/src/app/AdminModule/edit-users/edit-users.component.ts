@@ -77,9 +77,7 @@ export class EditUsersComponent implements OnInit {
 
   
     loadUsers() {
-      console.log(this.filterForm.value);
       const {id, role} = this.filterForm.value;
-      console.log(`User/limit/${this.Page}?role=${role||"null"}&&id=${id||0}`);
       this.http.getRecord(`User/limit/${this.Page}?role=${role||"null"}&&id=${id||0}`).subscribe(
         (data) => {
         this.users = data
@@ -122,15 +120,14 @@ export class EditUsersComponent implements OnInit {
     }
   
     saveUser() {
-        
-        
-      console.log("Updading user", this.selectedUser);
-        if (this.isEditing) {
-          this.http.updateRecord(`User/${this.selectedUser.id}`, this.selectedUser)
-            .subscribe(() => {
-              console.log("Updated User1");
+      if (this.isEditing) {
+        this.http.updateRecord(`User/${this.selectedUser.id}`, this.selectedUser)
+        .subscribe(() => {
+              addMessage({type:"success", message:"Updated User"});
               this.loadUsers();
-            });
+            },
+            () => {addMessage({type:"failure", message:"Error Updating"});}
+          );
         } 
       
         this.closeUserForm();
@@ -138,7 +135,6 @@ export class EditUsersComponent implements OnInit {
 
       addUser(){
         var newUser = {...this.addUserForm.value, profilePicture:"ProfilePhotoPlaceholder.jpg"};
-        console.log(newUser);
         this.http.postRecord("user", newUser).subscribe(
           (res)=>{
             alert("New user Added");
@@ -146,7 +142,7 @@ export class EditUsersComponent implements OnInit {
             this.loadUsers();
           },
           (error)=>{
-            console.log("Failed to add user, Check the Users Table for Duplicate ID");
+            addMessage({type:"failure", message:"Failed to add user, Check for Duplicate ID"});
           }
         )
       }
@@ -154,7 +150,11 @@ export class EditUsersComponent implements OnInit {
 
       deleteUser(id: number) {
         if (confirm('Are you sure you want to delete this user?')) {
-          this.http.deleteRecord(`User/${id}`).subscribe(() => this.loadUsers());
+          this.http.deleteRecord(`User/${id}`).subscribe(() => {
+            addMessage({type:"warning", message:"User Deleted"});
+            this.loadUsers();
+          }
+        );
         }
       }
       

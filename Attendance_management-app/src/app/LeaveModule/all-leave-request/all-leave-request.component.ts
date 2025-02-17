@@ -42,7 +42,6 @@ export class AllLeaveRequestComponent {
         this.http.getRecord(`LeaveRequestshistory/?role=null`)
         .subscribe((data)=>{
           this.leaveRequestHistory = data;
-          console.log(data);
         })
     }
   
@@ -110,7 +109,7 @@ export class AllLeaveRequestComponent {
   deleteLeaveRequest(requestId: number, message:string) {
     this.http.deleteRecord(`LeaveRequest/${requestId}`)
       .subscribe(() => {
-        addMessage({type:"success", message:`Request ${message}`});
+        addMessage({type:"warning", message:`Request ${message}`});
         this.fetchAllRequests();
       }, (error: any) => {
         addMessage({type:"failed", message:`Unable to remove rquest`});

@@ -6,19 +6,19 @@ INSERT INTO Users (id,name,email,password,role,profile_picture) values
 
 
 INSERT INTO Users (id,name,email,password,role,profile_picture) values 
-(100, "Smith", "smith@gmail.com", "Smith@123","Student", "ProfilePhotoPlaceholder.jpg"),
-(101, "Johnson", "johnson@gmail.com", "Johnson@123","Student", "ProfilePhotoPlaceholder.jpg"),
-(102, "Williams", "williams@gmail.com", "Williams@123","Student", "ProfilePhotoPlaceholder.jpg"),
-(103, "Jones", "Jones@gmail.com", "Jones@123","Student", "ProfilePhotoPlaceholder.jpg"),
-(104, "Davis", "davis@gmail.com", "Davis@123","Student", "ProfilePhotoPlaceholder.jpg"),
-(105, "Rodriguez", "rodriguez@gmail.com", "Rodriguez@123","Student", "ProfilePhotoPlaceholder.jpg"),
-(106, "Taylor", "taylor@gmail.com", "Taylor@123","Student", "ProfilePhotoPlaceholder.jpg"),
-(107, "Moore", "moore@gmail.com", "Moore@123","Student", "ProfilePhotoPlaceholder.jpg"),
-(108, "Jackson", "jackson@gmail.com", "Jackson@123","Student", "ProfilePhotoPlaceholder.jpg"),
-(109, "Lee", "lee@gmail.com", "Lee@123","Student", "ProfilePhotoPlaceholder.jpg"),
-(500, "Hill", "hill@gmail.com", "Hill@123","Teacher", "ProfilePhotoPlaceholder.jpg"),
-(501, "Roberts", "roberts@gmail.com", "Roberts@123","Teacher", "ProfilePhotoPlaceholder.jpg"),
-(999, "Allen", "allen@gmail.com", "Allen@123","Admin", "ProfilePhotoPlaceholder.jpg");
+(100, "Smith", "smith@gmail.com", "Smith@123","Student", "100.jpg"),
+(101, "Johnson", "johnson@gmail.com", "Johnson@123","Student", "101.jpg"),
+(102, "Williams", "williams@gmail.com", "Williams@123","Student", "102.jpg"),
+(103, "Jones", "Jones@gmail.com", "Jones@123","Student", "103.jpg"),
+(104, "Davis", "davis@gmail.com", "Davis@123","Student", "104.jpg"),
+(105, "Rodriguez", "rodriguez@gmail.com", "Rodriguez@123","Student", "105.jpg"),
+(106, "Taylor", "taylor@gmail.com", "Taylor@123","Student", "106.jpg"),
+(107, "Moore", "moore@gmail.com", "Moore@123","Student", "107.jpg"),
+(108, "Jackson", "jackson@gmail.com", "Jackson@123","Student", "108.jpg"),
+(109, "Lee", "lee@gmail.com", "Lee@123","Student", "109.jpg"),
+(500, "Hill", "hill@gmail.com", "Hill@123","Teacher", "500.jpg"),
+(501, "Roberts", "roberts@gmail.com", "Roberts@123","Teacher", "501.jpg"),
+(999, "Allen", "allen@gmail.com", "Allen@123","Admin", "999.jpg");
 
 INSERT INTO UsersRegistration (id,name,email,password,role,profile_picture) values 
 (110, "Albert", "albert@gmail.com", "Albert@123","Student", "ProfilePhotoPlaceholder.jpg"),

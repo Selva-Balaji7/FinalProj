@@ -17,6 +17,8 @@
 
 .containers{
   width: 50vw;
+  display: flex;
+  justify-content: center;
 }
 
 tr{
@@ -24,8 +26,10 @@ tr{
 }
 
 .card{
-  width: max-content;
-  margin-top: 2;
+  width: 100%;
+  min-width: max-content;
+  max-width: 500px;
+  height: max-content;
 }
 
 
