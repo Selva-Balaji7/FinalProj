@@ -1,5 +1,5 @@
 <div class="maincontainer" style="min-height:100vh; padding:15px"> 
-    <div class="container w-50">
+    <div class="containers">
       <div class="card p-4 shadow-lg mt-5"  style="width: max-content;">
         <h3 class="text-center mb-4" style="font-size: x-large; font-weight: 600;">All Leave Requests</h3>
   
@@ -24,8 +24,8 @@
               <td>{{ request.leaveType.name}}</td>
               <td>{{ request.date }}</td>
               <td>{{ request.reason }}</td>
-              <td><button type="button" class="btn btn-success" (click)="updateLeaveStatus(request,'Leave')">Accept</button></td>
-              <td><button type="button" class="btn btn-danger" (click)="updateLeaveStatus(request,'Rejected')">Reject</button></td>
+              <td><button type="button" class="btn btn-success actionbtn" (click)="updateLeaveStatus(request,'Leave')">Accept</button></td>
+              <td><button type="button" class="btn btn-danger actionbtn" (click)="updateLeaveStatus(request,'Rejected')">Reject</button></td>
             </tr>
           </tbody>
         </table>

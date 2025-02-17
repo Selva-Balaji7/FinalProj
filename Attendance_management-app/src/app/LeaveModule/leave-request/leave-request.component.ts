@@ -73,7 +73,7 @@ export class LeaveRequestComponent {
                           this.http.getRecord(`Leaverequestshistory/Countleaves/${this.user.id}?Date=${newLeaveRequest.date}`).subscribe(
                             (res:any)=>{
                               this.leavehistoryCount = res.count;
-                              addMessage({type:"warning", message:`Leaves ${this.leavehistoryCount}`});
+                              addMessage({type:"warning", message:`Leaves this Month ${this.leavehistoryCount}`});
                               
                               if((this.leavehistoryCount+this.leaverequestCount) >= 2 ){
                                 addMessage({type:"warning", message:`Leave Limit Reached`});
@@ -82,7 +82,7 @@ export class LeaveRequestComponent {
                                 setTimeout(() => {
                                   this.http.postRecord('LeaveRequest', newLeaveRequest)
                                   .subscribe(() => {
-                                    addMessage({type:"warning", message:`Leave Requests ${this.leaverequestCount+=1}`});
+                                    addMessage({type:"warning", message:`Leave Requests this Month ${this.leaverequestCount+=1}`});
                                       addMessage({type:"success", message:`Leave requested successfully`});
                                     });                                  
                                 }, 1000);

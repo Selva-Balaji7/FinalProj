@@ -3,6 +3,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    min-height: 100vh;
 }
 
 th{
@@ -12,4 +13,33 @@ th{
 
 .mb-3{
     color: rgb(62, 62, 62);
+}
+
+.tablecontainer{
+    width: 100%;
+    overflow-x: scroll;
+}
+
+
+.optionbtn{
+    width: 100px;
+    margin-right: 10px;
+}
+
+
+
+
+
+
+
+@media screen and (max-width:769px) {
+}
+@media screen and (max-width:425px) {   
+    .table{
+        font-size: 10px;
+    }
+    .optionbtn{
+        font-size: 10px;
+        width: 65px;
+    }
 }

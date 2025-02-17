@@ -1,5 +1,5 @@
 <div class="maincontainer" style="min-height:100vh; padding:15px"> 
-  <div class="container w-50">
+  <div class="containers">
     <div class="card p-4 shadow-lg" style="width: max-content;">
       <h3 class="text-center mb-4" style="font-size: x-large; font-weight: 600;">Current Leave Requests</h3>
 
@@ -28,7 +28,7 @@
             <td>{{ request.date }}</td>
             <td>{{ request.reason }}</td>
             <td>
-              <button class="btn btn-danger btn-sm" (click)="deleteLeaveHistory(request.id)">
+              <button class="btn btn-danger actionbtn" (click)="deleteLeaveHistory(request.id)">
                 <i class="bi bi-trash"></i>
               </button>
             </td>

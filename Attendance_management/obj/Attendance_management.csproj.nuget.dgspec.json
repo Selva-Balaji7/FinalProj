@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\After JWT\\FinalProj\\Attendance_management\\Attendance_management.csproj": {}
+    "D:\\Atendance_Management_Final\\FinalProj\\Attendance_management\\Attendance_management.csproj": {}
   },
   "projects": {
-    "D:\\After JWT\\FinalProj\\Attendance_management\\Attendance_management.csproj": {
+    "D:\\Atendance_Management_Final\\FinalProj\\Attendance_management\\Attendance_management.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\After JWT\\FinalProj\\Attendance_management\\Attendance_management.csproj",
+        "projectUniqueName": "D:\\Atendance_Management_Final\\FinalProj\\Attendance_management\\Attendance_management.csproj",
         "projectName": "Attendance_management",
-        "projectPath": "D:\\After JWT\\FinalProj\\Attendance_management\\Attendance_management.csproj",
+        "projectPath": "D:\\Atendance_Management_Final\\FinalProj\\Attendance_management\\Attendance_management.csproj",
         "packagesPath": "C:\\Users\\Bejesh\\.nuget\\packages\\",
-        "outputPath": "D:\\After JWT\\FinalProj\\Attendance_management\\obj\\",
+        "outputPath": "D:\\Atendance_Management_Final\\FinalProj\\Attendance_management\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

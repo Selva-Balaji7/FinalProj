@@ -9,8 +9,34 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+
+  display: flex;
+  justify-content: center;
+
+}
+
+.containers{
+  width: 50vw;
 }
 
 tr{
   text-align: center;
+}
+
+.card{
+  width: max-content;
+  margin-top: 2;
+}
+
+
+
+@media screen and (max-width:769px) {
+}
+@media screen and (max-width:425px) {   
+  .maincontainer{
+    overflow-x: scroll;
+  }
+  .containers{
+    width: 80vw;
+  }
 }

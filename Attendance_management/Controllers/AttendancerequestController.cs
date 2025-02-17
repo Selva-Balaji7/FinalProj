@@ -19,7 +19,21 @@ namespace Attendance_management.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Attendancerequest>>> GetAllAttendancerequestsCount()
         {
-            var attendancerequests = await _context.Attendancerequests.ToListAsync();
+            var attendancerequests = await _context.Attendancerequests
+                .Select(p => new Attendancerequest
+                {
+                    Id = p.Id,
+                    UserId = p.UserId,
+                    Date = p.Date,
+                    Status = p.Status,
+                    Remarks = p.Remarks,
+                    User = new User
+                    {
+                        Name = p.User.Name,
+                        Role = p.User.Role
+                    }
+                })
+                .ToListAsync();
             return Ok(attendancerequests);
         }
 
@@ -46,6 +60,7 @@ namespace Attendance_management.Controllers
                     Remarks = p.Remarks,
                     User = new User
                     {
+                        Name = p.User.Name,
                         Role = p.User.Role
                     }
                 })

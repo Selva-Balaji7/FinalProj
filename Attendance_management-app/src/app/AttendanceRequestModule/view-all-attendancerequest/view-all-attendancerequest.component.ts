@@ -23,6 +23,7 @@ export class ViewAllAttendancerequestComponent {
   constructor(private _route:Router,private allAttendanceReq: DbservicesService) { }
 
   ngOnInit(): void {
+    this.userstore.select(state => state.user).subscribe(data => this.user=data);
       if(!this.user.permissions.includes("AllAttendanceRequest") ){
         addMessage({type:"warning", message:"Access Denied"});
         this._route.navigate(['/']);

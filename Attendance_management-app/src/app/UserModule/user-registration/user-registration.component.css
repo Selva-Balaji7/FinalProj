@@ -21,10 +21,21 @@
 
 .regbtn{
     position: relative;
-    bottom: -70px;
+    bottom: -80px;
 }
 
 .imagebtn{
     position: relative;
-    bottom: 50px;
+    bottom: 20px;
+}
+
+
+
+@media screen and (max-width:769px) {
+}
+@media screen and (max-width:425px) {   
+    .registerpage{
+    padding-left: 5px;
+    padding-right: 5px;
+    }
 }

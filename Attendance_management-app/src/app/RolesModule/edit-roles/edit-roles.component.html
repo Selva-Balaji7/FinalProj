@@ -23,10 +23,10 @@
                             </ng-container>
                         </td>
                         <td>
-                            <button *ngIf="role.id!=editingValueForId && CanEdit" class="btn btn-warning btn-sm btn me-3" (click)="changeEdit(role.id)">Edit</button>
-                            <button *ngIf="role.id!=editingValueForId && CanEdit" class="btn btn-danger btn-sm btn me-3" (click)="deleteRole(role.id)">Delete</button>
-                            <button *ngIf="role.id==editingValueForId" class="btn btn-secondary btn-sm" (click)="editingValueForId=-1">Cancel</button>
-                            <button *ngIf="role.id==editingValueForId" class="btn btn-success btn-sm" type="submit" (click)="UpdateRole()">Update</button>
+                            <button *ngIf="role.id!=editingValueForId && CanEdit" class="btn btn-warning optionbtn" (click)="changeEdit(role.id)">Edit</button>
+                            <button *ngIf="role.id!=editingValueForId && CanEdit" class="btn btn-danger optionbtn" (click)="deleteRole(role.id)">Delete</button>
+                            <button *ngIf="role.id==editingValueForId" class="btn btn-secondary optionbtn" (click)="editingValueForId=-1">Cancel</button>
+                            <button *ngIf="role.id==editingValueForId" class="btn btn-success optionbtn" type="submit" (click)="UpdateRole()">Update</button>
                         </td>
                     </tr>
 

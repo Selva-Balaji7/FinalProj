@@ -22,6 +22,7 @@ export class AttendanceRequestTeacherComponent implements OnInit {
   constructor(private _route:Router,private attendanceReqTeacher: DbservicesService) { }
 
   ngOnInit(): void {
+    this.userstore.select(state => state.user).subscribe(data => this.user=data);
       if(!this.user.permissions.includes("TeachersAttendanceRequest")){
         this._route.navigate(['/']);
       }

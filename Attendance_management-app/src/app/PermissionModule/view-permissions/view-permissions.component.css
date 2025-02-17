@@ -18,7 +18,7 @@ input::after{
     /* border:2px solid black; */
     margin-bottom:15px;
     margin-top:15px;
-    
+    min-width: max-content;
 }
 table {
     width: 100%;
@@ -44,6 +44,21 @@ tr:hover{
     transform: scale(1.05);
     height: 60px;
 }
+.tablecontainer{
+    width: 100%;
+    overflow-x: scroll;
+}
 
 
 
+@media screen and (max-width:769px) {
+}
+@media screen and (max-width:425px) {   
+    .containers{
+        margin-left: 5vw;
+        margin-right: 5vw;
+     }
+     .tablecontainer{
+        font-size: 12px;
+     }
+}

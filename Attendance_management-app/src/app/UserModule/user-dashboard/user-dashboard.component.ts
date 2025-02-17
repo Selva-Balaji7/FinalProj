@@ -29,13 +29,13 @@ export class UserDashboardComponent {
     this.userstore.select(state => state.user).subscribe(data => this.user=data);
     this.profileImageUrl =`${this._http.baseURL}/Image/Get/${this.user.profilepicture}`;
 
-    // window.addEventListener("beforeunload", this.handleBeforeUnload);
-    // if(!this.user.id){
-    //   setTimeout(() => {
-    //     addMessage({type:"warning", message:"Please Log in Again"});  
-    //     this._route.navigate(['/']);
-    //   }, 750);
-    // }
+    window.addEventListener("beforeunload", this.handleBeforeUnload);
+    if(!this.user.id){
+      setTimeout(() => {
+        addMessage({type:"warning", message:"Please Log in Again"});  
+        this._route.navigate(['/']);
+      }, 750);
+    }
 
     document.addEventListener('click', this.handleClick);
 
@@ -56,8 +56,6 @@ export class UserDashboardComponent {
   handleClick(event: MouseEvent) {
     if (event.button === 0) { // Left mouse button
       const x = event.clientX;
-      const y = event.clientY;
-      console.log(`Mouse clicked at (${x}, ${y})`);
       if(x > 250){
         document.getElementById("sidebar")?.classList.remove('sidebar-open');
       }

@@ -8,7 +8,6 @@ namespace Attendance_management.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
 
     public class UsersregistrationController : ControllerBase
     {

@@ -156,19 +156,44 @@ togglePassword(){
 
 
 
+width: 100%;
 
 
-
-
-@media screen and (max-width:721px) {
-    #MessageBox{
-        width: 50vw;
-    }  
-    
+@media screen and (max-width:769px) {
 }
-@media screen and (max-width:425px) {
-    #MessageBox{
-        width: 70vw;
-    }  
-    
+@media screen and (max-width:425px) {   
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<details>
+        <summary class="btn btn-info openfilterbutton">Filter Attendance</summary>
+        <form [formGroup]="filterForm" (ngSubmit)="setFiler()">
+        </form>
+    </details>
+
+
+
+.openfilterbutton{
+    margin-bottom: 20px;
+}
+.filterbtn{
+    margin: 20px;
+}
+
+.optionbtn{
+    width: 100px;
+    margin-right: 10px;
 }

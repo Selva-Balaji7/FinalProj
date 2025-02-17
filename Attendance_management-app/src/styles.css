@@ -1,7 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-body{
-    min-width: 400px;
-}
+
 #MessageBox{
     width: 25vw;
     /* height: 100vh; */
@@ -91,7 +89,7 @@ body{
 
 
 
-@media screen and (max-width:721px) {
+@media screen and (max-width:769px) {
     #MessageBox{
         width: 50vw;
     }  

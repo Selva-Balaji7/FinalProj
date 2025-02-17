@@ -4,11 +4,21 @@ html, body {
     margin: 0;
     padding: 0;
   }
+
+  .homecontainer{
+    width: 100%;
+  }
+  .pageoutput{
+    width: 100%;
+    overflow-x: scroll;
+  }
   .NavBar{
     display: flex;
-    padding:15px;
+    /* padding:15px; */
     background-color: rgb(79, 79, 79);
     align-items: center;
+    width: 100%;
+    padding:10px
   }
 
   .profileimage{
@@ -16,7 +26,7 @@ html, body {
     height: 75pxpx;
     border-radius: 50%;
     box-shadow: -10px 4px 25px rgb(0, 0, 0);
-    margin-left: 10px;
+    margin-left: 20px;
     cursor: pointer;
   }
 
@@ -35,10 +45,20 @@ html, body {
     font-weight: 900;
   }
   .loggoutbtn{
-    margin-left:10px
+    margin-top:30px
   }
   
+  .sidebardashboard{
+    margin: 10px 0px;
+  }
   
+  .closesidemenubtn{
+    height: 40px;
+    width: max-content;
+    font-size: 18px;
+    background-color:red;
+    margin: 0px;
+  }
   
 .sidebar {
   display: flex;
@@ -103,3 +123,24 @@ summary:only-child {
   margin-top: 0px;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width:721px) {
+   
+  
+}
+@media screen and (max-width:425px) {
+  .dashboardbtn{
+    display: none;
+  }
+  
+}
