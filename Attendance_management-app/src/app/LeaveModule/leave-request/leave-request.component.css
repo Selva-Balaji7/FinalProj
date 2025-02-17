@@ -1,5 +1,16 @@
 /* Container Styling */
 
+.maincontainer{
+  background-image: url("../../../../public/LeaveModulebackground.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+}
+
 .leaverequestpage{
   font-style: italic;
   font-family: none;
@@ -7,17 +18,25 @@
 
   } 
 
-
+  .card{
+    min-width: max-content;
+    min-height: max-content;
+  }
+  
   
 .container {
- 
+  width: 75vw;
   max-width: 600px;
+  min-width: max-content;
+  height: max-content;
   padding: 20px;
   background-color: #E3F2FD;
   border-radius: 20px;
   box-shadow: 8px -6px 8px rgba(0, 0, 0, 0.1);
   }
-  
+  .submitbtn{
+    min-width: max-content;
+  }
   /* Heading Styling */
   .container h2 {
     text-align: center;
@@ -55,21 +74,30 @@
     background-color: #1565c0;
   }
   
-  
-  
   /* Responsive Styling */
-  @media (max-width: 768px) {
-    .container {
-      width: 70%;
-      padding: 15px;
-    }
   
-    .container h2 {
-      font-size: 20px;
-    }
-  
-    button {
-      width: 50%;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  @media screen and (max-width:769px) {
+  }
+  @media screen and (max-width:425px) {   
+    button{
+      margin-top: 20px;
     }
   }
-  

@@ -6,6 +6,7 @@ import { DbservicesService } from '../../services/db/dbservices.service';
 import { saveUserData } from '../../../store/user/user.actions';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { addMessage } from '../../../common/popupmessage';
 
 @Component({
   selector: 'app-view-all-attendance',
@@ -39,13 +40,15 @@ export class ViewAllAttendanceComponent {
     ngOnInit(){
       this.userstore.select(state => state.user).subscribe(data => this.user=data);
   
-      if(!this.user.permissions.includes("ViewAllAttendance"))
-        this._route.navigate(['/']);
-      else
-        this.getAttendanceDetails();
-
-      if(this.user.permissions.includes("EditAttendance"))
-        this.canEditAttendance = true;
+        if(!this.user.permissions.includes("ViewAllAttendance") ){
+          addMessage({type:"warning", message:"Access Denied"});
+          this._route.navigate(['/']);
+        }
+        else
+          this.getAttendanceDetails();
+  
+        if(this.user.permissions.includes("EditAttendance"))
+          this.canEditAttendance = true;        
   
       this.filterForm = new FormGroup({
         startDate:new FormControl("", [Validators.required]),
@@ -66,7 +69,7 @@ export class ViewAllAttendanceComponent {
           this.UpdateStatuses = res;
         },
         (error) => {
-          console.log("Unable to Fetch status");
+          addMessage({type:"failure", message:"Error Getting Data From Server"});
         }
       );
 
@@ -76,7 +79,7 @@ export class ViewAllAttendanceComponent {
           this.Roles = ["",...this.Roles]
         },
         (error) => {
-          console.log("Unable to Fetch status");
+          addMessage({type:"failure", message:"Error Getting Data From Server"});
         }
       );
       
@@ -85,7 +88,6 @@ export class ViewAllAttendanceComponent {
     
   
     getAttendanceDetails(){
-      console.log("Trying to get details");
       if(this.filterid)
         var reqUrl:string = `Attendance/${this.filterid}/limit/${this.page}`;
       else
@@ -108,10 +110,13 @@ export class ViewAllAttendanceComponent {
       else
         reqUrl += `&status=null`
   
-      console.log(reqUrl);
       this._http.getRecord(reqUrl).subscribe(
-        (res) => {this.attendances=res;console.log(this.attendances);},
-        (error) => {console.log(error)}
+        (res) => {
+          this.attendances=res;
+        },
+        (error) => {
+          addMessage({type:"failure", message:"Error Getting Data From Server"});
+        }
       )
     }
   
@@ -136,7 +141,6 @@ export class ViewAllAttendanceComponent {
     }
   
     setFiler(){
-      console.log(this.filterForm.value);
       this.startDate = this.filterForm.value.startDate;
       this.endDate = this.filterForm.value.endDate;
       this.status = this.filterForm.value.status;
@@ -145,16 +149,15 @@ export class ViewAllAttendanceComponent {
       this.page = 1;
   
       if((this.startDate && !this.startDate) || (!this.startDate && this.startDate))  
-        window.alert("Both Dates are required");
-      
+        addMessage({type:"warning", message:"Add Both Dates to filter Range"});
         
       this.getAttendanceDetails();
+      addMessage({type:"success", message:"Filter Applied"});
     }
 
 
     editStatusof(attendance:any){
       this.isEditingId = attendance.id;
-      console.log("Changing state for ", this.isEditingId);
 
       this.editAttendanceForm.setValue({
         status:attendance.status
@@ -171,15 +174,26 @@ export class ViewAllAttendanceComponent {
         createdAt:attendance.createdAt
       }
       this._http.updateRecord(`attendance/${updatedAttendance.id}`, updatedAttendance).subscribe(
-        (res)=>{this.getAttendanceDetails();this.isEditingId=-1},
-        (error)=>{console.log(error);}
+        (res)=>{
+          this.getAttendanceDetails();
+          this.isEditingId=-1
+          addMessage({type:"success", message:"Updated Attendance"});
+        },
+        (error)=>{
+          addMessage({type:"failure", message:"Error Updating"});
+        }
       )
     }
 
     deleteStatusof(attendance:any){
       this._http.deleteRecord(`attendance/${attendance.id}`).subscribe(
-        (res)=>{this.getAttendanceDetails();},
-        (error)=>{console.log(error);}
+        (res)=>{
+          this.getAttendanceDetails();
+          addMessage({type:"warning", message:"Attendance Deleted"});
+        },
+        (error)=>{
+          addMessage({type:"failure", message:"Attendance Deleted"});
+        }
       )
     }
 

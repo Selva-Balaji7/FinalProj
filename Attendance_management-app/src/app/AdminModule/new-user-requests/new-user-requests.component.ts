@@ -26,14 +26,12 @@ export class NewUserRequestsComponent {
   ngOnInit(){
     this.userstore.select(state => state.user).subscribe(data => this.user=data);
 
-    if(!this.user.permissions.includes("NewUserRequests")){
-      setTimeout(() => {
-        this._route.navigate(['/']);        
-      }, 1000);
-      addMessage({type:"warning", message:"You Have no permission"});
-    }
-    else
-      this.getUserRequests();
+      if(!this.user.permissions.includes("NewUserRequests")){
+          this._route.navigate(['/']);
+        addMessage({type:"warning", message:"You Have no permission"});
+      }
+      else
+        this.getUserRequests();      
 
     this.updateRequestForm = new FormGroup({
       id: new FormControl("",[Validators.required]),
@@ -60,7 +58,12 @@ export class NewUserRequestsComponent {
         this.userRequests = res;
       },
       (error)=>{
-        addMessage({type:"failure", message:"Error Getting Data From Server"});
+        if(error.status == 401){
+          addMessage({type:"warning", message:"Unauthorized! Wrong or Expired Token, Try Login again"});
+        }
+        else{
+          addMessage({type:"failure", message:"Error Getting Data From Server"});
+        }
       }
     )
   }
@@ -127,6 +130,63 @@ export class NewUserRequestsComponent {
     return true;
   }
 
+  validate(formcontrolname:any){
+    if(formcontrolname == "id"){
+      if(this.updateRequestForm.get("id").invalid){
+        if(this.updateRequestForm.get("id").errors.pattern){
+          addMessage({type:"warning", message:"Id is a 3 or 4 Digit Number"});
+        }
+        if(this.updateRequestForm.get("id").errors.required){
+          addMessage({type:"warning", message:"id Field is Requied"});
+        }
+      }
+    }
+    else if(formcontrolname == "password"){
+      if(this.updateRequestForm.get("password").invalid){
+        if(this.updateRequestForm.get("password").errors.pattern){
+          addMessage({
+            type:"warning", 
+            message:"Password should have Lower, Upper, Digits, Special Characters "});
+        }
+        if(this.updateRequestForm.get("password").errors.required){
+          addMessage({type:"warning", message:"Password Field is Requied"});
+        }
+      }
+    }
+    else if(formcontrolname == "email"){
+      if(this.updateRequestForm.get("email").invalid){
+        if(this.updateRequestForm.get("email").errors.pattern){
+          addMessage({type:"warning", message:"InValid Email"});
+        }
+        if(this.updateRequestForm.get("email").errors.required){
+          addMessage({type:"warning", message:"Email is Requied"});
+        }
+      }
+    }
+    else if(formcontrolname == "name"){
+      if(this.updateRequestForm.get("name").invalid){
+        if(this.updateRequestForm.get("name").errors.pattern){
+          addMessage({type:"warning", message:"Name should be 3 - 20 characters"});
+        }
+        if(this.updateRequestForm.get("name").errors.required){
+          addMessage({type:"warning", message:"Name Field is Requied"});
+        }
+      }
+    }
+	else if(formcontrolname == "role"){
+          if(this.updateRequestForm.get("role").invalid){
+            if(this.updateRequestForm.get("role").errors.required){
+              addMessage({type:"warning", message:"Role Field is Requied"});
+            }
+          }
+        }
+    
+  }
 
+
+  showPassword: any;
+togglePassword(){
+    this.showPassword = !this.showPassword;
+  }
 
 }

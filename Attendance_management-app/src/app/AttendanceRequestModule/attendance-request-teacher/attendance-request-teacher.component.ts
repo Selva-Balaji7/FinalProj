@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { DbservicesService } from '../../services/db/dbservices.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { inject } from '@angular/core';
+	import { Store } from '@ngrx/store';
+	import { UserState } from '../../../store/user/user.state';
+import { addMessage } from '../../../common/popupmessage';
+
 @Component({
   selector: 'app-attendance-request-teacher',
   imports: [CommonModule],
@@ -9,62 +15,55 @@ import { CommonModule } from '@angular/common';
 })
 export class AttendanceRequestTeacherComponent implements OnInit {
 
-
+  private userstore = inject(Store<{user:UserState}>);
+  	public user:any;
   attendanceRequests: any[] = [];
 
-  constructor(private attendanceReqTeacher: DbservicesService) { }
+  constructor(private _route:Router,private attendanceReqTeacher: DbservicesService) { }
 
   ngOnInit(): void {
-    this.loadAttendanceRequests();
+    this.userstore.select(state => state.user).subscribe(data => this.user=data);
+      if(!this.user.permissions.includes("TeachersAttendanceRequest")){
+        this._route.navigate(['/']);
+      }
+      else
+        this.loadAttendanceRequests();
   }
 
   loadAttendanceRequests(): void {
     this.attendanceReqTeacher.getRecord('Attendancerequest/byrole?role=Teacher').subscribe(
       (data: any) => {
         this.attendanceRequests = data;
-        console.log(this.attendanceRequests);
       },
       (error: any) => {
-        console.error('Error fetching attendance requests', error);
+        addMessage({type:"failure", message:"Error Getting Data From Server"});
       }
     );
   }
 
   onSubmit(request: any): void {
-    console.log('Submitting request:?', request);
-
-
-
     const updatedData = {
       userId: request.userId,
       date: request.date,
       status: 'present',
       remarks: null
     };
-    console.log('Attendance request updated successfully', updatedData);
-
 
     this.attendanceReqTeacher.postRecord('Attendance', updatedData).subscribe(
       (response: any) => {
-        console.log('Attendance request updated successfully', response);
-
 
         this.attendanceReqTeacher.deleteRecord(`Attendancerequest/${request.id}`).subscribe(
           (deleteResponse: any) => {
-            console.log('Attendance request deleted successfully', deleteResponse);
-
+            addMessage({type:"success", message:"Request Accepted"});
             this.loadAttendanceRequests();
           },
           (deleteError: any) => {
-            console.error('Error deleting attendance request', deleteError);
+            addMessage({type:"failure", message:"Failed to Accept"});
           }
         );
-
-
-        this.loadAttendanceRequests();
       },
       (error: any) => {
-        console.error('Error updating attendance request', error);
+        addMessage({type:"failure", message:"Error Adding Attendance"});
       }
     );
 
@@ -74,41 +73,29 @@ export class AttendanceRequestTeacherComponent implements OnInit {
 
 
   onReject(request: any): void {
-    console.log('Submitting request:', request);
-
-
 
     this.attendanceReqTeacher.deleteRecord(`Attendancerequest/${request.id}`).subscribe(
       (deleteResponse: any) => {
-        console.log('Attendance request deleted successfully', deleteResponse);
-
-
         const updatedData = {
           userId: request.userId,
           date: request.date,
           status: 'Absent',
           remarks: null
         };
-        console.log('Attendance request updated successfully', updatedData);
-
-
 
         this.attendanceReqTeacher.postRecord('Attendance', updatedData).subscribe(
           (response: any) => {
-            console.log('Attendance request updated successfully', response);
-
-
-
+            addMessage({type:"warning", message:"Rejected"});
+          }
+          ,()=>{
+            addMessage({type:"failure", message:"Error Adding Attendance"});
           }
         );
-
-
-
 
         this.loadAttendanceRequests();
       },
       (deleteError: any) => {
-        console.error('Error deleting attendance request', deleteError);
+        addMessage({type:"failure", message:"Error Deleting Request"});
       }
     );
 

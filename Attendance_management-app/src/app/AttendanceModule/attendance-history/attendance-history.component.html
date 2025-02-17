@@ -1,41 +1,39 @@
-<div class="attendance-page d-flex justify-content-center align-items-center vh-100" style="background-color: #f8f9fa;">
-    <div class="card shadow-lg p-4 w-75" style="border-radius: 10px;">
+<div class="attendance-page" style="background-color: #f8f9fa;">
+    <div class="containers" style="border-radius: 10px;">
       
       <h3 class="text-center mb-3 text-primary" style="font-weight: bold;">Attendance Records</h3>
      <br/>
       <!-- Filter Section -->
-      <div class="mb-4 p-2 bg-light rounded">
-        <h5 class="text-secondary">Filter Attendance</h5>
-        <form [formGroup]="filterForm" (ngSubmit)="setFiler()" class="row g-3 align-items-center">
-          <div class="col-md-3">
-            <label class="form-label">Start Date:</label>
-            <input type="date" formControlName="startDate" class="form-control">
-          </div>
-          <div class="col-md-3">
-            <label class="form-label">End Date:</label>
-            <input type="date" formControlName="endDate" class="form-control">
-          </div>
-          <div class="col-md-3">
-            <label class="form-label">Status:</label>
-            <select formControlName="status" class="form-select">
-              <option *ngFor="let status of Statuses" [value]="status">{{status}}</option>
-            </select>
-          </div>
-          <div class="col-md-1 text-center">
-            <button type="submit" class="btn btn-primary">Filter</button>
-          </div>
-        </form>
-      </div>
-       <br/>
+       <div class="filtersection">
+          <details>
+            <summary class="btn btn-info openfilterbutton">Filter Attendance</summary>
+            <form [formGroup]="filterForm" (ngSubmit)="setFiler()" class="row g-3 align-items-center">
+              <div class="col-md-3">
+                <label class="form-label">Start Date:</label>
+                <input type="date" formControlName="startDate" class="form-control">
+              </div>
+              <div class="col-md-3">
+                <label class="form-label">End Date:</label>
+                <input type="date" formControlName="endDate" class="form-control">
+              </div>
+              <div class="col-md-3">
+                <label class="form-label">Status:</label>
+                <select formControlName="status" class="form-select">
+                  <option *ngFor="let status of Statuses" [value]="status">{{status}}</option>
+                </select>
+              </div>
+              <div class="col-md-1 text-center">
+                <button type="submit" class="btn btn-primary">Filter</button>
+              </div>
+            </form>
+        </details>
+       </div>
       <!-- Attendance Table -->
-      <div *ngIf="attendances.length != 0" class="table-responsive">
+      <div *ngIf="attendances.length != 0" class="tableresponsive">
         <form action="" [formGroup]="editAttendanceForm">
           <table class="table table-striped table-bordered shadow-sm text-center">
-            <thead class="table-primary">
+            <thead class="table-dark">
               <tr>
-                <th>User ID</th>
-                <th>Name</th>
-                <th>Role</th>
                 <th>Date</th>
                 <th>Time</th>
                 <th>Status</th>
@@ -45,9 +43,6 @@
             </thead>
             <tbody>
               <tr *ngFor="let attendance of attendances">
-                <td>{{attendance.userId}}</td>
-                <td>{{attendance.user.name}}</td>
-                <td>{{attendance.user.role}}</td>
                 <td>{{attendance.date}}</td>
                 <td>{{attendance.updatedAt | date:'HH:mm'}}</td>
                 <td>
@@ -63,8 +58,8 @@
                 </td>
                 <td>{{attendance.remarks || "-"}}</td>
                 <td *ngIf="canEditAttendance">
-                  <button *ngIf="isEditingId != attendance.id" class="btn btn-warning btn-sm me-1" (click)="editStatusof(attendance)">Edit</button>
-                  <button *ngIf="isEditingId != attendance.id" class="btn btn-danger btn-sm me-1" (click)="deleteStatusof(attendance)">Delete</button>
+                  <button *ngIf="isEditingId != attendance.id" class="btn btn-warning optionbtn" (click)="editStatusof(attendance)">Edit</button>
+                  <button *ngIf="isEditingId != attendance.id" class="btn btn-danger optionbtn" (click)="deleteStatusof(attendance)">Delete</button>
                   <button *ngIf="isEditingId == attendance.id" class="btn btn-secondary btn-sm" (click)="this.isEditingId = -1;">Cancel</button>
                 </td>
               </tr>

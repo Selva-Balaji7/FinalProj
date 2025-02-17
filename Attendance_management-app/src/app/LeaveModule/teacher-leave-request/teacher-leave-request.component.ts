@@ -17,6 +17,7 @@ export class TeacherLeaveRequestComponent {
       public user:any;
   
     leaveRequests: any;
+    leaveRequestHistory:any;
     isAttendanceMarked: boolean=false;
   
     constructor(private _route:Router,private http: DbservicesService) {}
@@ -27,14 +28,21 @@ export class TeacherLeaveRequestComponent {
       if(!this.user.permissions.includes("TeacherLeaveRequest"))
         this._route.navigate(['/']);
       else
-        this.fetchStudentRequests();
+        this.fetchTeacherRequests();
   
     }
   
-    fetchStudentRequests() {
+    fetchTeacherRequests() {
       this.http.getRecord('LeaveRequest?role=teacher')
         .subscribe((data) => {
           this.leaveRequests = data;
+          console.log(data);
+        });
+
+        this.http.getRecord(`LeaveRequestshistory/?role=teacher`)
+        .subscribe((data)=>{
+          this.leaveRequestHistory = data;
+          console.log(data);
         });
     }
   
@@ -76,7 +84,7 @@ export class TeacherLeaveRequestComponent {
                 
               }, (error: any) => {
                 addMessage({type:"failure", message:"Error Adding Attendance"});
-              });
+            });
             });
           }
           else if(status==='Rejected'){
@@ -102,8 +110,8 @@ export class TeacherLeaveRequestComponent {
   deleteLeaveRequest(requestId: number, message:string) {
     this.http.deleteRecord(`LeaveRequest/${requestId}`)
       .subscribe(() => {
-        addMessage({type:"success", message:`Request ${message}`});
-        this.fetchStudentRequests();
+        addMessage({type:"warning", message:`Request ${message}`});
+        this.fetchTeacherRequests();
       }, (error: any) => {
         addMessage({type:"failed", message:`Unable to remove rquest`});
       });

@@ -38,15 +38,15 @@ export class ViewTeacherAttendanceComponent {
       ngOnInit(){
         this.userstore.select(state => state.user).subscribe(data => this.user=data);
     
-        if(!this.user.permissions.includes("ViewStudentAttendance")){
-          addMessage({type:"warning", message:"You Have no permission"});
-          this._route.navigate(['/']);
-        }
-        else
-          this.getAttendanceDetails();
-  
-        if(this.user.permissions.includes("EditAttendance"))
-          this.canEditAttendance = true;
+          if(!this.user.permissions.includes("ViewStudentAttendance")){
+            addMessage({type:"warning", message:"Access Denied"});
+            this._route.navigate(['/']);
+          }
+          else
+            this.getAttendanceDetails();
+    
+          if(this.user.permissions.includes("EditAttendance") )
+            this.canEditAttendance = true;          
     
         this.filterForm = new FormGroup({
           startDate:new FormControl("", [Validators.required]),

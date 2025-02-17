@@ -2,7 +2,7 @@ import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UserState } from '../../../store/user/user.state';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
-import { saveUserData } from '../../../store/user/user.actions';
+import { deleteUserData, saveUserData } from '../../../store/user/user.actions';
 import { CommonModule } from '@angular/common';
 import { DbservicesService } from '../../services/db/dbservices.service';
 import { addMessage } from '../../../common/popupmessage';
@@ -22,42 +22,62 @@ export class UserDashboardComponent {
   @ViewChild('mainContent') mainContent!: ElementRef;  
   public isSidebarOpen: boolean=false;
 
+
   constructor(private _route:Router, private _http: DbservicesService){}
   
   ngOnInit(){
     this.userstore.select(state => state.user).subscribe(data => this.user=data);
-    if(!this.user.id){
-      var localuser:any = localStorage.getItem('user');
-      if(!!localuser){
-        this.userstore.dispatch(saveUserData(JSON.parse(localuser)));
-      }
-      else{
-        addMessage({type:"warning", message:"Login to Access Again"});
-        setTimeout(() => {
-          this._route.navigate(['/']);
-        }, 1000);
-      }
-    }
-    console.log(this.user);
     this.profileImageUrl =`${this._http.baseURL}/Image/Get/${this.user.profilepicture}`;
-  };
 
-  LogoutSequence(){
-    localStorage.removeItem('user');
-    addMessage({type:"success", message:"Logged Out"});
-    setTimeout(() => {
-      window.location.reload();      
-    }, 1000);
-  }
-
-  toggleSidebar() {
-    this.isSidebarOpen = !this.isSidebarOpen;
-
-    //  Ensure elements exist before accessing them
-    if (this.sidebar && this.sidebar.nativeElement && this.mainContent && this.mainContent.nativeElement) {
-      this.sidebar.nativeElement.style.left = this.isSidebarOpen ? '0px' : '-250px';
-      this.mainContent.nativeElement.style.marginLeft = this.isSidebarOpen ? '250px' : '0px';
+    window.addEventListener("beforeunload", this.handleBeforeUnload);
+    if(!this.user.id){
+      setTimeout(() => {
+        this._route.navigate(['/']);
+      }, 750);
     }
+
+    document.addEventListener('click', this.handleClick);
+
+  };
+  
+  ngOnDestroy(){
+    addMessage({type:"warning", message:"You have Been Loged out"});  
+    window.removeEventListener("beforeunload", this.handleBeforeUnload);
+    document.removeEventListener('click', this.handleClick);
+    this.userstore.dispatch(deleteUserData());
+  }
+  
+  handleBeforeUnload(event: BeforeUnloadEvent){
+    event.preventDefault();
+      event.returnValue = 'Reloading the page will log you out, continue?';
+    }
+
+  handleClick(event: MouseEvent) {
+    if (event.button === 0) { // Left mouse button
+      const x = event.clientX;
+      if(x > 250){
+        document.getElementById("sidebar")?.classList.remove('sidebar-open');
+      }
+    }
+  }
+  
+  LogoutSequence(){
+    setTimeout(() => {
+      this._route.navigate(['/']);     
+    }, 500);
+  }
+  
+  toggleSidebar() {
+    var sidebar = document.getElementById("sidebar");
+    if(sidebar?.classList.contains('sidebar-open')){
+      document.getElementById("sidebar")?.classList.remove('sidebar-open');
+      this.isSidebarOpen = false;
+    }
+    else{
+      document.getElementById("sidebar")?.classList.add('sidebar-open');
+      this.isSidebarOpen = true;
+    }
+
 }
 
 }

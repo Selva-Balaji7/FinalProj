@@ -1,5 +1,41 @@
 <div class="container mt-5">
-    <div class="card shadow-lg p-4">
+    <details>
+        <summary class="btn btn-info openfilterbutton">Filter Attendance</summary>
+        <form [formGroup]="filterForm" (ngSubmit)="setFiler()">
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label class="form-label fw-bold">Start Date:</label>
+                    <input type="date" class="form-control" formControlName="startDate">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-bold">End Date:</label>
+                    <input type="date" class="form-control" formControlName="endDate">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label fw-bold">ID:</label>
+                    <input type="text" class="form-control" formControlName="id">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Status:</label>
+                    <select class="form-select" formControlName="status">
+                        <option *ngFor="let status of Statuses" [value]="status">{{status || "--"}}</option>
+                    </select>
+                </div>
+                <div class="col-md-6" *ngIf="filterForm.get('id').invalid">
+                    <label class="form-label fw-bold">Role:</label>
+                    <select class="form-select" formControlName="role">
+                        <option *ngFor="let role of Roles" [value]="role">{{role || "--"}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary w-25">Filter</button>
+            </div>
+        </form>
+    </details>
+    <!-- <div class="card shadow-lg p-4">
         <h3 class="text-center text-primary mb-3" style="font-weight: bold;">Filter Attendance</h3>
         <form [formGroup]="filterForm" (ngSubmit)="setFiler()">
             <div class="row mb-3">
@@ -34,12 +70,12 @@
                 <button type="submit" class="btn btn-primary w-25">Filter</button>
             </div>
         </form>
-    </div>
+    </div> -->
 </div>
 
 <div class="container mt-4">
     <div class="card shadow-lg p-4">
-        <h3 class="text-center text-success mb-3" style="font-weight: bold;">Attendance Records</h3>
+        <h3 class="text-center text-success mb-3" style="font-weight: bold;">All Attendance Records</h3>
 
         <div *ngIf="attendances.length == 0" class="text-center text-danger">
             <h5>No Records Found, Try again...</h5>
@@ -69,10 +105,10 @@
                                 <td>{{attendance.date}}</td>
                                 <td>{{attendance.updatedAt | date:'HH:mm'}}</td>
                                 <td *ngIf="isEditingId == attendance.id;then falsepart; else truepart"></td>
-                                <td>{{attendance.remarks || "-"}}</td>
+                                <td>{{attendance.remarks }}</td>
                                 <td *ngIf="canEditAttendance">
-                                    <button *ngIf="isEditingId != attendance.id" class="btn btn-warning btn-sm me-2" type="button" (click)="editStatusof(attendance)">Edit</button>
-                                    <button *ngIf="isEditingId != attendance.id" class="btn btn-danger btn-sm" type="button" (click)="deleteStatusof(attendance)">Delete</button>
+                                    <button *ngIf="isEditingId != attendance.id" class="btn btn-warning optionbtn" type="button" (click)="editStatusof(attendance)">Edit</button>
+                                    <button *ngIf="isEditingId != attendance.id" class="btn btn-danger optionbtn" type="button" (click)="deleteStatusof(attendance)">Delete</button>
                                     <button *ngIf="isEditingId == attendance.id" class="btn btn-secondary btn-sm" type="button" (click)="this.isEditingId = -1;">Cancel</button>
                                 </td>
                                 <ng-template #truepart>

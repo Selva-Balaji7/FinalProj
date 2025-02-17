@@ -3,9 +3,10 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
-import { provideHttpClient, withJsonpSupport } from '@angular/common/http';
+import { provideHttpClient, withInterceptors, withJsonpSupport } from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
 import { userReducer } from '../store/user/user.reducer';
+import { authInterceptor } from './services/interceptor/auth.interceptor';
 
 
 export const appConfig: ApplicationConfig = {
@@ -13,7 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes),
     // provideClientHydration(withEventReplay()),
-    provideHttpClient(withJsonpSupport()),
-    provideStore({user:userReducer}),
+    provideHttpClient(withJsonpSupport(), withInterceptors([authInterceptor])),
+    provideStore({user:userReducer})
   ]
 };

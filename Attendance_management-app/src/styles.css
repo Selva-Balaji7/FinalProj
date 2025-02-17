@@ -1,9 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+
 #MessageBox{
     width: 25vw;
-    position: absolute;
+    /* height: 100vh; */
+    position: fixed;
     right: 5px;
-    bottom:5px;
+    top:5px;
 }
 
 .messagetext{
@@ -14,15 +16,25 @@
     animation: boxinout 6s linear;
 }
 .successmessage{
-    color: green;
+    /* background-color: rgb(39, 165, 0); */
+    background: linear-gradient( to right,green , rgb(2, 216, 2));
+    color: rgb(255, 255, 255);
 }
 .warningmessage{
-    color: orangered;
+    /* background-color:  rgb(174, 81, 0); */
+    background: linear-gradient( to right,rgb(174, 81, 0),  rgb(210, 98, 0));
+    color: rgb(241, 241, 241);
 }
 .failuremessage{
-    color: red;
+    /* background-color: brown; */
+    background: linear-gradient(to right, brown, rgb(202, 53, 53));
+    color: rgb(255, 156, 156);
 }
-.successmessage::after,.warningmessage::after, .failuremessage::after{
+.normalmessage{
+    background:linear-gradient(to right, rgb(239, 238, 238), rgb(226, 224, 224));
+    color: rgb(75, 75, 75);
+}
+.successmessage::after,.warningmessage::after, .failuremessage::after, .normalmessage::after{
     content: '';
     position:absolute;
     left: 0px;
@@ -31,13 +43,16 @@
     animation: loadbar 6s linear ;
 }
 .successmessage::after{
-    border: 1px solid green;
+    border: 2px solid rgb(0, 61, 0);
 }
 .warningmessage::after{
-    border: 1px solid orangered;
+    border: 2px solid orangered;
 }
 .failuremessage::after{
-    border: 1px solid red;
+    border: 2px solid red;
+}
+.normalmessage::after{
+    border: 2px solid rgb(74, 74, 74);
 }
 
 @keyframes loadbar {
@@ -51,6 +66,10 @@
 @keyframes boxinout {
     0%{
         opacity: 1;
+        left:-100%;
+    }
+    5%{
+        left:0px
     }
     80%{
         opacity: 1;
@@ -70,4 +89,15 @@
 
 
 
-
+@media screen and (max-width:769px) {
+    #MessageBox{
+        width: 50vw;
+    }  
+    
+}
+@media screen and (max-width:425px) {
+    #MessageBox{
+        width: 70vw;
+    }  
+    
+}

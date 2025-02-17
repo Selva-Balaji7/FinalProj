@@ -50,7 +50,10 @@ showPassword: any;
   }
 
   onUpload() {
-    if (!this.selectedFile) return;
+    if (!this.selectedFile){
+      addMessage({type:"warning", message:"No Image Selected"});      
+      return;
+    } 
   
     const fileExtension = this.selectedFile.name.split('.').pop();
     if(fileExtension != "jpg") return;
@@ -75,7 +78,10 @@ showPassword: any;
   registerUser(){
     this.http.getRecord(`User/${this.regForm.value.id}`).subscribe(
       (response:any) => {
-        addMessage({type:"warning", message:"You are already a User"});
+        addMessage({type:"warning", message:"Id is already a User, Try login"});
+        setTimeout(() => {
+          this._route.navigate(['/']);                  
+        }, 1500);
         return;
       },
       (error:any) => {
@@ -83,6 +89,9 @@ showPassword: any;
         this.http.getRecord(`Usersregistration/${this.regForm.value.id}`).subscribe(
           (response:any) => {
             addMessage({type:"warning", message:"You have already registered"});
+            setTimeout(() => {
+              this._route.navigate(['/']);                  
+            }, 1500);
             return;
           },
           (error:any) => {
@@ -104,7 +113,7 @@ showPassword: any;
         
             this.http.postRecord('Usersregistration', user).subscribe(
               (response:any) => {
-                this.onUpload();
+                // this.onUpload();
                 addMessage({type:"success", message:"User Registered Successfully"});
                 setTimeout(() => {
                   this._route.navigate(['/']);                  
@@ -141,7 +150,7 @@ showPassword: any;
         if(this.regForm.get("password").errors.pattern){
           addMessage({
             type:"warning", 
-            message:"Password should have Lower, Upper, Digits, Special Characters "});
+            message:"Password should have Lower, Upper, Digits, Special Characters and 8 to 20 Characters"});
         }
         if(this.regForm.get("password").errors.required){
           addMessage({type:"warning", message:"Password Field is Requied"});
@@ -169,6 +178,11 @@ showPassword: any;
       }
     }
     
+  }
+
+
+  togglePassword(){
+    this.showPassword = !this.showPassword;
   }
 
 }

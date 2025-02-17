@@ -36,9 +36,9 @@ export class AttendanceHistoryComponent {
   
     ngOnInit(){
       this.userstore.select(state => state.user).subscribe(data => this.user=data);
-  
+
       if(!this.user.permissions.includes("AttendanceHistory")){
-        addMessage({type:"warning", message:"You Have no permission"});
+        addMessage({type:"warning", message:"Access Denied"});
         this._route.navigate(['/']);
       }
       else
@@ -46,6 +46,7 @@ export class AttendanceHistoryComponent {
 
       if(this.user.permissions.includes("EditAttendance"))
         this.canEditAttendance = true;
+  
   
       this.filterForm = new FormGroup({
         startDate:new FormControl("", [Validators.required]),
@@ -156,7 +157,7 @@ export class AttendanceHistoryComponent {
     deleteStatusof(attendance:any){
       this._http.deleteRecord(`attendance/${attendance.id}`).subscribe(
         (res)=>{
-          addMessage({type:"success", message:"Attendance Deleted"});
+          addMessage({type:"warning", message:"Attendance Deleted"});
           this.getAttendanceDetails();
         },
         (error)=>{

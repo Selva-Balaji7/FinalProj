@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Attendance_Management_MainProject\\Attendance_management\\Attendance_management.csproj": {}
+    "D:\\Bejesh\\FinalProj\\Attendance_management\\Attendance_management.csproj": {}
   },
   "projects": {
-    "D:\\Attendance_Management_MainProject\\Attendance_management\\Attendance_management.csproj": {
+    "D:\\Bejesh\\FinalProj\\Attendance_management\\Attendance_management.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Attendance_Management_MainProject\\Attendance_management\\Attendance_management.csproj",
+        "projectUniqueName": "D:\\Bejesh\\FinalProj\\Attendance_management\\Attendance_management.csproj",
         "projectName": "Attendance_management",
-        "projectPath": "D:\\Attendance_Management_MainProject\\Attendance_management\\Attendance_management.csproj",
+        "projectPath": "D:\\Bejesh\\FinalProj\\Attendance_management\\Attendance_management.csproj",
         "packagesPath": "C:\\Users\\bejesh.sriram\\.nuget\\packages\\",
-        "outputPath": "D:\\Attendance_Management_MainProject\\Attendance_management\\obj\\",
+        "outputPath": "D:\\Bejesh\\FinalProj\\Attendance_management\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -54,6 +54,10 @@
               "target": "Package",
               "version": "[5.3.0, )"
             },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.2, )"
@@ -74,7 +78,15 @@
               "target": "Package",
               "version": "[8.0.2, )"
             },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
             "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[8.0.2, )"
             }

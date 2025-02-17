@@ -16,3 +16,6 @@ export interface SaveUserDataPayload {
     props<SaveUserDataPayload>() 
   );
 
+  export const deleteUserData = createAction(
+    '[UserData] Delete User Data',
+  )

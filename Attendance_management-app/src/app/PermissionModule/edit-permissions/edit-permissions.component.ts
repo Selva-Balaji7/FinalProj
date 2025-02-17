@@ -85,7 +85,7 @@ export class EditPermissionsComponent {
               this.getPermissionsDetails();
             },
             (error) => {
-              addMessage({type:"success", message:"Unable to Give Permission"});
+              addMessage({type:"failure", message:"Unable to Give Permission"});
             }
           );
         }
@@ -111,7 +111,7 @@ export class EditPermissionsComponent {
         else{
           this._http.deleteRecord(`permission/${formDetails.permissionSelect}?roleid=${this.addpermissionforID}`).subscribe(
             (res)=>{
-              addMessage({type:"success", message:`Permission Deleted for ${formDetails.roleSelect}`});
+              addMessage({type:"warning", message:`Permission Deleted for ${formDetails.roleSelect}`});
               this.getPermissionsDetails();
             },
             (error) => {
