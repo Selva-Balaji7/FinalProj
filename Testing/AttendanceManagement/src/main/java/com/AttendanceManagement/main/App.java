@@ -1,4 +1,4 @@
-package AttendanceManagement.AttendanceManagement;
+package com.AttendanceManagement.main;
 
 /**
  * Hello world!
