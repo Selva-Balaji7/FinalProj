@@ -27,6 +27,7 @@
               }
             ],
             "styles": [
+<<<<<<< HEAD
 
               "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.css",
@@ -36,6 +37,14 @@
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ]
+=======
+              "@angular/material/prebuilt-themes/azure-blue.css",
+              "src/styles.css",
+              "bootstrap/dist/css/bootstrap.min.css",
+              "bootstrap-icons/font/bootstrap-icons.css"
+            ],
+            "scripts": []
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
           },
           "configurations": {
             "production": {
@@ -91,7 +100,10 @@
               }
             ],
             "styles": [
+<<<<<<< HEAD
               "@angular/material/prebuilt-themes/azure-blue.css",
+=======
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
               "src/styles.css"
             ],
             "scripts": []

@@ -1,6 +1,9 @@
 ﻿using Attendance_management.Data;
 using Attendance_management.Models;
+<<<<<<< HEAD
 using Attendance_management.UserServices;
+=======
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,13 +16,36 @@ namespace Attendance_management.Controllers
     public class UserController : ControllerBase
     {
         private ApplicationDbContext _context;
+<<<<<<< HEAD
         HashServiceClass hashserv = new HashServiceClass();
+=======
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
 
         public UserController(ApplicationDbContext context)
         {
             _context = context;
         }
 
+<<<<<<< HEAD
+=======
+        [HttpGet("getDate")]
+        public ActionResult<object> GetDate()
+        {
+            // Get the current date
+            var currentDate = DateTime.Now.ToString("yyyy-MM-dd");
+
+            // Create an anonymous object to return as JSON
+            var result = new
+            {
+                date = currentDate
+            };
+
+            // Return the JSON object
+            return Ok(result);
+        }
+
+
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetAllUser()
         {
@@ -45,6 +71,7 @@ namespace Attendance_management.Controllers
         }
 
         [HttpGet("{id}/verify")]
+<<<<<<< HEAD
         public async Task<ActionResult<bool>> VerifyUser(int id, [FromQuery] string password)
         {
             var user = await _context.Users.FindAsync(id);
@@ -52,11 +79,21 @@ namespace Attendance_management.Controllers
             if (user == null)
             {
                 return NotFound();
+=======
+        public async Task<ActionResult<bool>> VerifyUser(int id, [FromQuery]string password)
+        {
+            var user = await _context.Users.FindAsync(id);
+
+            if(user == null)
+            {
+                return NotFound("User Id Not Found");
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
             }
             return user.Password == password;
         }
 
 
+<<<<<<< HEAD
         [HttpGet("images/{fileName}")]
         public IActionResult GetImage(string fileName)
         {
@@ -69,6 +106,8 @@ namespace Attendance_management.Controllers
         }
 
 
+=======
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
 
         [HttpPost]
         public async Task<ActionResult> AddUser(User user)
@@ -78,11 +117,19 @@ namespace Attendance_management.Controllers
                 Id = user.Id,
                 Name = user.Name,
                 Email = user.Email,
+<<<<<<< HEAD
                 Password = this.hashserv.HashPassword(user.Password),
                 Role = user.Role,
                 ProfilePicture = user.ProfilePicture,
                 CreatedAt = user.CreatedAt,
                 UpdatedAt = user.UpdatedAt
+=======
+                Password = user.Password,
+                Role = user.Role,
+                ProfilePicture = user.ProfilePicture,
+                //CreatedAt = user.CreatedAt,
+                //UpdatedAt = user.UpdatedAt
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
             };
 
             _context.Users.Add(newUser);
@@ -92,6 +139,7 @@ namespace Attendance_management.Controllers
         }
 
 
+<<<<<<< HEAD
 
         [HttpPost("{id}/profileimage")]
         public async Task<IActionResult> UploadProfileImage(int id, IFormFile image)
@@ -121,6 +169,11 @@ namespace Attendance_management.Controllers
 
 
 
+=======
+        
+
+        
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
 
 
         [HttpPut("{id}")]
@@ -151,14 +204,22 @@ namespace Attendance_management.Controllers
 
             return NoContent();
 
+<<<<<<< HEAD
         }
+=======
+        } 
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
 
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteUser(int id)
         {
             var user = await _context.Users.FindAsync(id);
+<<<<<<< HEAD
             if (user == null)
+=======
+            if(user == null)
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
             {
                 return NotFound();
             }
@@ -172,4 +233,8 @@ namespace Attendance_management.Controllers
 
 
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87

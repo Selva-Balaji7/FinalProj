@@ -1,9 +1,49 @@
+<<<<<<< HEAD
 using Attendance_management.Data;
 using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
+=======
+//dotnet run --urls="https://localhost:7200;http://localhost:7201"
+//dotnet run --urls="https://0.0.0.0:7200;http://0.0.0.0:7201"
+using System.Text;
+using Attendance_management.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+
+var builder = WebApplication.CreateBuilder(args);
+
+var key = Encoding.ASCII.GetBytes(builder.Configuration["Jwt:SecretKey"]);
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(key)
+    };
+});
+
+builder.Services.AddAuthorization();
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+
+
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
     ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))));
@@ -20,8 +60,12 @@ builder.Services.AddCors(options =>
         });
 });
 
+<<<<<<< HEAD
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+=======
+
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
 
 var app = builder.Build();
 
@@ -33,7 +77,16 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+<<<<<<< HEAD
 app.UseCors("AllowAllOrigins");
+=======
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();
+
+app.UseCors("AllowAllOrigins");
+
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

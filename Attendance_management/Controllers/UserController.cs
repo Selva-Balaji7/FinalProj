@@ -1,7 +1,11 @@
 ﻿using Attendance_management.Data;
 using Attendance_management.Models;
+<<<<<<< HEAD
 using Attendance_management.UserServices;
 
+=======
+using Microsoft.AspNetCore.Authorization;
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,17 +13,43 @@ namespace Attendance_management.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+<<<<<<< HEAD
+=======
+    [Authorize]
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
 
     public class UserController : ControllerBase
     {
         private ApplicationDbContext _context;
+<<<<<<< HEAD
         HashServiceClass hashserv = new HashServiceClass();
+=======
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
 
         public UserController(ApplicationDbContext context)
         {
             _context = context;
         }
 
+<<<<<<< HEAD
+=======
+        [HttpGet("getDate")]
+        public ActionResult<object> GetDate()
+        {
+            // Get the current date
+            var currentDate = DateTime.Now.ToString("yyyy-MM-dd");
+
+            // Create an anonymous object to return as JSON
+            var result = new
+            {
+                date = currentDate
+            };
+
+            // Return the JSON object
+            return Ok(result);
+        }
+
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetAllUser()
@@ -32,6 +62,7 @@ namespace Attendance_management.Controllers
             return Ok(response);
         }
 
+<<<<<<< HEAD
         [HttpGet("{id}")]
         public async Task<ActionResult> GetUser(int id)
         {
@@ -53,11 +84,77 @@ namespace Attendance_management.Controllers
             if (user == null)
             {
                 return NotFound();
+=======
+        [HttpGet("limit/{count}")]
+        public async Task<ActionResult<IEnumerable<Attendance>>> GetLimitUsers(int count, [FromQuery]string role, [FromQuery]int id)
+        {
+            try{
+                var roleList = role=="null" ? await _context.Users.Select(u=> u.Role).Distinct().ToListAsync() : new List<string> { role };
+                
+                if (id == 0)
+                {
+                    var users = await _context.Users
+                        .Where(u => roleList.Contains(u.Role))
+                        .OrderBy(u => u.Id)
+                        .Skip((count - 1) * 10)
+                        .Take(10)
+                        .ToListAsync();
+                    return Ok(users);
+                }
+                else
+                {
+                    var users = await _context.Users
+                        .Where(u => u.Id == id)
+                        .OrderBy(u => u.Id)
+                        .Skip((count - 1) * 10)
+                        .Take(10)
+                        .ToListAsync();
+                    return Ok(users);
+                }
+
+            }
+            catch{
+                return BadRequest("Error Fetching Users");
+            }
+        }
+        
+
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetUser(int id)
+        {
+            try
+            {
+                var response = await _context.Users.FindAsync(id);
+
+                if (response == null)
+                {
+                    return NotFound("User Not Found");
+                }
+
+                return Ok(response);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("{id}/verify")]
+        public async Task<ActionResult<bool>> VerifyUser(int id, [FromQuery]string password)
+        {
+            var user = await _context.Users.FindAsync(id);
+
+            if(user == null)
+            {
+                return NotFound("User Id Not Found");
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
             }
             return user.Password == password;
         }
 
 
+<<<<<<< HEAD
         [HttpGet("images/{fileName}")]
         public IActionResult GetImage(string fileName)
         {
@@ -70,6 +167,8 @@ namespace Attendance_management.Controllers
         }
 
 
+=======
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
 
         [HttpPost]
         public async Task<ActionResult> AddUser(User user)
@@ -79,11 +178,19 @@ namespace Attendance_management.Controllers
                 Id = user.Id,
                 Name = user.Name,
                 Email = user.Email,
+<<<<<<< HEAD
                 Password = this.hashserv.HashPassword(user.Password),
                 Role = user.Role,
                 ProfilePicture = user.ProfilePicture,
                 CreatedAt = user.CreatedAt,
                 UpdatedAt = user.UpdatedAt
+=======
+                Password = user.Password,
+                Role = user.Role,
+                ProfilePicture = user.ProfilePicture,
+                //CreatedAt = user.CreatedAt,
+                //UpdatedAt = user.UpdatedAt
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
             };
 
             _context.Users.Add(newUser);
@@ -93,6 +200,7 @@ namespace Attendance_management.Controllers
         }
 
 
+<<<<<<< HEAD
 
         [HttpPost("{id}/profileimage")]
         public async Task<IActionResult> UploadProfileImage(int id, IFormFile image)
@@ -122,6 +230,11 @@ namespace Attendance_management.Controllers
 
 
 
+=======
+        
+
+        
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
 
 
         [HttpPut("{id}")]
@@ -155,11 +268,36 @@ namespace Attendance_management.Controllers
         }
 
 
+<<<<<<< HEAD
+=======
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeleteUser(int id)
+        //{
+        //    var user = await _context.Users.FindAsync(id);
+        //    if (user == null)
+        //    {
+        //        return NotFound(new { message = "User not found" });
+        //    }
+        //    var attendanceRecords = _context.Attendances.Where(a => a.UserId == id);
+        //    _context.Attendances.RemoveRange(attendanceRecords);
+
+
+        //    _context.Users.Remove(user);
+        //    await _context.SaveChangesAsync();
+        //    return Ok(new { message = "User deleted successfully" });
+        //}
+
+
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteUser(int id)
         {
             var user = await _context.Users.FindAsync(id);
+<<<<<<< HEAD
             if (user == null)
+=======
+            if(user == null)
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
             {
                 return NotFound();
             }
@@ -173,4 +311,8 @@ namespace Attendance_management.Controllers
 
 
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87

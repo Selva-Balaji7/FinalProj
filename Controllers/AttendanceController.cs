@@ -40,12 +40,19 @@ namespace Attendance_management.Controllers
         // https://localhost:7200/api/attendance/limit/1?startDate=2025-01-01&endDate=2025-01-30
         // https://localhost:7200/api/attendance/limit/1?startDate=null&endDate=null&role=null&status=null
         [HttpGet("limit/{count}")]
+<<<<<<< HEAD
         public async Task<ActionResult<IEnumerable<Attendance>>> GetLimitAttendance(int count, [FromQuery] string startDate, [FromQuery] string endDate, [FromQuery] string role, [FromQuery] string status)
         {
             Console.Clear();
             //var roleList = role=="null" ? new List<string> { "Student", "Teacher", "Admin" } : new List<string> { role };
             var roleList = role == "null" ? await _context.Roles.Select(r => r.RoleName).ToListAsync() : new List<string> { role };
             //var statusList = (status == "null") ? new List<string> { "Present", "Holiday", "Sunday", "Leave" } : new List<string> { status };
+=======
+        public async Task<ActionResult<IEnumerable<Attendance>>> GetLimitAttendance(int count, [FromQuery]string startDate, [FromQuery]string endDate, [FromQuery]string role, [FromQuery]string status)
+        {
+            Console.Clear();
+            var roleList = role=="null" ? await _context.Attendances.Select(a=> a.User.Role).Distinct().ToListAsync() : new List<string> { role };
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
             var statusList = (status == "null") ? await _context.Attendances.Select(a => a.Status).Distinct().ToListAsync() : new List<string> { status };
 
             if (startDate == "null" || endDate == "null")
@@ -58,9 +65,17 @@ namespace Attendance_management.Controllers
                     .Take(10)
                     .Select(a => new Attendance
                     {
+<<<<<<< HEAD
                         UserId = a.UserId,
                         Date = a.Date,
                         Status = a.Status,
+=======
+                        Id = a.Id,
+                        UserId = a.UserId,
+                        Date = a.Date,
+                        Status = a.Status,
+                        CreatedAt = a.CreatedAt,
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
                         UpdatedAt = a.UpdatedAt,
                         User = new User
                         {
@@ -69,7 +84,11 @@ namespace Attendance_management.Controllers
                         }
                     })
                     .ToListAsync();
+<<<<<<< HEAD
                 if (attendances != null)
+=======
+                if(attendances != null)
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
                 {
                     return Ok(attendances);
                 }
@@ -86,9 +105,17 @@ namespace Attendance_management.Controllers
                     .Take(10)
                     .Select(a => new Attendance
                     {
+<<<<<<< HEAD
                         UserId = a.UserId,
                         Date = a.Date,
                         Status = a.Status,
+=======
+                        Id = a.Id,
+                        UserId = a.UserId,
+                        Date = a.Date,
+                        Status = a.Status,
+                        CreatedAt = a.CreatedAt,
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
                         UpdatedAt = a.UpdatedAt,
                         User = new User
                         {
@@ -123,6 +150,7 @@ namespace Attendance_management.Controllers
         }
 
         [HttpGet("{id}/limit/{count}")]
+<<<<<<< HEAD
         public async Task<ActionResult<Attendance>> GetAttendanceLimit(int id, int count, [FromQuery] string startDate, [FromQuery] string endDate, [FromQuery] string role, [FromQuery] string status)
         {
             Console.Clear();
@@ -158,6 +186,75 @@ namespace Attendance_management.Controllers
                 }
             }
             return BadRequest();
+=======
+        public async Task<ActionResult<Attendance>> GetAttendanceLimit(int id, int count,[FromQuery] string startDate, [FromQuery] string endDate, [FromQuery] string status)
+        {
+            try{
+
+                var statusList = (status == "null") ? await _context.Attendances.Select(a => a.Status).Distinct().ToListAsync() : new List<string> { status };
+                if (startDate == "null" || endDate == "null")
+                {
+                    var attendances = await _context.Attendances
+                        .Where(a => a.UserId == id && statusList.Contains(a.Status))
+                        .OrderByDescending(a => a.Date)
+                        .Skip((count - 1) * 10)
+                        .Take(10)
+                        .Select(a => new Attendance
+                        {
+                            Id = a.Id,
+                            UserId = a.UserId,
+                            Date = a.Date,
+                            Status = a.Status,
+                            CreatedAt = a.CreatedAt,
+                            UpdatedAt = a.UpdatedAt,
+                            User = new User
+                            {
+                                Name = a.User.Name,
+                                Role = a.User.Role
+                            }
+                        })
+                        .ToListAsync();
+                    if (attendances != null)
+                    {
+                        return Ok(attendances);
+                    }
+                }
+                else
+                {
+                    var sDate = DateOnly.Parse(startDate);
+                    var eDate = DateOnly.Parse(endDate);
+
+                    var attendances = await _context.Attendances
+                        .Where(a => a.UserId == id && a.Date >= sDate && a.Date <= eDate && statusList.Contains(a.Status))
+                        .OrderByDescending(a => a.Date)
+                        .Skip((count - 1) * 10)
+                        .Take(10)
+                        .Select(a => new Attendance
+                        {
+                            Id = a.Id,
+                            UserId = a.UserId,
+                            Date = a.Date,
+                            Status = a.Status,
+                            CreatedAt = a.CreatedAt,
+                            UpdatedAt = a.UpdatedAt,
+                            User = new User
+                            {
+                                Name = a.User.Name,
+                                Role = a.User.Role
+                            }
+                        })
+                        .ToListAsync();
+                    if (attendances != null)
+                    {
+                        return Ok(attendances);
+                    }
+                }
+                return BadRequest();
+            }
+            catch{
+                return BadRequest();
+            }
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
         }
 
 
@@ -176,6 +273,37 @@ namespace Attendance_management.Controllers
             return Ok(attendance.Count);
         }
 
+<<<<<<< HEAD
+=======
+        [HttpGet("GetStatus")]
+        public async Task<ActionResult<IEnumerable<string>>> getDistinctStatus(){
+            try{
+                var status = await _context.Attendances.
+                            Select(a=>a.Status)
+                            .Distinct()
+                            .ToListAsync();
+                
+                return Ok(status);
+            }
+            catch{
+                return BadRequest();
+            }
+        }
+        [HttpGet("GetRoles")]
+        public async Task<ActionResult<IEnumerable<string>>> getDistinctRoles(){
+            try{
+                var roles = await _context.Attendances.
+                            Select(a=>a.User.Role)
+                            .Distinct()
+                            .ToListAsync();
+                
+                return Ok(roles);
+            }
+            catch{
+                return BadRequest();
+            }
+        }
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
 
         [HttpGet("check/{id}")]
         public async Task<ActionResult<bool>> checkAttendance(int id, [FromQuery] string Date)
@@ -188,7 +316,11 @@ namespace Attendance_management.Controllers
                     .Where(a => a.UserId == id && a.Date == cDate)
                     .ToListAsync();
 
+<<<<<<< HEAD
                 if (att.Count == 0)
+=======
+                if(att.Count == 0)
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
                 {
                     return Ok(true);
                 }
@@ -213,7 +345,11 @@ namespace Attendance_management.Controllers
                 Date = attendance.Date,
                 Status = attendance.Status,
                 Remarks = attendance.Remarks,
+<<<<<<< HEAD
                 //CreatedAt = DateTime.UtcNow,
+=======
+                // CreatedAt = attendance.CreatedAt,
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
                 // UpdatedAt = DateTime.UtcNow
             };
 
@@ -269,4 +405,8 @@ namespace Attendance_management.Controllers
             return NoContent();
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
