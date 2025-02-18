@@ -1,4 +1,4 @@
-package com.AttendanceManagement;
+package com.AttendanceManagementTest.main;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

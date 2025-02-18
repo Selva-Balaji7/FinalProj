@@ -1,35 +1,36 @@
- package AttendanceModule;
+ package com.AttendanceManagementTest.main.com.AttendanceManagement.AttendanceModule;
 
- import org.openqa.selenium.By;
- import org.openqa.selenium.JavascriptExecutor;
- import org.openqa.selenium.Keys;
- import org.openqa.selenium.WebDriver;
- import org.openqa.selenium.WebElement;
- import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Test;
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
- import org.testng.annotations.AfterSuite;
- import org.testng.annotations.BeforeSuite;
- import org.testng.annotations.Test;
 
- import java.util.concurrent.TimeUnit;
 
- public class AttendanceTest {
+// import net.bytebuddy.dynamic.loading.ClassInjector.UsingReflection.System;
 
-     private WebDriver driver;
+ public class AttendanceTest{
+
+     private WebDriver driver =new ChromeDriver();
      private String baseUrl = "http://localhost:4200";
      private String expectedDashboardURL = baseUrl + "/dashboard";
 
      @BeforeSuite
-     public void setUp() {
+     public void setUp() throws InterruptedException {
          // Set up the ChromeDriver
          System.setProperty("webdriver.chrome.driver", "path/to/chromedriver"); // Replace with the actual path to your chromedriver
 //         driver = new ChromeDriver();
-         driver=new EdgeDriver();
          driver.manage().window().maximize();
-         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); // Implicit wait for element finding
+         Thread.sleep(2000);
      }
-
      @Test(priority = 1, description = "Login as Admin and Verify Dashboard Redirection")
      public void testAdminLogin() throws InterruptedException {
          driver.get(baseUrl);
@@ -40,8 +41,8 @@ import org.testng.Assert;
 
          WebElement password = driver.findElement(By.id("userpassword"));
          password.sendKeys("Allen@123");
-
-         WebElement loginButton = driver.findElement(By.className("btn"));
+         
+         WebElement loginButton = driver.findElement(By.className("btn-primary"));
          loginButton.click();
 
          Thread.sleep(2000); // Wait for redirection
@@ -55,17 +56,17 @@ import org.testng.Assert;
      public void testMarkAttendance() throws InterruptedException {
          // Navigate to Mark Attendance page
          driver.findElement(By.className("hamburger-btn")).click();
-         Thread.sleep(1000);
+         Thread.sleep(2000);
          driver.findElement(By.xpath("//summary[text()='Attendance']")).click();
-         Thread.sleep(1000);
-         driver.findElement(By.linkText("Mark Attendance")).click();
-         Thread.sleep(1000);
+         Thread.sleep(2000);
+         driver.findElement(By.linkText("Give Attendance")).click();
+         Thread.sleep(2000);
 
          // Mark attendance for a specific date
          WebElement dateInput = driver.findElement(By.id("attendanceDate"));
-         dateInput.sendKeys("2025-02-16");
-         driver.findElement(By.id("submit")).click();
+         dateInput.sendKeys("2025-02-18");
          Thread.sleep(2000);
+         driver.findElement(By.id("submit")).click();
 
          System.out.println("Attendance marked successfully");
      }
@@ -77,7 +78,7 @@ import org.testng.Assert;
          // Navigate to Attendance History page
          driver.findElement(By.className("hamburger-btn")).click();
          Thread.sleep(1000);
-         driver.findElement(By.linkText("Attendance Histoy")).click();
+         driver.findElement(By.linkText("Your Histoy")).click();
          Thread.sleep(1000);
 
          // Filter by date and status
@@ -102,7 +103,7 @@ import org.testng.Assert;
          // Navigate to View Student Attendances page
          driver.findElement(By.className("hamburger-btn")).click();
          Thread.sleep(1000);
-         driver.findElement(By.linkText("View Student Attendances")).click();
+         driver.findElement(By.linkText("Students")).click();
          Thread.sleep(1000);
 
          // Filter and update attendance

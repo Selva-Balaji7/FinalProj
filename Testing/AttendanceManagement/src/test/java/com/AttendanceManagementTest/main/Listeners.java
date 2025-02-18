@@ -1,6 +1,7 @@
-package com.AttendanceManagement;
+package com.AttendanceManagementTest.main;
 
 import org.openqa.selenium.WebDriver;
+
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
@@ -51,7 +52,7 @@ public class Listeners implements ITestListener {
 	@Override
 	public void onFinish(ITestContext context) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("Test execution is completed");
 		
 		
 	}

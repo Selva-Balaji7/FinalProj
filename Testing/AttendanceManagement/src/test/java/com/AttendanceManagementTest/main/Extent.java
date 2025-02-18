@@ -1,6 +1,7 @@
-package com.AttendanceManagement;
+package com.AttendanceManagementTest.main;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.util.Calendar;
 
@@ -13,11 +14,10 @@ import org.testng.ISuiteListener;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import com.AttendanceManagement.AttendanceModule.AttendanceTest;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
-
-import AttendanceModule.AttendanceTest;
 
 //import java.io.File;
 //import java.io.IOException;

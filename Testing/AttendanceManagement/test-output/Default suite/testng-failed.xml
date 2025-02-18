@@ -3,18 +3,14 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="AttendanceModule.AttendanceTest">
+      <class name="com.AttendanceManagementTest.main.com.AttendanceManagement.AttendanceModule.AttendanceTest">
         <methods>
-          <include name="testViewStudentAttendances"/>
-          <include name="testViewAllAttendances"/>
-          <include name="testViewTeacherAttendances"/>
-          <include name="testViewAttendanceHistory"/>
-          <include name="setUp"/>
+          <include name="testAttendanceHistory"/>
           <include name="testMarkAttendance"/>
-          <include name="testAdminLogin"/>
-          <include name="tearDown"/>
+          <include name="LaunchBrowser"/>
+          <include name="CloseBrowser"/>
         </methods>
-      </class> <!-- AttendanceModule.AttendanceTest -->
+      </class> <!-- com.AttendanceManagementTest.main.com.AttendanceManagement.AttendanceModule.AttendanceTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
