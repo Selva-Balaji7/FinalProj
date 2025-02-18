@@ -115,7 +115,7 @@
                                     {{attendance.status}}
                                 </ng-template>
                                 <ng-template #falsepart>
-                                    <select class="form-select" formControlName="status">
+                                    <select class="form-select2" formControlName="status">
                                         <option *ngFor="let status of UpdateStatuses" [value]="status">{{status}}</option>
                                     </select>
                                     <button type="submit" class="btn btn-success btn-sm mt-2" (click)="updateAttendance(attendance)">Update</button>
