@@ -9,23 +9,23 @@ export function addMessage(message:any, type:any="No"){
       messagetext.classList.add("normalmessage");
     }
     else if(message.type == "success"){
-      messagetext.innerHTML += '<img src="svgs/done_20dp_success.svg"></img>'
+      messagetext.innerHTML += '<img alt="success icon" src="svgs/done_20dp_success.svg"></img>'
       messagetext.innerHTML += " "+ message.message;
       messagetext.classList.add("successmessage");
     }
     else if(message.type == "warning"){
-      messagetext.innerHTML += '<img src="svgs/info_20dp_warning.svg"></img>'
+      messagetext.innerHTML += '<img alt="warning icon" src="svgs/info_20dp_warning.svg"></img>'
       messagetext.innerHTML += " "+ message.message;      
       messagetext.classList.add("warningmessage");
     }
     else if(message.type == "failure"){
-      messagetext.innerHTML += '<img src="svgs/error_20dp_error.svg"></img>'
+      messagetext.innerHTML += '<img alt="fail icon" src="svgs/error_20dp_error.svg"></img>'
       messagetext.innerHTML += " "+ message.message;
       messagetext.classList.add("failuremessage");
     }
     
     setTimeout(() => {
       messagetext.remove();
-    }, 5800);
+    }, 500800);
 }
 
