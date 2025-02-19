@@ -94,9 +94,8 @@ public class Attendance {
         dropdown.sendKeys("Present");
         dropdown.sendKeys(Keys.ENTER);
         Thread.sleep(1000);
-        driver.findElement(By.xpath("//button[@type='submit']")).click();
         System.out.println("filtered successfully");
-        Thread.sleep(2000);
+       
 
           
         

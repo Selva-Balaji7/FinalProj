@@ -1,6 +1,7 @@
  package com.AttendanceManagementTest.main;
 
 import org.openqa.selenium.WebDriver;
+
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
@@ -210,8 +211,6 @@ import org.testng.ITestContext;
          // Navigate to View All Attendances page
          driver.findElement(By.className("hamburger-btn")).click();
          Thread.sleep(1000);
-//         driver.findElement(By.xpath("//summary[text()='Attendance']")).click();
-         Thread.sleep(2000);
          driver.findElement(By.linkText("All")).click();
          Thread.sleep(1000);
 
