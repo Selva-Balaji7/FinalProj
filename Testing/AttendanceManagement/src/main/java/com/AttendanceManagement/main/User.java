@@ -1,7 +1,7 @@
 package com.AttendanceManagement.main;
 
 import org.openqa.selenium.By;
-
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -58,7 +58,7 @@ public class User {
 	     }*/
 	     
 	     //forgot password
-	     driver.findElement(By.linkText("Forgot Password?")).click();
+	     /*driver.findElement(By.linkText("Forgot Password?")).click();
 	     Thread.sleep(2000);
 	     WebElement id=driver.findElement(By.id("userid"));
 	     id.click();
@@ -85,24 +85,122 @@ public class User {
 	     Thread.sleep(2000);
 	     driver.findElement(By.id("confirmpassword")).sendKeys("Allen@123");
 	     Thread.sleep(2000);
-	     driver.findElement(By.className("btn-success")).click(); 
+	     driver.findElement(By.className("btn-success")).click(); */
 	     
 	     //new user
-	     driver.findElement(By.linkText("New User")).click();
-	     driver.findElement(By.id("userid")).sendKeys("4853");
+//	     driver.findElement(By.linkText("New User")).click();
+//	     driver.findElement(By.id("userid")).sendKeys("4899");
+//	     Thread.sleep(2000);
+//	     driver.findElement(By.id("username")).sendKeys("nitheesh");
+//	     Thread.sleep(2000);
+//	     driver.findElement(By.id("useremail")).sendKeys("nitheesh@gmail.com");
+//	     Thread.sleep(2000);
+//	     driver.findElement(By.id("userpassword")).sendKeys("Nitheesh@193"); 
+//	     Thread.sleep(2000);
+//	    
+//	     WebElement dropdown=driver.findElement(By.name("role"));
+//	     dropdown.click();
+//	     Thread.sleep(2000);
+//	     dropdown.sendKeys("Student");
+//	     Actions actions=new Actions(driver);
+//         actions.moveByOffset(100, 100).click().perform();
+//	     Thread.sleep(2000);
+//	     ((JavascriptExecutor)driver).executeScript("window.scrollTo(0,document.body.scrollHeight);");
+//	     try {
+//	    	 WebElement fileInput=driver.findElement(By.xpath("//input[@type='file']"));
+//		     Thread.sleep(2000);
+//		     String filePath="D:\\Attendance_Management_MainProject\\SampleUserImages\\Male\\11.jpg";
+//		     Thread.sleep(2000);
+//		     fileInput.sendKeys(filePath);
+//		     Thread.sleep(2000);
+//		     driver.findElement(By.className("imagebtn")).click();
+//		     System.out.println("uploaded successfully");
+//		     Thread.sleep(2000);
+//		     ((JavascriptExecutor)driver).executeScript("window.scrollTo(0,document.body.scrollHeight);");
+//		     Thread.sleep(2000);
+//		     driver.findElement(By.className("regbtn")).click();
+//		     System.out.println("registered successfully");
+//		     Thread.sleep(2000);
+//	     }
+//	     catch(Exception e){
+//	    	 e.printStackTrace();
+//	     }
+//	     driver.findElement(By.xpath("//button[@tabindex=0]")).click();
+	     
+	     
+	     
+	     //edit profile
+	     WebElement userID = driver.findElement(By.id("userid"));
+	     userID.sendKeys("999");
+	     WebElement password = driver.findElement(By.id("userpassword"));
+	     password.sendKeys("Allen@123");
+	     WebElement loginButton = driver.findElement(By.className("btn")); // Change ID if needed
+	     loginButton.click();
 	     Thread.sleep(2000);
-	     driver.findElement(By.id("username")).sendKeys("selva");
+	     driver.findElement(By.className("hamburger-btn")).click();
 	     Thread.sleep(2000);
-	     driver.findElement(By.id("useremail")).sendKeys("selva@123");
+	     driver.findElement(By.className("dropdowns")).click();
+	     driver.findElement(By.linkText("Your Profile")).click();
 	     Thread.sleep(2000);
-	     driver.findElement(By.id("userpassword")).sendKeys("Selva@123"); 
+	     boolean profile=driver.findElement(By.className("userprofile")).isDisplayed();
+	     if(profile==true)
+	     {
+	    	 System.out.println("profile is present");
+	     }
+	     else
+	     {
+	    	 System.out.println("profile is not present"); 
+	     }
 	     Thread.sleep(2000);
-	     WebElement dropdown=driver.findElement(By.name("role"));
-	     dropdown.click();
+	     driver.findElement(By.className("hamburger-btn")).click();
 	     Thread.sleep(2000);
-	     dropdown.sendKeys("Selva@123");
+	     driver.findElement(By.linkText("Edit Profile")).click();
 	     Thread.sleep(2000);
-	     driver.findElement(By.xpath("//input[@type='file']")).click();
+	     driver.findElement(By.className("changeprofilebtn")).click();
+	     Thread.sleep(2000);
+	     try {
+	    	 WebElement fileInput=driver.findElement(By.xpath("//input[@type='file']"));
+		     Thread.sleep(2000);
+		     String filePath="D:\\Attendance_Management_MainProject\\SampleUserImages\\Male\\11.jpg";
+		     Thread.sleep(2000);
+		     fileInput.sendKeys(filePath);
+		     Thread.sleep(2000);
+		     driver.findElement(By.className("btn-success")).click();
+		     System.out.println("profile uploaded successfully");
+		     Thread.sleep(2000);
+	     }
+	     catch(Exception e)
+	     {
+	    	e.printStackTrace();
+	     }
+	     Thread.sleep(2000);
+	     ((JavascriptExecutor)driver).executeScript("window.scrollTo(0,document.body.scrollHeight);");
+	     Thread.sleep(2000);
+	     driver.findElement(By.className("changedetails")).click();
+	     Thread.sleep(2000);
+	     WebElement username=driver.findElement(By.id("username"));
+	     username.clear();
+	     Thread.sleep(2000);
+	     username.sendKeys("Allen");
+	     Thread.sleep(2000); 
+	     WebElement email=driver.findElement(By.id("useremail"));
+	     email.clear();
+	     email.sendKeys("allen@gmail.com");
+	     Thread.sleep(2000); 
+	     WebElement pass=driver.findElement(By.id("userpassword"));
+	     pass.clear();
+	     Thread.sleep(2000);
+	     pass.sendKeys("Allen@123");
+	     Thread.sleep(2000);
+	     driver.findElement(By.xpath("//button[@type='submit']")).click();
+	     System.out.println("Details changed successfully");
+	     
+	     
+	     
+	     
+	     
+	     
+	     
 	     
 	     
 	     
