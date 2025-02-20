@@ -1,4 +1,4 @@
-package com.AttendanceManagement.main.AttendanceModule;
+package com.AttendanceManagement.main;
 
 import org.openqa.selenium.WebDriver;
 
