@@ -1,12 +1,6 @@
-<<<<<<< HEAD
-using Attendance_management.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-=======
 using System.Diagnostics;
 using Attendance_management.Models;
 using Microsoft.AspNetCore.Mvc;
->>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
 
 namespace Attendance_management.Controllers
 {

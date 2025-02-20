@@ -7,12 +7,12 @@ namespace Attendance_management.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class RoleController : Controller
+    public class RolesController : Controller
     {
 
         private readonly ApplicationDbContext _context;
 
-        public RoleController(ApplicationDbContext context)
+        public RolesController(ApplicationDbContext context)
         {
             _context = context;
         }

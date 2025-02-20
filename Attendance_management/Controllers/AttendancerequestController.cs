@@ -1,8 +1,5 @@
 ﻿using Attendance_management.Data;
-<<<<<<< HEAD
-=======
 using Attendance_management.Models;
->>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,11 +7,7 @@ namespace Attendance_management.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-<<<<<<< HEAD
-    public class AttendancerequestController : Controller
-=======
     public class AttendancerequestController : ControllerBase
->>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
     {
         private readonly ApplicationDbContext _context;
 
@@ -23,8 +16,6 @@ namespace Attendance_management.Controllers
             _context = context;
         }
 
-<<<<<<< HEAD
-=======
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Attendancerequest>>> GetAllAttendancerequestsCount()
         {
@@ -105,7 +96,6 @@ namespace Attendance_management.Controllers
         }
 
 
->>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
         [HttpGet("check/{id}")]
         public async Task<ActionResult<bool>> checkAttendanceRequest(int id, [FromQuery] string Date)
         {
@@ -113,19 +103,11 @@ namespace Attendance_management.Controllers
 
             try
             {
-<<<<<<< HEAD
-                var leavereq = await _context.Attendancerequests
-                    .Where(lr => lr.UserId == id && lr.Date == cDate)
-                    .ToListAsync();
-
-                if (leavereq.Count == 0)
-=======
                 var attreq = await _context.Attendancerequests
                     .Where(ar => ar.UserId == id && ar.Date == cDate)
                     .ToListAsync();
 
                 if (attreq.Count == 0)
->>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
                 {
                     return Ok(true);
                 }
@@ -138,11 +120,6 @@ namespace Attendance_management.Controllers
             {
                 return BadRequest(false);
             }
-<<<<<<< HEAD
-
-
-        }
-=======
         }
 
 
@@ -213,6 +190,5 @@ namespace Attendance_management.Controllers
         }
 
 
->>>>>>> ff435484b4f0e6ee505303c5a4e3ffc0f910cb87
     }
 }
