@@ -2,6 +2,7 @@ package com.AttendanceManagement.main;
 
 import java.util.List;
 
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -10,7 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
-public class Permissions {
+public class Users {
 	public static void main(String[]args) throws InterruptedException
 	{
 
@@ -25,38 +26,43 @@ public class Permissions {
 	     password.sendKeys("Allen@123");
 	     WebElement loginButton = driver.findElement(By.className("btn")); // Change ID if needed
 	     loginButton.click();
-	     Thread.sleep(2000);
-	     driver.findElement(By.className("hamburger-btn")).click();
-	     Thread.sleep(2000);
-	     driver.findElement(By.xpath("//summary[text()='Permissions']")).click();
-	     Thread.sleep(2000);
-	     driver.findElement(By.linkText("View Permissions")).click();
-	     Thread.sleep(2000);
-	     driver.findElement(By.className("hamburger-btn")).click();
-	     Thread.sleep(2000);
-	     driver.findElement(By.linkText("Edit Permissions")).click();
-	     Thread.sleep(2000);
-	     ((JavascriptExecutor)driver).executeScript("window.scrollTo(0,document.body.scrollHeight);");
-	     Thread.sleep(2000);
-	     WebElement dropdown1 =driver.findElement(By.xpath("//select[@formcontrolname='permissionSelect']"));
-	     dropdown1.click();
-	     Thread.sleep(2000);
-	     dropdown1.sendKeys("ViewAllAttendance");
-	     Thread.sleep(2000);
-	     WebElement dropdown2=driver.findElement(By.id("roleSelect"));
-	     dropdown2.click();
-	     Thread.sleep(2000);
-	     dropdown2.sendKeys("Student");
-	     Thread.sleep(2000);
-	     dropdown2.click();
-	     driver.findElement(By.className("btn-success")).click();
-	     System.out.println("Permission added");
-	     Thread.sleep(2000);
-	     driver.findElement(By.className("btn-danger")).click();
-	     System.out.println("Permission deleted successfully");
+	     Thread.sleep(2000); 
 	     
-	   
-	     }
+	     //view users
+	     driver.findElement(By.className("hamburger-btn")).click();
+	     Thread.sleep(2000); 
+	     driver.findElement(By.xpath("//summary[text()='Users']")).click();
+	     Thread.sleep(2000);
+	     driver.findElement(By.linkText("View Users")).click();
+	     Thread.sleep(2000);
+	     driver.findElement(By.id("userid")).sendKeys("999");
+	     Thread.sleep(2000);
+	     WebElement role=driver.findElement(By.xpath("//select[@formcontrolname=\"role\"]"));
+	     role.click();
+	     Thread.sleep(2000);
+	     role.sendKeys("Admin");
+	     role.click();
+	     Thread.sleep(2000);
+	     driver.findElement(By.xpath("//button[@type='submit']")).click();
+	     Thread.sleep(2000); 
+	 
+	     //approve users
+	     driver.findElement(By.className("hamburger-btn")).click();
+	     Thread.sleep(2000); 
+	     driver.findElement(By.linkText("Approve User")).click();
+	     Thread.sleep(2000);
+	     List<WebElement> view=driver.findElements(By.xpath("//button[@type='button']"));
+	     view.get(1).click();
+	     Thread.sleep(2000);
+	     driver.findElement(By.className("approvebtn")).click();
+	     System.out.println("approved successfully");
+	     Thread.sleep(2000);
+	     List<WebElement> view1=driver.findElements(By.xpath("//button[@type='button']"));
+	     view1.get(1).click();
+	     Thread.sleep(2000);
+	     driver.findElement(By.className("rejectbtn")).click();
+	     Thread.sleep(2000);
+	     System.out.println("rejected successfully");
 	     
-
+	}
 }
